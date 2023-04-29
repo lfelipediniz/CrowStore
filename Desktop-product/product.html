@@ -4,34 +4,33 @@
 <head>
     <title>Blusa Crow</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <div class="header">
+    <div id="header">
         <a href="../home/index.html">
-            <img src="crowLogo.svg" alt="CrowStore">
-            <nav>
-                <div id="shotcuts1">
-                    <a href="../home/index.html">Home</a>
-                    <a href="../home/index.html#vitrine">Vitrine</a>
-                    <a href="../home/index.html#sobrenos">Sobre nós</a>
-                    <a href="#contato"></a>
-                </div>
-                <div id="shortcuts2">
-                    <a href="../search/index.html"><img src="search.svg" alt="Buscar"></a>
-                    <a href="https://www.instagram.com/"><img src="instagram.svg" alt="Instagram"></a>
-                    <a href="../checkout/index.html"><img src="cart.svg" alt="Carrinho de compras"></a>
-                </div>
-            </nav>
+            <img src="imgs/logo.svg" id="logo" alt="CrowStore">
         </a>
+        <nav>
+            <a href="../home/index.html#vitrine">Vitrine</a>
+            <a href="../home/index.html#sobrenos">Sobre nós</a>
+            <a href="#contato">Contato</a>
+            <div></div>
+            <a href="../search/index.html"><img src="imgs/search.svg" alt="Buscar"></a>
+            <a href="https://www.instagram.com/"><img src="imgs/insta.svg" alt="Instagram"></a>
+            <a href="../checkout/index.html"><img src="imgs/cart.svg" alt="Carrinho de compras"></a>
+        </nav>
     </div>
-    <div class="body">
-        <img src="main.jpg" class="exibit" alt="Product image">
-        <img src="detail1.jpg" class="thumbnail" alt="Thumbnail 1">
-        <img src="placeholder.jpg" class="thumbnail" alt="Thumbnail 2">
-        <img src="placeholder.jpg" class="thumbnail" alt="Thumbnail 3">
-        <img src="placeholder.jpg" class="thumbnail" alt="Thumbnail 4">
-        <img src="placeholder.jpg" class="thumbnail" alt="Thumbnail 5">
+    <div id="body">
+        <div id="gallery">
+            <img src="imgs/detail.jpg" class="thumbnail" alt="Thumbnail 1">
+            <img src="imgs/placeholder.svg" class="thumbnail" alt="Thumbnail 2">
+            <img src="imgs/placeholder.svg" class="thumbnail" alt="Thumbnail 3">
+            <img src="imgs/placeholder.svg" class="thumbnail" alt="Thumbnail 4">
+            <img src="imgs/placeholder.svg" class="thumbnail" alt="Thumbnail 5">
+        </div>
+        <div id="image-container"></div>
         <div class="description">
             <h1>Blusa Crow</h1>
             <p>Cillum veniam est eiusmod sed culpa Duis. Ipsum aute Duis non officia. Labore pariatur tempor commodo
@@ -88,22 +87,22 @@
         <nav>
             <h3>Esta peça combina com</h3>
             <a href="" class="suggestion">
-                <img src="touca.jpg">
+                <img src="imgs/touca.jpg">
                 <p class="name">Touca CROW</p>
                 <p class="price">39,99</p>
             </a>
             <a href="" class="suggestion">
-                <img src="calça.jpg">
+                <img src="imgs/calça.jpg">
                 <p class="name">Calça CROW</p>
                 <p class="price">99,99</p>
             </a>
             <a href="" class="suggestion">
-                <img src="calça.jpg">
+                <img src="imgs/calça.jpg">
                 <p class="name">Calça CROW</p>
                 <p class="price">99,99</p>
             </a>
             <a href="" class="suggestion">
-                <img src="calça.jpg">
+                <img src="imgs/calça.jpg">
                 <p class="name">Calça CROW</p>
                 <p class="price">99,99</p>
             </a>
@@ -112,13 +111,13 @@
     <footer>
         <address>
             <div id="store">
-                <img src="store.svg"> <strong>Flagship Store</strong> Avenida Trabalhador São Carlense, 400
+                <img src="imgs/store.svg"> <strong>Flagship Store</strong> Avenida Trabalhador São Carlense, 400
             </div>
             <div class="contact">
-                <img src="insta.svg">crowstore
+                <img src="imgs/insta.svg">crowstore
             </div>
             <div class="contact">
-                <img src="whats.svg">16 99999 9999
+                <img src="imgs/whats.svg">16 99999 9999
             </div>
         </address>
     </footer>

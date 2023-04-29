@@ -27,26 +27,26 @@
     float: left;
 }
 
-nav {
+#header nav {
     height: 16px;
     margin-left: auto;
 }
 
-nav a {
+#header nav a {
     padding-left: 0.5em;
     display: inline-block;
     text-decoration: none;
     color: inherit;
 }
 
-nav div {
+#header nav div {
     height: 16px;
     border-right: 1px solid black;
     padding-left: 0.5em;
     display: inline-block;
 }
 
-nav img {
+#header nav img {
     height: 16px;
     width: auto;
 }
@@ -54,31 +54,36 @@ nav img {
 /* Body */
 
 #body {
-    padding: 1em 4em;
+    padding-top: 1em;
     max-width: 944px;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Product */
+
+#product {
+    height: 584px;
+}
+
 #gallery {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: space-between;
     width: 104px;
+    height: inherit;
     float: left;
 }
 
 .thumbnail {
     width: 104px;
     height: auto;
-    margin-bottom: 1em;
     border: 1px solid black;
 }
 
 #image-container {
     width: 464px;
-    height: 584px;
+    height: inherit;
     background-image: url("imgs/main.jpg");
     background-size: cover;
     background-position: bottom center;
@@ -87,23 +92,38 @@ nav img {
     float: left;
 }
 
+#description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: inherit;
+    width: 332px;
+    float: left;
+}
+
+#form {
+    position: absolute;
+    bottom: 0;
+}
+
 h1 {
     font-weight: 700;
     font-size: 2em;
-    margin: 0 !important
+    margin: 0 !important;
 }
 
 h2 {
     font-weight: 300;
     font-size: 1.25em;
-    margin: 0 0 0.8 !important
+    margin: 1em 0 0.5em 0 !important;
 }
+
 
 ul {
     list-style: none;
     padding-left: 0;
     display: flex;
-    margin: 0 0 0 0 !important
+    margin: 0 0 0 0 !important;
 }
 
 li {
@@ -151,8 +171,30 @@ button {
     border-width: 3px;
 }
 
-#submit {
-    padding: 0.55em;
-    margin-top: 1em;
+#quantity {
+    height: 40px;
 }
 
+#submit {
+    height: 56px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-top: 2em;
+}
+
+button img {
+    margin-right: 0.5em;
+}
+
+/* Carousel */
+
+h3 {
+    font-weight:500;
+    text-transform: uppercase;
+    margin: 2em 0 1em 0 !important;
+    float: left;
+}
+
+img .suggestion {
+
+}

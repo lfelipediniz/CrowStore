@@ -55,6 +55,9 @@ nav img {
 
 #body {
     padding: 1em 4em;
+    max-width: 944px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #gallery {
@@ -63,11 +66,14 @@ nav img {
     justify-content: flex-start;
     align-items: flex-start;
     width: 104px;
+    float: left;
 }
 
 .thumbnail {
     width: 104px;
     height: auto;
+    margin-bottom: 1em;
+    border: 1px solid black;
 }
 
 #image-container {
@@ -76,6 +82,77 @@ nav img {
     background-image: url("imgs/main.jpg");
     background-size: cover;
     background-position: bottom center;
-    padding-left: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+    float: left;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2em;
+    margin: 0 !important
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 1.25em;
+    margin: 0 0 0.8 !important
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    margin: 0 0 0 0 !important
+}
+
+li {
+    margin-right: 0.5em;
+}
+
+
+button { 
+    background-color: white;
+    border: 1px solid black;
+}
+
+.sample {
+    height: 40px;
+    width: 40px;
+}
+
+#color1 {
+    background-color: #FFAAA5;
+    border-width: 3px;
+}
+
+#color2 {
+    background-color: #FFD3B6;
+}
+
+#color3 {
+    background-color: #FFD3B6;
+}
+
+#color4 {
+    background-color: #A8E6CF;
+}
+
+#color5 {
+    background-color: #FF8B94;
+}
+
+#pp {
+    color: gray;
+}
+
+#m {
+    font-weight: 700;
+    border-width: 3px;
+}
+
+#submit {
+    padding: 0.55em;
+    margin-top: 1em;
 }
 

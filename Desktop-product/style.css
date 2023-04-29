@@ -27,6 +27,12 @@
     float: left;
 }
 
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+}
+
 #header nav {
     height: 16px;
     margin-left: auto;
@@ -34,9 +40,6 @@
 
 #header nav a {
     padding-left: 0.5em;
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
 }
 
 #header nav div {
@@ -118,7 +121,6 @@ h2 {
     margin: 1em 0 0.5em 0 !important;
 }
 
-
 ul {
     list-style: none;
     padding-left: 0;
@@ -192,9 +194,86 @@ h3 {
     font-weight:500;
     text-transform: uppercase;
     margin: 2em 0 1em 0 !important;
-    float: left;
 }
 
-img .suggestion {
+#carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+#carousel a {
+    width: 212px;
+}
+
+.suggestion {
+    height: 360px;
+    width: inherit;
+    margin-bottom: 1em;
+    background-size: cover;
+    background-position: bottom center;
+}
+
+#suggestion1 {
+    background-image: url("imgs/touca.jpg")
+}
+
+#suggestion2, #suggestion2, #suggestion3, #suggestion4 {
+    background-image: url("imgs/calça.jpg");
+}
+
+.name {
+    float: left;
+    margin: 0;
+}
+.price {
+    float: right;
+    margin: 0;
+}
+
+/* Footer */
+
+footer {
+    background-color: black;
+    height: 136px;
+    color: white;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer * {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+footer p {
+    margin-left: 8px;
+}
+
+address {
+    font-style: normal;
+    width: 944px;
+    display: flex;
+    margin: auto;
+}
+
+.contact {
+    font-weight: 700;
+    margin-left: 16px;
+    float: right;
+}
+
+#contacts {
+    margin-left: auto;
+}
+
+footer img {
+    height: 24px;
+    width: auto;
+}
+
+#store {
+    float: left;
 }

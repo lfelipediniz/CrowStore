@@ -54,15 +54,103 @@ a {
     width: auto;
 }
 
+/* Body */
+
+#body {
+    padding-top: 6em;
+    max-width: 944px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 /* Search bar */
 
+
+#searchBar {
+    padding: 1em 64px;
+    height: 8em;
+    width: 100%;
+}
+
 input {
-    width: 100%; 
-    padding: 1em 4em;
+    width: 100%;
+    margin-top: 64px;
     border: none;
     border-bottom: 1px solid black;
     font-weight: 500;
     box-sizing: border-box;
+}
+
+#filtros p {
+    font-weight:500;
+    text-transform: uppercase;
+    float: left;
+    margin: 0 
+}
+
+ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+li {
+    margin: 0 0.5em 0.5em 0;
+    float:left;
+}
+
+button { 
+    background-color: white;
+    border: 1px solid black;
+}
+
+/* Carousel */
+
+h3 {
+    font-weight:500;
+    text-transform: uppercase;
+    margin: 2em 0 1em 0 !important;
+}
+
+em {
+    font-style: normal;
+    text-transform: none;
+}
+
+#carousel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#body a {
+    width: 212px;
+    margin-bottom: 32px;
+}
+
+.suggestion {
+    height: 360px;
+    width: inherit;
+    margin-bottom: 1em;
+    background-size: cover;
+    background-position: bottom center;
+}
+
+#suggestion1 {
+    background-image: url("../imgs/touca.jpg")
+}
+
+#suggestion2, #suggestion2, #suggestion3, #suggestion4, #suggestion5 {
+    background-image: url("../imgs/calça.jpg");
+}
+
+.name {
+    float: left;
+    margin: 0;
+}
+.price {
+    float: right;
+    margin: 0;
 }
 
 /* Footer */

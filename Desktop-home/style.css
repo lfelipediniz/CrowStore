@@ -47,7 +47,7 @@ a {
 
 #header nav div {
     height: 16px;
-    border-right: 1px solid black;
+    border-right: 1px solid white;
     padding-left: 0.5em;
     display: inline-block;
 }
@@ -80,34 +80,29 @@ a {
     width: 30rem;
     height: 50px;
     background-color: #262626;
-    }
-    
-    #texto {
+}
+
+#texto {
     position: absolute;
     bottom: 15px;
     left: 10px;
     color: white;
     font-size: 16px;
     font-weight: bold;
-    font-family: Arial, sans-serif;
-    }
-    
-    .seta {
+}
+
+.arrow {
     position: absolute;
-    bottom: 20px;
-    font-size: 20px;
-    color: white;
-    cursor: pointer;
-    }
-    
-    #seta-direita {
-    right: 20px;
-    }
-    
-    #seta-esquerda {
-    left: 20px;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex; /* adicionado para alinhar as setas lado a lado */
+}
+
+#arrow-left {
     transform: rotate(180deg);
-    }
+    margin-right: 10px; /* adicionado para separar as setas */
+}
 
 /* Product */
 

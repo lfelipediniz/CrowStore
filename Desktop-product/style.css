@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-/* Header element */
+/* Header */
 
 #header {
     padding: 1em 4em;
@@ -87,7 +87,7 @@ a {
 #image-container {
     width: 464px;
     height: inherit;
-    background-image: url("imgs/main.jpg");
+    background-image: url("../imgs/main.jpg");
     background-size: cover;
     background-position: bottom center;
     margin-left: 1em;
@@ -215,11 +215,11 @@ h3 {
 }
 
 #suggestion1 {
-    background-image: url("imgs/touca.jpg")
+    background-image: url("../imgs/touca.jpg")
 }
 
 #suggestion2, #suggestion2, #suggestion3, #suggestion4 {
-    background-image: url("imgs/calça.jpg");
+    background-image: url("../imgs/calça.jpg");
 }
 
 .name {

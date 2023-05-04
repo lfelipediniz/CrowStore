@@ -227,51 +227,25 @@ button img {
   margin-right: 0.5em;
 }
 
-/* Carousel */
-
 h3 {
   font-weight: 500;
   text-transform: uppercase;
   margin: 2em 0 1em 0 !important;
+  padding-left: 30px;
 }
 
-#carousel {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+.arrow-container {
+  }
+  
+  .arrow {
+    width: 15px;
+  }
+  
+  .arrow-left {
+    margin-right: 50px;
+  }
+  
 
-#carousel a {
-  width: 212px;
-}
-
-.suggestion {
-  height: 360px;
-  width: inherit;
-  margin-bottom: 1em;
-  background-size: cover;
-  background-position: bottom center;
-}
-
-#suggestion1 {
-  background-image: url("imgs/touca.jpg");
-}
-
-#suggestion2,
-#suggestion2,
-#suggestion3,
-#suggestion4 {
-  background-image: url("imgs/calça.jpg");
-}
-
-.name {
-  float: left;
-  margin: 0;
-}
-.price {
-  float: right;
-  margin: 0;
-}
 
 /* Footer */
 

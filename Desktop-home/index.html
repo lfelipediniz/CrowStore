@@ -31,15 +31,15 @@
     </div>
 
     <div id="btnContainer">
-        <div class="detach-btn">
-            <button class="all-gender-btn" onclick="filterSelection('all')">Todos</button>
-            <button class="gender-btn" id="female-btn" onclick="filterSelection('woman')">Feminino</button>
-            <button class="gender-btn" id="male-btn" onclick="filterSelection('male')">Masculino</button>
+        <div class="showcase-gender-btn">
+            <button class="gender-btn active" onclick="filterSelection('all')">Todos</button>
+            <button class="gender-btn" id="female-gender-btn" onclick="filterSelection('woman')">Feminino</button>
+            <button class="gender-btn" id="male-gender-btn" onclick="filterSelection('male')">Masculino</button>
         </div>
         <hr />
     </div>
 
-    <div class="detach">
+    <div class="showcase">
         <!-- Gallery Grid -->
         <div class="row">
             <div class="column woman">
@@ -138,7 +138,7 @@
 
         // Add active class to the current button (highlight it)
         let btnContainer = document.getElementById("btnContainer");
-        let btns = btnContainer.getElementsByClassName("btn");
+        let btns = btnContainer.getElementsByClassName("gender-btn");
         for (let i = 0; i < btns.length; i++) {
             btns[i].addEventListener("click", function () {
                 let current = document.getElementsByClassName("active");

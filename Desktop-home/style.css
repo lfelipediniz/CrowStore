@@ -1,419 +1,386 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    font-family: Inter, sans-serif;
-    font-size: 1em;
-    line-height: 1.5em;
-    box-sizing: border-box;
+  font-family: Inter, sans-serif;
+  font-size: 1em;
+  line-height: 1.5em;
+  box-sizing: border-box;
 }
 
 /* Header element */
 
 #header {
-    padding: 2em 4em;
-    color: #fff;
-    height: 5em;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.216);
+  padding: 2em 4em;
+  color: #fff;
+  height: 5em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.216);
 }
 
 #header * {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 #logo {
-    height: 65px;
-    width: auto;
-    float: left;
+  height: 65px;
+  width: auto;
+  float: left;
 }
 
 a {
-    display: inline-block;
-    text-decoration: none;
-    color: inherit;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
 }
 
 #header nav {
-    height: 16px;
-    margin-left: auto;
+  height: 16px;
+  margin-left: auto;
 }
 
 #header nav a {
-    padding-left: 0.5em;
+  padding-left: 0.5em;
 }
 
 #header nav div {
-    height: 16px;
-    border-right: 1px solid white;
-    padding-left: 0.5em;
-    display: inline-block;
+  height: 16px;
+  border-right: 1px solid white;
+  padding-left: 0.5em;
+  display: inline-block;
 }
 
 #header nav img {
-    height: 16px;
-    width: auto;
+  height: 16px;
+  width: auto;
 }
 
 /* Body */
 
 #body {
-    max-width: 944px;
-    margin-left: auto;
-    margin-right: auto;
-
+  max-width: 944px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #banner {
-    width: 100%;
-    height: auto;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
 }
 
 #retangulo {
-    position: absolute;
-    bottom: 0;
-    left: 50px;
-    width: 30rem;
-    height: 50px;
-    background-color: #262626;
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+  width: 30rem;
+  height: 50px;
+  background-color: #262626;
 }
 
 #texto {
-    position: absolute;
-    bottom: 15px;
-    left: 10px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .arrow {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex; /* adicionado para alinhar as setas lado a lado */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex; /* adicionado para alinhar as setas lado a lado */
 }
 
 #arrow-left {
-    transform: rotate(180deg);
-    margin-right: 10px; /* adicionado para separar as setas */
+  transform: rotate(180deg);
+  margin-right: 10px; /* adicionado para separar as setas */
 }
 
 /* Product */
 
 #product {
-    height: 584px;
+  height: 584px;
 }
 
 #gallery {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 104px;
-    height: inherit;
-    float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 104px;
+  height: inherit;
+  float: left;
 }
 
 .thumbnail {
-    width: 104px;
-    height: auto;
-    border: 1px solid black;
+  width: 104px;
+  height: auto;
+  border: 1px solid black;
 }
 
 #image-container {
-    width: 464px;
-    height: inherit;
-    background-image: url("imgs/main.jpg");
-    background-size: cover;
-    background-position: bottom center;
-    margin-left: 1em;
-    margin-right: 1em;
-    float: left;
+  width: 464px;
+  height: inherit;
+  background-image: url("imgs/main.jpg");
+  background-size: cover;
+  background-position: bottom center;
+  margin-left: 1em;
+  margin-right: 1em;
+  float: left;
 }
 
 #description {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: inherit;
-    width: 332px;
-    float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: inherit;
+  width: 332px;
+  float: left;
 }
 
 #form {
-    position: absolute;
-    bottom: 0;
+  position: absolute;
+  bottom: 0;
 }
 
 h1 {
-    font-weight: 700;
-    font-size: 2em;
-    margin: 0 !important;
+  font-weight: 700;
+  font-size: 2em;
+  margin: 0 !important;
 }
 
 h2 {
-    font-weight: 300;
-    font-size: 1.25em;
-    margin: 1em 0 0.5em 0 !important;
+  font-weight: 300;
+  font-size: 1.25em;
+  margin: 1em 0 0.5em 0 !important;
 }
 
 ul {
-    list-style: none;
-    padding-left: 0;
-    display: flex;
-    margin: 0 0 0 0 !important;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  margin: 0 0 0 0 !important;
 }
 
 li {
-    margin-right: 0.5em;
+  margin-right: 0.5em;
 }
 
-
-button { 
-    background-color: white;
-    border: 1px solid black;
+button {
+  background-color: white;
+  border: 1px solid black;
 }
 
 .sample {
-    height: 40px;
-    width: 40px;
+  height: 40px;
+  width: 40px;
 }
 
 #color1 {
-    background-color: #FFAAA5;
-    border-width: 3px;
+  background-color: #ffaaa5;
+  border-width: 3px;
 }
 
 #color2 {
-    background-color: #FFD3B6;
+  background-color: #ffd3b6;
 }
 
 #color3 {
-    background-color: #FFD3B6;
+  background-color: #ffd3b6;
 }
 
 #color4 {
-    background-color: #A8E6CF;
+  background-color: #a8e6cf;
 }
 
 #color5 {
-    background-color: #FF8B94;
+  background-color: #ff8b94;
 }
 
 #pp {
-    color: gray;
+  color: gray;
 }
 
 #m {
-    font-weight: 700;
-    border-width: 3px;
+  font-weight: 700;
+  border-width: 3px;
 }
 
 #quantity {
-    height: 40px;
+  height: 40px;
 }
 
 #submit {
-    height: 56px;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    margin-top: 2em;
+  height: 56px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 2em;
 }
 
 button img {
-    margin-right: 0.5em;
+  margin-right: 0.5em;
 }
 
 /* Carousel */
 
 h3 {
-    font-weight:500;
-    text-transform: uppercase;
-    margin: 2em 0 1em 0 !important;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 2em 0 1em 0 !important;
 }
 
 #carousel {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 #carousel a {
-    width: 212px;
+  width: 212px;
 }
 
 .suggestion {
-    height: 360px;
-    width: inherit;
-    margin-bottom: 1em;
-    background-size: cover;
-    background-position: bottom center;
+  height: 360px;
+  width: inherit;
+  margin-bottom: 1em;
+  background-size: cover;
+  background-position: bottom center;
 }
 
 #suggestion1 {
-    background-image: url("imgs/touca.jpg")
+  background-image: url("imgs/touca.jpg");
 }
 
-#suggestion2, #suggestion2, #suggestion3, #suggestion4 {
-    background-image: url("imgs/calça.jpg");
+#suggestion2,
+#suggestion2,
+#suggestion3,
+#suggestion4 {
+  background-image: url("imgs/calça.jpg");
 }
 
 .name {
-    float: left;
-    margin: 0;
+  float: left;
+  margin: 0;
 }
 .price {
-    float: right;
-    margin: 0;
+  float: right;
+  margin: 0;
 }
 
 /* Footer */
 
 footer {
-    background-color: black;
-    height: 136px;
-    color: white;
-    margin-top: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: black;
+  height: 136px;
+  color: white;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer * {
-    vertical-align: middle;
-    display: inline-block;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 footer p {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 address {
-    font-style: normal;
-    width: 944px;
-    display: flex;
-    margin: auto;
+  font-style: normal;
+  width: 944px;
+  display: flex;
+  margin: auto;
 }
 
 .contact {
-    font-weight: 700;
-    margin-left: 16px;
-    float: right;
+  font-weight: 700;
+  margin-left: 16px;
+  float: right;
 }
 
 #contacts {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 footer img {
-    height: 24px;
-    width: auto;
+  height: 24px;
+  width: auto;
 }
 
 #store {
-    float: left;
+  float: left;
 }
 
-.detach-btn {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
+.showcase-gender-btn {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
 
-  .detach {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    }
+.showcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .all-gender-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  
-  .all-gender-btn:focus,
-  .all-gender-btn:active {
-    text-decoration: underline;
-  }
+/* Style the buttons */
+.gender-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  margin: 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
 
+.gender-btn:hover,
+.gender-btn.active {
+  text-decoration: underline;
+}
 
-  
-  .gender-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  
-  .gender-btn:focus,
-  .gender-btn:active {
-    text-decoration: underline;
-  }
-  
-  .new-arrivals {
-    text-align: center;
-  }
-  
-  /**/
+.new-arrivals {
+  text-align: center;
+}
 
+/**/
 
-  
-  /* Add padding BETWEEN each column */
-  .row,
-  .row > .column {
-    padding: 8px;
-  }
-  
-  /* Create three equal columns that floats next to each other */
-  .column {
-    float: left;
-    width: 20%;
-    display: none; /* Hide all elements by default */
-  }
-  
-  /* Clear floats after rows */ 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Content */
-  .content {
-    background-color: white;
-    padding: 10px;
-  }
-  
-  /* The "show" class is added to the filtered elements */
-  .show {
-    display: block;
-  }
-  
-  /* Style the buttons */
-  .btn {
-    border: none;
-    outline: none;
-    padding: 12px 16px;
-    background-color: white;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #ddd;
-  }
-  
-  .btn.active {
-    background-color: #666;
-    color: white;
-  }
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  display: none; /* Hide all elements by default */
+}
+
+/* Clear floats after rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 10px;
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: block;
+}

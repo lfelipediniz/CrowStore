@@ -319,11 +319,33 @@ footer img {
     float: left;
 }
 
-.detach {
+.detach-btn {
     display: flex;
     justify-content: center;
     margin: 20px 0;
   }
+
+  .detach {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+  .all-gender-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .all-gender-btn:focus,
+  .all-gender-btn:active {
+    text-decoration: underline;
+  }
+
+
   
   .gender-btn {
     background-color: transparent;

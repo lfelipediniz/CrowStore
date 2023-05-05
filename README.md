@@ -1,5 +1,20 @@
 # Crow Store
 
+## Project Report
+
+### Authors
+
+João Vitor Pereira Candido - 13751131
+
+Luiz Felipe - 99999999
+
+Guilherme de Abreu Barreto - 12543033
+
+### Project Description
+
+The CrowStore is a project for an online store for clothing. It's based off of an initial design proposal by one of its team members. To the interested reader, it is available [here](https://github.com/JV-PC/CrowStore).
+
+Its structure follows closely its homepage, where all other pages can be directly accessed, such as product listings, searching and administrator's controls.
 
 ## Navigation Diagram
 
@@ -15,18 +30,10 @@
       Produto---Carrinho
 ```
 
-## Project Report
-
-João Vitor Pereira Candido - 13751131
-
-Luiz Felipe - 99999999
-
-Abreu - 99999999
-
-
 ### Requirements
 
 - The system must have 2 types of users: Clients and Administrators
+
     - Administrators are responsible for registering/managing administrators, customers, and products/services provided. The application already comes with an account admin with password admin.
 
     - Customers are users who access the system to buy products/services.
@@ -45,12 +52,6 @@ Product/services records include, at least: name, id, photo, description, price,
 - Your functionality: Create a functionality that is specific to your application. It does not have to be something complicated. For instance, if you are selling cars, you may allow users to use an accelerator to hear how each car engine roars up and down.
 
 - The system must provide accessibility requirements and provide good usability. The system must be responsive.
-
-### Project Description
-
-- O projeto consiste no desenvolvimento de uma loja online para a venda de roupas.
-A idealização da loja e design inicial da mesma já era existente, feita por um dos integrantes do grupo. Se for de interesse, aqui está a idealização original: https://github.com/JV-PC/CrowStore.
-Neste projeto, o cliente é direcionado a uma homepage que mostra alguns produtos disponíveis na loja e a maioria das funcionalidades disponíveis no site, como a busca por produtos;
 
 ### Comments About the Code
 

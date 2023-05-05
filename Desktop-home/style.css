@@ -378,12 +378,7 @@ footer img {
   height: 693px;
 }
 
-#banner-section {
-  background-image: url(../imgs/banner.png); 
-  background-size: cover;
-  height: 672px;
 
-}
 
 #about-rectangle {
   width: 670px;
@@ -405,3 +400,43 @@ footer img {
   margin-top: -30px;
   height: 300px;
 }
+
+#banner-section {
+  background-image: url(../imgs/banner.png); 
+  background-size: cover;
+  height: 672px;
+  align-items:end;
+  display: flex;
+
+}
+
+#banner-rectangle {
+  margin-left: 30px;
+  margin-bottom: 70px;
+  width: 400px;
+  height: 50px;
+  background-color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#banner-text {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: capitalize;  
+  color: #FFFFFF;
+  text-align: left;
+  margin-left: 30px;
+}
+
+#banner-arrows {
+  margin-top: 5px;
+  padding-right: 20px;
+  
+  
+}
+
+

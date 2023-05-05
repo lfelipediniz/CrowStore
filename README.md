@@ -5,23 +5,24 @@
 
 ```mermaid
   graph TD;
-      Home[<a href='https://github.com/lfelipediniz/CrowStore/blob/08317affc3ff2eef954d9de8bf898a5c1f85b319/mockup-imgs/mockhome.png?raw=true'>Home</a>]---Carrinho[<a href='https://github.com/lfelipediniz/CrowStore/blob/08317affc3ff2eef954d9de8bf898a5c1f85b319/mockup-imgs/mockcart.png?raw=true'>Carrinho</a>];
+      Home[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockhome.png?raw=true'>Home</a>]---Carrinho[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockcart.png?raw=true'>Carrinho</a>];
       
       Home---Produto[<a href='https://github.com/lfelipediniz/CrowStore/blob/08317affc3ff2eef954d9de8bf898a5c1f85b319/mockup-imgs/mockproduct.png?raw=true'>Produto</a>];
       Produto---Carrinho
       
-      Home---Search[<a href='https://github.com/lfelipediniz/CrowStore/blob/08317affc3ff2eef954d9de8bf898a5c1f85b319/mockup-imgs/mocksearch.png?raw=true'>Search</a>];
+      Home---Search[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mocksearch.png?raw=true'>Search</a>];
       Search---Produto
       Produto---Carrinho
 ```
 
 ## Project Report
 
-Guilherme de Abreu Barreto - 12543033
-
 João Vitor Pereira Candido - 13751131
 
-Luiz Felipe Diniz Costa - 13782032
+Luiz Felipe - 99999999
+
+Abreu - 99999999
+
 
 ### Requirements
 

@@ -17,12 +17,9 @@
 
 ## Project Report
 
-João Vitor Pereira Candido - 13751131
-
-Luiz Felipe Diniz Costa - 13782032
-
 Guilherme de Abreu Barreto - 12543033
-
+João Vitor Pereira Candido - 13751131
+Luiz Felipe Diniz Costa - 13782032
 
 ### Requirements
 

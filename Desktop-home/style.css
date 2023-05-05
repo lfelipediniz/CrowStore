@@ -371,9 +371,10 @@ footer img {
 
 #about-section {
   margin-top: 30px;
-  justify-content: center;
+  align-items: center;
   background-image: url(../imgs/aboutBanner.png); 
   background-size: cover;
+  display: flex;
   height: 693px;
 }
 
@@ -384,3 +385,13 @@ footer img {
 
 }
 
+#about-rectangle {
+  width: 800px;
+  height: 297px;
+  background-color: #E6E6E6;
+  padding: 30px;
+}
+
+#horizontal-logo {
+  width: 160px;
+}

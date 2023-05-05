@@ -19,9 +19,9 @@
 
 João Vitor Pereira Candido - 13751131
 
-Luiz Felipe - 99999999
+Luiz Felipe Diniz Costa - 13782032
 
-Abreu - 99999999
+Guilherme de Abreu Barreto - 12543033
 
 
 ### Requirements

@@ -1,29 +1,11 @@
-window.addEventListener('load', () => {
-  const slider = document.querySelector('.slider');
-  const slides = document.querySelector('.slides');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
+function createSlider(sliderSelector, slidesSelector, prevBtnSelector, nextBtnSelector) {
+  const slider = document.querySelector(sliderSelector);
+  const slides = document.querySelector(slidesSelector);
+  const prevBtn = document.querySelector(prevBtnSelector);
+  const nextBtn = document.querySelector(nextBtnSelector);
 
   let scrollPos = 0;
   let direction = 1; // 1 = forward, -1 = backward
-
-  prevBtn.addEventListener('click', () => {
-    scrollPos -= 300;
-    slides.scrollTo({
-      left: scrollPos,
-      behavior: 'smooth'
-    });
-    direction = -1;
-  });
-
-  nextBtn.addEventListener('click', () => {
-    scrollPos += 300;
-    slides.scrollTo({
-      left: scrollPos,
-      behavior: 'smooth'
-    });
-    direction = 1;
-  });
 
   const slideImgs = slides.querySelectorAll('img');
 
@@ -46,17 +28,13 @@ window.addEventListener('load', () => {
   setOpacity();
   slides.addEventListener('scroll', setOpacity);
 
-  function moveSlides() {
-    if (direction === 1) {
-      scrollPos += 300;
-    } else {
-      scrollPos -= 300;
-    }
+  const maxScrollPos = slides.scrollWidth - slider.offsetWidth;
 
-    if (scrollPos > slides.scrollWidth - slider.offsetWidth) {
-      direction = -1;
-    } else if (scrollPos < 0) {
-      direction = 1;
+  function moveSlides() {
+    scrollPos += direction * 300;
+
+    if (scrollPos > maxScrollPos || scrollPos < 0) {
+      direction = -direction;
     }
 
     slides.scrollTo({
@@ -65,7 +43,30 @@ window.addEventListener('load', () => {
     });
   }
 
+  prevBtn.addEventListener('click', () => {
+    scrollPos -= 300;
+    slides.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth'
+    });
+    direction = -1;
+  });
+
+  nextBtn.addEventListener('click', () => {
+    scrollPos += 300;
+    slides.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth'
+    });
+    direction = 1;
+  });
+
   setInterval(moveSlides, 7000);
+}
+
+window.addEventListener('load', () => {
+  createSlider('.slider-releases', '.slides-releases', '.prev-releases', '.next-releases');
+  createSlider('.slider-best-sellers', '.slides-best-sellers', '.prev-best-sellers', '.next-best-sellers');
 });
 
 

@@ -382,6 +382,15 @@ footer img {
   margin: 0;
 }
 
+#product-arrows {
+  display: flex;
+  justify-content: center;
+}
+
+#product-arrows a {
+  margin: 0 15px;
+}
+
 
 
 

@@ -33,15 +33,6 @@ Its structure follows closely its homepage, where all other pages can be directl
 <<<<<<< HEAD
 ## Project Report
 
-Guilherme de Abreu Barreto - 12543033
-
-João Vitor Pereira Candido - 13751131
-
-Luiz Felipe Diniz Costa - 13782032
-
-
-=======
->>>>>>> refs/remotes/origin/main
 ### Requirements
 
 - The system must have 2 types of users: Clients and Administrators

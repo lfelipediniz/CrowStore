@@ -1,48 +1,72 @@
-const slider = document.querySelector('.slider');
-const slides = document.querySelector('.slides');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
+window.addEventListener('load', () => {
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelector('.slides');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
 
-let scrollPos = 0;
+  let scrollPos = 0;
+  let direction = 1; // 1 = forward, -1 = backward
 
-prevBtn.addEventListener('click', () => {
-  scrollPos -= 300;
-  slides.scrollTo({
-    left: scrollPos,
-    behavior: 'smooth'
+  prevBtn.addEventListener('click', () => {
+    scrollPos -= 300;
+    slides.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth'
+    });
+    direction = -1;
   });
-});
 
-nextBtn.addEventListener('click', () => {
-  scrollPos += 300;
-  slides.scrollTo({
-    left: scrollPos,
-    behavior: 'smooth'
+  nextBtn.addEventListener('click', () => {
+    scrollPos += 300;
+    slides.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth'
+    });
+    direction = 1;
   });
-});
 
-const slideImgs = slides.querySelectorAll('img');
+  const slideImgs = slides.querySelectorAll('img');
 
+  function setOpacity() {
+    const sliderRect = slides.getBoundingClientRect();
+    const sliderRight = sliderRect.left + sliderRect.width;
 
+    slideImgs.forEach(img => {
+      const imgRect = img.getBoundingClientRect();
+      const imgRight = imgRect.left + imgRect.width;
 
-function setOpacity() {
-  const sliderRect = slides.getBoundingClientRect();
-  const sliderRight = sliderRect.left + sliderRect.width;
+      if (imgRight > sliderRight) {
+        img.classList.add('last-visible');
+      } else {
+        img.classList.remove('last-visible');
+      }
+    });
+  }
 
-  slideImgs.forEach(img => {
-    const imgRect = img.getBoundingClientRect();
-    const imgRight = imgRect.left + imgRect.width;
+  setOpacity();
+  slides.addEventListener('scroll', setOpacity);
 
-    if (imgRight > sliderRight) {
-      img.classList.add('last-visible');
+  function moveSlides() {
+    if (direction === 1) {
+      scrollPos += 300;
     } else {
-      img.classList.remove('last-visible');
+      scrollPos -= 300;
     }
-  });
-}
 
-setOpacity();
-slides.addEventListener('scroll', setOpacity);
+    if (scrollPos > slides.scrollWidth - slider.offsetWidth) {
+      direction = -1;
+    } else if (scrollPos < 0) {
+      direction = 1;
+    }
+
+    slides.scrollTo({
+      left: scrollPos,
+      behavior: 'smooth'
+    });
+  }
+
+  setInterval(moveSlides, 7000);
+});
 
 
 

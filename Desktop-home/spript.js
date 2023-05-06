@@ -23,6 +23,8 @@ nextBtn.addEventListener('click', () => {
 
 const slideImgs = slides.querySelectorAll('img');
 
+
+
 function setOpacity() {
   const sliderRect = slides.getBoundingClientRect();
   const sliderRight = sliderRect.left + sliderRect.width;
@@ -41,6 +43,8 @@ function setOpacity() {
 
 setOpacity();
 slides.addEventListener('scroll', setOpacity);
+
+
 
 filterSelection("all")
 function filterSelection(c) {

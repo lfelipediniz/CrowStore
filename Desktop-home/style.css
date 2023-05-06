@@ -387,9 +387,15 @@ footer img {
 }
 
 .product-content {
-  margin-right: 50px;
+  margin-top: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 440px;
 }
 
+.container-margin {
+  margin: 0 50px;
+}
 
 
 .product-content:hover {

@@ -1,3 +1,53 @@
+const bannerSection = document.querySelector('#banner-section');
+const bannerText = document.querySelector('#banner-text');
+
+const images = [
+  { url: '../imgs/bannerJaqueta.png', title: 'Jaqueta Tchans' },
+  { url: '../imgs/bannerWhite.png', title: 'Camisesta Básica' },
+  { url: '../imgs/bannerConjuntoOutono.png', title: 'Conjunto Outono' }
+];
+
+let currentImageIndex = 0;
+
+function updateBanner() {
+  const currentImage = images[currentImageIndex];
+  const nextImageIndex = (currentImageIndex + 1) % images.length;
+  const nextImage = images[nextImageIndex];
+
+  // Adiciona a classe .banner-image na imagem atual e na próxima imagem
+  bannerSection.style.backgroundImage = `url(${currentImage.url}), url(${nextImage.url})`;
+  bannerSection.querySelectorAll('.banner-image').forEach(image => {
+    image.classList.remove('banner-image');
+  });
+  bannerSection.querySelectorAll(`[style*="${currentImage.url}"], [style*="${nextImage.url}"]`).forEach(image => {
+    image.classList.add('banner-image');
+  });
+
+  bannerText.textContent = currentImage.title;
+}
+
+function handleArrowClick() {
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  updateBanner();
+}
+
+const bannerArrowRight = document.querySelector('#banner-arrow-right');
+bannerArrowRight.addEventListener('click', handleArrowClick);
+
+// Atualiza a banner com a primeira imagem ao carregar a página
+updateBanner();
+
+// Define um intervalo de 5 segundos para chamar a função handleArrowClick
+setInterval(handleArrowClick, 5000);
+
+// Adiciona um event listener transitionend para remover a classe .banner-image da imagem atual
+bannerSection.addEventListener('transitionend', () => {
+  bannerSection.querySelectorAll('.banner-image').forEach(image => {
+    image.classList.remove('banner-image');
+  });
+});
+
+
 function createSlider(sliderSelector, slidesSelector, prevBtnSelector, nextBtnSelector) {
   const slider = document.querySelector(sliderSelector);
   const slides = document.querySelector(slidesSelector);

@@ -1,26 +1,4 @@
-const slides = document.querySelector('.slides');
-const prevBtn = document.querySelector('.prev');
-const nextBtn = document.querySelector('.next');
-let slideIndex = 0;
-const slideWidth = slides.children[0].offsetWidth;
 
-prevBtn.addEventListener('click', () => {
-  if (slideIndex === 0) {
-    slideIndex = slides.children.length - 1;
-  } else {
-    slideIndex--;
-  }
-  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-});
-
-nextBtn.addEventListener('click', () => {
-  if (slideIndex === slides.children.length - 1) {
-    slideIndex = 0;
-  } else {
-    slideIndex++;
-  }
-  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
-});
 
 filterSelection("all")
 function filterSelection(c) {

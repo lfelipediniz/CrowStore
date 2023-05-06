@@ -1,40 +1,26 @@
-const slider = document.querySelector('.slider');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-const slidesPerPage = 4;
-let currentPage = 0;
+const slides = document.querySelector('.slides');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+let slideIndex = 0;
+const slideWidth = slides.children[0].offsetWidth;
 
-function showPage(page) {
-    const startIndex = page * slidesPerPage;
-    const endIndex = startIndex + slidesPerPage;
-    slider.style.transform = `translateX(-${startIndex * (100 / slidesPerPage)}%)`;
+prevBtn.addEventListener('click', () => {
+  if (slideIndex === 0) {
+    slideIndex = slides.children.length - 1;
+  } else {
+    slideIndex--;
+  }
+  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+});
 
-    const totalSlides = slider.children.length;
-    prevButton.classList.toggle('disabled', page === 0);
-    nextButton.classList.toggle('disabled', endIndex >= totalSlides);
-
-    currentPage = page;
-}
-
-function prevPage() {
-    showPage(currentPage - 1);
-}
-
-function nextPage() {
-    showPage(currentPage + 1);
-}
-
-prevButton.addEventListener('click', prevPage);
-nextButton.addEventListener('click', nextPage);
-
-setInterval(() => {
-    if (currentPage === Math.floor(slider.children.length / slidesPerPage)) {
-        showPage(0);
-    } else {
-        nextPage();
-    }
-}, 10000);
-
+nextBtn.addEventListener('click', () => {
+  if (slideIndex === slides.children.length - 1) {
+    slideIndex = 0;
+  } else {
+    slideIndex++;
+  }
+  slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+});
 
 filterSelection("all")
 function filterSelection(c) {

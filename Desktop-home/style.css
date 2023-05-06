@@ -400,8 +400,6 @@ footer img {
 
 
 
-
-
 /* The "show" class is added to the filtered elements */
 .show {
   display: block;
@@ -500,7 +498,6 @@ footer img {
 }
 
 .slider img {
-  width: calc(100% / 4);
   margin-right: 10px;
 }
 

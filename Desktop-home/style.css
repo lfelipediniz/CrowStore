@@ -109,32 +109,6 @@ a {
   height: 584px;
 }
 
-#gallery {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 104px;
-  height: inherit;
-  float: left;
-}
-
-.thumbnail {
-  width: 104px;
-  height: auto;
-  border: 1px solid black;
-}
-
-#image-container {
-  width: 464px;
-  height: inherit;
-  background-image: url("imgs/main.jpg");
-  background-size: cover;
-  background-position: bottom center;
-  margin-left: 1em;
-  margin-right: 1em;
-  float: left;
-}
-
 #description {
   display: flex;
   flex-direction: column;
@@ -177,52 +151,6 @@ button {
   border: 1px solid black;
 }
 
-.sample {
-  height: 40px;
-  width: 40px;
-}
-
-#color1 {
-  background-color: #ffaaa5;
-  border-width: 3px;
-}
-
-#color2 {
-  background-color: #ffd3b6;
-}
-
-#color3 {
-  background-color: #ffd3b6;
-}
-
-#color4 {
-  background-color: #a8e6cf;
-}
-
-#color5 {
-  background-color: #ff8b94;
-}
-
-#pp {
-  color: gray;
-}
-
-#m {
-  font-weight: 700;
-  border-width: 3px;
-}
-
-#quantity {
-  height: 40px;
-}
-
-#submit {
-  height: 56px;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  margin-top: 2em;
-}
-
 button img {
   margin-right: 0.5em;
 }
@@ -232,13 +160,6 @@ h3 {
   text-transform: uppercase;
   margin: 2em 0 1em 0 !important;
   padding-left: 30px;
-}
-
-.arrow-container {
-}
-
-.arrow {
-  width: 15px;
 }
 
 .arrow-left {
@@ -396,10 +317,6 @@ footer img {
   margin: 0 15px;
 }
 
-
-
-
-
 /* The "show" class is added to the filtered elements */
 .show {
   display: block;
@@ -425,8 +342,6 @@ footer img {
   display: flex;
   height: 693px;
 }
-
-
 
 #about-rectangle {
   width: 670px;

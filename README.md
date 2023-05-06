@@ -17,11 +17,11 @@
 
 ## Project Report
 
+Guilherme de Abreu Barreto - 12543033
+
 João Vitor Pereira Candido - 13751131
 
-Luiz Felipe - 99999999
-
-Abreu - 99999999
+Luiz Felipe Diniz Costa - 13782032
 
 
 ### Requirements

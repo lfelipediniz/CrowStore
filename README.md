@@ -30,7 +30,7 @@ Its structure follows closely its homepage, where all other pages can be directl
       Produto---Carrinho
 ```
 
-<<<<<<< HEAD
+
 ## Project Report
 
 ### Requirements

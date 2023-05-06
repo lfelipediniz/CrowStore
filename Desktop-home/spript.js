@@ -1,3 +1,25 @@
+const slider = document.querySelector('.slider');
+const slides = document.querySelector('.slides');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let scrollPos = 0;
+
+prevBtn.addEventListener('click', () => {
+  scrollPos -= 300;
+  slides.scrollTo({
+    left: scrollPos,
+    behavior: 'smooth'
+  });
+});
+
+nextBtn.addEventListener('click', () => {
+  scrollPos += 300;
+  slides.scrollTo({
+    left: scrollPos,
+    behavior: 'smooth'
+  });
+});
 
 
 filterSelection("all")

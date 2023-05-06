@@ -50,6 +50,32 @@
     </div>
     <h3>Lançamentos</h3>
     <div class="showcase">
+
+        <div class="slider-container">
+            <div class="slider">
+                <img src="https://placehold.co/227x378" alt="Slide 1">
+                <img src="https://placehold.co/227x378" alt="Slide 2">
+                <img src="https://placehold.co/227x378" alt="Slide 3">
+                <img src="https://placehold.co/227x378" alt="Slide 4">
+                <img src="https://placehold.co/227x378" alt="Slide 5">
+                <img src="https://placehold.co/227x378" alt="Slide 6">
+                <img src="https://placehold.co/227x378" alt="Slide 7">
+                <img src="https://placehold.co/227x378" alt="Slide 8">
+                <img src="https://placehold.co/227x378" alt="Slide 9">
+                <img src="https://placehold.co/227x378" alt="Slide 10">
+            </div>
+
+            <div id="product-arrows">
+                <button class="prev">
+                    <img src="../imgs/icons/black-arrow-left.svg" alt="&lt;">
+                </button>
+                <button class="next">
+                    <img src="../imgs/icons/black-arrow-right.svg" alt=">">
+                </button>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="row row-four">
                 <a href="">
@@ -169,6 +195,45 @@
     </footer>
 
     <script>
+
+        const slider = document.querySelector('.slider');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const slidesPerPage = 4;
+        let currentPage = 0;
+
+        function showPage(page) {
+            const startIndex = page * slidesPerPage;
+            const endIndex = startIndex + slidesPerPage;
+            slider.style.transform = `translateX(-${startIndex * (100 / slidesPerPage)}%)`;
+
+            const totalSlides = slider.children.length;
+            prevButton.classList.toggle('disabled', page === 0);
+            nextButton.classList.toggle('disabled', endIndex >= totalSlides);
+
+            currentPage = page;
+        }
+
+        function prevPage() {
+            showPage(currentPage - 1);
+        }
+
+        function nextPage() {
+            showPage(currentPage + 1);
+        }
+
+        prevButton.addEventListener('click', prevPage);
+        nextButton.addEventListener('click', nextPage);
+
+        setInterval(() => {
+            if (currentPage === Math.floor(slider.children.length / slidesPerPage)) {
+                showPage(0);
+            } else {
+                nextPage();
+            }
+        }, 10000);
+
+
         filterSelection("all")
         function filterSelection(c) {
             let x, i;

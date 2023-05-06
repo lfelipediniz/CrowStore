@@ -410,3 +410,6 @@ footer img {
   height: 0;
 }
 
+.slides img.last-visible {
+  opacity: 0.5;
+}

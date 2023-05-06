@@ -21,6 +21,26 @@ nextBtn.addEventListener('click', () => {
   });
 });
 
+const slideImgs = slides.querySelectorAll('img');
+
+function setOpacity() {
+  const sliderRect = slides.getBoundingClientRect();
+  const sliderRight = sliderRect.left + sliderRect.width;
+
+  slideImgs.forEach(img => {
+    const imgRect = img.getBoundingClientRect();
+    const imgRight = imgRect.left + imgRect.width;
+
+    if (imgRight > sliderRight) {
+      img.classList.add('last-visible');
+    } else {
+      img.classList.remove('last-visible');
+    }
+  });
+}
+
+setOpacity();
+slides.addEventListener('scroll', setOpacity);
 
 filterSelection("all")
 function filterSelection(c) {

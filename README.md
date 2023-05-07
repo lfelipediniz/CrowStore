@@ -1,5 +1,9 @@
 # Crow Store
 
+<p align="center">
+  <img width="200" src="https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/crow-store.png?raw=true">
+</p>
+
 ## Project Report
 
 ### Authors

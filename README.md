@@ -24,7 +24,7 @@ Its structure follows closely its homepage, where all other pages can be directl
 
 ```mermaid
   graph TD;
-      Home[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockhome.png?raw=true'>Home</a>]---Carrinho[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockcart.png?raw=true'>Carrinho</a>];
+      Home[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockhome.gif?raw=true'>Home</a>]---Carrinho[<a href='https://github.com/lfelipediniz/CrowStore/blob/main/mockup-imgs/mockcart.png?raw=true'>Carrinho</a>];
       
       Home---Produto[<a href='https://github.com/lfelipediniz/CrowStore/blob/08317affc3ff2eef954d9de8bf898a5c1f85b319/mockup-imgs/mockproduct.png?raw=true'>Produto</a>];
       Produto---Carrinho

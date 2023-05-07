@@ -11,7 +11,7 @@
 | Name | USP number |
 | :--- | :--- |
 | [João Vitor Pereira Candido](https://github.com/JV-PC) | 13751131 |
-| [Luiz Felipe](https://github.com/lfelipediniz) | 13782032 |
+| [Luiz Felipe Diniz Costa](https://github.com/lfelipediniz) | 13782032 |
 | [Guilherme de Abreu Barreto](https://github.com/de-abreu) | 12543033 |
 
 ### Project Description

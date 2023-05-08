@@ -1,3 +1,4 @@
+"use strict"
 // Banner
 
 const bannerSection = document.querySelector("#banner-section");

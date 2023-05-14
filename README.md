@@ -20,7 +20,7 @@ The CrowStore is a project for an online store for clothing. It's based off of a
 
 Its structure follows closely its homepage, where all other pages can be directly accessed, such as product listings, searching and administrator's controls.
 
-## Navigation Diagram
+### Navigation Diagram
 
 ```mermaid
   graph TD;
@@ -34,7 +34,11 @@ Its structure follows closely its homepage, where all other pages can be directl
       Produto---Carrinho
 ```
 
-## Project Report
+### Mockup images
+
+![Home mockup](mockup-imgs/mockuphome.gif)
+
+Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/mockup-imgs)
 
 ### Requirements
 

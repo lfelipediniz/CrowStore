@@ -1,7 +1,7 @@
 # Crow Store
 
 <p align="center">
-  <img width="200" src="https://raw.githubusercontent.com/lfelipediniz/CrowStore/main/Milestone1/mockup-imgs/crow-store.png">
+  <img width="200" src="Milestone1/mockup-imgs/crow-store.png">
 </p>
 
 ## Project Report

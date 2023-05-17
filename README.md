@@ -38,7 +38,7 @@ Its structure follows closely its homepage, where all other pages can be directl
 
 ![Home mockup](Milestone1/mockup-imgs/mockhome.gif)
 
-Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/mockup-imgs)
+Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/Milestone1/mockup-imgs)
 
 ### Requirements
 

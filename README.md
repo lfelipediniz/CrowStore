@@ -82,8 +82,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ### Mockup images
 
-![Home mockup](Milestone1/mockup-imgs/mockhome.gif)
-
+<div style="align: center;">
+  <img src="Milestone1/mockup-imgs/mockhome.gif" alt="Home mockup">
+</div>
 
 Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/Milestone1/mockup-imgs)
 

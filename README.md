@@ -26,6 +26,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 #### Automatically install dependencies
 
+First of all, it's needed to have [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) a
+installed on your system.
+
 To automatically install all dependencies needed on the project just run: 
 
 ```bash
@@ -37,8 +40,6 @@ yarn install
 ```
 
 #### Getting Started
-
-First of all, it's needed to have [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org/en/download/), [Yarn](https://yarnpkg.com/) and installed on your system. After that, run these commands on your terminal:
 
 Run the development server:
 

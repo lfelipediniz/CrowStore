@@ -20,7 +20,7 @@ const Wrap = () => {
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
  
-      <HeroSection></HeroSection>
+      <HeroSection />
       <ShowCaseSection></ShowCaseSection>
       <AboutUSSection />
       <FAQ />

@@ -8,8 +8,6 @@ function Hero() {
     <HeroContainer id="Hero Container">
       <Carousel />
       <WrapContent>
-        <HeroWrapper>
-        </HeroWrapper>
       </WrapContent>
     </HeroContainer>
   );

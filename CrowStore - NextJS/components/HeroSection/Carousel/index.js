@@ -30,9 +30,9 @@ const Caurosel = () => {
   return (
     <div>
       <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
-        <Slide1>slide n°1</Slide1>
-        <Slide2>slide n°2</Slide2>
-        <Slide3>slide n°3</Slide3>
+        <Slide1></Slide1>
+        <Slide2></Slide2>
+        <Slide3></Slide3>
       </SwipeableViews>
       <button onClick={handleNextSlide}>Próximo slide</button>
     </div>

@@ -9,8 +9,6 @@ function Hero() {
       <Carousel />
       <WrapContent>
         <HeroWrapper>
-            {/* Renderize o componente Carousel */}
-            
         </HeroWrapper>
       </WrapContent>
     </HeroContainer>

@@ -1,6 +1,15 @@
-import React, { useEffect } from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import { Slide1, Slide2, Slide3 } from './CarouselElements';
+import React, { useEffect } from "react";
+import SwipeableViews from "react-swipeable-views";
+import {
+  Slide1,
+  Slide2,
+  Slide3,
+  BannerArrow,
+  BannerRetangule,
+  BannerText,
+} from "./CarouselElements";
+import { FaAngleRight } from "react-icons/fa";
+import { WrapContent } from "../../ReusedComponents/WrapContent";
 
 const Caurosel = () => {
   const [index, setIndex] = React.useState(0);
@@ -29,12 +38,44 @@ const Caurosel = () => {
 
   return (
     <div>
-      <SwipeableViews index={index} onChangeIndex={handleChangeIndex}>
-        <Slide1></Slide1>
-        <Slide2></Slide2>
-        <Slide3></Slide3>
+      <SwipeableViews index={index} onChangeIndex={handleChangeIndex} enableMouseEvents={false}>
+        <Slide1>
+        <WrapContent>
+          <BannerRetangule>
+            <BannerText>
+            Jaqueta Tchans
+            </BannerText>
+              <BannerArrow onClick={handleNextSlide}>
+                <FaAngleRight />{" "}
+              </BannerArrow>
+          </BannerRetangule>
+          </WrapContent>
+        </Slide1>
+        <Slide2>
+        <WrapContent>
+          <BannerRetangule>
+            <BannerText>
+            Camisesta Básica
+            </BannerText>
+              <BannerArrow onClick={handleNextSlide}>
+                <FaAngleRight />{" "}
+              </BannerArrow>
+          </BannerRetangule>
+          </WrapContent>
+        </Slide2>
+        <Slide3>
+        <WrapContent>
+          <BannerRetangule>
+            <BannerText>
+            Conjunto Outono
+            </BannerText>
+              <BannerArrow onClick={handleNextSlide}>
+                <FaAngleRight />{" "}
+              </BannerArrow>
+          </BannerRetangule>
+          </WrapContent>
+        </Slide3>
       </SwipeableViews>
-      <button onClick={handleNextSlide}>Próximo slide</button>
     </div>
   );
 };

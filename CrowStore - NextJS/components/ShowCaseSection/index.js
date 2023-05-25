@@ -6,15 +6,48 @@ import {
   ShowcaseGenderBtn,
   GenderBtn,
   IconContainer,
+  Girl,
+  Boy,
 } from "./ShowCaseSectionElements";
 
 import { WrapContent } from "../ReusedComponents/WrapContent";
 
 const InfoSection = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Todos");
+  const [selectedFilter, setSelectedFilter] = useState("all");
 
   const handleFilterSelection = (filter) => {
     setSelectedFilter(filter);
+  };
+
+  const girlContent = [
+    <div>mulher1</div>,
+    <div>mulher2</div>
+  ];
+
+  const boyContent = [
+    <div>homem1</div>,
+    <div>homem2</div>
+  ];
+
+  const renderContent = () => {
+    if (selectedFilter === "girl") {
+      return girlContent;
+    } else if (selectedFilter === "boy") {
+      return boyContent;
+    } else if (selectedFilter === "all") {
+      const content = [];
+      const maxLength = Math.max(girlContent.length, boyContent.length);
+      for (let i = 0; i < maxLength; i++) {
+        if (i < girlContent.length) {
+          content.push(girlContent[i]);
+        }
+        if (i < boyContent.length) {
+          content.push(boyContent[i]);
+        }
+      }
+      return content;
+    }
+    return [];
   };
 
   return (
@@ -24,8 +57,8 @@ const InfoSection = () => {
           <BtnContainer>
             <ShowcaseGenderBtn>
               <GenderBtn
-                onClick={() => handleFilterSelection("Todos")}
-                selected={selectedFilter === "Todos"}
+                onClick={() => handleFilterSelection("all")}
+                selected={selectedFilter === "all"}
               >
                 <IconContainer>
                   <FaCrow />
@@ -33,8 +66,8 @@ const InfoSection = () => {
                 </IconContainer>
               </GenderBtn>
               <GenderBtn
-                onClick={() => handleFilterSelection("Feminino")}
-                selected={selectedFilter === "Feminino"}
+                onClick={() => handleFilterSelection("girl")}
+                selected={selectedFilter === "girl"}
               >
                 <IconContainer>
                   <FaFemale />
@@ -42,8 +75,8 @@ const InfoSection = () => {
                 </IconContainer>
               </GenderBtn>
               <GenderBtn
-                onClick={() => handleFilterSelection("Masculino")}
-                selected={selectedFilter === "Masculino"}
+                onClick={() => handleFilterSelection("boy")}
+                selected={selectedFilter === "boy"}
               >
                 <IconContainer>
                   <FaMale />
@@ -52,6 +85,8 @@ const InfoSection = () => {
               </GenderBtn>
             </ShowcaseGenderBtn>
           </BtnContainer>
+
+          {renderContent()}
         </WrapContent>
       </InfoContainer>
     </>

@@ -46,4 +46,12 @@ export const IconContainer = styled.div`
   gap: 8px;
 `;
 
+export const Girl = styled.div`
+  display: flex;
+  gap: 8px;
+`;
 
+export const Boy = styled.div`
+  display: flex;
+  gap: 8px;
+`;

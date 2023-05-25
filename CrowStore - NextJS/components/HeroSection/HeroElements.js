@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
-import { Link as LinkS } from "react-scroll";
-import { fonts } from "../../styles/fonts";
+import bannerImage from "../../public/CrowStore/imgs/bannerJaqueta.png";
+
 
 export const HeroContainer = styled.div`
-  background-color: ${colors.primary};
   height: 470px;
   @media (max-width: 768px) {
     padding: 100px 0 0 0;
@@ -27,5 +26,12 @@ export const HeroWrapper = styled.div`
   padding: 0;
   justify-content: center;
   min-height: 700px;
+`;
 
+export const Banner = styled.div`
+  background: url(${bannerImage}) no-repeat center center;
+  background-size: cover;
+  height: 672px;
+  align-items: end;
+  display: flex;
 `;

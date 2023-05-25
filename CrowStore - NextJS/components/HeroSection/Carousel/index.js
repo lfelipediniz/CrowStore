@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 import { Slide1, Slide2, Slide3 } from './CarouselElements';
 
@@ -16,6 +16,16 @@ const Caurosel = () => {
       setIndex((prevIndex) => prevIndex + 1);
     }
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNextSlide();
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [index]);
 
   return (
     <div>

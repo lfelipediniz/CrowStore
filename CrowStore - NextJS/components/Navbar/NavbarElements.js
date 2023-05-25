@@ -5,8 +5,7 @@ import { Link as LinkS } from "react-scroll";
 import { colors } from "../../styles/colors";
 
 export const Nav = styled.nav`
-  background: ${({ scrollNav, navbarColor }) =>
-    scrollNav ? "rgba(38, 38, 38, 0.25)" : navbarColor || "transparent"};
+  background: rgba(38, 38, 38, 0.50);
   height: 60px;
   margin-top: -60px;
   margin-top: ${({ navbarColor }) => (navbarColor ? "0px" : "-60px")};
@@ -86,7 +85,7 @@ export const NavItems = styled.li`
 `;
 
 export const NavLinks = styled(LinkS)`
-  color: ${colors.textBlack};
+  color: ${colors.primary};
   display: flex;
   text-decoration: none;
   padding: 1.3rem 2.5rem;

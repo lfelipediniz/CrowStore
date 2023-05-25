@@ -1,8 +1,9 @@
- import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 
-import { FaBars, FaWhatsapp } from "react-icons/fa";
+import { FaBars, FaSearch, FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import { AiFillInstagram } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
 
@@ -15,11 +16,10 @@ import {
   NavMenu,
   NavItems,
   NavLinks,
-  NavLink, 
+  NavLink,
 } from "./NavbarElements.js";
 import Logo from "../../public/CrowStore/logos/logo-crow-512x512.png";
-
-import {colors} from "../../styles/colors.js"
+import { colors } from "../../styles/colors.js";
 
 const Navbar = ({ toggle, home, blog, navbarColor }) => {
   const [scrollNav, setScrollNav] = useState(false);
@@ -92,7 +92,6 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                       Sobre nós
                     </NavLinks>
                   </NavItems>
-
                   <NavItems>
                     <NavLinks
                       to="doubts"
@@ -106,7 +105,6 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                       Dúvidas
                     </NavLinks>
                   </NavItems>
-
                   <NavItems>
                     <NavLinks
                       to="contact"
@@ -120,10 +118,65 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                       Contato
                     </NavLinks>
                   </NavItems>
+                  <>
+                  {/* <NavItems>
+                    <NavLinks
+                      smooth={true}
+                      duration={500}
+                      spy={true}
+                      exact="true"
+                      offset={-60}
+                    >
+                      |
+                    </NavLinks>
+                  </NavItems> */}
 
+                  <NavItems>
+                    <NavLinks
+                      to="contact"
+                      href="#contact"
+                      smooth={true}
+                      duration={500}
+                      spy={true}
+                      exact="true"
+                      offset={-60}
+                    >
+                      <FaSearch color="#FFFBFE" />
+                    </NavLinks>
+                  </NavItems>
+                  <NavItems>
+                    <NavLinks
+                      to="contact"
+                      href="#contact"
+                      smooth={true}
+                      duration={500}
+                      spy={true}
+                      exact="true"
+                      offset={-60}
+                      style={{
+                        boxShadow: "0 0 5px #FFFBFE",
+                        
+                       
+                      }}
+                    >
+                      <FaShoppingCart color="#FFFBFE" />
+                    </NavLinks>
+                  </NavItems>
 
-
-
+                  <NavItems>
+                    <NavLinks
+                      to="contact"
+                      href="#contact"
+                      smooth={true}
+                      duration={500}
+                      spy={true}
+                      exact="true"
+                      offset={-60}
+                    >
+                      <FaUserAlt color="#FFFBFE" />
+                    </NavLinks>
+                  </NavItems>
+                  </>
                 </>
               ) : (
                 <>

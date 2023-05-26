@@ -37,7 +37,6 @@ const Caurosel = () => {
   }, [index]);
 
   return (
-    <div>
       <SwipeableViews index={index} onChangeIndex={handleChangeIndex} enableMouseEvents={false}>
         <Slide1>
         <WrapContent>
@@ -76,7 +75,6 @@ const Caurosel = () => {
           </WrapContent>
         </Slide3>
       </SwipeableViews>
-    </div>
   );
 };
 

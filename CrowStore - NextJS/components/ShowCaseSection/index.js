@@ -52,7 +52,7 @@ const InfoSection = () => {
 
   return (
     <>
-      <InfoContainer>
+      <InfoContainer id="showcase">
         <WrapContent>
           <BtnContainer>
             <ShowcaseGenderBtn>

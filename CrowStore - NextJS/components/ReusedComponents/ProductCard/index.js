@@ -1,18 +1,18 @@
 import React from "react";
 import {
   Content,
-  Img,
   ProductCardContainer,
   ProductInfo,
 } from "./ProductCardElements";
+
+import Image from "next/image";
 
 const ProductCard = ({ img, productName, price }) => {
   return (
     <>
       <ProductCardContainer>
-        <Img src={img} />
+        <Image src={img} alt={productName} width={230} height={380} />
         <ProductInfo>
-          <Content>{productName}</Content>
           <Content>{price}</Content>
         </ProductInfo>
       </ProductCardContainer>

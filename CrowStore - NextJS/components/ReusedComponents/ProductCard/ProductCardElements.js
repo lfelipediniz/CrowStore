@@ -7,14 +7,21 @@ export const ProductCardContainer = styled.div`
   height: 440px;
 `;
 
-export const Img = styled.image``;
-
-export const ProductInfo = styled.image`
+export const ProductInfo = styled.div`
   margin: 0;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   font-size: 13px;
 `;
 
-export const Content = styled.p``;
+export const Content = styled.p`
+  margin: 0;
+`;
+
+export const ProductImage = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+

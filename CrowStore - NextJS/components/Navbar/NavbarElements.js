@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   background: rgba(38, 38, 38, 0.50);
   height: 60px;
   margin-top: -60px;
-  margin-top: ${({ navbarColor }) => (navbarColor ? "0px" : "-60px")};
+  margin-top: ${({ navbarColor }) => (navbarColor ? "0px" : "-80px")};
   font-size: 1rem;
   display: flex;
   align-items: center;

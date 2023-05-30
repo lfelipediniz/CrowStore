@@ -7,6 +7,7 @@ import {
   ShowcaseGenderBtn,
   GenderBtn,
   IconContainer,
+  ProductContainer,
   Girl,
   Boy,
 } from "./ShowCaseSectionElements";
@@ -115,8 +116,9 @@ const InfoSection = () => {
               </GenderBtn>
             </ShowcaseGenderBtn>
           </BtnContainer>
-
+          <ProductContainer>
           {renderContent()}
+          </ProductContainer>
         </WrapContent>
       </InfoContainer>
     </>

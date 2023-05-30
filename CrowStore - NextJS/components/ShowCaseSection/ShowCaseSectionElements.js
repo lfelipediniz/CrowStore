@@ -55,3 +55,8 @@ export const Boy = styled.div`
   display: flex;
   gap: 8px;
 `;
+
+export const ProductContainer = styled.div`
+  flex-direction: row;
+  display: flex;
+`;

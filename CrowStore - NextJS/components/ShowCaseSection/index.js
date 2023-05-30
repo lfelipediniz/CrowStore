@@ -57,66 +57,33 @@ const InfoSection = () => {
   const renderContent = () => {
     let content;
     if (selectedFilter === "girl") {
-      const slides = [];
-      const slideCount = Math.ceil(girlContent.length / 5);
-      for (let i = 0; i < slideCount; i++) {
-        const start = i * 5;
-        const end = start + 5;
-        slides.push(
-          <div key={`slide-${i}`}>
-            {girlContent.slice(start, end).map((item, index) => (
-              <ProductCard
-                key={`girl-${start + index}`}
-                img={item.image}
-                productName={item.productName}
-                price={item.price}
-              />
-            ))}
-          </div>
-        );
-      }
-      content = slides;
+      content = girlContent.map((item, index) => (
+        <ProductCard
+          key={`girl-${index}`}
+          img={item.image}
+          productName={item.productName}
+          price={item.price}
+        />
+      ));
     } else if (selectedFilter === "boy") {
-      const slides = [];
-      const slideCount = Math.ceil(boyContent.length / 5);
-      for (let i = 0; i < slideCount; i++) {
-        const start = i * 5;
-        const end = start + 5;
-        slides.push(
-          <div key={`slide-${i}`}>
-            {boyContent.slice(start, end).map((item, index) => (
-              <ProductCard
-                key={`boy-${start + index}`}
-                img={item.image}
-                productName={item.productName}
-                price={item.price}
-              />
-            ))}
-          </div>
-        );
-      }
-      content = slides;
+      content = boyContent.map((item, index) => (
+        <ProductCard
+          key={`boy-${index}`}
+          img={item.image}
+          productName={item.productName}
+          price={item.price}
+        />
+      ));
     } else if (selectedFilter === "all") {
       const interleaved = interleaveProducts();
-      const slides = [];
-      const slideCount = Math.ceil(interleaved.length / 5);
-      for (let i = 0; i < slideCount; i++) {
-        const start = i * 5;
-        const end = start + 5;
-        slides.push(
-          <div key={`slide-${i}`}>
-            {interleaved.slice(start, end).map((item, index) => (
-              <ProductCard
-                key={`all-${start + index}`}
-                img={item.image}
-                productName={item.productName}
-                price={item.price}
-              />
-            ))}
-          </div>
-        );
-      }
-      content = slides;
+      content = interleaved.map((item, index) => (
+        <ProductCard
+          key={`all-${index}`}
+          img={item.image}
+          productName={item.productName}
+          price={item.price}
+        />
+      ));
     } else {
       content = [];
     }
@@ -124,7 +91,7 @@ const InfoSection = () => {
   };
 
   const handleNextSlide = () => {
-    if (index === renderContent().length - 1) {
+    if (index === Math.ceil(renderContent().length / 5) - 1) {
       setIndex(0);
     } else {
       setIndex((prevIndex) => prevIndex + 1);
@@ -182,7 +149,16 @@ const InfoSection = () => {
               onChangeIndex={handleChangeIndex}
               enableMouseEvents={false}
             >
-              {renderContent()}
+              {renderContent().reduce((acc, item, index) => {
+                if (index % 5 === 0) {
+                  acc.push(
+                    <div key={`slide-${index / 5}`} style={{ display: "flex" }}>
+                      {renderContent().slice(index, index + 5)}
+                    </div>
+                  );
+                }
+                return acc;
+              }, [])}
             </AutoPlaySwipeableViews>
           </ProductContainer>
         </WrapContent>

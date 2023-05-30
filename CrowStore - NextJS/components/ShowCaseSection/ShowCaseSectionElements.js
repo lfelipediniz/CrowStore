@@ -57,15 +57,15 @@ export const Boy = styled.div`
 `;
 
 export const ProductContainer = styled.div`
-  display: flex; /* Alteração: alterado flex-direction para display: flex */
-  overflow-x: auto; /* Adição: para permitir a rolagem horizontal */
-  -webkit-overflow-scrolling: touch; /* Adição: para suportar rolagem suave no iOS */
-  scroll-behavior: smooth; /* Adição: para suportar rolagem suave em navegadores compatíveis */
-  padding-bottom: 20px; /* Adição: para adicionar espaço na parte inferior do container */
-  
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+
   &::-webkit-scrollbar {
-    display: none; /* Adição: ocultar a barra de rolagem */
+    display: none;
   }
 `;
-
 

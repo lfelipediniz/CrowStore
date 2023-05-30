@@ -32,9 +32,9 @@ const Footer = () => {
           </SocialLogo>
         </FooterLinkItems>
         <FooterLinkItems>
-          <FooterLinkTitle>Endereço</FooterLinkTitle>
+          <FooterLinkTitle>Flagship Store</FooterLinkTitle>
           <FooterLink href={endereco} target="_blank">
-            Flagship Store Avenida Trabalhador São Carlense, 400
+            Avenida Trabalhador São Carlense, 400
             <br />
             13566590, São Carlos - SP
           </FooterLink>

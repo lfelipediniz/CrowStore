@@ -69,6 +69,7 @@ export const ProductArrows = styled.div`
 export const ButtonArrow = styled.button`
   background-color: transparent;
   border: none;
+  color: ${colors.textBlack};
   cursor: pointer;
   font-size: 35px;
   outline: none;

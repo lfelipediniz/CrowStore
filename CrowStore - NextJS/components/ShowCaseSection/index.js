@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FaAngleLeft, FaCrow, FaFemale, FaMale } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import { FaAngleLeft, FaAngleRight, FaCrow, FaFemale, FaMale} from "react-icons/fa";
 import Image from "next/image";
 import SwipeableViews from "react-swipeable-views";
 import {
@@ -17,10 +17,9 @@ import {
 import ProductData from "../../fakedata/showcaseContent/products.json";
 import BestData from "../../fakedata/showcaseContent/productsBestS.json";
 
+
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import ProductCard from "../ReusedComponents/ProductCard";
-
-import { FaAngleRight } from "react-icons/fa";
 
 const InfoSection = () => {
   // State hooks
@@ -28,6 +27,7 @@ const InfoSection = () => {
   const [girlContent, setGirlContent] = useState([]); // Armazena o conteúdo para meninas
   const [boyContent, setBoyContent] = useState([]); // Armazena o conteúdo para meninos
   const [index, setIndex] = useState(0); // Armazena o índice atual do slide
+  const autoPlayTimeoutRef = useRef(null); // Referência para o timeout do autoplay
 
   // Função para lidar com a seleção de filtro
   const handleFilterSelection = (filter) => {
@@ -99,7 +99,8 @@ const InfoSection = () => {
 
   // Função para avançar para o próximo slide
   const handleNextSlide = () => {
-    if (index === Math.ceil(renderContent().length / 5) - 1) {
+    const maxIndex = Math.ceil(renderContent().length / 5) - 1;
+    if (index === maxIndex) {
       setIndex(0);
     } else {
       setIndex((prevIndex) => prevIndex + 1);
@@ -108,22 +109,36 @@ const InfoSection = () => {
 
   // Função para voltar para o slide anterior
   const handlePrevSlide = () => {
+    const maxIndex = Math.ceil(renderContent().length / 5) - 1;
     if (index === 0) {
-      setIndex(Math.ceil(renderContent().length / 5) - 1);
+      setIndex(maxIndex);
     } else {
       setIndex((prevIndex) => prevIndex - 1);
     }
   };
 
-  // Configura um intervalo para avançar automaticamente para o próximo slide a cada 20 segundos
-  useEffect(() => {
-    const interval = setInterval(() => {
+  // Função para avançar automaticamente para o próximo slide a cada 15 segundos
+  const startAutoPlay = () => {
+    autoPlayTimeoutRef.current = setInterval(() => {
       handleNextSlide();
-    }, 20000);
+    }, 15000);
+  };
 
-    // Limpa o intervalo quando o componente é desmontado
+  // Função para parar o autoplay
+  const stopAutoPlay = () => {
+    clearInterval(autoPlayTimeoutRef.current);
+  };
+
+  // Reinicia o autoplay quando o índice do slide muda
+  useEffect(() => {
+    stopAutoPlay();
+    startAutoPlay();
+  }, [index]);
+
+  // Limpa o intervalo quando o componente é desmontado
+  useEffect(() => {
     return () => {
-      clearInterval(interval);
+      stopAutoPlay();
     };
   }, []);
 
@@ -170,7 +185,8 @@ const InfoSection = () => {
               index={index}
               onChangeIndex={handleChangeIndex}
               enableMouseEvents={false}
-              interval={50000} // Define o tempo de intervalo para 50 segundos
+              interval={null} // Define o intervalo como null para desabilitar o intervalo interno do SwipeableViews
+              resistance
             >
               {/* Renderiza o conteúdo do slide em grupos de 5 */}
               {renderContent().reduce((acc, item, index) => {

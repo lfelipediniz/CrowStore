@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaCrow, FaFemale, FaMale } from "react-icons/fa";
+import { FaAngleLeft, FaCrow, FaFemale, FaMale } from "react-icons/fa";
 import Image from "next/image";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
@@ -10,14 +10,18 @@ import {
   GenderBtn,
   IconContainer,
   ProductContainer,
-  Girl,
-  Boy,
+  ButtonArrow,
+  ProductArrows,
+  Subtitle
 } from "./ShowCaseSectionElements";
 
 import ProductData from "../../fakedata/showcaseContent/products.json";
+import BestData from "../../fakedata/showcaseContent/productsBestS.json";
 
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import ProductCard from "../ReusedComponents/ProductCard";
+
+import { FaAngleRight } from "react-icons/fa";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -98,10 +102,18 @@ const InfoSection = () => {
     }
   };
 
+  const handlePrevSlide = () => {
+    if (index === 0) {
+      setIndex(Math.ceil(renderContent().length / 5) - 1);
+    } else {
+      setIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       handleNextSlide();
-    }, 4000);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -143,6 +155,9 @@ const InfoSection = () => {
               </GenderBtn>
             </ShowcaseGenderBtn>
           </BtnContainer>
+
+          <Subtitle>Lançamentos</Subtitle>
+
           <ProductContainer>
             <AutoPlaySwipeableViews
               index={index}
@@ -152,7 +167,10 @@ const InfoSection = () => {
               {renderContent().reduce((acc, item, index) => {
                 if (index % 5 === 0) {
                   acc.push(
-                    <div key={`slide-${index / 5}`} style={{ display: "flex" }}>
+                    <div
+                      key={`slide-${index / 5}`}
+                      style={{ display: "flex" }}
+                    >
                       {renderContent().slice(index, index + 5)}
                     </div>
                   );
@@ -161,6 +179,17 @@ const InfoSection = () => {
               }, [])}
             </AutoPlaySwipeableViews>
           </ProductContainer>
+
+          <ProductArrows>
+            <ButtonArrow onClick={handlePrevSlide}>
+              <FaAngleLeft />
+            </ButtonArrow>
+            <ButtonArrow onClick={handleNextSlide}>
+              <FaAngleRight />
+            </ButtonArrow>
+          </ProductArrows>
+
+          <Subtitle>Mais Vendidas</Subtitle>
         </WrapContent>
       </InfoContainer>
     </>

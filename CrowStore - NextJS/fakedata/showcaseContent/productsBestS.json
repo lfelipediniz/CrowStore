@@ -1,0 +1,37 @@
+{
+    "girlContent": [
+      {
+        "productName": "Calça Crow",
+        "price": "R$ 99,90",
+        "image": "/CrowStore/imgs/CALCACROW.png"
+      },
+      {
+        "productName": "Moleton Crow",
+        "price": "R$ 149,90",
+        "image": "/CrowStore/imgs/MOLETOMCROW.png"
+      },
+      {
+        "productName": "Suéter Man Crow",
+        "price": "R$ 79,90",
+        "image": "/CrowStore/imgs/SUETERCROW.png"
+      }
+    ],
+    "boyContent": [
+      {
+        "productName": "Suéter Crow",
+        "price": "R$ 89,90",
+        "image": "/CrowStore/imgs/SUETERMANCROW.png"
+      },
+      {
+        "productName": "Suéter Crow",
+        "price": "R$ 89,90",
+        "image": "/CrowStore/imgs/SUETERMANCROW.png"
+      },
+      {
+        "productName": "Suéter Crow",
+        "price": "R$ 89,90",
+        "image": "/CrowStore/imgs/SUETERMANCROW.png"
+      }
+    ]
+  }
+  

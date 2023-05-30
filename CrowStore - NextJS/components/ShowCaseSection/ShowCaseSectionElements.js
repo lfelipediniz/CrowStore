@@ -57,15 +57,34 @@ export const Boy = styled.div`
 `;
 
 export const ProductContainer = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  padding-bottom: 20px;
 
-  &::-webkit-scrollbar {
-    display: none;
+`;
+
+export const ProductArrows = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+`;
+
+export const ButtonArrow = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 35px;
+  outline: none;
+  padding: 0;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
   }
 `;
+
+export const Subtitle = styled.h3`
+
+`;
+
+
+
+
 

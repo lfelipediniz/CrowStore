@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const ProductCardContainer = styled.div`
   margin-top: 30px;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin-right: 100px;
   height: 440px;
 `;
 

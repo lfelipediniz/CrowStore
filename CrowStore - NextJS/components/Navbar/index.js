@@ -66,7 +66,6 @@ const Navbar = ({ toggle, home, login, navbarColor }) => {
               <FaBars />
             </MobileIcon>
             <NavMenu>
-              {home ? (
                 <>
                   <NavItems>
                     <NavLinks
@@ -142,35 +141,6 @@ const Navbar = ({ toggle, home, login, navbarColor }) => {
                     </Link>
                   </NavItems>
                 </>
-              ) : (
-                <>
-                  <NavItems>
-                    <Link href="/#showcase">
-                      <NavLink>Vitrine</NavLink>
-                    </Link>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/#aboutus">
-                      <NavLink>Sobre nós</NavLink>
-                    </Link>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/#contact">
-                      <NavLink>Contato</NavLink>
-                    </Link>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/#doubts">
-                      <NavLink>Dúvidas</NavLink>
-                    </Link>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/login">
-                      <NavLink>Login</NavLink>
-                    </Link>
-                  </NavItems>
-                </>
-              )}
             </NavMenu>
           </NavbarContainer>
         </Nav>

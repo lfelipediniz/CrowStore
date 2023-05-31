@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import Footer from "../Footer";
-import AboutUSSection from "../AboutUSSection";
+import Sidebar from "../Sidebar";
+import Navbar from "../Navbar";
+import User from "../User";
 
 const WrapLogin = () => {
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+
   return (
     <>
-      <AboutUSSection />
+      <Sidebar isOpen={isOpen} toggle={toggle} home />
+      <Navbar toggle={toggle} home />
+      <User />
       <Footer />
     </>
   );

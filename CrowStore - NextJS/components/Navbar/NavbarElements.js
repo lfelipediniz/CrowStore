@@ -20,6 +20,13 @@ export const Nav = styled.nav`
   @media screen and (max-width: 1000px) {
     transition: 0.8s all ease;
   }
+
+  @media screen and (max-width: 640px) {
+    background: ${({ scrollNav, navbarColor }) =>
+    scrollNav ? "rgba(38, 38, 38, 0.50)" : navbarColor || "rgba(38, 38, 38, 1)"};
+  }
+
+
 `;
 
 export const NavbarContainer = styled.div`
@@ -44,14 +51,14 @@ export const NavLogo = styled(Image)`
   cursor: pointer;
   display: flex;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  width: 57px;
+  height: 57px;
 
-  @media screen and (max-width: 1000px) {
-    width: 50px;
-    height: 50px;
-    margin-top: 8px;
+  @media screen and (max-width: 640px) {
+    width: 55px;
+  height: 55px;
   }
+
 `;
 
 export const MobileIcon = styled.div`

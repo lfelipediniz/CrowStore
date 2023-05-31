@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {
-  FaBars,
-  FaSearch,
-  FaUserAlt,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { FaBars, FaSearch, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
@@ -59,7 +54,7 @@ const Navbar = ({ toggle, navbarColor }) => {
     <>
       <IconContext.Provider value={{ color: colors.textBlack }}>
         <Nav navbarColor={navbarColor} scrollNav={scrollNav}>
-        <NavbarContainer>
+          <NavbarContainer>
             <ImgWrap>
               <NavLogo
                 to="/"
@@ -70,7 +65,7 @@ const Navbar = ({ toggle, navbarColor }) => {
               />
             </ImgWrap>
             <MobileIcon onClick={toggle}>
-              <FaBars />
+              <FaBars color="#FFFBFE" />
             </MobileIcon>
             <NavMenu>
               {isHomePage ? (
@@ -138,15 +133,15 @@ const Navbar = ({ toggle, navbarColor }) => {
               <NavItems>
                 <Link href="/search">
                   <NavLink>
-                  <FaSearch color="#FFFBFE" /> 
+                    <FaSearch color="#FFFBFE" />
                   </NavLink>
                 </Link>
               </NavItems>
-              
+
               <NavItems>
                 <Link href="/shopcart">
-                  <NavLink>
-                  <FaShoppingCart color="#FFFBFE" />
+                  <NavLink style={{ boxShadow: "0 0 5px #FFFBFE" }}>
+                    <FaShoppingCart color="#FFFBFE" />
                   </NavLink>
                 </Link>
               </NavItems>

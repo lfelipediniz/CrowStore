@@ -37,44 +37,46 @@ const Caurosel = () => {
   }, [index]);
 
   return (
-      <SwipeableViews index={index} onChangeIndex={handleChangeIndex} enableMouseEvents={false}>
+    <>
+      <SwipeableViews
+        index={index}
+        onChangeIndex={handleChangeIndex}
+        enableMouseEvents={false}
+      >
         <Slide1>
-        <WrapContent>
-          <BannerRetangule>
-            <BannerText>
-            Jaqueta Tchans
-            </BannerText>
+          <WrapContent>
+            <BannerRetangule>
+              <BannerText>Jaqueta Tchans</BannerText>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
-          </BannerRetangule>
+            </BannerRetangule>
           </WrapContent>
         </Slide1>
         <Slide2>
-        <WrapContent>
-          <BannerRetangule>
-            <BannerText>
-            Camisesta Básica
-            </BannerText>
+          <WrapContent>
+            <BannerRetangule>
+              <BannerText>Camisesta Básica</BannerText>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
-          </BannerRetangule>
+            </BannerRetangule>
           </WrapContent>
         </Slide2>
         <Slide3>
-        <WrapContent>
-          <BannerRetangule>
-            <BannerText>
-            Conjunto Outono
-            </BannerText>
+          <WrapContent>
+            <BannerRetangule>
+              <BannerText>Conjunto Outono</BannerText>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
-          </BannerRetangule>
+            </BannerRetangule>
           </WrapContent>
         </Slide3>
       </SwipeableViews>
+      <WrapContent>
+      </WrapContent>
+    </>
   );
 };
 

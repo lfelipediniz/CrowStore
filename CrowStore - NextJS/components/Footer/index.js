@@ -24,7 +24,7 @@ const Footer = () => {
   const num1 =
     "";
   return (
-    <FooterContainer id="contact">
+    <FooterContainer>
       <FooterLinksWrapper>
         <FooterLinkItems>
           <SocialLogo to="/" onClick={toggleHome}>

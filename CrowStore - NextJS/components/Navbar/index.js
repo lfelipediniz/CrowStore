@@ -105,32 +105,7 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                       Dúvidas
                     </NavLinks>
                   </NavItems>
-                  <NavItems>
-                    <NavLinks
-                      to="contact"
-                      href="#contact"
-                      smooth={true}
-                      duration={500}
-                      spy={true}
-                      exact="true"
-                      offset={-60}
-                    >
-                      Contato
-                    </NavLinks>
-                  </NavItems>
                   <>
-                  {/* <NavItems>
-                    <NavLinks
-                      smooth={true}
-                      duration={500}
-                      spy={true}
-                      exact="true"
-                      offset={-60}
-                    >
-                      |
-                    </NavLinks>
-                  </NavItems> */}
-
                   <NavItems>
                     <NavLinks
                       to="contact"
@@ -188,11 +163,6 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                   <NavItems>
                     <Link href="/#aboutus">
                       <NavLink>Sobre nós</NavLink>
-                    </Link>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/#contact">
-                      <NavLink>Contato</NavLink>
                     </Link>
                   </NavItems>
                   <NavItems>

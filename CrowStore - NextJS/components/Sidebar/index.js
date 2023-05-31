@@ -30,9 +30,6 @@ const Sidebar = ({ isOpen, toggle, home }) => {
               <LinkS to="doubts" href="#doubts">
                 <SidebarItemS onClick={toggle}>Dúvidas</SidebarItemS>
               </LinkS>
-              <LinkS to="contact" href="#contact">
-                <SidebarItemS onClick={toggle}>Contato</SidebarItemS>
-              </LinkS>
             </>
           ) : (
             <>
@@ -41,9 +38,6 @@ const Sidebar = ({ isOpen, toggle, home }) => {
               </Link>
               <Link href="/#aboutus">
                 <SidebarItem onClick={toggle}>aboutus</SidebarItem>
-              </Link>
-              <Link href="/#contact">
-                <SidebarItem onClick={toggle}>Sobre</SidebarItem>
               </Link>
               <Link href="/#doubts">
                 <SidebarItem onClick={toggle}>Dúvidas</SidebarItem>

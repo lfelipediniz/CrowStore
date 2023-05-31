@@ -134,19 +134,15 @@ const Navbar = ({ toggle, navbarColor }) => {
                   </NavItems>
                 </>
               )}
+
               <NavItems>
-                <NavLinks
-                  to="contact"
-                  href="#contact"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-60}
-                >
+                <Link href="/search">
+                  <NavLink>
                   <FaSearch color="#FFFBFE" /> 
-                </NavLinks>
+                  </NavLink>
+                </Link>
               </NavItems>
+              
               <NavItems>
                 <Link href="/shopcart">
                   <NavLink>

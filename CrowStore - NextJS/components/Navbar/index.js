@@ -166,6 +166,11 @@ const Navbar = ({ toggle, home, blog, navbarColor }) => {
                     </Link>
                   </NavItems>
                   <NavItems>
+                    <Link href="/#contact">
+                      <NavLink>Contato</NavLink>
+                    </Link>
+                  </NavItems>
+                  <NavItems>
                     <Link href="/#doubts">
                       <NavLink>Dúvidas</NavLink>
                     </Link>

@@ -144,24 +144,15 @@ const Navbar = ({ toggle, navbarColor }) => {
                   exact="true"
                   offset={-60}
                 >
-                  <FaSearch color="#FFFBFE" />
+                  <FaSearch color="#FFFBFE" /> 
                 </NavLinks>
               </NavItems>
               <NavItems>
-                <NavLinks
-                  to="contact"
-                  href="#contact"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-60}
-                  style={{
-                    boxShadow: "0 0 5px #FFFBFE",
-                  }}
-                >
+                <Link href="/shopcart">
+                  <NavLink>
                   <FaShoppingCart color="#FFFBFE" />
-                </NavLinks>
+                  </NavLink>
+                </Link>
               </NavItems>
               <NavItems>
                 <Link href="/login">

@@ -8,9 +8,14 @@ export const InfoContainer = styled.div`
   height: auto;
   background-color: ${colors.primary};
 
-  @media (max-width: 768px) {
-    padding: 100px 0 100px 0;
+/* 
+  @media (max-width: 440px) {
+    margin-top: -140px;
   }
+
+  @media (max-width: 540px) {
+    margin-top: -100px;
+  } */
 `;
 
 export const BtnContainer = styled.div``;
@@ -71,7 +76,7 @@ export const ButtonArrow = styled.button`
   border: none;
   color: ${colors.textBlack};
   cursor: pointer;
-  font-size: 35px;
+  font-size: 35px; 
   outline: none;
   padding: 0;
   transition: transform 0.3s;

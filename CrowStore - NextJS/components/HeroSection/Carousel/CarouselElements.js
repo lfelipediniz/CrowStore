@@ -25,7 +25,10 @@ export const BannerRetangule = styled.div`
   justify-content: space-between;
 
   @media (max-width: 900px) {
-    display: none;
+    width: 165px;
+    height: 50px;
+    margin-bottom: 30px;
+    margin-left: 0;
   }
 `;
 
@@ -39,6 +42,10 @@ export const BannerText = styled.text`
   color: #ffffff;
   text-align: left;
   margin-left: 0;
+
+  @media (max-width: 900px) {
+font-size: 15px;
+  }
 `;
 
 
@@ -51,6 +58,11 @@ export const BannerArrow = styled.button`
   margin-top: 9px;
   padding-right: 5px;
   font-size: 30px;
+
+  @media (max-width: 900px) {
+  display: none;
+  }
+
 `;
 
 export const Slide1 = styled(Slide)`
@@ -59,8 +71,6 @@ export const Slide1 = styled(Slide)`
   position: relative;
 
   @media (max-width: 640px) {
-    background-size: contain;
-    background-repeat: no-repeat;
     margin-top: 80px;
   }
 `;
@@ -71,8 +81,7 @@ export const Slide2 = styled(Slide)`
 
   @media (max-width: 640px) {
     margin-top: 80px;
-    background-size: contain;
-    background-repeat: no-repeat;
+
   }
 `;
 
@@ -82,7 +91,6 @@ export const Slide3 = styled(Slide)`
 
   @media (max-width: 640px) {
     margin-top: 80px;
-    background-size: contain;
-    background-repeat: no-repeat;
+
   }
 `;

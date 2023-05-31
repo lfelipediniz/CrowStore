@@ -23,8 +23,9 @@ import {
 import Logo from "../../public/CrowStore/logos/logo-crow-512x512.png";
 import { colors } from "../../styles/colors.js";
 
-const Navbar = ({ toggle, home, login, navbarColor }) => {
+const Navbar = ({ toggle, navbarColor }) => {
   const [scrollNav, setScrollNav] = useState(false);
+  const [isHomePage, setIsHomePage] = useState(false);
 
   const changeNav = () => {
     if (window.scrollY >= 60) {
@@ -34,8 +35,17 @@ const Navbar = ({ toggle, home, login, navbarColor }) => {
     }
   };
 
+  const checkHomePage = () => {
+    setIsHomePage(window.location.pathname === "/");
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
+    checkHomePage();
+
+    return () => {
+      window.removeEventListener("scroll", changeNav);
+    };
   }, []);
 
   const toggleHome = () => {
@@ -48,24 +58,19 @@ const Navbar = ({ toggle, home, login, navbarColor }) => {
         <Nav navbarColor={navbarColor} scrollNav={scrollNav}>
           <NavbarContainer>
             <ImgWrap>
-              {home ? (
-                <NavLogo
-                  to="/"
-                  href="/"
-                  onClick={toggleHome}
-                  src={Logo}
-                  alt="Logo CROW"
-                />
-              ) : (
-                <a href="/">
-                  <NavLogo src={Logo} alt="Logo CROW" />
-                </a>
-              )}
+              <NavLogo
+                to="/"
+                href="/"
+                onClick={toggleHome}
+                src={Logo}
+                alt="Logo CROW"
+              />
             </ImgWrap>
             <MobileIcon onClick={toggle}>
               <FaBars />
             </MobileIcon>
             <NavMenu>
+              {isHomePage && (
                 <>
                   <NavItems>
                     <NavLinks
@@ -106,41 +111,44 @@ const Navbar = ({ toggle, home, login, navbarColor }) => {
                       Dúvidas
                     </NavLinks>
                   </NavItems>
-                  <NavItems>
-                    <NavLinks
-                      to="contact"
-                      href="#contact"
-                      smooth={true}
-                      duration={500}
-                      spy={true}
-                      exact="true"
-                      offset={-60}
-                    >
-                      <FaSearch color="#FFFBFE" />
-                    </NavLinks>
-                  </NavItems>
-                  <NavItems>
-                    <NavLinks
-                      to="contact"
-                      href="#contact"
-                      smooth={true}
-                      duration={500}
-                      spy={true}
-                      exact="true"
-                      offset={-60}
-                      style={{
-                        boxShadow: "0 0 5px #FFFBFE",
-                      }}
-                    >
-                      <FaShoppingCart color="#FFFBFE" />
-                    </NavLinks>
-                  </NavItems>
-                  <NavItems>
-                    <Link href="/login">
-                      <NavLink><FaUserAlt color="#FFFBFE" /></NavLink>
-                    </Link>
-                  </NavItems>
                 </>
+              )}
+              <NavItems>
+                <NavLinks
+                  to="contact"
+                  href="#contact"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  exact="true"
+                  offset={-60}
+                >
+                  <FaSearch color="#FFFBFE" />
+                </NavLinks>
+              </NavItems>
+              <NavItems>
+                <NavLinks
+                  to="contact"
+                  href="#contact"
+                  smooth={true}
+                  duration={500}
+                  spy={true}
+                  exact="true"
+                  offset={-60}
+                  style={{
+                    boxShadow: "0 0 5px #FFFBFE",
+                  }}
+                >
+                  <FaShoppingCart color="#FFFBFE" />
+                </NavLinks>
+              </NavItems>
+              <NavItems>
+                <Link href="/login">
+                  <NavLink>
+                    <FaUserAlt color="#FFFBFE" />
+                  </NavLink>
+                </Link>
+              </NavItems>
             </NavMenu>
           </NavbarContainer>
         </Nav>

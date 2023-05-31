@@ -1,7 +1,7 @@
 export const fonts = {
     heading: '30pt',
     subtitle: '20pt',
-    text: '15pt',
+    text: '12pt',
 
     headingT: '18pt',
     subtitleT: '15pt',
@@ -10,6 +10,4 @@ export const fonts = {
     headingM: '15pt',
     subtitleM: '10pt',
     textM: '10pt',
-
-
 }

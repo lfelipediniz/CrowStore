@@ -13,7 +13,7 @@ export const BannerRetangule = styled.div`
   margin-bottom: 70px;
   width: 400px;
   height: 50px;
-  background-color: #262626;
+  background-color: ${colors.secondary};
   display: flex;
   align-items: center;
   justify-content: space-between;

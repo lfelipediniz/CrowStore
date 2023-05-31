@@ -21,6 +21,7 @@ export const Section1 = styled.div`
 `;
 
 export const FAQH1 = styled.h2`
+color: ${colors.secondary};
   padding: 2rem 0;
   font-size: ${fonts.heading};
   line-height: 1.1;

@@ -69,7 +69,7 @@ export const ProductArrows = styled.div`
 export const ButtonArrow = styled.button`
   background-color: transparent;
   border: none;
-  color: ${colors.textBlack};
+  color: ${colors.secondary};
   cursor: pointer;
   font-size: 35px;
   outline: none;
@@ -82,7 +82,7 @@ export const ButtonArrow = styled.button`
 `;
 
 export const Subtitle = styled.h3`
-
+color: ${colors.secondary};
 `;
 
 

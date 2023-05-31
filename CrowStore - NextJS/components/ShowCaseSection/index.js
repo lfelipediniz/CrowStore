@@ -203,8 +203,6 @@ const InfoSection = () => {
               <FaAngleRight />
             </ButtonArrow>
           </ProductArrows>
-
-          <Subtitle>Mais Vendidas</Subtitle>
         </WrapContent>
       </InfoContainer>
     </>

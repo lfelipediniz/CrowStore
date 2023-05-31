@@ -1,7 +1,9 @@
-export default function Login() {
+import WrapLogin from "../components/WrapLogin/WrapLogin";
+
+export default function Home() {
   return (
     <>
-    alelll
+      <WrapLogin/>
     </>
   );
 }

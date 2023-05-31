@@ -55,7 +55,7 @@ export const NavLogo = styled(Image)`
 `;
 
 export const MobileIcon = styled.div`
-  display: none;
+display: none;
 
   @media screen and (max-width: 900px) {
     display: flex;
@@ -63,10 +63,11 @@ export const MobileIcon = styled.div`
     cursor: pointer;
     color: ${colors.textBlack};
   }
+  
 `;
 
 export const NavMenu = styled.ul`
-  display: flex;
+ display: flex;
   list-style: none;
   top: 0;
   right: 0;
@@ -77,7 +78,7 @@ export const NavMenu = styled.ul`
 `;
 
 export const NavItems = styled.li`
-  height: 60px;
+    height: 60px;
   flex-grow: 1;
   a {
     text-decoration: none;
@@ -85,7 +86,7 @@ export const NavItems = styled.li`
 `;
 
 export const NavLinks = styled(LinkS)`
-  color: ${colors.primary};
+ color: ${colors.primary};
   display: flex;
   text-decoration: none;
   padding: 1.3rem 2.5rem;
@@ -96,6 +97,16 @@ export const NavLinks = styled(LinkS)`
   &.active {
     border-bottom: 3px solid ${colors.cta};
   }
+`;
+
+export const NavLink = styled.div`
+  border-bottom: ${({ page }) => (page ? `3px solid ${colors.cta}` : "")};
+  display: flex;
+  align-items: center;
+  padding: 1.3rem 2.5rem;
+  height: 100%;
+  cursor: pointer;
+  font-weight: 600;
 `;
 
 export const NavBtn = styled.div`
@@ -123,7 +134,7 @@ export const NavBtnLink = styled.a`
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: ${colors.cta};
-    color: ${colors.primary};
+    background: #076e00;
+    color: #010606;
   }
 `;

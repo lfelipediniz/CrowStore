@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   FaBars,
   FaSearch,
@@ -26,6 +27,7 @@ import { colors } from "../../styles/colors.js";
 const Navbar = ({ toggle, navbarColor }) => {
   const [scrollNav, setScrollNav] = useState(false);
   const [isHomePage, setIsHomePage] = useState(false);
+  const router = useRouter();
 
   const changeNav = () => {
     if (window.scrollY >= 60) {
@@ -36,7 +38,7 @@ const Navbar = ({ toggle, navbarColor }) => {
   };
 
   const checkHomePage = () => {
-    setIsHomePage(window.location.pathname === "/");
+    setIsHomePage(router.pathname === "/");
   };
 
   useEffect(() => {
@@ -50,13 +52,14 @@ const Navbar = ({ toggle, navbarColor }) => {
 
   const toggleHome = () => {
     scroll.scrollToTop();
+    router.push("/");
   };
 
   return (
     <>
       <IconContext.Provider value={{ color: colors.textBlack }}>
         <Nav navbarColor={navbarColor} scrollNav={scrollNav}>
-          <NavbarContainer>
+        <NavbarContainer>
             <ImgWrap>
               <NavLogo
                 to="/"
@@ -70,7 +73,7 @@ const Navbar = ({ toggle, navbarColor }) => {
               <FaBars />
             </MobileIcon>
             <NavMenu>
-              {isHomePage && (
+              {isHomePage ? (
                 <>
                   <NavItems>
                     <NavLinks
@@ -110,6 +113,24 @@ const Navbar = ({ toggle, navbarColor }) => {
                     >
                       Dúvidas
                     </NavLinks>
+                  </NavItems>
+                </>
+              ) : (
+                <>
+                  <NavItems>
+                    <Link href="/#showcase">
+                      <NavLink>Vitrine</NavLink>
+                    </Link>
+                  </NavItems>
+                  <NavItems>
+                    <Link href="/#aboutus">
+                      <NavLink>Sobre nós</NavLink>
+                    </Link>
+                  </NavItems>
+                  <NavItems>
+                    <Link href="/#doubts">
+                      <NavLink>Dúvidas</NavLink>
+                    </Link>
                   </NavItems>
                 </>
               )}

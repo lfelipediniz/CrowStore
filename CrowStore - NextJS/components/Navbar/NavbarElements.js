@@ -105,6 +105,7 @@ export const NavLink = styled.div`
   align-items: center;
   padding: 1.3rem 2.5rem;
   height: 100%;
+  color: ${colors.primary};
   cursor: pointer;
   font-weight: 600;
 `;

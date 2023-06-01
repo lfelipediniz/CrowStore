@@ -28,7 +28,7 @@ const Footer = () => {
       <FooterLinksWrapper>
         <FooterLinkItems>
           <SocialLogo to="/" onClick={toggleHome}>
-            <SocialLogoImg alt="Logo MG Energia Solar" src={whiteLogo} />
+            <SocialLogoImg alt="Logo Crow Store" src={whiteLogo} />
           </SocialLogo>
         </FooterLinkItems>
         <FooterLinkItems>

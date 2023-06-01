@@ -1,11 +1,5 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaCrow,
-  FaFemale,
-  FaMale,
-} from "react-icons/fa";
+import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { FaAngleLeft, FaAngleRight, FaCrow, FaFemale, FaMale } from "react-icons/fa";
 import Image from "next/image";
 import SwipeableViews from "react-swipeable-views";
 import {
@@ -31,9 +25,7 @@ const InfoSection = () => {
   const [girlContent, setGirlContent] = useState([]);
   const [boyContent, setBoyContent] = useState([]);
   const [index, setIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(5); // Alterado para estado
-
-  const autoPlayTimeoutRef = useRef(null);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const handleFilterSelection = (filter) => {
     setSelectedFilter(filter);
@@ -109,6 +101,8 @@ const InfoSection = () => {
     setIndex((prevIndex) => (prevIndex === 0 ? maxIndex : prevIndex - 1));
   };
 
+  const autoPlayTimeoutRef = useRef(null);
+
   const startAutoPlay = () => {
     autoPlayTimeoutRef.current = setInterval(() => {
       handleNextSlide();
@@ -128,25 +122,23 @@ const InfoSection = () => {
     };
   }, [index]);
 
-  // Atualiza o número de itens por página com base na largura da tela
   const updateItemsPerPage = () => {
     const screenWidth = window.innerWidth;
+    let newItemsPerPage = 5;
+
     if (screenWidth < 570) {
-      setItemsPerPage(1);
-    } 
-    else if (screenWidth < 808) {
-      setItemsPerPage(2);
-    }
-    else if (screenWidth < 1050) {
-      setItemsPerPage(3);
+      newItemsPerPage = 1;
+    } else if (screenWidth < 808) {
+      newItemsPerPage = 2;
+    } else if (screenWidth < 1050) {
+      newItemsPerPage = 3;
     } else if (screenWidth < 1340) {
-      setItemsPerPage(4);
-    } else {
-      setItemsPerPage(5);
+      newItemsPerPage = 4;
     }
+
+    setItemsPerPage(newItemsPerPage);
   };
 
-  // Atualiza o número de itens por página ao montar o componente e ao redimensionar a tela
   useLayoutEffect(() => {
     updateItemsPerPage();
 
@@ -162,78 +154,76 @@ const InfoSection = () => {
   }, []);
 
   return (
-    <>
-      <InfoContainer id="showcase">
-        <WrapContent>
-          <BtnContainer>
-            <ShowcaseGenderBtn>
-              <GenderBtn
-                onClick={() => handleFilterSelection("all")}
-                selected={selectedFilter === "all"}
-              >
-                <IconContainer>
-                  <FaCrow />
-                  Todos
-                </IconContainer>
-              </GenderBtn>
-              <GenderBtn
-                onClick={() => handleFilterSelection("girl")}
-                selected={selectedFilter === "girl"}
-              >
-                <IconContainer>
-                  <FaFemale />
-                  Feminino
-                </IconContainer>
-              </GenderBtn>
-              <GenderBtn
-                onClick={() => handleFilterSelection("boy")}
-                selected={selectedFilter === "boy"}
-              >
-                <IconContainer>
-                  <FaMale />
-                  Masculino
-                </IconContainer>
-              </GenderBtn>
-            </ShowcaseGenderBtn>
-          </BtnContainer>
-
-          <Subtitle>Lançamentos</Subtitle>
-
-          <ProductContainer>
-            <SwipeableViews
-              index={index}
-              onChangeIndex={handleChangeIndex}
-              enableMouseEvents={false}
-              interval={null}
-              resistance
+    <InfoContainer id="showcase">
+      <WrapContent>
+        <BtnContainer>
+          <ShowcaseGenderBtn>
+            <GenderBtn
+              onClick={() => handleFilterSelection("all")}
+              selected={selectedFilter === "all"}
             >
-              {renderContent().reduce((acc, item, index) => {
-                if (index % itemsPerPage === 0) {
-                  acc.push(
-                    <div
-                      key={`slide-${index / itemsPerPage}`}
-                      className="CarouselContainer"
-                    >
-                      {renderContent().slice(index, index + itemsPerPage)}
-                    </div>
-                  );
-                }
-                return acc;
-              }, [])}
-            </SwipeableViews>
-          </ProductContainer>
+              <IconContainer>
+                <FaCrow />
+                Todos
+              </IconContainer>
+            </GenderBtn>
+            <GenderBtn
+              onClick={() => handleFilterSelection("girl")}
+              selected={selectedFilter === "girl"}
+            >
+              <IconContainer>
+                <FaFemale />
+                Feminino
+              </IconContainer>
+            </GenderBtn>
+            <GenderBtn
+              onClick={() => handleFilterSelection("boy")}
+              selected={selectedFilter === "boy"}
+            >
+              <IconContainer>
+                <FaMale />
+                Masculino
+              </IconContainer>
+            </GenderBtn>
+          </ShowcaseGenderBtn>
+        </BtnContainer>
 
-          <ProductArrows>
-            <ButtonArrow onClick={handlePrevSlide}>
-              <FaAngleLeft />
-            </ButtonArrow>
-            <ButtonArrow onClick={handleNextSlide}>
-              <FaAngleRight />
-            </ButtonArrow>
-          </ProductArrows>
-        </WrapContent>
-      </InfoContainer>
-    </>
+        <Subtitle>Lançamentos</Subtitle>
+
+        <ProductContainer>
+          <SwipeableViews
+            index={index}
+            onChangeIndex={handleChangeIndex}
+            enableMouseEvents={false}
+            interval={null}
+            resistance
+          >
+            {renderContent().reduce((acc, item, index) => {
+              if (index % itemsPerPage === 0) {
+                acc.push(
+                  <div
+                    key={`slide-${index / itemsPerPage}`}
+                    className="CarouselContainer"
+                  >
+                    {renderContent().slice(index, index + itemsPerPage)}
+                  </div>
+                );
+              }
+              return acc;
+            }, [])}
+          </SwipeableViews>
+        </ProductContainer>
+
+        <ProductArrows>
+          <ButtonArrow onClick={handlePrevSlide}>
+            <FaAngleLeft />
+          </ButtonArrow>
+          <ButtonArrow onClick={handleNextSlide}>
+            <FaAngleRight />
+          </ButtonArrow>
+        </ProductArrows>
+      </WrapContent>
+    </InfoContainer>
   );
 };
 

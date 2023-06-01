@@ -7,8 +7,8 @@ export const FAQContainer = styled.div`
   color: ${colors.textBlack};
   padding: 3rem 0;
   height: auto;
-  @media screen and (max-width: 768px) {
-    padding: 100px 0;
+  @media screen and (max-width: 900px) {
+    padding: 0;
   }
 `;
 
@@ -28,7 +28,7 @@ color: ${colors.secondary};
   font-weight: 800;
   text-align: ${(props) => (props.isRight ? "right" : "left")};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     font-size: ${fonts.subtitle};
   }
 `;
@@ -39,7 +39,7 @@ export const FAQH2 = styled.h2`
   color: ${colors.textBlack} !important;
   text-align: ${(props) => (props.isRight ? "right" : "left")};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     font-size: ${fonts.subtitleM};
   }
 `;

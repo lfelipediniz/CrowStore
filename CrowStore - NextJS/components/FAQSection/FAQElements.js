@@ -51,7 +51,6 @@ export const TextWrapper = styled.div`
   padding-bottom: 1rem;
   font-size: ${fonts.text};
   @media screen and (max-width: 768px) {
-    font-size: ${fonts.textT};
   text-indent: 0;
 
   }

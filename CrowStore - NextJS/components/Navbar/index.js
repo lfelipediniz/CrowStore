@@ -108,6 +108,7 @@ const Navbar = ({ toggle, navbarColor }) => {
                     >
                       Dúvidas
                     </NavLinks>
+                    
                   </NavItems>
                 </>
               ) : (
@@ -126,7 +127,7 @@ const Navbar = ({ toggle, navbarColor }) => {
                     <Link href="/#doubts">
                       <NavLink>Dúvidas</NavLink>
                     </Link>
-                  </NavItems>
+                  </NavItems>  
                 </>
               )}
 

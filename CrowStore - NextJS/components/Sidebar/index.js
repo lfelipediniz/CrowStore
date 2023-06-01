@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link as LinkS } from "react-scroll";
 import Link from "next/link";
 import {
@@ -6,12 +6,23 @@ import {
   CloseIcon,
   Icon,
   SidebarWrapper,
-  SidebarMenu, 
+  SidebarMenu,
   SidebarItem,
   SidebarItemS,
 } from "./SidebarElements";
 
-const Sidebar = ({ isOpen, toggle, home }) => {
+const Sidebar = ({ isOpen, toggle }) => {
+  const [isHomePage, setIsHomePage] = useState(false);
+
+  const checkHomePage = () => {
+    setIsHomePage(router.pathname === "/");
+  };
+
+  const toggleHome = () => {
+    scroll.scrollToTop();
+    router.push("/");
+  };
+
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -19,7 +30,7 @@ const Sidebar = ({ isOpen, toggle, home }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          {home ? (
+          {isHomePage ? (
             <>
               <LinkS to="showcase" href="#showcase">
                 <SidebarItemS onClick={toggle}>Vitrine</SidebarItemS>
@@ -44,6 +55,16 @@ const Sidebar = ({ isOpen, toggle, home }) => {
               </Link>
             </>
           )}
+
+          <Link href="/login">
+            <SidebarItemS onClick={toggle}>Meu Perfil</SidebarItemS>
+          </Link>
+          <Link href="/shopcart">
+            <SidebarItemS onClick={toggle}>Meu Carrinho</SidebarItemS>
+          </Link>
+          <Link href="/search">
+            <SidebarItemS onClick={toggle}>Pesquisar Produto</SidebarItemS>
+          </Link>
         </SidebarMenu>
       </SidebarWrapper>
     </SidebarContainer>

@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FaAngleLeft, FaAngleRight, FaCrow, FaFemale, FaMale } from "react-icons/fa";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+import {
+  FaAngleLeft,
+  FaAngleRight,
+  FaCrow,
+  FaFemale,
+  FaMale,
+} from "react-icons/fa";
 import Image from "next/image";
 import SwipeableViews from "react-swipeable-views";
 import {
@@ -11,7 +17,7 @@ import {
   ProductContainer,
   ButtonArrow,
   ProductArrows,
-  Subtitle
+  Subtitle,
 } from "./ShowCaseSectionElements";
 
 import ProductData from "../../fakedata/showcaseContent/products.json";
@@ -21,32 +27,28 @@ import { WrapContent } from "../ReusedComponents/WrapContent";
 import ProductCard from "../ReusedComponents/ProductCard";
 
 const InfoSection = () => {
-  // State hooks
-  const [selectedFilter, setSelectedFilter] = useState("all"); // Armazena o filtro selecionado
-  const [girlContent, setGirlContent] = useState([]); // Armazena o conteúdo para meninas
-  const [boyContent, setBoyContent] = useState([]); // Armazena o conteúdo para meninos
-  const [index, setIndex] = useState(0); // Armazena o índice atual do slide
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [girlContent, setGirlContent] = useState([]);
+  const [boyContent, setBoyContent] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(5); // Alterado para estado
 
-  const autoPlayTimeoutRef = useRef(null); // Referência para o timeout do autoplay
+  const autoPlayTimeoutRef = useRef(null);
 
-  // Função para lidar com a seleção de filtro
   const handleFilterSelection = (filter) => {
     setSelectedFilter(filter);
-    setIndex(0); // Redefine o índice do slide para 0 ao mudar o filtro
+    setIndex(0);
   };
 
-  // Função para lidar com a mudança de índice do slide
   const handleChangeIndex = (index) => {
     setIndex(index);
   };
 
-  // Carrega o conteúdo inicial para meninas e meninos quando o componente é montado
   useEffect(() => {
     setGirlContent(ProductData.girlContent);
     setBoyContent(ProductData.boyContent);
   }, []);
 
-  // Função para intercalar os produtos para meninas e meninos
   const interleaveProducts = () => {
     const interleaved = [];
     const maxLength = Math.max(girlContent.length, boyContent.length);
@@ -61,7 +63,6 @@ const InfoSection = () => {
     return interleaved;
   };
 
-  // Função para renderizar o conteúdo com base no filtro selecionado
   const renderContent = () => {
     let content;
     if (selectedFilter === "girl") {
@@ -98,31 +99,26 @@ const InfoSection = () => {
     return content;
   };
 
-  // Função para avançar para o próximo slide
   const handleNextSlide = () => {
-    const maxIndex = Math.ceil(renderContent().length / 5) - 1;
+    const maxIndex = Math.ceil(renderContent().length / itemsPerPage) - 1;
     setIndex((prevIndex) => (prevIndex === maxIndex ? 0 : prevIndex + 1));
   };
 
-  // Função para voltar para o slide anterior
   const handlePrevSlide = () => {
-    const maxIndex = Math.ceil(renderContent().length / 5) - 1;
+    const maxIndex = Math.ceil(renderContent().length / itemsPerPage) - 1;
     setIndex((prevIndex) => (prevIndex === 0 ? maxIndex : prevIndex - 1));
   };
 
-  // Função para iniciar o autoplay
   const startAutoPlay = () => {
     autoPlayTimeoutRef.current = setInterval(() => {
       handleNextSlide();
     }, 5000);
   };
 
-  // Função para parar o autoplay
   const stopAutoPlay = () => {
     clearInterval(autoPlayTimeoutRef.current);
   };
 
-  // Configura o autoplay quando o componente é montado e quando o índice do slide muda
   useEffect(() => {
     stopAutoPlay();
     startAutoPlay();
@@ -131,6 +127,39 @@ const InfoSection = () => {
       stopAutoPlay();
     };
   }, [index]);
+
+  // Atualiza o número de itens por página com base na largura da tela
+  const updateItemsPerPage = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 570) {
+      setItemsPerPage(1);
+    } 
+    else if (screenWidth < 808) {
+      setItemsPerPage(2);
+    }
+    else if (screenWidth < 1050) {
+      setItemsPerPage(3);
+    } else if (screenWidth < 1340) {
+      setItemsPerPage(4);
+    } else {
+      setItemsPerPage(5);
+    }
+  };
+
+  // Atualiza o número de itens por página ao montar o componente e ao redimensionar a tela
+  useLayoutEffect(() => {
+    updateItemsPerPage();
+
+    const handleResize = () => {
+      updateItemsPerPage();
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -175,18 +204,17 @@ const InfoSection = () => {
               index={index}
               onChangeIndex={handleChangeIndex}
               enableMouseEvents={false}
-              interval={null} // Desabilita o intervalo interno do SwipeableViews
+              interval={null}
               resistance
             >
-              {/* Renderiza o conteúdo do slide em grupos de 5 */}
               {renderContent().reduce((acc, item, index) => {
-                if (index % 5 === 0) {
+                if (index % itemsPerPage === 0) {
                   acc.push(
                     <div
-                      key={`slide-${index / 5}`}
-                      style={{ display: "flex" }}
+                      key={`slide-${index / itemsPerPage}`}
+                      className="CarouselContainer"
                     >
-                      {renderContent().slice(index, index + 5)}
+                      {renderContent().slice(index, index + itemsPerPage)}
                     </div>
                   );
                 }

@@ -8,14 +8,6 @@ export const InfoContainer = styled.div`
   height: auto;
   background-color: ${colors.primary};
 
-/* 
-  @media (max-width: 440px) {
-    margin-top: -140px;
-  }
-
-  @media (max-width: 540px) {
-    margin-top: -100px;
-  } */
 `;
 
 export const BtnContainer = styled.div``;
@@ -30,7 +22,7 @@ export const GenderBtn = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: ${fonts.text};
   margin: 0 10px;
   text-decoration: none;
   cursor: pointer;
@@ -62,6 +54,9 @@ export const Boy = styled.div`
 `;
 
 export const ProductContainer = styled.div`
+.CarouselContainer {
+display: flex;
+}
 
 `;
 
@@ -89,6 +84,7 @@ export const ButtonArrow = styled.button`
 export const Subtitle = styled.h3`
 color: ${colors.textBlack};
 `;
+
 
 
 

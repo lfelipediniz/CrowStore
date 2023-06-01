@@ -13,6 +13,11 @@ export const InfoWrapper = styled.div`
   background-size: cover;
   display: flex;
   height: 693px;
+
+  @media (max-width: 900px) {
+    background-image: none;
+    display: inline;
+  }
 `;
 
 export const AboutRectangle = styled.div`
@@ -22,6 +27,14 @@ export const AboutRectangle = styled.div`
   padding: 30px;
   margin-top: 200px;
   font-size: 15px;
+
+  @media (max-width: 900px) {
+    background-color: transparent;
+    margin-top: 0px;
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
 `;
 
 export const AboutGif = styled(Image)`
@@ -29,6 +42,10 @@ export const AboutGif = styled(Image)`
   margin-right: -55px;
   margin-top: -30px;
   height: 300px;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export const HorizontalLogo = styled(Image)`
@@ -39,4 +56,8 @@ export const AboutText = styled.p`
   color: ${colors.textBlack};
   font-size: ${fonts.text};
   margin-top: 15px;
+
+  @media (max-width: 900px) {
+    font-size: ${fonts.text};
+  }
 `;

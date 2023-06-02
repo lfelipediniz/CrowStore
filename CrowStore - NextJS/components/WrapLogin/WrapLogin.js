@@ -4,6 +4,9 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import User from "../User";
 
+
+
+
 const WrapLogin = () => {
 
   const [isOpen, setIsOpen] = useState(false);
@@ -12,15 +15,16 @@ const WrapLogin = () => {
     setIsOpen(!isOpen);
   };
 
-
   return (
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
-      <User />
+      <User/>
       <Footer />
     </>
   );
 };
 
 export default WrapLogin; 
+
+

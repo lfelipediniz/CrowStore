@@ -8,24 +8,24 @@ import AboutUSSection from "../AboutUSSection";
 import ShowCaseSection from "../ShowCaseSection";
 
 const Wrap = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    };
 
-  return (
-    <>
-      <Sidebar isOpen={isOpen} toggle={toggle} home />
-      <Navbar toggle={toggle} home />
- 
-      <HeroSection />
-      <ShowCaseSection></ShowCaseSection>
-      <AboutUSSection />
-      <FAQ />
-      <Footer />
-    </>
-  );
+    return (
+        <>
+            <Sidebar isOpen={isOpen} toggle={toggle} home />
+            <Navbar toggle={toggle} home />
+
+            <HeroSection />
+            <ShowCaseSection subtitle="Lançamento"></ShowCaseSection>
+            <AboutUSSection />
+            <FAQ />
+            <Footer />
+        </>
+    );
 };
 
 export default Wrap;

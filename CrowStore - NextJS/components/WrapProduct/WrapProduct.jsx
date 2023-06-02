@@ -3,23 +3,22 @@ import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 
-const WrapSearch = () => {
-
+const WrapProduct = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => {
         setIsOpen(!isOpen);
     };
 
-
     return (
         <>
-            <Sidebar isOpen={isOpen} toggle={toggle} home />
-            <Navbar toggle={toggle} home />
-
+            <Sidebar isOpen={isOpen} toogle={toggle} home />
+            <Navbar toogle={toggle} home />
             <Footer />
+            <DisplayProduct />
+            <ShowCaseSection></ShowCaseSection>
         </>
     );
-};
+}
 
-export default WrapSearch;
+export default WrapProduct

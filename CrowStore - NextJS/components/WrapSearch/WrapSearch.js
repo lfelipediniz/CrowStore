@@ -5,7 +5,7 @@ import Navbar from "../Navbar";
 
 // import FilterTags from "../FilterTags";
 // import DisplayOptions from "../DisplayOptions"
-import ProductData from "../../fakedata/showcaseContent/products.json";
+import { productData } from "./products.jsx";
 
 const WrapSearch = () => {
 
@@ -14,8 +14,19 @@ const WrapSearch = () => {
     const [filters, setFilters] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
 
+    // Function to filter items based on searchTerm and filters
+    function filterItems(items, searchTerm, filters) {
+        return items.filter((item) => {
+            const hasSearchTerm = item.productName.toLowerCase().includes(searchTerm.toLowerCase());
+            const hasAllFilters = filters.every((filter) => {
+                return item.productName.toLowerCase().includes(filter.toLowerCase());
+            });
+            return hasSearchTerm && hasAllFilters;
+        });
+    };
+
     useEffect(() => {
-        const newFilteredItems = filterItems(ProductData, searchTerm, filters);
+        const newFilteredItems = filterItems(productData, searchTerm, filters);
         setFilteredItems(newFilteredItems);
     }, [searchTerm, filters]);
 
@@ -23,31 +34,15 @@ const WrapSearch = () => {
         setIsOpen(!isOpen);
     };
 
-    const modifyFilters = (newFilters) => {
-        setFilters(newFilters);
-    }
+    // const modifyFilters = (newFilters) => {
+    //     setFilters(newFilters);
+    // }
 
 
-    const modifySearchTerm = (newTerm) => {
-        setSearchTerm(newTerm);
-    }
+    // const modifySearchTerm = (newTerm) => {
+    //     setSearchTerm(newTerm);
+    // }
 
-    // Function to filter items based on searchTerm and filters
-    const filterItems = (items, searchTerm, filters) => {
-        items.filter((item) => {
-            // Check if the item name includes the search term
-            const hasSearchTerm = item.productName
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-
-            // Check if the item matches all filters
-            const hasAllFilters = filters.every((filter) => {
-                return item.productName.toLowerCase().includes(filter.toLowerCase());
-            });
-
-            return hasSearchTerm && hasAllFilters;
-        });
-    };
 
     return (
         <>

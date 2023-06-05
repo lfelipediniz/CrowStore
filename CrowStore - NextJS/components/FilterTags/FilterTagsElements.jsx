@@ -36,4 +36,9 @@ box-sizing: border-box;
 background-color: white;
 padding: 1px 6px;
 border: 1px solid black;
+
+&.selected {
+    color: #E71D36;
+    border: 1px solid #E71D36;
+}
 `;

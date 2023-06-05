@@ -24,10 +24,12 @@ const WrapSearch = () => {
 
     const modifyFilters = (newFilters) => {
         setFilters(newFilters);
+        console.log("New filters:", newFilters);
     };
 
     const modifySearchTerm = (newTerm) => {
         setSearchTerm(newTerm);
+        console.log("New search term:", newTerm);
     };
 
     // Function to filter items based on searchTerm and filters

@@ -17,6 +17,6 @@ justify-content: center;
 align-items: center;
 
 &:focus {
-    border-bottom: 1px solid#E71D36;
+    border-bottom: 1px solid #E71D36;
 }
 `;

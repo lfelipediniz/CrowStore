@@ -5,7 +5,18 @@ font-family: Inter, sans-serif;
 font-size: 1em;
 line-height: 1.5em;
 box-sizing: border-box;
-padding: 10px;
-border: 1px solid grey;
-border-radius: 5px;
-width: 100%`;
+padding: 10px 10px;
+margin: 120px auto 0 ;
+width: calc(100% - (2 * 64px));
+border: none;
+border-bottom: 1px solid black;
+font-weight: 500;
+box-sizing: border-box;
+display: flex;
+justify-content: center;
+align-items: center;
+
+&:focus {
+    border-bottom: 1px solid#E71D36;
+}
+`;

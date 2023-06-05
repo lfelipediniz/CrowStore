@@ -1,0 +1,24 @@
+{
+    "filters": [
+        {
+            "value": "Masculino",
+            "label": "Masculino"
+        },
+        {
+            "value": "Feminino",
+            "label": "Feminino"
+        },
+        {
+            "value": "Moletom",
+            "label": "Moletom"
+        },
+        {
+            "value": "Calça",
+            "label": "Calça"
+        },
+        {
+            "value": "Suéter",
+            "label": "Suéter"
+        }
+    ]
+}

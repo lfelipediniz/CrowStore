@@ -8,6 +8,8 @@ export const FooterContainer = styled.footer`
   padding: 100px 0;
   display: flex;
   background-color: ${colors.primary};
+  clear: both;
+
 
   @media screen and (max-width: 1100px) {
     margin-right: 0; 

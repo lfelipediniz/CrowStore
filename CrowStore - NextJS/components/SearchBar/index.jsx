@@ -1,7 +1,5 @@
 import React from "react";
-import {
-    Input
-} from "./SearchBarElements";
+import { Input } from "./SearchBarElements";
 
 const SearchBar = ({ onChange }) => {
 

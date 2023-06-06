@@ -1,17 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-
-const SideNavContainer = styled.div`
-  background-color: #262626;
-  width: 200px;
-  height: 100%;
-`;
-
-const SideNavItem = styled.div`
-  padding: 10px;
-  color: #fff;
-  cursor: pointer;
-`;
+import { SideNavContainer, SideNavItem } from "../UserElements";
+import { colors } from "../../../styles/colors";
 
 function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
   const handleItemClick = (category) => {
@@ -26,7 +15,7 @@ function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
           onClick={() => handleItemClick(category)}
           style={{
             backgroundColor:
-              selectedCategory === category ? "rgba(255, 255, 255, 0.1)" : "transparent",
+              selectedCategory === category ? colors.textBlack : "transparent",
           }}
         >
           {category}

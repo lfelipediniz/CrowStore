@@ -45,10 +45,10 @@ const Sidebar = ({ isOpen, toggle }) => {
           ) : (
             <>
               <Link href="/#showcase">
-                <SidebarItem onClick={toggle}>Orçamento</SidebarItem>
+                <SidebarItem onClick={toggle}>Vitrine</SidebarItem>
               </Link>
               <Link href="/#aboutus">
-                <SidebarItem onClick={toggle}>aboutus</SidebarItem>
+                <SidebarItem onClick={toggle}>Sobre nós</SidebarItem>
               </Link>
               <Link href="/#doubts">
                 <SidebarItem onClick={toggle}>Dúvidas</SidebarItem>

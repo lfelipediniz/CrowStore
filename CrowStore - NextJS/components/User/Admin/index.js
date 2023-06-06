@@ -19,6 +19,18 @@ function Admin() {
 
   const categories = categoriesData.map((category) => category.name);
 
+  const getContent = () => {
+    if (selectedCategory === "Todos") {
+      return categoriesData
+        .filter((category) => category.name !== "Todos")
+        .flatMap((category) => category.content);
+    }
+    const selectedCategoryData = categoriesData.find(
+      (category) => category.name === selectedCategory
+    );
+    return selectedCategoryData ? selectedCategoryData.content : [];
+  };
+
   return (
     <WrapContent>
       <UserContainer>
@@ -31,19 +43,9 @@ function Admin() {
         </SideNavContainer>
 
         <div>
-          {categoriesData.map((category) => {
-            if (selectedCategory === "Todos" && category.name === "Todos") {
-              return category.content.flatMap((content, index) => (
-                <h2 key={index}>{content}</h2>
-              ));
-            }
-            if (selectedCategory === category.name) {
-              return category.content.map((content, index) => (
-                <h2 key={index}>{content}</h2>
-              ));
-            }
-            return null;
-          })}
+          {getContent().map((content, index) => (
+            <h2 key={index}>{content}</h2>
+          ))}
         </div>
       </UserContainer>
     </WrapContent>

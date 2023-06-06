@@ -3,22 +3,22 @@ import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 
 export const UserContainer = styled.div`
+  display: flex;
   padding: 3rem 0;
+  margin-top: 80px;
   width: 100%;
-  height: auto;
+  height: 90vh;
   background-color: ${colors.primary};
 `;
 
-const SideNavContainer = styled.div`
+export const SideNavContainer = styled.div`
   background-color: #262626;
-  width: 200px;
+  width: 276px;
   height: 100%;
 `;
 
-const SideNavItem = styled.div`
+export const SideNavItem = styled.div`
   padding: 10px;
-  color: #fff;
+  color: ${colors.primary};
   cursor: pointer;
 `;
-
-export { SideNavContainer, SideNavItem };

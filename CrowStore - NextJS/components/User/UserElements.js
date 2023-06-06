@@ -7,8 +7,18 @@ export const UserContainer = styled.div`
   width: 100%;
   height: auto;
   background-color: ${colors.primary};
-
 `;
 
+const SideNavContainer = styled.div`
+  background-color: #262626;
+  width: 200px;
+  height: 100%;
+`;
 
+const SideNavItem = styled.div`
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+`;
 
+export { SideNavContainer, SideNavItem };

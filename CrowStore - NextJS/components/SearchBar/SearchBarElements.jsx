@@ -1,3 +1,4 @@
+import { colors } from "../../styles/colors";
 import styled from "styled-components";
 
 export const Input = styled.input`
@@ -19,4 +20,8 @@ align-items: center;
 &:focus {
     border-bottom: 1px solid #E71D36;
 }
+`;
+
+export const Subtitle = styled.h3`
+color: ${colors.textBlack};
 `;

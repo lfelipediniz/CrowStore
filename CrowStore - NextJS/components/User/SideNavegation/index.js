@@ -2,7 +2,7 @@ import React from "react";
 import { SideNavContainer, SideNavItem } from "../UserElements";
 import { colors } from "../../../styles/colors";
 
-function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
+function SideNavigation({ categories, selectedCategory, onCategoryChange, editMode }) {
   const handleItemClick = (category) => {
     onCategoryChange(category);
   };
@@ -19,6 +19,9 @@ function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
           }}
         >
           {category}
+          {editMode && (
+            <button onClick={() => handleRemoveCategory(category)}>Remover</button>
+          )}
         </SideNavItem>
       ))}
     </SideNavContainer>

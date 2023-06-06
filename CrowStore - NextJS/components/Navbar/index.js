@@ -147,7 +147,7 @@ const Navbar = ({ toggle, navbarColor }) => {
                 </Link>
               </NavItems>
               <NavItems>
-                <Link href="/login">
+                <Link href="/user">
                   <NavLink>
                     <FaUserAlt color="#FFFBFE" />
                   </NavLink>

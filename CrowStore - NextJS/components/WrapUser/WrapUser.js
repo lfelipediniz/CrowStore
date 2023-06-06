@@ -7,7 +7,7 @@ import User from "../User";
 
 
 
-const WrapLogin = () => {
+const WrapUser = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,6 +25,6 @@ const WrapLogin = () => {
   );
 };
 
-export default WrapLogin; 
+export default WrapUser; 
 
 

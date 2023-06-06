@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen, toggle }) => {
             </>
           )}
 
-          <Link href="/login">
+          <Link href="/user">
             <SidebarItemS onClick={toggle}>Meu Perfil</SidebarItemS>
           </Link>
           <Link href="/shopcart">

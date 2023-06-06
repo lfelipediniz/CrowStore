@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import Login from "../Login";
-import { UserContainer } from "./UserElements";
+import Admin from "./Admin";
+import CommonUser from "./CommonUser";
 
 function User() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(true);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -17,12 +19,7 @@ function User() {
   return (
     <>
       {isLoggedIn ? (
-        <WrapContent>
-          <UserContainer>
-            
-          </UserContainer>
-
-        </WrapContent>
+        isAdmin ? <Admin /> : <CommonUser />
       ) : (
         <Login />
       )}

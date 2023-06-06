@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
-import Login from "./Login";
-
+import Login from "../Login";
+import { UserContainer } from "./UserElements";
 
 function User() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
-    <Login />
-    <WrapContent>
-    </WrapContent>
+      {isLoggedIn ? (
+        <WrapContent>
+          <UserContainer>
+            
+          </UserContainer>
+
+        </WrapContent>
+      ) : (
+        <Login />
+      )}
     </>
   );
 }

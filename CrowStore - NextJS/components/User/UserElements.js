@@ -22,3 +22,47 @@ export const SideNavItem = styled.div`
   color: ${colors.primary};
   cursor: pointer;
 `;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  background-color: ${colors.primary};
+  color: ${colors.white};
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.cta};
+  }
+`;
+
+export const EditModeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+export const EditModeButton = styled.button`
+  background-color: ${colors.primary};
+  color: ${colors.white};
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  margin-right: 1rem;
+  cursor: pointer;
+`;
+
+export const EditModeOptions = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+export const EditModeOption = styled.button`
+  background-color: ${colors.primary};
+  color: ${colors.white};
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;

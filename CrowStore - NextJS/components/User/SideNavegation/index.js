@@ -1,19 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import { SideNavContainer, SideNavItem } from "../UserElements";
+import { colors } from "../../../styles/colors";
 
-const SideNavContainer = styled.div`
-  background-color: #262626;
-  width: 200px;
-  height: 100%;
-`;
-
-const SideNavItem = styled.div`
-  padding: 10px;
-  color: #fff;
-  cursor: pointer;
-`;
-
-function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
+function SideNavigation({ categories, selectedCategory, onCategoryChange, editMode }) {
   const handleItemClick = (category) => {
     onCategoryChange(category);
   };
@@ -26,10 +15,13 @@ function SideNavigation({ categories, selectedCategory, onCategoryChange }) {
           onClick={() => handleItemClick(category)}
           style={{
             backgroundColor:
-              selectedCategory === category ? "rgba(255, 255, 255, 0.1)" : "transparent",
+              selectedCategory === category ? colors.textBlack : "transparent",
           }}
         >
           {category}
+          {editMode && (
+            <button onClick={() => handleRemoveCategory(category)}>Remover</button>
+          )}
         </SideNavItem>
       ))}
     </SideNavContainer>

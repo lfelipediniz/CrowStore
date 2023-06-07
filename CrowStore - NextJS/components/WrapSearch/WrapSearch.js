@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import ProductData from "../../fakedata/showcaseContent/products.json";
 import SearchBar from "../SearchBar"
 import FilterTags from "../FilterTags"
+import DisplayOptions from "../DisplayOptions"
 import { Subtitle } from "./WrapElements.js"
 
 const WrapSearch = () => {
@@ -19,30 +20,39 @@ const WrapSearch = () => {
 
         const productList = [];
 
-        ProductData.girlContent.forEach((product) => {
-            productList.push(`${product.productName} Feminino`);
+        items.girlContent.forEach((girlProduct) => {
+            const product = {
+                productName: girlProduct.productName + " Feminino",
+                price: girlProduct.price,
+                image: girlProduct.image,
+            };
+            productList.push(product);
         });
 
-        ProductData.boyContent.forEach((product) => {
-            productList.push(`${product.productName} Masculino`);
+        items.boyContent.forEach((boyProduct) => {
+            const product = {
+                productName: boyProduct.productName + " Masculino",
+                price: boyProduct.price,
+                image: boyProduct.image,
+            };
+            productList.push(product);
         });
 
-        const result = productList.filter(item => {
+        return productList.filter(item => {
             // Check if the item name includes the search term
             const hasSearchTerm =
-                item &&
-                item.toLowerCase().includes(searchTerm.toLowerCase());
+                item.productName &&
+                item.productName.toLowerCase().includes(searchTerm.toLowerCase());
 
             // Check if the item matches all filters
             const hasAllFilters = filters.every(filter => {
                 return (
-                    item &&
-                    item.toLowerCase().includes(filter.toLowerCase())
+                    item.productName &&
+                    item.productName.toLowerCase().includes(filter.toLowerCase())
                 );
             });
             return hasSearchTerm && hasAllFilters;
         });
-        return result;
     };
 
     const toggle = () => {
@@ -70,7 +80,7 @@ const WrapSearch = () => {
             <SearchBar onChange={modifySearchTerm} />
             <FilterTags onChange={modifyFilters} />
             {searchTerm && <Subtitle>{filteredItems.length} resultados para "{searchTerm}"</Subtitle>}
-            {/* <DisplayOptions items={filteredItems} /> */}
+            <DisplayOptions items={filteredItems} />
             <Footer />
         </>
     );

@@ -18,17 +18,19 @@ export const RemoveButton = styled.button`
   cursor: pointer;
 `;
 
-export const ProductContainer = styled.div``;
+export const ProductContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Centralizar os itens */
+`;
 
 export const ScrollableContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - 100px); /* Ajuste a altura conforme necessário */
+  max-height: calc(100vh - 200px); /* Ajuste a altura conforme necessário */
   width: 100%;
 
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 10px;
-
+  display: flex;
+  justify-content: center; /* Centralizar os produtos */
   /* Hide Scroll */
   scrollbar-width: thin; /* Para navegadores Firefox */
   scrollbar-color: transparent transparent; /* Para navegadores Firefox */

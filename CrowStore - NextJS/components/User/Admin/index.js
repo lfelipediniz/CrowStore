@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { WrapContent } from "../../ReusedComponents/WrapContent";
-import { UserContainer, RemoveButton, ProductContainer, ScrollableContainer } from "../UserElements";
+import {
+  UserContainer,
+  RemoveButton,
+  ProductContainer,
+  ScrollableContainer,
+} from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -8,7 +13,11 @@ import Products from "../../../fakedata/adminContent/products.json";
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const [categories, setCategories] = useState(["Todos", "Masculino", "Feminino"]);
+  const [categories, setCategories] = useState([
+    "Todos",
+    "Masculino",
+    "Feminino",
+  ]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   const toggleEditingMode = () => {
@@ -28,7 +37,11 @@ function Admin() {
 
   const handleRemoveCategory = (index) => {
     const categoryToRemove = categories[index];
-    if (categoryToRemove === "Todos" || categoryToRemove === "Masculino" || categoryToRemove === "Feminino") {
+    if (
+      categoryToRemove === "Todos" ||
+      categoryToRemove === "Masculino" ||
+      categoryToRemove === "Feminino"
+    ) {
       return; // Não remove as categorias "Todos", "Masculino" e "Feminino"
     }
     const updatedCategories = [...categories];
@@ -55,35 +68,46 @@ function Admin() {
         <Sidebar>
           <Menu>
             {categories.map((category, index) => (
-              <MenuItem key={index} onClick={() => handleCategoryClick(category)}>
+              <MenuItem
+                key={index}
+                onClick={() => handleCategoryClick(category)}
+              >
                 {category}
-                {category !== "Todos" && category !== "Masculino" && category !== "Feminino" && editingMode && (
-                  <RemoveButton onClick={() => handleRemoveCategory(index)}>
-                    X
-                  </RemoveButton>
-                )}
+                {category !== "Todos" &&
+                  category !== "Masculino" &&
+                  category !== "Feminino" &&
+                  editingMode && (
+                    <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                      X
+                    </RemoveButton>
+                  )}
               </MenuItem>
             ))}
             {editingMode && (
-              <MenuItem onClick={handleAddCategory}> Adicionar Categoria </MenuItem>
+              <MenuItem onClick={handleAddCategory}>
+                {" "}
+                Adicionar Categoria{" "}
+              </MenuItem>
             )}
             <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
           </Menu>
         </Sidebar>
 
-        <ScrollableContainer>
 
-        {filteredProducts.map((product, index) => (
-          <ProductCard
-            key={index}
-            img={product.image}
-            productName={product.productName}
-            price={product.price}
-          />
-        ))}
+          <ScrollableContainer>
+            <ProductContainer>
 
-
-        </ScrollableContainer>
+            {filteredProducts.map((product, index) => (
+              <ProductCard
+                key={index}
+                img={product.image}
+                productName={product.productName}
+                price={product.price}
+              />
+            ))}
+                        </ProductContainer>
+          </ScrollableContainer>
+          
 
       </UserContainer>
     </WrapContent>

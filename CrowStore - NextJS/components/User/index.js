@@ -10,8 +10,8 @@ import {LoginContainer, LoginTitle, LoginForm, Loginlabel, LoginInput, Loginbut,
 
 function User() {
   
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [userN, setUsername] = useState('');
   const [senha, setPassword] = useState('');
 

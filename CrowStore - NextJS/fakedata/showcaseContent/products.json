@@ -2,8 +2,8 @@
   {
     "productName": "Calça Crow",
     "price": "R$ 99,90",
-    "image": "/CrowStore/imgs/CALCACROW.png",
-    "category": "moletom",
+    "image": "/CrowStore/imgs/SUETERMANCROW.png",
+    "category": "sueter",
     "gender": "boy"
   },
   {
@@ -16,14 +16,14 @@
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
+    "image": "/CrowStore/imgs/SUETERCROW.png",
     "category": "moletom",
     "gender": "girl"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
+    "image": "/CrowStore/imgs/TOUCACROW.png",
     "category": "moletom",
     "gender": "girl"
   },

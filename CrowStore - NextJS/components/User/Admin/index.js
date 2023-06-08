@@ -54,13 +54,14 @@ function Admin() {
   };
 
   const filteredProducts =
-    selectedCategory === "Todos"
-      ? Products
-      : Products.filter(
-          (product) =>
-            product.gender ===
-            (selectedCategory === "Masculino" ? "boy" : "girl")
-        );
+  selectedCategory === "Todos"
+    ? Products
+    : Products.filter(
+        (product) =>
+          product.category === selectedCategory ||
+          (selectedCategory === "Masculino" && product.gender === "boy") ||
+          (selectedCategory === "Feminino" && product.gender === "girl")
+      );
 
   return (
     <WrapContent>
@@ -93,10 +94,8 @@ function Admin() {
           </Menu>
         </Sidebar>
 
-
-          <ScrollableContainer>
-            <ProductContainer>
-
+        <ScrollableContainer>
+          <ProductContainer>
             {filteredProducts.map((product, index) => (
               <ProductCard
                 key={index}
@@ -105,10 +104,8 @@ function Admin() {
                 price={product.price}
               />
             ))}
-                        </ProductContainer>
-          </ScrollableContainer>
-          
-
+          </ProductContainer>
+        </ScrollableContainer>
       </UserContainer>
     </WrapContent>
   );

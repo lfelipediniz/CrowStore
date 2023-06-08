@@ -3,11 +3,13 @@ import { WrapContent } from "../../ReusedComponents/WrapContent";
 import { UserContainer, RemoveButton } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
+import Products from "../../../fakedata/adminContent/products.json";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [categories, setCategories] = useState(["Todos", "Masculino", "Feminino"]);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -34,13 +36,26 @@ function Admin() {
     setCategories(updatedCategories);
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProducts =
+    selectedCategory === "Todos"
+      ? Products
+      : Products.filter(
+          (product) =>
+            product.gender ===
+            (selectedCategory === "Masculino" ? "boy" : "girl")
+        );
+
   return (
     <WrapContent>
       <UserContainer>
         <Sidebar>
           <Menu>
             {categories.map((category, index) => (
-              <MenuItem key={index}>
+              <MenuItem key={index} onClick={() => handleCategoryClick(category)}>
                 {category}
                 {category !== "Todos" && category !== "Masculino" && category !== "Feminino" && editingMode && (
                   <RemoveButton onClick={() => handleRemoveCategory(index)}>
@@ -55,11 +70,16 @@ function Admin() {
             <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
           </Menu>
         </Sidebar>
-        
 
-       <ProductCard        
-       />
-        
+        {filteredProducts.map((product, index) => (
+          <ProductCard
+            key={index}
+            img={product.image}
+            productName={product.productName}
+            price={product.price}
+          />
+        ))}
+
       </UserContainer>
     </WrapContent>
   );

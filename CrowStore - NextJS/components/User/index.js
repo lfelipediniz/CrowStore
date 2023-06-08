@@ -4,18 +4,11 @@ import Login from "../Login";
 import Admin from "./Admin";
 import CommonUser from "./CommonUser";
 
+
 function User() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
   return (
     <>
       {isLoggedIn ? (

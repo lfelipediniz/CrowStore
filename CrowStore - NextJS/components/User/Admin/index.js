@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { WrapContent } from "../../ReusedComponents/WrapContent";
 import { UserContainer, RemoveButton } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import ProductCard from "../../ReusedComponents/ProductCard";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const [categories, setCategories] = useState(["Todos", "Documentation", "Calendar"]);
+  const [categories, setCategories] = useState(["Todos", "Masculino", "Feminino"]);
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -25,8 +26,8 @@ function Admin() {
 
   const handleRemoveCategory = (index) => {
     const categoryToRemove = categories[index];
-    if (categoryToRemove === "Todos") {
-      return; // Não remove a categoria "Todos"
+    if (categoryToRemove === "Todos" || categoryToRemove === "Masculino" || categoryToRemove === "Feminino") {
+      return; // Não remove as categorias "Todos", "Masculino" e "Feminino"
     }
     const updatedCategories = [...categories];
     updatedCategories.splice(index, 1);
@@ -41,7 +42,7 @@ function Admin() {
             {categories.map((category, index) => (
               <MenuItem key={index}>
                 {category}
-                {category !== "Todos" && editingMode && (
+                {category !== "Todos" && category !== "Masculino" && category !== "Feminino" && editingMode && (
                   <RemoveButton onClick={() => handleRemoveCategory(index)}>
                     X
                   </RemoveButton>
@@ -54,7 +55,10 @@ function Admin() {
             <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
           </Menu>
         </Sidebar>
+        
 
+       <ProductCard        
+       />
         
       </UserContainer>
     </WrapContent>

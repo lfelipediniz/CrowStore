@@ -15,15 +15,14 @@ import {
 } from "./ShowCaseSectionElements";
 
 import ProductData from "../../fakedata/showcaseContent/products.json";
-import BestData from "../../fakedata/showcaseContent/productsBestS.json";
+
 
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import ProductCard from "../ReusedComponents/ProductCard";
 
 const InfoSection = ({ subtitle }) => {
     const [selectedFilter, setSelectedFilter] = useState("all");
-    const [girlContent, setGirlContent] = useState([]);
-    const [boyContent, setBoyContent] = useState([]);
+    const [allProducts, setAllProducts] = useState([]);
     const [index, setIndex] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -37,58 +36,25 @@ const InfoSection = ({ subtitle }) => {
     };
 
     useEffect(() => {
-        setGirlContent(ProductData.girlContent);
-        setBoyContent(ProductData.boyContent);
+        setAllProducts(ProductData);
     }, []);
 
-    const interleaveProducts = () => {
-        const interleaved = [];
-        const maxLength = Math.max(girlContent.length, boyContent.length);
-        for (let i = 0; i < maxLength; i++) {
-            if (i < girlContent.length) {
-                interleaved.push(girlContent[i]);
-            }
-            if (i < boyContent.length) {
-                interleaved.push(boyContent[i]);
-            }
-        }
-        return interleaved;
-    };
-
     const renderContent = () => {
-        let content;
-        if (selectedFilter === "girl") {
-            content = girlContent.map((item, index) => (
-                <ProductCard
-                    key={`girl-${index}`}
-                    img={item.image}
-                    productName={item.productName}
-                    price={item.price}
-                />
-            ));
-        } else if (selectedFilter === "boy") {
-            content = boyContent.map((item, index) => (
-                <ProductCard
-                    key={`boy-${index}`}
-                    img={item.image}
-                    productName={item.productName}
-                    price={item.price}
-                />
-            ));
-        } else if (selectedFilter === "all") {
-            const interleaved = interleaveProducts();
-            content = interleaved.map((item, index) => (
-                <ProductCard
-                    key={`all-${index}`}
-                    img={item.image}
-                    productName={item.productName}
-                    price={item.price}
-                />
-            ));
+        let filteredProducts;
+        if (selectedFilter === "all") {
+            filteredProducts = allProducts;
         } else {
-            content = [];
+            filteredProducts = allProducts.filter((product) => product.gender === selectedFilter);
         }
-        return content;
+
+        return filteredProducts.map((product, index) => (
+            <ProductCard
+                key={`product-${index}`}
+                img={product.image}
+                productName={product.productName}
+                price={product.price}
+            />
+        ));
     };
 
     const handleNextSlide = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { WrapContent } from "../../ReusedComponents/WrapContent";
-import { UserContainer, RemoveButton } from "../UserElements";
+import { UserContainer, RemoveButton, ProductContainer, ScrollableContainer } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -71,6 +71,8 @@ function Admin() {
           </Menu>
         </Sidebar>
 
+        <ScrollableContainer>
+
         {filteredProducts.map((product, index) => (
           <ProductCard
             key={index}
@@ -79,6 +81,9 @@ function Admin() {
             price={product.price}
           />
         ))}
+
+
+        </ScrollableContainer>
 
       </UserContainer>
     </WrapContent>

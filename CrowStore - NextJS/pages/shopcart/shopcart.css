@@ -15,11 +15,17 @@ h1 {
 h2 {
     font-weight: 300;
     font-size: 1.25em;
+    margin: 0 !important;
+}
+
+h3 {
+    font-weight:500;
+    text-transform: uppercase;
 }
 
 bodyContainer {
     min-width: 224px;
-    max-width: 11184px;
+    max-width: 1184px;
     margin: 0 auto;
 }
 
@@ -28,13 +34,19 @@ bodyContainer {
     min-width: 224px;
     height: 100%;
     overflow-y: auto;
+    margin-right: 16px;
     float: left;
 }
 
-.productDescription {
+.productContainer {
     background-color: #E8E8E8;
     width: 100%;
     height: 256px;
+    position: relative;
+}
+
+.productContainer div, .productContainer img, .productContainer form {
+    float: left;
 }
 
 .productImage {
@@ -45,4 +57,34 @@ bodyContainer {
     margin-right: 16px;
 }
 
+.productDescription {
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+    float: left;
+    margin: 0 16px 0;
+    padding: 16px 0 16px;
+}
+
+.remove {
+    position: absolute;
+    bottom: 0;
+}
+
+.productQuantity {
+    white-space: nowrap;
+    width: max-content;
+    margin: 16px 16px 16px 0;
+}
+
+.child {
+    display: inline-block;
+}
+
+.paymentOptions {    
+    min-width: 224px;
+    max-width: 464px;
+    float: left;
+    padding: 16px;
+}
 

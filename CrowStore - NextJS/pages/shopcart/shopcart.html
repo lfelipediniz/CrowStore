@@ -15,17 +15,19 @@
         <h1>Meu Carrinho</h1>
         <hr>
         <a href="Search Page">≪ Continuar comprando</a>
-        <div id="Cart">
+        <div id="cart">
             <div class="productContainer">
                 <img class="productImage" src="CALCACROW.png" alt="Product name">
                 <div class="productDescription">
                     <h2>Nome do produto</h2>
                     <p>Tags</p>
-                    <h3>Quantidade</h3>
-                    <input type="number" name="product1count" value="1" , min="1" , max="setMax">
-                    <button type="button">Remover</button>
-                    <p>{Price}</p>
+                    <button class="remove" type="button">Remover</button>
                 </div>
+                <form class="productQuantity">
+                    <label for="quantity">Quantidade</label><br>
+                    <input type="number" name="quantity" value="1" min="1" max="setMax">
+                    <p>{Price}</p>
+                </form>
             </div>
             <h2>Frete:</h2>
             <p>Preço do frete ou alerta "Descreva um endereço de entrega"</p>

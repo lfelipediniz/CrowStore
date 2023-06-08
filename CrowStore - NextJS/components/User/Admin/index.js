@@ -6,7 +6,7 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const [categories, setCategories] = useState(["Documentation", "Calendar"]);
+  const [categories, setCategories] = useState(["Todos", "Documentation", "Calendar"]);
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -24,6 +24,10 @@ function Admin() {
   };
 
   const handleRemoveCategory = (index) => {
+    const categoryToRemove = categories[index];
+    if (categoryToRemove === "Todos") {
+      return; // Não remove a categoria "Todos"
+    }
     const updatedCategories = [...categories];
     updatedCategories.splice(index, 1);
     setCategories(updatedCategories);
@@ -37,7 +41,7 @@ function Admin() {
             {categories.map((category, index) => (
               <MenuItem key={index}>
                 {category}
-                {editingMode && (
+                {category !== "Todos" && editingMode && (
                   <RemoveButton onClick={() => handleRemoveCategory(index)}>
                     X
                   </RemoveButton>
@@ -50,6 +54,8 @@ function Admin() {
             <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
           </Menu>
         </Sidebar>
+
+        
       </UserContainer>
     </WrapContent>
   );

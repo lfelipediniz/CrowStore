@@ -21,8 +21,13 @@ export const RemoveButton = styled.button`
 export const ProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Centralizar os itens */
+  justify-content: center;
+  flex-grow: 1;
 `;
+
+export const SearchContainer = styled.div`
+  flex-basis: 100%;
+`
 
 export const ScrollableContainer = styled.div`
   overflow-y: auto;

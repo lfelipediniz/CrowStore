@@ -5,10 +5,13 @@ import {
   RemoveButton,
   ProductContainer,
   ScrollableContainer,
+  SearchContainer,
+  SearchWrapper
 } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
+import SearchBar from "../../SearchBar";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -54,14 +57,20 @@ function Admin() {
   };
 
   const filteredProducts =
-  selectedCategory === "Todos"
-    ? Products
-    : Products.filter(
-        (product) =>
-          product.category === selectedCategory ||
-          (selectedCategory === "Masculino" && product.gender === "boy") ||
-          (selectedCategory === "Feminino" && product.gender === "girl")
-      );
+    selectedCategory === "Todos"
+      ? Products
+      : Products.filter(
+          (product) =>
+            product.category === selectedCategory ||
+            (selectedCategory === "Masculino" && product.gender === "boy") ||
+            (selectedCategory === "Feminino" && product.gender === "girl")
+        );
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchFilteredProducts = filteredProducts.filter((product) =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <WrapContent>
@@ -94,9 +103,15 @@ function Admin() {
           </Menu>
         </Sidebar>
 
+        <SearchContainer>
+
+          <SearchBar onChange={setSearchTerm} />
+
+        </SearchContainer>
+
         <ScrollableContainer>
           <ProductContainer>
-            {filteredProducts.map((product, index) => (
+            {searchFilteredProducts.map((product, index) => (
               <ProductCard
                 key={index}
                 img={product.image}

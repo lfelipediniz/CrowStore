@@ -13,25 +13,30 @@
 <body>
     <div id="bodyContainer">
         <h1>Meu Carrinho</h1>
-        <hr>
         <div id="cart">
             <a href="Search Page">≪ Continuar comprando</a>
             <div class="productContainer">
                 <img class="productImage" src="CALCACROW.png" alt="Product name">
                 <div class="productDescription">
-                    <h2>Nome do produto</h2>
-                    <button class="remove" type="button">Remover</button> <br>
-                    <label for="quantity">Quantidade:</label><br>
-                    <input type="number" name="quantity" value="1" min="1" max="setMax">
-                    <h3>Preço:</h3>
-                    <p><strong>{Price}</strong></p>
+                    <div class="productId">
+                        <h2 class="productName">Nome do produto</h2>
+                        <button class="remove" type="button">Remover</button>
+                    </div>
+                    <div class="productPricing">
+                        <label for="quantity">Quantidade:</label><br>
+                        <input type="number" name="quantity" value="1" min="1" max="setMax">
+                        <h3>Preço:</h3>
+                        <p><strong>{Price}</strong></p>
+                    </div>
                 </div>
             </div>
+            <div id="total">
+                <h2>Frete:</h2>
+                <p>{Frete}</p>
+                <h2>Total</h2>
+                <p>{totalPrice}</p>
+            </div>
         </div>
-        <h2>Frete:</h2>
-        <p>{Frete}</p>
-        <h2>Total</h2>
-        <p>{totalPrice}</p>
         <div id="paymentOptions">
             <img src="Crow Store Payments Logo" alt="Crow Store Payments">
             <form>

@@ -89,6 +89,11 @@ function Admin() {
     setOpenModal(false);
   };
 
+  const genderOptions = [
+    { value: "boy", label: "Masculino" },
+    { value: "girl", label: "Feminino" },
+  ];
+
   return (
     <>
       <SearchContainer>
@@ -171,16 +176,31 @@ function Admin() {
             <TextField label="Preço de Venda" variant="outlined" />
             <TextField
               select
-              label="Selecionar Categoria"
+              label="Seletor de Gênero"
               variant="outlined"
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
-              {categories.map((category, index) => (
-                <MenuItem key={index} value={category}>
-                  {category}
+              {genderOptions.map((option, index) => (
+                <MenuItem key={index} value={option.value}>
+                  {option.label}
                 </MenuItem>
               ))}
+            </TextField>
+            <TextField
+              select
+              label="Seletor de Categoria"
+              variant="outlined"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories
+                .filter((category) => category !== "Todos" && category !== "Masculino" && category !== "Feminino")
+                .map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
             </TextField>
             <Button variant="contained" component="label">
               Adicionar Imagem

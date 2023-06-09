@@ -4,76 +4,87 @@
     "price": "R$ 99,90",
     "image": "/CrowStore/imgs/SUETERMANCROW.png",
     "category": "sueter",
-    "gender": "boy"
+    "gender": "boy",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/SUETERCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/TOUCACROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Moleton Crow",
     "price": "R$ 149,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   },
   {
     "productName": "Suéter Man Crow",
     "price": "R$ 79,90",
     "image": "/CrowStore/imgs/MOLETOMCROW.png",
     "category": "moletom",
-    "gender": "girl"
+    "gender": "girl",
+    "stock": "4"
   }
 ]

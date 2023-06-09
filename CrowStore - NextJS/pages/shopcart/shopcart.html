@@ -34,6 +34,25 @@
                     </div>
                 </div>
             </div>
+            <div class="productContainer">
+                <img class="productImage" src="CALCACROW.png" alt="Product name">
+                <div class="productDescription">
+                    <div class="productId">
+                        <h2 class="productName">Nome do produto</h2>
+                        <button class="remove" type="button">Remover</button>
+                    </div>
+                    <div class="productPricing">
+                        <div class="row">
+                            <label for="quantity">Quantidade:</label>
+                            <input type="number" name="quantity" value="1" min="1" max="setMax">
+                        </div>
+                        <div class="row">
+                            <h3>Preço:</h3>
+                            <p><strong>{Price}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="total">
                 <div class="row">
                     <h2>Frete:</h2>
@@ -51,13 +70,12 @@
                 <p>Forma de Pagamento</p>
                 <div id="modality">
                     <div id="opt1">
-                        <label for="pix"><img src="pix_unselected.svg" alt="Pix">PIX</label>
-                        <input type="radio" name="pix" value="pix">
+                        <img src="pix_unselected.svg" alt="Pix">
+                        <p>PIX</p>
                     </div>
                     <div id="opt2">
-                        <label for="creditCard"><img src="credit_unselected.svg" alt="Cartão de crédito">Cartão de
-                            Crédito</label>
-                        <input type="radio" name="creditCard" value="creditCard">
+                        <img src="credit_unselected.svg" alt="Cartão de crédito">
+                        <p>Cartão de Crédito</p>
                     </div>
                 </div>
                 <div id="contactInfo">
@@ -70,7 +88,7 @@
                     <label for="phone">Telefone</label>
                     <input type="phone" name="phone">
                 </div>
-                <button type="submit">Comprar</button>
+                <button id="confirm" type="submit">Comprar</button>
             </form>
         </div>
     </div>

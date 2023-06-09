@@ -18,6 +18,7 @@ import {
   TextField,
   MenuItem,
   Button,
+  Divider,
 } from "@mui/material";
 import { Sidebar, Menu } from "react-pro-sidebar";
 
@@ -106,6 +107,17 @@ function Admin() {
         <WrapContent>
           <Sidebar>
             <Menu iconShape="square">
+              <MenuItem onClick={toggleEditingMode}>
+                {editingMode ? "Finalizar Edição" : "Modo Edição"}
+              </MenuItem>
+              <Divider />
+              {editingMode && (
+                <>
+                  <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
+                  <MenuItem onClick={handleAddCategory}>Adicionar Categoria</MenuItem>
+                  <Divider />
+                </>
+              )}
               {categories.map((category, index) => (
                 <MenuItem
                   key={index}
@@ -124,18 +136,6 @@ function Admin() {
                     )}
                 </MenuItem>
               ))}
-              {editingMode && (
-                <MenuItem onClick={handleAddCategory}>
-                  {" "}
-                  Adicionar Categoria{" "}
-                </MenuItem>
-              )}
-              <MenuItem onClick={toggleEditingMode}>
-                {editingMode ? "Finalizar Edição" : "Modo Edição"}
-              </MenuItem>
-              {editingMode && (
-                <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
-              )}
             </Menu>
           </Sidebar>
         </WrapContent>
@@ -195,7 +195,12 @@ function Admin() {
               onChange={(e) => setSelectedCategory(e.target.value)}
             >
               {categories
-                .filter((category) => category !== "Todos" && category !== "Masculino" && category !== "Feminino")
+                .filter(
+                  (category) =>
+                    category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino"
+                )
                 .map((category, index) => (
                   <MenuItem key={index} value={category}>
                     {category}

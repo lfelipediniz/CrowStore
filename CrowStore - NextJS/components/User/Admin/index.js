@@ -69,6 +69,7 @@ function Admin() {
     setSelectedCategory(category);
   };
 
+  // Filtra os produtos com base na categoria selecionada
   const filteredProducts =
     selectedCategory === "Todos"
       ? Products
@@ -81,6 +82,7 @@ function Admin() {
 
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Filtra os produtos com base no termo de busca
   const searchFilteredProducts = filteredProducts.filter((product) =>
     product.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -100,6 +102,7 @@ function Admin() {
 
   return (
     <>
+      {/* Container de pesquisa */}
       <SearchContainer>
         <WrapContent>
           <SearchBar onChange={setSearchTerm} />
@@ -118,7 +121,7 @@ function Admin() {
               }}
             >
               <List>
-                {/* Editing mode */}
+                {/* Modo de edição */}
                 <ListItem button onClick={toggleEditingMode}>
                   <ListItemText
                     primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
@@ -126,14 +129,14 @@ function Admin() {
                 </ListItem>
                 <Divider />
 
-                {/* Add Product */}
+                {/* Adicionar Produto */}
                 {editingMode && (
                   <ListItem button onClick={handleOpenModal}>
                     <ListItemText primary="Adicionar Produto" />
                   </ListItem>
                 )}
 
-                {/* Add Category */}
+                {/* Adicionar Categoria */}
                 {editingMode && (
                   <ListItem button onClick={handleAddCategory}>
                     <ListItemText primary="Adicionar Categoria" />
@@ -141,7 +144,7 @@ function Admin() {
                 )}
                 <Divider />
 
-                {/* Categories */}
+                {/* Categorias */}
                 {categories.map((category, index) => (
                   <ListItem
                     key={index}
@@ -165,6 +168,7 @@ function Admin() {
           </SidebarContainer>
         </WrapContent>
 
+        {/* Container de produtos */}
         <ScrollableContainer>
           <ProductContainer>
             {searchFilteredProducts.map((product, index) => (
@@ -179,6 +183,7 @@ function Admin() {
         </ScrollableContainer>
       </UserContainer>
 
+      {/* Modal de adicionar produto */}
       <Modal
         open={openModal}
         onClose={handleCloseModal}

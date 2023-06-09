@@ -41,8 +41,8 @@ export const ScrollableContainer = styled.div`
   display: flex;
   justify-content: center; /* Centralizar os produtos */
   /* Hide Scroll */
-  scrollbar-width: thin; /* Para navegadores Firefox */
-  scrollbar-color: transparent transparent; /* Para navegadores Firefox */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /*  Firefox */
   &::-webkit-scrollbar {
     width: 6px; /* Largura da barra de rolagem */
   }
@@ -55,4 +55,8 @@ export const AddProductContainer = styled.div`
 background-color: rgb(38, 38, 38, 0.90);
 width: 1000px;
 height: 600px;
+`
+
+export const SidebarContainer = styled.div`
+
 `

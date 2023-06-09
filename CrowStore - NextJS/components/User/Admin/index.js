@@ -7,6 +7,7 @@ import {
   ScrollableContainer,
   SearchContainer,
   AddProductContainer,
+  SidebarContainer,
 } from "../UserElements";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -19,8 +20,10 @@ import {
   MenuItem,
   Button,
   Divider,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
-import { Sidebar, Menu } from "react-pro-sidebar";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -105,39 +108,61 @@ function Admin() {
 
       <UserContainer>
         <WrapContent>
-          <Sidebar>
-            <Menu iconShape="square">
-              <MenuItem onClick={toggleEditingMode}>
-                {editingMode ? "Finalizar Edição" : "Modo Edição"}
-              </MenuItem>
-              <Divider />
-              {editingMode && (
-                <>
-                  <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
-                  <MenuItem onClick={handleAddCategory}>Adicionar Categoria</MenuItem>
-                  <Divider />
-                </>
-              )}
-              {categories.map((category, index) => (
-                <MenuItem
-                  key={index}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {category}
-                  {category !== "Todos" &&
-                    category !== "Masculino" &&
-                    category !== "Feminino" &&
-                    editingMode && (
-                      <RemoveButton
-                        onClick={() => handleRemoveCategory(index)}
-                      >
-                        X
-                      </RemoveButton>
-                    )}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Sidebar>
+          <SidebarContainer>
+            {/* Sidebar */}
+            <Box
+              sx={{
+                width: "200px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <List>
+                {/* Editing mode */}
+                <ListItem button onClick={toggleEditingMode}>
+                  <ListItemText
+                    primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                  />
+                </ListItem>
+                <Divider />
+
+                {/* Add Product */}
+                {editingMode && (
+                  <ListItem button onClick={handleOpenModal}>
+                    <ListItemText primary="Adicionar Produto" />
+                  </ListItem>
+                )}
+
+                {/* Add Category */}
+                {editingMode && (
+                  <ListItem button onClick={handleAddCategory}>
+                    <ListItemText primary="Adicionar Categoria" />
+                  </ListItem>
+                )}
+                <Divider />
+
+                {/* Categories */}
+                {categories.map((category, index) => (
+                  <ListItem
+                    key={index}
+                    button
+                    selected={selectedCategory === category}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    <ListItemText primary={category} />
+                    {category !== "Todos" &&
+                      category !== "Masculino" &&
+                      category !== "Feminino" &&
+                      editingMode && (
+                        <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                          X
+                        </RemoveButton>
+                      )}
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          </SidebarContainer>
         </WrapContent>
 
         <ScrollableContainer>

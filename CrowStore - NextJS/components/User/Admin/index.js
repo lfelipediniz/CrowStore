@@ -5,10 +5,13 @@ import {
   RemoveButton,
   ProductContainer,
   ScrollableContainer,
+  SearchContainer,
 } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
+import SearchBar from "../../SearchBar";
+import { Button, Box, Modal, Typography } from "@mui/material";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -19,6 +22,7 @@ function Admin() {
     "Feminino",
   ]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [openModal, setOpenModal] = useState(false);
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -42,7 +46,7 @@ function Admin() {
       categoryToRemove === "Masculino" ||
       categoryToRemove === "Feminino"
     ) {
-      return; // Não remove as categorias "Todos", "Masculino" e "Feminino"
+      return;
     }
     const updatedCategories = [...categories];
     updatedCategories.splice(index, 1);
@@ -58,46 +62,72 @@ function Admin() {
       ? Products
       : Products.filter(
           (product) =>
-            product.gender ===
-            (selectedCategory === "Masculino" ? "boy" : "girl")
+            product.category === selectedCategory ||
+            (selectedCategory === "Masculino" && product.gender === "boy") ||
+            (selectedCategory === "Feminino" && product.gender === "girl")
         );
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchFilteredProducts = filteredProducts.filter((product) =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
-    <WrapContent>
+    <>
+      <SearchContainer>
+        <WrapContent>
+          <SearchBar onChange={setSearchTerm} />
+        </WrapContent>
+      </SearchContainer>
+
       <UserContainer>
-        <Sidebar>
-          <Menu>
-            {categories.map((category, index) => (
-              <MenuItem
-                key={index}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category}
-                {category !== "Todos" &&
-                  category !== "Masculino" &&
-                  category !== "Feminino" &&
-                  editingMode && (
-                    <RemoveButton onClick={() => handleRemoveCategory(index)}>
-                      X
-                    </RemoveButton>
-                  )}
-              </MenuItem>
-            ))}
-            {editingMode && (
-              <MenuItem onClick={handleAddCategory}>
-                {" "}
-                Adicionar Categoria{" "}
-              </MenuItem>
-            )}
-            <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
-          </Menu>
-        </Sidebar>
+        <WrapContent>
+          <Sidebar>
+            <Menu iconShape="square">
+              {categories.map((category, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                  {category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino" &&
+                    editingMode && (
+                      <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                        X
+                      </RemoveButton>
+                    )}
+                </MenuItem>
+              ))}
+              {editingMode && (
+                <MenuItem onClick={handleAddCategory}>
+                  {" "}
+                  Adicionar Categoria{" "}
+                </MenuItem>
+              )}
+            </Menu>
+            <Menu iconShape="square">
+              <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
+              {editingMode && (
+                <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
+              )}
+            </Menu>
+          </Sidebar>
+        </WrapContent>
 
-
-          <ScrollableContainer>
-            <ProductContainer>
-
-            {filteredProducts.map((product, index) => (
+        <ScrollableContainer>
+          <ProductContainer>
+            {searchFilteredProducts.map((product, index) => (
               <ProductCard
                 key={index}
                 img={product.image}
@@ -105,12 +135,26 @@ function Admin() {
                 price={product.price}
               />
             ))}
-                        </ProductContainer>
-          </ScrollableContainer>
-          
-
+          </ProductContainer>
+        </ScrollableContainer>
       </UserContainer>
-    </WrapContent>
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <Typography variant="h6" component="h2">
+            Adicionar Produto
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            ...
+          </Typography>
+        </Box>
+      </Modal>
+    </>
   );
 }
 

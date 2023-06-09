@@ -50,3 +50,9 @@ export const ScrollableContainer = styled.div`
     background-color: transparent; /* Cor do "polegar" da barra de rolagem */
   }
 `;
+
+export const AddProductContainer = styled.div`
+background-color: rgb(38, 38, 38, 0.90);
+width: 1000px;
+height: 600px;
+`

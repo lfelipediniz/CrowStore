@@ -11,6 +11,7 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
 import SearchBar from "../../SearchBar";
+import { Button, Box, Modal, Typography } from "@mui/material";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -21,6 +22,7 @@ function Admin() {
     "Feminino",
   ]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [openModal, setOpenModal] = useState(false);
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -44,7 +46,7 @@ function Admin() {
       categoryToRemove === "Masculino" ||
       categoryToRemove === "Feminino"
     ) {
-      return; // Não remove as categorias "Todos", "Masculino" e "Feminino"
+      return;
     }
     const updatedCategories = [...categories];
     updatedCategories.splice(index, 1);
@@ -71,6 +73,14 @@ function Admin() {
     product.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
   return (
     <>
       <SearchContainer>
@@ -82,7 +92,7 @@ function Admin() {
       <UserContainer>
         <WrapContent>
           <Sidebar>
-            <Menu>
+            <Menu iconShape="square">
               {categories.map((category, index) => (
                 <MenuItem
                   key={index}
@@ -105,7 +115,12 @@ function Admin() {
                   Adicionar Categoria{" "}
                 </MenuItem>
               )}
+            </Menu>
+            <Menu iconShape="square">
               <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
+              {editingMode && (
+                <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
+              )}
             </Menu>
           </Sidebar>
         </WrapContent>
@@ -123,6 +138,22 @@ function Admin() {
           </ProductContainer>
         </ScrollableContainer>
       </UserContainer>
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+          <Typography variant="h6" component="h2">
+            Adicionar Produto
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            ...
+          </Typography>
+        </Box>
+      </Modal>
     </>
   );
 }

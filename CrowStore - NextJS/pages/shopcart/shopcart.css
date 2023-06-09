@@ -17,6 +17,7 @@ h2 {
 h3, label {
     font-weight:500;
     text-transform: uppercase;
+    margin-right: 16px;
 }
 
 /* Principais divs */
@@ -27,7 +28,7 @@ h1 {
     width: 100%;
     border-bottom: 1px solid black;
     padding-bottom: 32px;
-    margin-bottom: 48px;
+    margin-bottom: 0;
 }
 
 #bodyContainer {
@@ -43,7 +44,9 @@ h1 {
 }
 
 #paymentOptions {
-    padding: 16px;
+    box-sizing: border-box;
+    width: 464px;
+    padding: 32px;
     order: 1;
 }
 
@@ -71,6 +74,8 @@ h1 {
 
 a {
     color: black;
+    width: 100%;
+    margin: 32px 0;
 }
 
 .productContainer {
@@ -78,7 +83,7 @@ a {
     width: 100%;
     height: 256px;
     position: relative;
-    margin: 32px 0;
+    margin-bottom: 32px;
     display: flex;
     align-items: stretch;
 }
@@ -97,18 +102,30 @@ a {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-
-.productId, productPricing {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .productName {
     flex-grow: 1;
     margin-bottom: 16px;
+}
+
+.productId {
+    display:flex;
+    justify-content: space-between;
+}
+
+.productId, .productPricing {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productPricing {
+    justify-content: flex-end;
+}
+
+.productId h2 {
+    flex-grow: 1;
 }
 
 .remove {
@@ -122,7 +139,7 @@ a {
 }
 
 @media (max-width: 464px) {
-    .productDescription {
+    .productId {
         flex-direction: column;
     }
     .remove {
@@ -130,6 +147,25 @@ a {
         margin-top: 8px;
     }    
 }
+
+.productPricing {
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.productPricing label {
+    margin-right: 16px;
+}
+
+.productPricing input, .productPricing p {
+    text-align: right;
+}
+
 
 .productPricing label {
     display: inline-block;
@@ -143,6 +179,39 @@ a {
     width: 64px;
 }
 
+#total {
+    border-top: 1px solid black;
+}
+
 /* Opções de pagamento */
 
+#paymentOptions {
+    background-color: black;
+}
 
+#paymentOptions * {
+    color: white;
+}
+
+#paymentLogo {
+    width: 280px;
+    height: auto;
+    margin: 32px 52px;
+}
+
+#paymentOptions label {
+    text-transform: none;
+}
+
+#paymentOptions #modality label {
+    text-align: center;
+}
+
+#contactInfo label {
+    margin-bottom: 8px;
+}
+
+#contactInfo input {
+    margin-bottom: 16px;
+    width: 100%;
+}

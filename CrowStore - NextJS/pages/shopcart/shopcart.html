@@ -13,8 +13,8 @@
 <body>
     <div id="bodyContainer">
         <h1>Meu Carrinho</h1>
+        <a href="Search Page">≪ Continuar comprando</a>
         <div id="cart">
-            <a href="Search Page">≪ Continuar comprando</a>
             <div class="productContainer">
                 <img class="productImage" src="CALCACROW.png" alt="Product name">
                 <div class="productDescription">
@@ -23,36 +23,53 @@
                         <button class="remove" type="button">Remover</button>
                     </div>
                     <div class="productPricing">
-                        <label for="quantity">Quantidade:</label><br>
-                        <input type="number" name="quantity" value="1" min="1" max="setMax">
-                        <h3>Preço:</h3>
-                        <p><strong>{Price}</strong></p>
+                        <div class="row">
+                            <label for="quantity">Quantidade:</label>
+                            <input type="number" name="quantity" value="1" min="1" max="setMax">
+                        </div>
+                        <div class="row">
+                            <h3>Preço:</h3>
+                            <p><strong>{Price}</strong></p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div id="total">
-                <h2>Frete:</h2>
-                <p>{Frete}</p>
-                <h2>Total</h2>
-                <p>{totalPrice}</p>
+                <div class="row">
+                    <h2>Frete:</h2>
+                    <p><strong>{Frete}</strong></p>
+                </div>
+                <div class="row">
+                    <h2>Total:</h2>
+                    <p><strong>{totalPrice}</strong></p>
+                </div>
             </div>
         </div>
         <div id="paymentOptions">
-            <img src="Crow Store Payments Logo" alt="Crow Store Payments">
+            <img id="paymentLogo" src="CROWPayments.svg" alt="Crow Store Payments">
             <form>
                 <p>Forma de Pagamento</p>
-                <label for="pix"><img src="Pix" alt="Pix">PIX</label>
-                <input type="radio" name="pix" value="pix">
-                <label for="creditCard"><img src="creditCard" alt="Cartão de crédito">Cartão de Crédito</label>
-                <input type="radio" name="creditCard" value="creditCard">
-                <label for="clientName">Nome</label>
-                <input type="text" name="clientName">
-                <label for="cep">CEP</label>
-                <input type="text" name="cep">
-                <label for="address">Endereço de entrega</label>
-                <input type="text" name="address">
-                <label for="phone">Telefone</label>
-                <input type="phone" name="phone">
+                <div id="modality">
+                    <div id="opt1">
+                        <label for="pix"><img src="pix_unselected.svg" alt="Pix">PIX</label>
+                        <input type="radio" name="pix" value="pix">
+                    </div>
+                    <div id="opt2">
+                        <label for="creditCard"><img src="credit_unselected.svg" alt="Cartão de crédito">Cartão de
+                            Crédito</label>
+                        <input type="radio" name="creditCard" value="creditCard">
+                    </div>
+                </div>
+                <div id="contactInfo">
+                    <label for="clientName">Nome</label>
+                    <input type="text" name="clientName">
+                    <label for="cep">CEP</label>
+                    <input type="text" name="cep">
+                    <label for="address">Endereço de entrega</label>
+                    <input type="text" name="address">
+                    <label for="phone">Telefone</label>
+                    <input type="phone" name="phone">
+                </div>
                 <button type="submit">Comprar</button>
             </form>
         </div>

@@ -6,7 +6,6 @@ import {
   ProductContainer,
   ScrollableContainer,
   SearchContainer,
-  SearchWrapper
 } from "../UserElements";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
@@ -73,41 +72,43 @@ function Admin() {
   );
 
   return (
-    <WrapContent>
-      <UserContainer>
-        <Sidebar>
-          <Menu>
-            {categories.map((category, index) => (
-              <MenuItem
-                key={index}
-                onClick={() => handleCategoryClick(category)}
-              >
-                {category}
-                {category !== "Todos" &&
-                  category !== "Masculino" &&
-                  category !== "Feminino" &&
-                  editingMode && (
-                    <RemoveButton onClick={() => handleRemoveCategory(index)}>
-                      X
-                    </RemoveButton>
-                  )}
-              </MenuItem>
-            ))}
-            {editingMode && (
-              <MenuItem onClick={handleAddCategory}>
-                {" "}
-                Adicionar Categoria{" "}
-              </MenuItem>
-            )}
-            <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
-          </Menu>
-        </Sidebar>
-
-        <SearchContainer>
-
+    <>
+      <SearchContainer>
+        <WrapContent>
           <SearchBar onChange={setSearchTerm} />
+        </WrapContent>
+      </SearchContainer>
 
-        </SearchContainer>
+      <UserContainer>
+        <WrapContent>
+          <Sidebar>
+            <Menu>
+              {categories.map((category, index) => (
+                <MenuItem
+                  key={index}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  {category}
+                  {category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino" &&
+                    editingMode && (
+                      <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                        X
+                      </RemoveButton>
+                    )}
+                </MenuItem>
+              ))}
+              {editingMode && (
+                <MenuItem onClick={handleAddCategory}>
+                  {" "}
+                  Adicionar Categoria{" "}
+                </MenuItem>
+              )}
+              <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
+            </Menu>
+          </Sidebar>
+        </WrapContent>
 
         <ScrollableContainer>
           <ProductContainer>
@@ -122,7 +123,7 @@ function Admin() {
           </ProductContainer>
         </ScrollableContainer>
       </UserContainer>
-    </WrapContent>
+    </>
   );
 }
 

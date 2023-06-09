@@ -6,12 +6,21 @@ import {
   ProductContainer,
   ScrollableContainer,
   SearchContainer,
+  AddProductContainer,
 } from "../UserElements";
-import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
 import SearchBar from "../../SearchBar";
-import { Button, Box, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  Modal,
+  Typography,
+  TextField,
+  MenuItem,
+  Button,
+  Divider,
+} from "@mui/material";
+import { Sidebar, Menu } from "react-pro-sidebar";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -81,6 +90,11 @@ function Admin() {
     setOpenModal(false);
   };
 
+  const genderOptions = [
+    { value: "boy", label: "Masculino" },
+    { value: "girl", label: "Feminino" },
+  ];
+
   return (
     <>
       <SearchContainer>
@@ -93,6 +107,17 @@ function Admin() {
         <WrapContent>
           <Sidebar>
             <Menu iconShape="square">
+              <MenuItem onClick={toggleEditingMode}>
+                {editingMode ? "Finalizar Edição" : "Modo Edição"}
+              </MenuItem>
+              <Divider />
+              {editingMode && (
+                <>
+                  <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
+                  <MenuItem onClick={handleAddCategory}>Adicionar Categoria</MenuItem>
+                  <Divider />
+                </>
+              )}
               {categories.map((category, index) => (
                 <MenuItem
                   key={index}
@@ -103,24 +128,14 @@ function Admin() {
                     category !== "Masculino" &&
                     category !== "Feminino" &&
                     editingMode && (
-                      <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                      <RemoveButton
+                        onClick={() => handleRemoveCategory(index)}
+                      >
                         X
                       </RemoveButton>
                     )}
                 </MenuItem>
               ))}
-              {editingMode && (
-                <MenuItem onClick={handleAddCategory}>
-                  {" "}
-                  Adicionar Categoria{" "}
-                </MenuItem>
-              )}
-            </Menu>
-            <Menu iconShape="square">
-              <MenuItem onClick={toggleEditingMode}> Modo Edição </MenuItem>
-              {editingMode && (
-                <MenuItem onClick={handleOpenModal}>Adicionar Produto</MenuItem>
-              )}
             </Menu>
           </Sidebar>
         </WrapContent>
@@ -145,13 +160,58 @@ function Admin() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-          <Typography variant="h6" component="h2">
-            Adicionar Produto
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            ...
-          </Typography>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <AddProductContainer>
+            <Typography variant="h6" component="h2">
+              Informações do Produto
+            </Typography>
+            <TextField label="Estoque Disponível" variant="outlined" />
+            <TextField label="Preço de Venda" variant="outlined" />
+            <TextField
+              select
+              label="Seletor de Gênero"
+              variant="outlined"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {genderOptions.map((option, index) => (
+                <MenuItem key={index} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              label="Seletor de Categoria"
+              variant="outlined"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories
+                .filter(
+                  (category) =>
+                    category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino"
+                )
+                .map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+            </TextField>
+            <Button variant="contained" component="label">
+              Adicionar Imagem
+              <input type="file" hidden />
+            </Button>
+          </AddProductContainer>
         </Box>
       </Modal>
     </>

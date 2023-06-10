@@ -7,7 +7,7 @@ import {
   ScrollableContainer,
   SearchContainer,
   AddProductContainer,
-  SidebarContainer,
+  SidebarContainer
 } from "../UserElements";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -24,6 +24,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+
 
 import { FaTrashAlt } from "react-icons/fa";
 

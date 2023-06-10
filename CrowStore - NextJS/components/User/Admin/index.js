@@ -8,6 +8,7 @@ import {
   SearchContainer,
   AddProductContainer,
   SidebarContainer,
+  EditButtonCotainer,
 } from "../UserElements";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -118,12 +119,14 @@ function Admin() {
             <Box>
               <List>
                 {/* Modo de edição */}
+                <EditButtonCotainer>
                 <ListItem button onClick={toggleEditingMode}>
                   <ListItemText
                     primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
                   />
                 </ListItem>
-                <Divider />
+                </EditButtonCotainer>
+
 
                 {/* Adicionar Produto */}
                 {editingMode && (
@@ -134,11 +137,15 @@ function Admin() {
 
                 {/* Adicionar Categoria */}
                 {editingMode && (
+                  <>
+                  
                   <ListItem button onClick={handleAddCategory}>
                     <ListItemText primary="Adicionar Categoria" />
                   </ListItem>
+                  <Divider />
+                  </>
                 )}
-                <Divider />
+
 
                 {/* Categorias */}
                 {categories.map((category, index) => (

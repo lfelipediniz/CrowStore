@@ -82,3 +82,10 @@ export const SidebarContainer = styled.div`
     background-color: transparent; /* Cor do "polegar" da barra de rolagem */
   }
 `;
+
+export const EditButtonCotainer = styled.div`
+  width: 290px; /* Adjust the width value as needed */
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  background-color: ${colors.cta};
+  border-radius: 0 7px 7px 0;
+`

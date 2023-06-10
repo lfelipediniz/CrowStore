@@ -1,4 +1,4 @@
-import WrapShopCart from "../components/WrapProduct/WrapShopCart";
+import WrapShopCart from "../components/WrapShopCart";
 
 export default function Product() {
     return (

@@ -3,8 +3,8 @@ import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Cart from "../Cart";
-import PaymentOptions from "../PaymentOptions"
-import { Header, Link } from "./WrapElements.js";
+// import PaymentOptions from "../PaymentOptions"
+import { BodyContainer, Header, Link } from "./WrapElements.jsx";
 
 const WrapShopCart = () => {
 
@@ -18,8 +18,12 @@ const WrapShopCart = () => {
         <>
             <Sidebar isOpen={isOpen} toggle={toggle} home />
             <Navbar toggle={toggle} home />
-            <h1>Meu Carrinho</h1>
-            <a href="Search Page">≪ Continuar comprando</a>
+            <BodyContainer>
+                <Header>Meu Carrinho</Header>
+                <Link>≪ Continuar comprando</Link>
+                <Cart />
+                {/* <PaymentOptions /> */}
+            </BodyContainer>
             <Footer />
         </>
     );

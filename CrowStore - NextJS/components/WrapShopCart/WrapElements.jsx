@@ -23,5 +23,5 @@ color: ${colors.textBlack};
 font-size: 1em;
 font-family: Inter, sans-serif;
 width: 100%;
-margin-top: 32px;
+margin: 32px 0;
 `

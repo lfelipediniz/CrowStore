@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import productsData from '../../fakedata/usersDatabase/purchases.json';
+import {
+    StyledCart,
+    ProductContainer,
+    ProductImage,
+    ProductDescription,
+    ProductName,
+    ProductId,
+    RemoveButton,
+    ProductPricing,
+    Row,
+    QuantityLabel,
+    QuantityInput,
+    TotalContainer,
+    H3,
+    P
+} from "./CartElements"
 
 const Cart = () => {
     const [products, setProducts] = useState([]);
@@ -38,21 +54,21 @@ const Cart = () => {
     };
 
     return (
-        <div id="cart">
+        <StyledCart>
             {products.map((product, index) => (
-                <div className="productContainer" key={index}>
-                    <img className="productImage" src={product.image} alt={product.productName} />
-                    <div className="productDescription">
-                        <div className="productId">
-                            <h2 className="productName">{product.productName}</h2>
-                            <button className="remove" type="button" onClick={() => removeProduct(index)}>
+                <ProductContainer key={index}>
+                    <ProductImage src={product.image} alt={product.productName} />
+                    <ProductDescription>
+                        <ProductId>
+                            <ProductName>{product.productName}</ProductName>
+                            <RemoveButton onClick={() => removeProduct(index)}>
                                 Remover
-                            </button>
-                        </div>
-                        <div className="productPricing">
-                            <div className="row">
-                                <label htmlFor={`quantity${index}`}>Quantidade:</label>
-                                <input
+                            </RemoveButton>
+                        </ProductId>
+                        <ProductPricing>
+                            <Row>
+                                <QuantityLabel htmlFor={`quantity${index}`}>Quantidade:</QuantityLabel>
+                                <QuantityInput
                                     type="number"
                                     name={`quantity${index}`}
                                     value={quantities[index]}
@@ -60,32 +76,32 @@ const Cart = () => {
                                     max={product.stock}
                                     onChange={(e) => updateQuantity(index, e.target.value)}
                                 />
-                            </div>
-                            <div className="row">
-                                <h3>Preço:</h3>
-                                <p>
+                            </Row>
+                            <Row>
+                                <H3>Preço:</H3>
+                                <P>
                                     <strong>{product.price}</strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                </P>
+                            </Row>
+                        </ProductPricing>
+                    </ProductDescription>
+                </ProductContainer>
             ))}
-            <div id="total">
-                <div className="row">
+            <TotalContainer>
+                <Row>
                     <h2>Frete:</h2>
                     <p>
                         <strong>{'{Frete}'}</strong>
                     </p>
-                </div>
-                <div className="row">
+                </Row>
+                <Row>
                     <h2>Total:</h2>
                     <p>
                         <strong>{calculateTotalPrice()}</strong>
                     </p>
-                </div>
-            </div>
-        </div>
+                </Row>
+            </TotalContainer>
+        </StyledCart>
     );
 };
 

@@ -4,7 +4,8 @@ export const colors = {
     cta: "#E71D36",
     ctaHover: "#BC001D",
     textBlack: "#4E4E4E",
-
+    white: "#FFFFFF",
+    lightGray: "#E8E8E8",
     placeHolder: "#A6A6A6",
     input: "#DFDFDF"
 }

@@ -17,7 +17,7 @@ import {
     P
 } from "./CartElements"
 
-const Cart = () => {
+const Cart = ({ onCartUpdate }) => {
     const [products, setProducts] = useState([]);
     const [quantities, setQuantities] = useState([]);
 
@@ -34,12 +34,17 @@ const Cart = () => {
         const updatedQuantities = [...quantities];
         updatedQuantities.splice(index, 1);
         setQuantities(updatedQuantities);
+        // Invoke the onCartUpdate function with updated values
+        onCartUpdate(updatedProducts, updatedQuantities, calculateTotalPrice());
     };
 
     const updateQuantity = (index, value) => {
         const updatedQuantities = [...quantities];
         updatedQuantities[index] = parseInt(value);
         setQuantities(updatedQuantities);
+
+        // Invoke the onCartUpdate function with updated values
+        onCartUpdate(products, updatedQuantities, calculateTotalPrice());
     };
 
     const calculateTotalPrice = () => {

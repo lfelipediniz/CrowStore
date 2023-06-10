@@ -7,8 +7,7 @@ import {
   ScrollableContainer,
   SearchContainer,
   AddProductContainer,
-  SidebarContainer,
-  EditButtonCotainer,
+  SidebarContainer
 } from "../UserElements";
 import ProductCard from "../../ReusedComponents/ProductCard";
 import Products from "../../../fakedata/adminContent/products.json";
@@ -25,6 +24,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+
 
 import { FaTrashAlt } from "react-icons/fa";
 
@@ -119,14 +119,12 @@ function Admin() {
             <Box>
               <List>
                 {/* Modo de edição */}
-                <EditButtonCotainer>
                 <ListItem button onClick={toggleEditingMode}>
                   <ListItemText
                     primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
                   />
                 </ListItem>
-                </EditButtonCotainer>
-
+                <Divider />
 
                 {/* Adicionar Produto */}
                 {editingMode && (
@@ -137,15 +135,11 @@ function Admin() {
 
                 {/* Adicionar Categoria */}
                 {editingMode && (
-                  <>
-                  
                   <ListItem button onClick={handleAddCategory}>
                     <ListItemText primary="Adicionar Categoria" />
                   </ListItem>
-                  <Divider />
-                  </>
                 )}
-
+                <Divider />
 
                 {/* Categorias */}
                 {categories.map((category, index) => (

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 
+import { RiDeleteBinLine } from "react-icons/ri";
+
 import { Button } from "@mui/material";
 
 export const UserContainer = styled.div`
@@ -11,13 +13,6 @@ export const UserContainer = styled.div`
   width: 100%;
   height: 90vh;
   background-color: ${colors.primary};
-`;
-
-export const RemoveButton = styled.button`
-  background: transparent;
-  border: none;
-  color: ${colors.cta};
-  cursor: pointer;
 `;
 
 export const ProductContainer = styled.div`
@@ -79,13 +74,24 @@ export const SidebarContainer = styled.div`
     width: 6px; /* Largura da barra de rolagem */
   }
   &::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Cor do "polegar" da barra de rolagem */
+    background-color: transparent; /* Cor do "poleListItemTextgar" da barra de rolagem */
   }
 `;
 
-export const EditButtonCotainer = styled.div`
-  width: 290px; /* Adjust the width value as needed */
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-  background-color: ${colors.cta};
-  border-radius: 0 7px 7px 0;
-`
+
+export const RemoveButton = styled.button`
+  background: transparent;
+  border: none;
+  color: ${colors.cta};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 8px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+`;

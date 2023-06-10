@@ -5,7 +5,11 @@ import Navbar from "../Navbar";
 import ProductData from "../../fakedata/showcaseContent/products.json";
 import SearchBar from "../SearchBar";
 import FilterTags from "../FilterTags";
-import { ProductContainer, ScrollableContainer } from "../ShowCaseSection/ShowCaseSectionElements";
+import {
+    ProductContainer,
+    ScrollableContainer,
+} from "../User/UserElements";
+import ProductCard from "../ReusedComponents/ProductCard";
 import { Subtitle } from "./WrapElements.js";
 
 const WrapSearch = () => {

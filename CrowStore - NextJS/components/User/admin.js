@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WrapContent } from "../../ReusedComponents/WrapContent";
+import { WrapContent } from "../ReusedComponents/WrapContent";
 import {
   UserContainer,
   RemoveButton,
@@ -9,10 +9,13 @@ import {
   AddProductContainer,
   SidebarContainer,
   EditButtonCotainer,
-} from "../UserElements";
-import ProductCard from "../../ReusedComponents/ProductCard";
-import Products from "../../../fakedata/adminContent/products.json";
-import SearchBar from "../../SearchBar";
+  AddProduct,
+  AddButton,
+  ImagePreview
+} from "./UserElements";
+import ProductCard from "../ReusedComponents/ProductCard";
+import Products from "../../fakedata/adminContent/products.json";
+import SearchBar from "../SearchBar";
 import {
   Box,
   Modal,
@@ -26,7 +29,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaPhotoVideo } from "react-icons/fa";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -103,6 +106,18 @@ function Admin() {
     { value: "girl", label: "Feminino" },
   ];
 
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.includes("image")) {
+      setSelectedImage(URL.createObjectURL(file));
+    }
+  };
+
+
+
   return (
     <>
       {/* Container de pesquisa */}
@@ -120,13 +135,12 @@ function Admin() {
               <List>
                 {/* Modo de edição */}
                 <EditButtonCotainer>
-                <ListItem button onClick={toggleEditingMode}>
-                  <ListItemText
-                    primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
-                  />
-                </ListItem>
+                  <ListItem button onClick={toggleEditingMode}>
+                    <ListItemText
+                      primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                    />
+                  </ListItem>
                 </EditButtonCotainer>
-
 
                 {/* Adicionar Produto */}
                 {editingMode && (
@@ -138,14 +152,12 @@ function Admin() {
                 {/* Adicionar Categoria */}
                 {editingMode && (
                   <>
-                  
-                  <ListItem button onClick={handleAddCategory}>
-                    <ListItemText primary="Adicionar Categoria" />
-                  </ListItem>
-                  <Divider />
+                    <ListItem button onClick={handleAddCategory}>
+                      <ListItemText primary="Adicionar Categoria" />
+                    </ListItem>
+                    <Divider />
                   </>
                 )}
-
 
                 {/* Categorias */}
                 {categories.map((category, index) => (
@@ -160,7 +172,9 @@ function Admin() {
                       category !== "Masculino" &&
                       category !== "Feminino" &&
                       editingMode && (
-                        <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                        <RemoveButton
+                          onClick={() => handleRemoveCategory(index)}
+                        >
                           <FaTrashAlt />
                         </RemoveButton>
                       )}
@@ -187,12 +201,7 @@ function Admin() {
       </UserContainer>
 
       {/* Modal de adicionar produto */}
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <Modal open={openModal} onClose={handleCloseModal}>
         <Box
           sx={{
             position: "absolute",
@@ -201,50 +210,26 @@ function Admin() {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <AddProductContainer>
-            <Typography variant="h6" component="h2">
-              Informações do Produto
-            </Typography>
-            <TextField label="Estoque Disponível" variant="outlined" />
-            <TextField label="Preço de Venda" variant="outlined" />
-            <TextField
-              select
-              label="Seletor de Gênero"
-              variant="outlined"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {genderOptions.map((option, index) => (
-                <MenuItem key={index} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
-              label="Seletor de Categoria"
-              variant="outlined"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories
-                .filter(
-                  (category) =>
-                    category !== "Todos" &&
-                    category !== "Masculino" &&
-                    category !== "Feminino"
-                )
-                .map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-            </TextField>
-            <Button variant="contained" component="label">
-              Adicionar Imagem
-              <input type="file" hidden />
-            </Button>
-          </AddProductContainer>
+    <AddProductContainer>
+      <AddProduct>
+        <AddButton htmlFor="imageUpload">
+          {selectedImage ? (
+            <ImagePreview src={selectedImage} alt="Selected" />
+          ) : (
+            <>
+              <FaPhotoVideo /> Adicionar Imagem
+            </>
+          )}
+        </AddButton>
+        <input
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          hidden // Oculta o elemento input
+        />
+      </AddProduct>
+    </AddProductContainer>
         </Box>
       </Modal>
     </>

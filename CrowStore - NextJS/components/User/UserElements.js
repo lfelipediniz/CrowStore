@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 
-import { Button } from "@mui/material";
-
 export const UserContainer = styled.div`
   display: flex;
   padding: 3rem 0;
@@ -59,11 +57,17 @@ export const AddProductContainer = styled.div`
   height: 600px;
 `;
 
+export const AddProduct = styled.div`
+  padding: 50px;
+`;
+
 export const SidebarContainer = styled.div`
-  background-color: rgba(${parseInt(colors.secondary.slice(1, 3), 16)}, ${parseInt(
-  colors.secondary.slice(3, 5),
-  16
-)}, ${parseInt(colors.secondary.slice(5, 7), 16)}, 0.75);
+  background-color: rgba(
+    ${parseInt(colors.secondary.slice(1, 3), 16)},
+    ${parseInt(colors.secondary.slice(3, 5), 16)},
+    ${parseInt(colors.secondary.slice(5, 7), 16)},
+    0.75
+  );
   width: 300px;
   height: 300px;
   overflow-y: auto;
@@ -88,4 +92,37 @@ export const EditButtonCotainer = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   background-color: ${colors.cta};
   border-radius: 0 7px 7px 0;
-`
+`;
+
+export const AddButton = styled.label`
+  height: 500px;
+  width: 400px;
+  border-style: dashed;
+  border-width: 4px; /* Aumente a largura da borda conforme necessário */
+  background-color: transparent;
+  color: ${colors.primary};
+  font-size: ${fonts.subtitle};
+  border-radius: 15px;
+  transition: background-color 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden; /* Impede que a imagem exceda o tamanho do botão */
+
+  svg {
+    margin-bottom: 0.5rem; /* Espaçamento entre o ícone e o texto */
+    font-size: 60px;
+  }
+
+  &:active {
+    background-color: ${colors.primary};
+  }
+`;
+
+export const ImagePreview = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;

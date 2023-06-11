@@ -59,6 +59,10 @@ export const AddProductContainer = styled.div`
 
 export const AddProduct = styled.div`
   padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
 `;
 
 export const SidebarContainer = styled.div`
@@ -125,4 +129,44 @@ export const ImagePreview = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+export const InputInfoContainer = styled.div`
+  color: ${colors.primary};
+  display: flex;
+  flex-direction: column;
+
+  .MuiInputLabel-root,
+  .MuiInputBase-root,
+  .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline,
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+  .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-outlined,
+  .MuiOutlinedInput-root.Mui-focused .MuiInputBase-input,
+  .MuiFormControl-root.Mui-focused .MuiFormLabel-root {
+    color: ${colors.primary} !important;
+  }
+
+  .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: ${colors.primary};
+  }
+
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+  .MuiInputLabel-root:hover,
+  .MuiInputBase-root:hover,
+  .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: ${colors.cta} !important;
+    box-shadow: 0 0 0 2px ${colors.cta}80;
+  }
+
+  .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-outlined,
+  .MuiOutlinedInput-root.Mui-focused .MuiInputBase-input,
+  .MuiFormControl-root.Mui-focused .MuiFormLabel-root,
+  .MuiInputLabel-root:hover,
+  .MuiInputBase-root:hover {
+    color: ${colors.cta} !important;
+  }
+
+  .MuiSelect-icon {
+    color: ${colors.primary} !important;
+  }
 `;

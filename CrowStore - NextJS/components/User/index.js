@@ -28,9 +28,10 @@ function User() {
       {checklgn ? (
         checkadm ? <Admin /> : <CommonUser />
       ) : (
-        <WrapContent>
-          <Login />
-          </WrapContent>
+        // <WrapContent>
+        //   <Login />
+        //   </WrapContent>
+        <Admin />
       )}
     </>
   );

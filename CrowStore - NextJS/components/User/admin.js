@@ -11,7 +11,8 @@ import {
   EditButtonCotainer,
   AddProduct,
   AddButton,
-  ImagePreview
+  ImagePreview,
+  InputInfoContainer,
 } from "./UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
@@ -106,7 +107,6 @@ function Admin() {
     { value: "girl", label: "Feminino" },
   ];
 
-
   const [selectedImage, setSelectedImage] = useState(null);
 
   const handleImageChange = (event) => {
@@ -115,8 +115,6 @@ function Admin() {
       setSelectedImage(URL.createObjectURL(file));
     }
   };
-
-
 
   return (
     <>
@@ -210,26 +208,67 @@ function Admin() {
             transform: "translate(-50%, -50%)",
           }}
         >
-    <AddProductContainer>
-      <AddProduct>
-        <AddButton htmlFor="imageUpload">
-          {selectedImage ? (
-            <ImagePreview src={selectedImage} alt="Selected" />
-          ) : (
-            <>
-              <FaPhotoVideo /> Adicionar Imagem
-            </>
-          )}
-        </AddButton>
-        <input
-          id="imageUpload"
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          hidden // Oculta o elemento input
-        />
-      </AddProduct>
-    </AddProductContainer>
+          <AddProductContainer>
+            <AddProduct>
+              <>
+                <AddButton htmlFor="imageUpload">
+                  {selectedImage ? (
+                    <ImagePreview src={selectedImage} alt="Selected" />
+                  ) : (
+                    <>
+                      <FaPhotoVideo /> Adicionar Imagem
+                    </>
+                  )}
+                </AddButton>
+                <input
+                  id="imageUpload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  hidden // Oculta o elemento input
+                />
+              </>
+
+            <InputInfoContainer>
+            <TextField label="Estoque Disponível" variant="outlined" />
+            <TextField label="Preço de Venda" variant="outlined" />
+            <TextField
+              select
+              label="Seletor de Gênero"
+              variant="outlined"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {genderOptions.map((option, index) => (
+                <MenuItem key={index} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              label="Seletor de Categoria"
+              variant="outlined"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories
+                .filter(
+                  (category) =>
+                    category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino"
+                )
+                .map((category, index) => (
+                  <MenuItem key={index} value={category}>
+                    {category}
+                  </MenuItem>
+                ))}
+            </TextField>
+            </InputInfoContainer>
+
+            </AddProduct>
+          </AddProductContainer>
         </Box>
       </Modal>
     </>

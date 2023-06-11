@@ -202,4 +202,14 @@ export const InputInfoContainer = styled.div`
     background-color: ${colors.ctaBlack} !important;
     color: white !important;
   }
+
+  .MuiOutlinedInput-root input[type="number"]::-webkit-inner-spin-button,
+  .MuiOutlinedInput-root input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .rs {
+    color: ${colors.primary};
+  }
+  
 `;

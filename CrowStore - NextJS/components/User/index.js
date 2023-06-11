@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import Login from "../Login";
-import Admin from "./Admin";
-import CommonUser from "./CommonUser";
+import Admin from "./admin";
+import CommonUser from "./common";
+import data from '../../fakedata/usersDatabase/users.json';
+import {LoginContainer, LoginTitle, LoginForm, Loginlabel, LoginInput, Loginbut, Loginbut1} from "../Login/LoginElements"
 import { createGlobalState } from "react-hooks-global-state";
+
 
 const {setGlobalState, useGlobalState} = createGlobalState({
   isLoggedInn: false,
@@ -11,8 +14,6 @@ const {setGlobalState, useGlobalState} = createGlobalState({
   userN: '',
   senha: '',
 });
-
-
 
 export {setGlobalState, useGlobalState};
 

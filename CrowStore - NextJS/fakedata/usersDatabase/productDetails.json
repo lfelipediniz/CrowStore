@@ -63,11 +63,11 @@
         "productName": "Moletom Crow",
         "price": "R$ 149,90",
         "images": [
-            "/CrowStore/imgs/MOLETOMCROW1.png",
-            "/CrowStore/imgs/MOLETOMCROW2.png",
-            "/CrowStore/imgs/MOLETOMCROW3.png",
-            "/CrowStore/imgs/MOLETOMCROW4.png",
-            "/CrowStore/imgs/MOLETOMCROW5.png"
+            "/CrowStore/imgs/MoletomCrow/1.png",
+            "/CrowStore/imgs/MoletomCrow/2.png",
+            "/CrowStore/imgs/MoletomCrow/3.png",
+            "/CrowStore/imgs/MoletomCrow/4.png",
+            "/CrowStore/imgs/MoletomCrow/5.png",
         ],
         "category": "moletom",
         "gender": "girl",

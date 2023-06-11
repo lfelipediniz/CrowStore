@@ -21,9 +21,18 @@ export const PaymentOptionsContainer = styled.div`
         margin-bottom: 32px;
     }
 
+    input {
+        background-color: transparent;
+        border: none;
+        outline:none;
+        border-bottom: 1px solid ${colors.white};
+        padding: 8px 0
+    }
+
     @media (max-width: 464px) {
         width: 100%
     }
+
 
 `;
 

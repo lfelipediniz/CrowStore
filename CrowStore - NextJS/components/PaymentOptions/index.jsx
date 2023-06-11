@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField } from "@mui/material"
 import {
     PaymentOptionsContainer,
     PaymentLogo,
@@ -38,7 +39,7 @@ const PaymentForm = ({ onSubmit }) => {
 
         // Validate CEP and phone number
         const cepPattern = /^\d{5}-\d{3}$/;
-        const phonePattern = /^\d{10}$/;
+        const phonePattern = /(\D*\d){11}/;
         if (!cepPattern.test(formData.cep)) {
             alert("Please enter a valid CEP.");
             return;

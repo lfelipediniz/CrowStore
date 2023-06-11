@@ -121,7 +121,7 @@ h1 {
 h2 {
     font-weight: 300;
     font-size: 1.25em;
-    margin: 1em 0 0.5em 0 !important;
+    margin: 0 !important;
 }
 
 ul {
@@ -193,7 +193,7 @@ button img {
 
 /* Carousel */
 
-h3 {
+h3, label {
     font-weight:500;
     text-transform: uppercase;
     margin: 2em 0 1em 0 !important;

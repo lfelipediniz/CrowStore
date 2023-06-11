@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: Inter, sans-serif;
+    font-size: 1em;
+    line-height: 1.5em;
+    box-sizing: border-box;
+}
+
+
+.productName {
+    font-weight: 300;
+    font-size: 1.25em;
+    margin: 0;
+}
+
+h3, label {
+    font-weight:500;
+}
+
+/* Principais divs */
+
+h1 {
+    font-weight: 700;
+    font-size: 2em;
+    width: 100%;
+    border-bottom: 1px solid black;
+    padding-bottom: 32px;
+    margin-bottom: 0;
+}
+
+#bodyContainer {
+    min-width: 224px;
+    max-width: 1184px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#cart {
+    order: 0;
+}
+
+#paymentOptions {
+    box-sizing: border-box;
+    width: 464px;
+    padding: 32px;
+    order: 1;
+}
+
+@media (max-width: 864px) {
+    #cart, #paymentOptions {
+        width: 100%;
+    }
+}
+
+@media (min-width: 864px) {
+    #cart {
+        flex-grow: 1;
+        margin-right: 16px;
+    }
+
+    #paymentOptions {
+        flex-basis: 224px;
+    }
+}
+
+a {
+    color: black;
+    width: 100%;
+    margin: 32px 0;
+}
+
+/* Carrinho de compras */
+
+.productContainer {
+    background-color: #E8E8E8;
+    width: 100%;
+    height: 256px;
+    position: relative;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: stretch;
+}
+
+.productImage {
+    order: 0;
+    width: 160px;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.productDescription {
+    order: 1;
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.productId {
+    display:flex;
+    justify-content: flex-start;
+}
+
+.productId, .productPricing {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.productPricing {
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.remove {
+    background-color: #E71D36;
+    color: white;
+    border: 0px;
+    width: 96px;
+    height: 36px;
+    padding: 8px 16px;
+    margin-left: auto;
+}
+
+@media (max-width: 944px) {
+    .productId {
+        flex-direction: column;
+    }
+    .remove {
+        margin-left: 0;
+        margin-top: 8px;
+    }    
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.productPricing label {
+    margin-right: 16px;
+}
+
+.productPricing input, .productPricing p {
+    text-align: right;
+}
+
+
+.productPricing label {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.productPricing input {
+    display:inline-block;
+    vertical-align: top;
+    height: 40px;
+    width: 64px;
+}
+
+#total {
+    border-top: 1px solid black;
+}
+
+/* Opções de pagamento */
+
+#paymentOptions {
+    background-color: black;
+}
+
+#paymentOptions * {
+    color: white;
+}
+
+#paymentLogo {
+    width: 280px;
+    height: auto;
+    margin: 32px 52px;
+}
+
+#modality {
+    display: flex;
+    justify-content: space-between;
+}
+
+#opt1, #opt2 {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 48%;
+}
+
+#paymentOptions label {
+    text-transform: none;
+}
+
+#paymentOptions #modality label {
+    text-align: center;
+}
+
+#contactInfo label {
+    margin-bottom: 8px;
+}
+
+#contactInfo input {
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+#confirm {
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: white;
+    color: black;
+    border: 0px;
+    padding: 16px 32px;
+    margin: 16px auto;
+    display: block;
+}

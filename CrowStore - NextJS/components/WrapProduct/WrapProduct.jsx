@@ -1,14 +1,16 @@
-import React, { useState } from "react"; (142)
+import React, { useState } from "react";
 
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
-import { BodyContainer } from "../WrapShopCart/WrapElements";
+import BodyContainer from "./WrapProductElements";
+// import ProductDescription from "../ProductDescription"
 import {
     ProductContainer,
     ScrollableContainer,
 } from "../User/UserElements";
-import { ProductData } from "../../fakedata/usersDatabase/productDetails.json"
+import ProductCard from "../ReusedComponents/ProductCard";
+import ProductData from "../../fakedata/usersDatabase/productDetails"
 
 const WrapProduct = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,28 +19,27 @@ const WrapProduct = () => {
         setIsOpen(!isOpen);
     };
 
-    const product = ProductData[0];
+    // const product = ProductData[1];
+    // console.log(ProductData);
 
     return (
         <>
             <Sidebar isOpen={isOpen} toogle={toggle} home />
             <Navbar toogle={toggle} home />
             <BodyContainer>
-                <Visualizer product={product} />
-                {/* <Description product={product} /> */}
-                {/* <PurchaceOptions product={product} /> */}
-                {/* <ScrollableContainer style={{ marginLeft: 0 }}> */}
-                {/*     <ProductContainer> */}
-                {/*         {filteredItems.map((product, index) => ( */}
-                {/*             <ProductCard */}
-                {/*                 key={index} */}
-                {/*                 img={product.image} */}
-                {/*                 productName={product.productName} */}
-                {/*                 price={product.price} */}
-                {/*             /> */}
-                {/*         ))} */}
-                {/*     </ProductContainer> */}
-                {/* </ScrollableContainer> */}
+                {/* <ProductDescription product={product} /> */}
+                <ScrollableContainer style={{ marginLeft: 0 }}>
+                    <ProductContainer>
+                        {ProductData.map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                img={product.image}
+                                productName={product.productName}
+                                price={product.price}
+                            />
+                        ))}
+                    </ProductContainer>
+                </ScrollableContainer>
             </BodyContainer>
             <Footer />
         </>

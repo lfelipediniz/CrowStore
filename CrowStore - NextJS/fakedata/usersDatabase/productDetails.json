@@ -1,0 +1,218 @@
+[
+    {
+        "productName": "Calça Crow",
+        "price": "R$ 99,90",
+        "image": "/CrowStore/imgs/CALCACROW.png",
+        "category": "sueter",
+        "gender": "boy",
+        "size": {
+            "PP": {
+                "colors": {
+                    "Blue": 5,
+                    "Green": 7,
+                    "Red": 2,
+                    "Yellow": 0,
+                    "LightSalmon": 3
+                }
+            },
+            "P": {
+                "colors": {
+                    "Blue": 8,
+                    "Green": 2,
+                    "Red": 5,
+                    "Yellow": 1,
+                    "LightSalmon": 6
+                }
+            },
+            "M": {
+                "colors": {
+                    "Blue": 4,
+                    "Green": 3,
+                    "Red": 5,
+                    "Yellow": 9,
+                    "LightSalmon": 10
+                }
+            },
+            "G": {
+                "colors": {
+                    "Blue": 5,
+                    "Green": 7,
+                    "Red": 2,
+                    "Yellow": 4,
+                    "LightSalmon": 8
+                }
+            },
+            "XG": {
+                "colors": {
+                    "Blue": 0,
+                    "Green": 6,
+                    "Red": 3,
+                    "Yellow": 8,
+                    "LightSalmon": 2
+                }
+            }
+        }
+    },
+    {
+        "productName": "Moletom Crow",
+        "price": "R$ 149,90",
+        "image": "/CrowStore/imgs/MOLETOMCROW.png",
+        "category": "moletom",
+        "gender": "girl",
+        "size": {
+            "PP": {
+                "colors": {
+                    "Blue": 3,
+                    "Green": 7,
+                    "Red": 1,
+                    "Yellow": 6,
+                    "LightSalmon": 4
+                }
+            },
+            "P": {
+                "colors": {
+                    "Blue": 5,
+                    "Green": 2,
+                    "Red": 4,
+                    "Yellow": 9,
+                    "LightSalmon": 6
+                }
+            },
+            "M": {
+                "colors": {
+                    "Blue": 7,
+                    "Green": 3,
+                    "Red": 1,
+                    "Yellow": 8,
+                    "LightSalmon": 10
+                }
+            },
+            "G": {
+                "colors": {
+                    "Blue": 4,
+                    "Green": 6,
+                    "Red": 2,
+                    "Yellow": 5,
+                    "LightSalmon": 8
+                }
+            },
+            "XG": {
+                "colors": {
+                    "Blue": 2,
+                    "Green": 8,
+                    "Red": 3,
+                    "Yellow": 7,
+                    "LightSalmon": 2
+                }
+            }
+        }
+    },
+    {
+        "productName": "Touca Crow",
+        "price": "R$ 149,90",
+        "image": "/CrowStore/imgs/TOUCACROW.png",
+        "category": "moletom",
+        "gender": "girl",
+        "size": {
+            "PP": {
+                "colors": {
+                    "Blue": 1,
+                    "Green": 8,
+                    "Red": 5,
+                    "Yellow": 3,
+                    "LightSalmon": 4
+                }
+            },
+            "P": {
+                "colors": {
+                    "Blue": 6,
+                    "Green": 2,
+                    "Red": 4,
+                    "Yellow": 7,
+                    "LightSalmon": 6
+                }
+            },
+            "M": {
+                "colors": {
+                    "Blue": 4,
+                    "Green": 7,
+                    "Red": 3,
+                    "Yellow": 9,
+                    "LightSalmon": 10
+                }
+            },
+            "G": {
+                "colors": {
+                    "Blue": 2,
+                    "Green": 5,
+                    "Red": 4,
+                    "Yellow": 6,
+                    "LightSalmon": 8
+                }
+            },
+            "XG": {
+                "colors": {
+                    "Blue": 3,
+                    "Green": 8,
+                    "Red": 2,
+                    "Yellow": 7,
+                    "LightSalmon": 2
+                }
+            }
+        }
+    },
+    {
+        "productName": "Suéter Man Crow",
+        "price": "R$ 79,90",
+        "image": "/CrowStore/imgs/SUETERMANCROW.png",
+        "category": "moletom",
+        "gender": "boy",
+        "size": {
+            "PP": {
+                "colors": {
+                    "Blue": 5,
+                    "Green": 6,
+                    "Red": 3,
+                    "Yellow": 2,
+                    "LightSalmon": 1
+                }
+            },
+            "P": {
+                "colors": {
+                    "Blue": 3,
+                    "Green": 4,
+                    "Red": 1,
+                    "Yellow": 6,
+                    "LightSalmon": 4
+                }
+            },
+            "M": {
+                "colors": {
+                    "Blue": 7,
+                    "Green": 2,
+                    "Red": 3,
+                    "Yellow": 8,
+                    "LightSalmon": 10
+                }
+            },
+            "G": {
+                "colors": {
+                    "Blue": 5,
+                    "Green": 7,
+                    "Red": 2,
+                    "Yellow": 4,
+                    "LightSalmon": 8
+                }
+            },
+            "XG": {
+                "colors": {
+                    "Blue": 2,
+                    "Green": 8,
+                    "Red": 3,
+                    "Yellow": 7,
+                    "LightSalmon": 2
+                }
+            }
+        }
+    }
+]

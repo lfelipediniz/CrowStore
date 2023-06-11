@@ -1,6 +1,19 @@
 import { colors } from "../../styles/colors";
 import styled from "styled-components";
 
+export const StyledCart = styled.div`
+    order: 0;
+
+    @media (max-width: 864px) {
+        width: 100%;
+    }
+
+    @media (min-width: 864px) {
+        flex-grow: 1;
+        margin-right: 16px;
+    }
+`;
+
 export const ProductContainer = styled.div`
   background-color: ${colors.lightGray};
   width: 100%;
@@ -27,14 +40,19 @@ export const ProductDescription = styled.div`
   flex-direction: column;
 `;
 
-export const ProductName = styled.h2`
-  flex-grow: 1;
-  margin-bottom: 16px;
+export const H2 = styled.h2`
+    font-weight: 300;
+    font-size: 1.25em !important;
+    margin: 0;
 `;
 
 export const ProductId = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+
+  @media (max-width: 944px) {
+      flex-direction: column;
+  }
 `;
 
 export const RemoveButton = styled.button`
@@ -45,6 +63,11 @@ export const RemoveButton = styled.button`
   height: 36px;
   padding: 8px 16px;
   margin-left: auto;
+  
+  @media (max-width: 944px) {
+      margin-left: 0;
+      margin-top: 8px;
+  }
 
   &:hover {
     background-color: ${colors.ctaHover};
@@ -81,36 +104,8 @@ export const TotalContainer = styled.div`
   border-top: 1px solid ${colors.textBlack};
 `;
 
-export const StyledCart = styled.div`
-    order: 0;
-
-    @media (max-width: 464px) {
-        width: 100%;
-    }
-
-    @media (min-width: 464px) {
-        flex-grow: 1;
-        width: calc(100% - 224px);
-        max-width: calc(100% - 464px);
-        margin-right: 16px;
-    }
-`;
 
 export const H3 = styled.h3`
-    font-family: Inter, sans-serif;
-    font-size: 1em;
-    line-height: 1.5em;
-    box-sizing: border-box;
     font-weight:500;
-    text-transform: uppercase;
-    margin-right: 16px;
 `;
-
-export const P = styled.p`
-    font-family: Inter, sans-serif;
-    font-size: 1em;
-    line-height: 1.5em;
-    box-sizing: border-box;
-`
-
 

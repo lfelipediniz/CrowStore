@@ -2,7 +2,29 @@ import { colors } from "../../styles/colors";
 import styled from "styled-components";
 
 export const PaymentOptionsContainer = styled.div`
-  background-color: ${colors.black};
+    background-color: ${colors.secondary};
+    padding: 32px;
+    flex-basis: 448px;
+    order: 1;
+
+    * {
+        color: ${colors.white}
+    }
+
+    label {
+        font-weight: 500;
+        display:block;
+        width: 100%;
+    }
+
+    p {
+        margin-bottom: 32px;
+    }
+
+    @media (max-width: 464px) {
+        width: 100%
+    }
+
 `;
 
 export const PaymentLogo = styled.img`
@@ -14,6 +36,7 @@ export const PaymentLogo = styled.img`
 export const ModalityContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 32px;
 `;
 
 export const Option = styled.div`
@@ -23,33 +46,30 @@ export const Option = styled.div`
   flex-basis: 48%;
 
   img {
-    width: 100%;
     height: auto;
+    margin-bottom: 16px;
   }
 `;
 
 export const OptionLabel = styled.label`
   text-align: center;
+  color: ${props => (props.selected ? "#ff6765" : "inherit")};
 `;
 
 export const ContactInfo = styled.div`
-  label {
-    margin-bottom: 8px;
-  }
-
-  input {
-    margin-bottom: 16px;
-    width: 100%;
-  }
+    input {
+        margin: 16px 0 32px 0;
+        width: 100%;
+    }
 `;
 
 export const ConfirmButton = styled.button`
-  text-transform: uppercase;
-  font-weight: 700;
-  background-color: ${colors.white};
-  color: ${colors.black};
-  border: 0;
-  padding: 16px 32px;
-  margin: 16px auto;
-  display: block;
+text-transform: uppercase;
+font-weight: 700;
+background-color: ${colors.white};
+color: ${colors.secondary};
+border: 0;
+padding: 16px 32px;
+margin: 16px auto;
+display: block;
 `;

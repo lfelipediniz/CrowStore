@@ -7,7 +7,7 @@ import {
     OptionLabel,
     ContactInfo,
     ConfirmButton,
-} from "./paymentOptionsElement";
+} from "./PaymentOptionsElements";
 
 const PaymentForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
@@ -84,7 +84,7 @@ const PaymentForm = ({ onSubmit }) => {
 
     return (
         <PaymentOptionsContainer>
-            <PaymentLogo src="CROWPayments.svg" alt="Crow Store Payments" />
+            <PaymentLogo src="/CrowStore/imgs/CROWPayments.svg" alt="Crow Store Payments" />
             <form onSubmit={handleSubmit}>
                 <p>Forma de Pagamento</p>
                 <ModalityContainer>
@@ -93,20 +93,20 @@ const PaymentForm = ({ onSubmit }) => {
                         className={paymentMethod === "pix" ? "selected" : ""}
                     >
                         <img
-                            src={paymentMethod === "pix" ? "pix_selected.svg" : "pix_unselected.svg"}
+                            src={paymentMethod === "pix" ? "/CrowStore/imgs/pix_selected.svg" : "/CrowStore/imgs/pix_unselected.svg"}
                             alt="Pix"
                         />
-                        <OptionLabel>PIX</OptionLabel>
+                        <OptionLabel selected={paymentMethod === "pix"}>PIX</OptionLabel>
                     </Option>
                     <Option
                         onClick={() => handlePaymentMethodChange("credit")}
                         className={paymentMethod === "credit" ? "selected" : ""}
                     >
                         <img
-                            src={paymentMethod === "credit" ? "credit_selected.svg" : "credit_unselected.svg"}
+                            src={paymentMethod === "credit" ? "/CrowStore/imgs/credit_selected.svg" : "/CrowStore/imgs/credit_unselected.svg"}
                             alt="Cartão de crédito"
                         />
-                        <OptionLabel>Cartão de Crédito</OptionLabel>
+                        <OptionLabel selected={paymentMethod === "credit"}>Cartão de Crédito</OptionLabel>
                     </Option>
                 </ModalityContainer>
                 <ContactInfo>

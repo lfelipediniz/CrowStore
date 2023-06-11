@@ -5,7 +5,6 @@ import {
     ProductContainer,
     ProductImage,
     ProductDescription,
-    ProductName,
     ProductId,
     RemoveButton,
     ProductPricing,
@@ -13,8 +12,8 @@ import {
     QuantityLabel,
     QuantityInput,
     TotalContainer,
-    H3,
-    P
+    H2,
+    H3
 } from "./CartElements"
 
 const Cart = ({ onCartUpdate }) => {
@@ -65,7 +64,7 @@ const Cart = ({ onCartUpdate }) => {
                     <ProductImage src={product.image} alt={product.productName} />
                     <ProductDescription>
                         <ProductId>
-                            <ProductName>{product.productName}</ProductName>
+                            <H2>{product.productName}</H2>
                             <RemoveButton onClick={() => removeProduct(index)}>
                                 Remover
                             </RemoveButton>
@@ -84,9 +83,9 @@ const Cart = ({ onCartUpdate }) => {
                             </Row>
                             <Row>
                                 <H3>Preço:</H3>
-                                <P>
+                                <p>
                                     <strong>{product.price}</strong>
-                                </P>
+                                </p>
                             </Row>
                         </ProductPricing>
                     </ProductDescription>
@@ -94,13 +93,13 @@ const Cart = ({ onCartUpdate }) => {
             ))}
             <TotalContainer>
                 <Row>
-                    <h2>Frete:</h2>
+                    <H2>Frete:</H2>
                     <p>
                         <strong>{'{Frete}'}</strong>
                     </p>
                 </Row>
                 <Row>
-                    <h2>Total:</h2>
+                    <H2>Total:</H2>
                     <p>
                         <strong>{calculateTotalPrice()}</strong>
                     </p>

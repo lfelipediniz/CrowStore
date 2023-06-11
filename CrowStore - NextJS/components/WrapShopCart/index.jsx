@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import fs from "fs";
-import path from "path";
+// We'll add this once we have a server side application.
+// import fs from "fs";
+// import path from "path";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
@@ -37,9 +38,10 @@ const WrapShopCart = () => {
             ...cartData,
             ...formData,
         };
-        // Save the combined data to a JSON file
-        saveDataToFile(combinedData);
-        // Perform additional actions with the form data as needed
+        // Output to console, as a proof of concept
+        console.log(combinedData);
+        // Save the combined data to a JSON file (once we implement the server)
+        // saveDataToFile(combinedData);
     };
 
     const saveDataToFile = (data) => {

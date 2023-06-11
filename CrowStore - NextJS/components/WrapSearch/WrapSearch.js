@@ -72,7 +72,7 @@ const WrapSearch = () => {
                     {filteredItems.length} resultados para "{searchTerm}"
                 </Subtitle>
             )}
-            <ScrollableContainer margin-left="0">
+            <ScrollableContainer style={{ marginLeft: 0 }}>
                 <ProductContainer>
                     {filteredItems.map((product, index) => (
                         <ProductCard

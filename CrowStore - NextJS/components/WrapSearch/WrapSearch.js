@@ -72,7 +72,7 @@ const WrapSearch = () => {
                     {filteredItems.length} resultados para "{searchTerm}"
                 </Subtitle>
             )}
-            <ScrollableContainer>
+            <ScrollableContainer margin-left="0">
                 <ProductContainer>
                     {filteredItems.map((product, index) => (
                         <ProductCard
@@ -83,7 +83,7 @@ const WrapSearch = () => {
                         />
                     ))}
                 </ProductContainer>
-            </ScrollableContainer>
+            </ScrollableContainer >
             <Footer />
         </>
     );

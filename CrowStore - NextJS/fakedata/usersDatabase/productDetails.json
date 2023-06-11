@@ -2,52 +2,58 @@
     {
         "productName": "Calça Crow",
         "price": "R$ 99,90",
-        "image": "/CrowStore/imgs/CALCACROW.png",
+        "images": [
+            "/CrowStore/imgs/CALCACROW1.png",
+            "/CrowStore/imgs/CALCACROW2.png",
+            "/CrowStore/imgs/CALCACROW3.png",
+            "/CrowStore/imgs/CALCACROW4.png",
+            "/CrowStore/imgs/CALCACROW5.png"
+        ],
         "category": "sueter",
         "gender": "boy",
         "size": {
             "PP": {
                 "colors": {
-                    "Blue": 5,
-                    "Green": 7,
-                    "Red": 2,
-                    "Yellow": 0,
+                    "BabyBlue": 5,
+                    "MintGreen": 7,
+                    "SoftPink": 2,
+                    "PaleYellow": 0,
                     "LightSalmon": 3
                 }
             },
             "P": {
                 "colors": {
-                    "Blue": 8,
-                    "Green": 2,
-                    "Red": 5,
-                    "Yellow": 1,
+                    "BabyBlue": 8,
+                    "MintGreen": 2,
+                    "SoftPink": 5,
+                    "PaleYellow": 1,
                     "LightSalmon": 6
                 }
             },
             "M": {
                 "colors": {
-                    "Blue": 4,
-                    "Green": 3,
-                    "Red": 5,
-                    "Yellow": 9,
+                    "Lavender": 4,
+                    "SeafoamGreen": 3,
+                    "CoralPink": 5,
+                    "CreamYellow": 9,
                     "LightSalmon": 10
                 }
             },
             "G": {
                 "colors": {
-                    "Blue": 5,
-                    "Green": 7,
-                    "Red": 2,
-                    "Yellow": 4,
+                    "Periwinkle": 5,
+                    "SageGreen": 7,
+                    "Rose": 2,
+                    "ButtercupYellow": 4,
                     "LightSalmon": 8
                 }
             },
             "XG": {
                 "colors": {
-                    "Blue": 0,
-                    "Green": 6,
-                    "Red": 3,
-                    "Yellow": 8,
+                    "PowderBlue": 0,
+                    "MintCream": 6,
+                    "Peach": 3,
+                    "LemonChiffon": 8,
                     "LightSalmon": 2
                 }
             }
@@ -56,52 +62,58 @@
     {
         "productName": "Moletom Crow",
         "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
+        "images": [
+            "/CrowStore/imgs/MOLETOMCROW1.png",
+            "/CrowStore/imgs/MOLETOMCROW2.png",
+            "/CrowStore/imgs/MOLETOMCROW3.png",
+            "/CrowStore/imgs/MOLETOMCROW4.png",
+            "/CrowStore/imgs/MOLETOMCROW5.png"
+        ],
         "category": "moletom",
         "gender": "girl",
         "size": {
             "PP": {
                 "colors": {
-                    "Blue": 3,
-                    "Green": 7,
-                    "Red": 1,
-                    "Yellow": 6,
+                    "BabyBlue": 3,
+                    "MintGreen": 7,
+                    "SoftPink": 1,
+                    "PaleYellow": 6,
                     "LightSalmon": 4
                 }
             },
             "P": {
                 "colors": {
-                    "Blue": 5,
-                    "Green": 2,
-                    "Red": 4,
-                    "Yellow": 9,
+                    "BabyBlue": 5,
+                    "MintGreen": 2,
+                    "SoftPink": 4,
+                    "PaleYellow": 9,
                     "LightSalmon": 6
                 }
             },
             "M": {
                 "colors": {
-                    "Blue": 7,
-                    "Green": 3,
-                    "Red": 1,
-                    "Yellow": 8,
+                    "Lavender": 7,
+                    "SeafoamGreen": 3,
+                    "CoralPink": 1,
+                    "CreamYellow": 8,
                     "LightSalmon": 10
                 }
             },
             "G": {
                 "colors": {
-                    "Blue": 4,
-                    "Green": 6,
-                    "Red": 2,
-                    "Yellow": 5,
+                    "Periwinkle": 4,
+                    "SageGreen": 6,
+                    "Rose": 2,
+                    "ButtercupYellow": 5,
                     "LightSalmon": 8
                 }
             },
             "XG": {
                 "colors": {
-                    "Blue": 2,
-                    "Green": 8,
-                    "Red": 3,
-                    "Yellow": 7,
+                    "PowderBlue": 2,
+                    "MintCream": 8,
+                    "Peach": 3,
+                    "LemonChiffon": 7,
                     "LightSalmon": 2
                 }
             }
@@ -110,52 +122,58 @@
     {
         "productName": "Touca Crow",
         "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/TOUCACROW.png",
+        "images": [
+            "/CrowStore/imgs/TOUCACROW1.png",
+            "/CrowStore/imgs/TOUCACROW2.png",
+            "/CrowStore/imgs/TOUCACROW3.png",
+            "/CrowStore/imgs/TOUCACROW4.png",
+            "/CrowStore/imgs/TOUCACROW5.png"
+        ],
         "category": "moletom",
         "gender": "girl",
         "size": {
             "PP": {
                 "colors": {
-                    "Blue": 1,
-                    "Green": 8,
-                    "Red": 5,
-                    "Yellow": 3,
+                    "BabyBlue": 1,
+                    "MintGreen": 8,
+                    "SoftPink": 5,
+                    "PaleYellow": 3,
                     "LightSalmon": 4
                 }
             },
             "P": {
                 "colors": {
-                    "Blue": 6,
-                    "Green": 2,
-                    "Red": 4,
-                    "Yellow": 7,
+                    "BabyBlue": 6,
+                    "MintGreen": 2,
+                    "SoftPink": 4,
+                    "PaleYellow": 7,
                     "LightSalmon": 6
                 }
             },
             "M": {
                 "colors": {
-                    "Blue": 4,
-                    "Green": 7,
-                    "Red": 3,
-                    "Yellow": 9,
+                    "Lavender": 4,
+                    "SeafoamGreen": 7,
+                    "CoralPink": 3,
+                    "CreamYellow": 9,
                     "LightSalmon": 10
                 }
             },
             "G": {
                 "colors": {
-                    "Blue": 2,
-                    "Green": 5,
-                    "Red": 4,
-                    "Yellow": 6,
+                    "Periwinkle": 2,
+                    "SageGreen": 5,
+                    "Rose": 4,
+                    "ButtercupYellow": 6,
                     "LightSalmon": 8
                 }
             },
             "XG": {
                 "colors": {
-                    "Blue": 3,
-                    "Green": 8,
-                    "Red": 2,
-                    "Yellow": 7,
+                    "PowderBlue": 3,
+                    "MintCream": 8,
+                    "Peach": 2,
+                    "LemonChiffon": 7,
                     "LightSalmon": 2
                 }
             }
@@ -164,52 +182,58 @@
     {
         "productName": "Suéter Man Crow",
         "price": "R$ 79,90",
-        "image": "/CrowStore/imgs/SUETERMANCROW.png",
+        "images": [
+            "/CrowStore/imgs/SUETERMANCROW1.png",
+            "/CrowStore/imgs/SUETERMANCROW2.png",
+            "/CrowStore/imgs/SUETERMANCROW3.png",
+            "/CrowStore/imgs/SUETERMANCROW4.png",
+            "/CrowStore/imgs/SUETERMANCROW5.png"
+        ],
         "category": "moletom",
         "gender": "boy",
         "size": {
             "PP": {
                 "colors": {
-                    "Blue": 5,
-                    "Green": 6,
-                    "Red": 3,
-                    "Yellow": 2,
+                    "BabyBlue": 5,
+                    "MintGreen": 6,
+                    "SoftPink": 3,
+                    "PaleYellow": 2,
                     "LightSalmon": 1
                 }
             },
             "P": {
                 "colors": {
-                    "Blue": 3,
-                    "Green": 4,
-                    "Red": 1,
-                    "Yellow": 6,
+                    "BabyBlue": 3,
+                    "MintGreen": 4,
+                    "SoftPink": 1,
+                    "PaleYellow": 6,
                     "LightSalmon": 4
                 }
             },
             "M": {
                 "colors": {
-                    "Blue": 7,
-                    "Green": 2,
-                    "Red": 3,
-                    "Yellow": 8,
+                    "Lavender": 7,
+                    "SeafoamGreen": 2,
+                    "CoralPink": 3,
+                    "CreamYellow": 8,
                     "LightSalmon": 10
                 }
             },
             "G": {
                 "colors": {
-                    "Blue": 5,
-                    "Green": 7,
-                    "Red": 2,
-                    "Yellow": 4,
+                    "Periwinkle": 5,
+                    "SageGreen": 7,
+                    "Rose": 2,
+                    "ButtercupYellow": 4,
                     "LightSalmon": 8
                 }
             },
             "XG": {
                 "colors": {
-                    "Blue": 2,
-                    "Green": 8,
-                    "Red": 3,
-                    "Yellow": 7,
+                    "PowderBlue": 2,
+                    "MintCream": 8,
+                    "Peach": 3,
+                    "LemonChiffon": 7,
                     "LightSalmon": 2
                 }
             }

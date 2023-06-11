@@ -13,6 +13,8 @@ import {
   AddButton,
   ImagePreview,
   InputInfoContainer,
+  Input,
+  TitleModal,
 } from "./UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
@@ -229,44 +231,58 @@ function Admin() {
                 />
               </>
 
-            <InputInfoContainer>
-            <TextField label="Estoque Disponível" variant="outlined" />
-            <TextField label="Preço de Venda" variant="outlined" />
-            <TextField
-              select
-              label="Seletor de Gênero"
-              variant="outlined"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {genderOptions.map((option, index) => (
-                <MenuItem key={index} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField
-              select
-              label="Seletor de Categoria"
-              variant="outlined"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories
-                .filter(
-                  (category) =>
-                    category !== "Todos" &&
-                    category !== "Masculino" &&
-                    category !== "Feminino"
-                )
-                .map((category, index) => (
-                  <MenuItem key={index} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-            </TextField>
-            </InputInfoContainer>
+              <InputInfoContainer>
+                <TitleModal>Informações do Produto</TitleModal>
+                <TextField
+                  label="Estoque Disponível"
+                  variant="outlined"
+                  sx={{ marginBottom: "30px" }}
+                />
+                <TextField
+                  label="Preço de Venda"
+                  variant="outlined"
+                  sx={{ marginBottom: "30px" }}
+                />
+                <TextField
+                  select
+                  label="Selecionar de Gênero"
+                  variant="outlined"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  sx={{ marginBottom: "30px" }}
+                >
+                  {genderOptions.map((option, index) => (
+                    <MenuItem key={index} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  select
+                  label="Selecionar de Categoria"
+                  variant="outlined"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  sx={{ marginBottom: "65px" }}
+                >
+                  {categories
+                    .filter(
+                      (category) =>
+                        category !== "Todos" &&
+                        category !== "Masculino" &&
+                        category !== "Feminino"
+                    )
+                    .map((category, index) => (
+                      <MenuItem key={index} value={category}>
+                        {category}
+                      </MenuItem>
+                    ))}
+                </TextField>
 
+                <Button variant="contained" href="#contained-buttons">
+                  Adicionar
+                </Button>
+              </InputInfoContainer>
             </AddProduct>
           </AddProductContainer>
         </Box>

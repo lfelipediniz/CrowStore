@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
+import { TextField } from "@mui/material";
 
 export const UserContainer = styled.div`
   display: flex;
@@ -52,9 +53,10 @@ export const ScrollableContainer = styled.div`
 `;
 
 export const AddProductContainer = styled.div`
-  background-color: rgb(38, 38, 38, 0.9);
-  width: 1000px;
+  background-color: ${colors.secondary};
+  width: 900px;
   height: 600px;
+  border-radius: 10px;
 `;
 
 export const AddProduct = styled.div`
@@ -131,6 +133,10 @@ export const ImagePreview = styled.img`
   object-fit: cover;
 `;
 
+export const TitleModal = styled.h2`
+  margin-bottom: 50px;
+`;
+
 export const InputInfoContainer = styled.div`
   color: ${colors.primary};
   display: flex;
@@ -154,8 +160,7 @@ export const InputInfoContainer = styled.div`
   .MuiInputLabel-root:hover,
   .MuiInputBase-root:hover,
   .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-    border-color: ${colors.cta} !important;
-    box-shadow: 0 0 0 2px ${colors.cta}80;
+    border-color: ${colors.primary} !important;
   }
 
   .MuiOutlinedInput-root.Mui-focused .MuiInputLabel-outlined,
@@ -163,10 +168,21 @@ export const InputInfoContainer = styled.div`
   .MuiFormControl-root.Mui-focused .MuiFormLabel-root,
   .MuiInputLabel-root:hover,
   .MuiInputBase-root:hover {
-    color: ${colors.cta} !important;
+    color: ${colors.primary} !important;
   }
 
-  .MuiSelect-icon {
+  .MuiSelect-icon,
+  .MuiIconButton-label {
     color: ${colors.primary} !important;
+  }
+
+  .MuiOutlinedInput-inputAdornedStart .MuiSvgIcon-root,
+  .MuiOutlinedInput-inputAdornedEnd .MuiSvgIcon-root {
+    fill: ${colors.primary} !important;
+  }
+
+  .MuiButton-root {
+    background-color: ${colors.ctaBlack} !important;
+    color: white !important;
   }
 `;

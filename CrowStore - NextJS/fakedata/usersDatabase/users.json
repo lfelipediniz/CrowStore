@@ -5,6 +5,11 @@
     "category": "common"
   },
   {
+    "userName": "joaopereiraadm",
+    "password": "12345",
+    "category": "admin "
+  },
+  {
     "userName": "felipediniz",
     "password": "12345678",
     "category": "common"

@@ -5,6 +5,7 @@ export const BodyContainer = styled.div`
     margin: 120px auto;
     display:flex;
     flex-wrap:wrap;
+    justify-content:center;
 
     * {    
         font-family: Inter, sans-serif;

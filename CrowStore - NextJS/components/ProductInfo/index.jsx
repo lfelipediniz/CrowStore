@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     ProductInfoContainer,
     Title,
@@ -9,7 +9,7 @@ import {
     SizeButton,
     QuantityInput,
     SubmitButton,
-    CartIcon,
+    ShoppingCartIcon
 } from "./ProductInfoElements";
 
 const ProductInfo = ({ product, onAddToCart }) => {
@@ -26,6 +26,14 @@ const ProductInfo = ({ product, onAddToCart }) => {
         setSelectedSize(sizeKey);
         const maxQuantity = product.size[sizeKey]?.colors[selectedColor];
         setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
+
+        // Set the default selected color for the selected size
+        const colors = Object.keys(product.size[sizeKey]?.colors || {});
+        if (colors.length > 0) {
+            setSelectedColor(colors[0]);
+        } else {
+            setSelectedColor("");
+        }
     };
 
     const handleQuantityChange = (event) => {
@@ -56,6 +64,14 @@ const ProductInfo = ({ product, onAddToCart }) => {
     };
     const [selectedSize, setSelectedSize] = useState(getSmallestSize(product));
 
+    // Set the default selected color when the component mounts
+    useEffect(() => {
+        const colors = Object.keys(product.size[selectedSize]?.colors || {});
+        if (colors.length > 0) {
+            setSelectedColor(colors[0]);
+        }
+    }, [selectedSize, product.size]);
+
     return (
         <ProductInfoContainer>
             <div id="description">
@@ -70,19 +86,19 @@ const ProductInfo = ({ product, onAddToCart }) => {
             <form onSubmit={handleSubmit}>
                 <Subtitle>Cor</Subtitle>
                 <List>
-                    {Object.keys(product.size[selectedSize]?.colors || {}).map(
-                        (color) => (
-                            <ListItem key={color}>
-                                <ColorSample
-                                    type="button"
-                                    id={`color${color}`}
-                                    value={color}
-                                    color={product.size[selectedSize].colors[color]}
-                                    onClick={() => handleColorSelect(color)}
-                                ></ColorSample>
-                            </ListItem>
-                        )
-                    )}
+                    {Object.keys(product.size[selectedSize]?.colors || {}).map((color) => (
+                        <ListItem key={color}>
+                            <ColorSample
+                                type="button"
+                                className={`sample ${selectedColor === color ? "selected" : ""}`}
+                                id={`color${color}`}
+                                value={color}
+                                color={color}
+                                selected={selectedColor === color}
+                                onClick={() => handleColorSelect(color)}
+                            ></ColorSample>
+                        </ListItem>
+                    ))}
                 </List>
 
                 <Subtitle>Tamanho</Subtitle>
@@ -91,8 +107,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
                         <ListItem key={sizeKey}>
                             <SizeButton
                                 type="button"
-                                className={`sample ${selectedSize === sizeKey ? "selected" : ""
-                                    }`}
+                                className={`sample ${selectedSize === sizeKey ? "selected" : ""}`}
                                 id={sizeKey}
                                 value={sizeKey}
                                 selected={selectedSize === sizeKey}
@@ -118,7 +133,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
                 />
                 <br />
                 <SubmitButton type="submit" id="submit">
-                    <CartIcon src="../imgs/icons/cart.svg" alt="Cart Icon" />
+                    <ShoppingCartIcon />
                     Adicionar ao carrinho
                 </SubmitButton>
             </form>

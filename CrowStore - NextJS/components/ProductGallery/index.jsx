@@ -7,21 +7,22 @@ const ProductGallery = ({ images, onSelect }) => {
     const handleThumbnailClick = (image, index) => {
         setSelectedThumbnail(index);
         onSelect(image);
+    }
 
-        return (
-            <Gallery>
-                {images.map((image, index) => (
-                    <Thumbnail
-                        key={index}
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        onClick={() => handleThumbnailClick(image, index)}
-                        isSelected={selectedThumbnail === index}
-                    />
-                ))}
-            </Gallery>
-        );
-    };
+
+    return (
+        <Gallery>
+            {images.map((image, index) => (
+                <Thumbnail
+                    key={index}
+                    src={image}
+                    alt={`Thumbnail ${index + 1}`}
+                    onClick={() => handleThumbnailClick(image, index)}
+                    isSelected={selectedThumbnail === index}
+                />
+            ))}
+        </Gallery>
+    );
 };
 
 export default ProductGallery;

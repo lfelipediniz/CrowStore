@@ -5,7 +5,6 @@ import {
     Subtitle,
     List,
     ListItem,
-    Form,
     ColorSample,
     SizeButton,
     QuantityInput,
@@ -15,19 +14,16 @@ import {
 
 const ProductInfo = ({ product, onAddToCart }) => {
     const [selectedColor, setSelectedColor] = useState("");
-    const [selectedSize, setSelectedSize] = useState("");
     const [quantity, setQuantity] = useState(1);
 
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-        // Update the quantity based on the selected size and color
         const maxQuantity = product.size[selectedSize]?.colors[color];
         setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
     };
 
     const handleSizeSelect = (sizeKey) => {
         setSelectedSize(sizeKey);
-        // Update the quantity based on the selected size and color
         const maxQuantity = product.size[sizeKey]?.colors[selectedColor];
         setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
     };
@@ -39,7 +35,6 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Create the cart item object with the selected options
         const cartItem = {
             product: product.productName,
             price: product.price,
@@ -47,36 +42,47 @@ const ProductInfo = ({ product, onAddToCart }) => {
             size: selectedSize,
             quantity: parseInt(quantity),
         };
-        // Pass the cart item object to the onAddToCart callback
         onAddToCart(cartItem);
     };
+
+    // Helper function to get the smallest size available
+    const getSmallestSize = (product) => {
+        const sizes = Object.keys(product.size);
+        return sizes.reduce((smallestSize, currentSize) => {
+            return product.size[currentSize].order < product.size[smallestSize].order
+                ? currentSize
+                : smallestSize;
+        }, sizes[0]);
+    };
+    const [selectedSize, setSelectedSize] = useState(getSmallestSize(product));
 
     return (
         <ProductInfoContainer>
             <div id="description">
                 <Title>{product.productName}</Title>
                 <p>
-                    Cillum veniam est eiusmod sed culpa Duis. Ipsum aute Duis non officia.
-                    Labore pariatur tempor commodo dolor consectetur nulla laborum
-                    exercitation elit.
+                    Cillum veniam est eiusmod sed culpa Duis. Ipsum aute Duis non
+                    officia. Labore pariatur tempor commodo dolor consectetur nulla
+                    laborum exercitation elit.
                 </p>
             </div>
 
-            <Form name="order" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <Subtitle>Cor</Subtitle>
                 <List>
-                    {Object.keys(product.size[selectedSize]?.colors || {}).map((color) => (
-                        <ListItem key={color}>
-                            <ColorSample
-                                type="button"
-                                className={`sample ${selectedColor === color ? "selected" : ""}`}
-                                id={`color${color}`}
-                                value={color}
-                                color={product.colors[color]}
-                                onClick={() => handleColorSelect(color)}
-                            ></ColorSample>
-                        </ListItem>
-                    ))}
+                    {Object.keys(product.size[selectedSize]?.colors || {}).map(
+                        (color) => (
+                            <ListItem key={color}>
+                                <ColorSample
+                                    type="button"
+                                    id={`color${color}`}
+                                    value={color}
+                                    color={product.size[selectedSize].colors[color]}
+                                    onClick={() => handleColorSelect(color)}
+                                ></ColorSample>
+                            </ListItem>
+                        )
+                    )}
                 </List>
 
                 <Subtitle>Tamanho</Subtitle>
@@ -85,7 +91,8 @@ const ProductInfo = ({ product, onAddToCart }) => {
                         <ListItem key={sizeKey}>
                             <SizeButton
                                 type="button"
-                                className={`sample ${selectedSize === sizeKey ? "selected" : ""}`}
+                                className={`sample ${selectedSize === sizeKey ? "selected" : ""
+                                    }`}
                                 id={sizeKey}
                                 value={sizeKey}
                                 selected={selectedSize === sizeKey}
@@ -104,7 +111,9 @@ const ProductInfo = ({ product, onAddToCart }) => {
                     name="quantity"
                     value={quantity}
                     min={1}
-                    max={product.size[selectedSize]?.colors[selectedColor] || 1}
+                    max={
+                        product.size[selectedSize]?.colors[selectedColor] || 1
+                    }
                     onChange={handleQuantityChange}
                 />
                 <br />
@@ -112,7 +121,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
                     <CartIcon src="../imgs/icons/cart.svg" alt="Cart Icon" />
                     Adicionar ao carrinho
                 </SubmitButton>
-            </Form>
+            </form>
         </ProductInfoContainer>
     );
 };

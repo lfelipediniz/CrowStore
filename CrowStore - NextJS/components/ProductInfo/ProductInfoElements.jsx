@@ -8,6 +8,10 @@ export const ProductInfoContainer = styled.div`
   height: inherit;
   width: 332px;
   float: left;
+
+  @media (max-width: 944px) {
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -44,12 +48,14 @@ export const Button = styled.button`
 `;
 
 export const ColorSample = styled.button`
+  border: 1px solid ${colors.primary};
   height: 40px;
   width: 40px;
   background-color: ${({ color }) => color};
 `;
 
 export const SizeButton = styled.button`
+  border: 1px solid ${colors.primary};
   color: ${({ selected }) => (selected ? "black" : "gray")};
   font-weight: ${({ selected }) => (selected ? "700" : "normal")};
   border-width: ${({ selected }) => (selected ? "3px" : "1px")};

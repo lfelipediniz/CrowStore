@@ -25,7 +25,7 @@
     "react-icons": "4.7.1",
     "react-is": "^17.0.0",
     "react-lottie": "^1.2.3",
-    "react-router-dom": "6.7.0",
+    "react-router-dom": "^6.12.1",
     "react-scroll": "1.8.9",
     "react-spring-lightbox": "^1.7.1",
     "react-swipeable-views": "^0.14.0",

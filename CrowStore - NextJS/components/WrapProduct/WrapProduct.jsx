@@ -20,7 +20,6 @@ const WrapProduct = () => {
     };
 
     const product = ProductData[1];
-    console.log(product);
 
     return (
         <>

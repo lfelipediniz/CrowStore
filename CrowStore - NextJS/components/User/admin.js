@@ -9,30 +9,13 @@ import {
   AddProductContainer,
   SidebarContainer,
   EditButtonCotainer,
-  AddProduct,
-  AddButton,
-  ImagePreview,
-  InputInfoContainer,
-  TitleModal,
 } from "./UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
-import {
-  Box,
-  Modal,
-  Typography,
-  TextField,
-  MenuItem,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  InputAdornment,
-} from "@mui/material";
-
-import { FaTrashAlt, FaPhotoVideo } from "react-icons/fa";
+import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
+import { FaTrashAlt } from "react-icons/fa";
+import ProductModal from "../ProductModal"; // Importe o componente de modal personalizado
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -43,7 +26,7 @@ function Admin() {
     "Feminino",
   ]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [openModal, setOpenModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // Novo estado para controlar a visibilidade do modal
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -97,25 +80,11 @@ function Admin() {
   );
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
-  const genderOptions = [
-    { value: "boy", label: "Masculino" },
-    { value: "girl", label: "Feminino" },
-  ];
-
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.includes("image")) {
-      setSelectedImage(URL.createObjectURL(file));
-    }
+    setShowModal(false);
   };
 
   return (
@@ -201,109 +170,13 @@ function Admin() {
       </UserContainer>
 
       {/* Modal de adicionar produto */}
-      <Modal open={openModal} onClose={handleCloseModal}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <AddProductContainer>
-            <AddProduct>
-              <>
-                <AddButton htmlFor="imageUpload">
-                  {selectedImage ? (
-                    <ImagePreview src={selectedImage} alt="Selected" />
-                  ) : (
-                    <>
-                      <FaPhotoVideo /> Adicionar Imagem
-                    </>
-                  )}
-                </AddButton>
-                <input
-                  id="imageUpload"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  hidden // Oculta o elemento input
-                />
-              </>
-
-              <InputInfoContainer>
-                <TitleModal>Informações do Produto</TitleModal>
-                <TextField
-                  label="Estoque"
-                  variant="outlined"
-                  sx={{ marginBottom: "30px" }}
-                  InputProps={{
-                    inputProps: {
-                      type: "number",
-                      min: "0",
-                    },
-                  }}
-                />
-                <TextField
-                  label="Preço de Venda"
-                  variant="outlined"
-                  sx={{ marginBottom: "30px" }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <span className="rs">R$</span>
-                      </InputAdornment>
-                    ),
-                    inputProps: {
-                      type: "number",
-                      min: "0",
-                    },
-                  }}
-                />
-                <TextField
-                  select
-                  label="Selecionar de Gênero"
-                  variant="outlined"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  sx={{ marginBottom: "30px" }}
-                >
-                  {genderOptions.map((option, index) => (
-                    <MenuItem key={index} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  select
-                  label="Selecionar de Categoria"
-                  variant="outlined"
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  sx={{ marginBottom: "65px" }}
-                >
-                  {categories
-                    .filter(
-                      (category) =>
-                        category !== "Todos" &&
-                        category !== "Masculino" &&
-                        category !== "Feminino"
-                    )
-                    .map((category, index) => (
-                      <MenuItem key={index} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))}
-                </TextField>
-
-                <Button variant="contained" href="#contained-buttons">
-                  Adicionar
-                </Button>
-              </InputInfoContainer>
-            </AddProduct>
-          </AddProductContainer>
-        </Box>
-      </Modal>
+      <ProductModal
+        open={showModal}
+        onClose={handleCloseModal}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
     </>
   );
 }

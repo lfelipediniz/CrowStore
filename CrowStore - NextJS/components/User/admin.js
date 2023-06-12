@@ -13,7 +13,6 @@ import {
   AddButton,
   ImagePreview,
   InputInfoContainer,
-  Input,
   TitleModal,
 } from "./UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
@@ -30,6 +29,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  InputAdornment,
 } from "@mui/material";
 
 import { FaTrashAlt, FaPhotoVideo } from "react-icons/fa";
@@ -234,14 +234,31 @@ function Admin() {
               <InputInfoContainer>
                 <TitleModal>Informações do Produto</TitleModal>
                 <TextField
-                  label="Estoque Disponível"
+                  label="Estoque"
                   variant="outlined"
                   sx={{ marginBottom: "30px" }}
+                  InputProps={{
+                    inputProps: {
+                      type: "number",
+                      min: "0",
+                    },
+                  }}
                 />
                 <TextField
                   label="Preço de Venda"
                   variant="outlined"
                   sx={{ marginBottom: "30px" }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <span className="rs">R$</span>
+                      </InputAdornment>
+                    ),
+                    inputProps: {
+                      type: "number",
+                      min: "0",
+                    },
+                  }}
                 />
                 <TextField
                   select

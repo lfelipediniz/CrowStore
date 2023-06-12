@@ -91,6 +91,23 @@ export const SidebarContainer = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: transparent; /* Cor do "polegar" da barra de rolagem */
   }
+
+  /* Indicador de rolagem */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(
+      ${parseInt(colors.secondary.slice(1, 3), 16)},
+      ${parseInt(colors.secondary.slice(3, 5), 16)},
+      ${parseInt(colors.secondary.slice(5, 7), 16)},
+      0.75
+    );
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 `;
 
 export const EditButtonCotainer = styled.div`
@@ -185,4 +202,14 @@ export const InputInfoContainer = styled.div`
     background-color: ${colors.ctaBlack} !important;
     color: white !important;
   }
+
+  .MuiOutlinedInput-root input[type="number"]::-webkit-inner-spin-button,
+  .MuiOutlinedInput-root input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .rs {
+    color: ${colors.primary};
+  }
+  
 `;

@@ -9,6 +9,7 @@ export const ProductInfoContainer = styled.div`
   height: inherit;
   width: 332px;
   float: left;
+  margin-bottom: 16px;
 
   @media (max-width: 944px) {
     width: 100%;

@@ -18,7 +18,7 @@ export {setGlobalState, useGlobalState};
 
 function User() {
   const [checklgn] = useGlobalState("isLoggedInn");
-  const [checkadm] = useGlobalState("isLoggedInn");
+  const [checkadm] = useGlobalState("isAdm");
 
   
   return (
@@ -26,10 +26,9 @@ function User() {
       {checklgn ? (
         checkadm ? <Admin /> : <CommonUser />
       ) : (
-        // <WrapContent>
-        //   <Login />
-        //   </WrapContent>
-        <Admin />
+         <WrapContent>
+           <Login />
+           </WrapContent>
       )}
     </>
   );

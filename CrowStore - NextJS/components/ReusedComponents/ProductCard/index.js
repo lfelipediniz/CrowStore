@@ -1,4 +1,6 @@
 import React from "react";
+import Link from 'next/link';
+
 import {
   Content,
   ProductCardContainer,
@@ -11,7 +13,9 @@ const ProductCard = ({ img, productName, price }) => {
   return (
     <>
       <ProductCardContainer>
+        <a Link href="/product">
         <Image src={img} alt={productName} width={230} height={380} />
+        </a>
         <ProductInfo>
           <Content>{price}</Content>
         </ProductInfo>

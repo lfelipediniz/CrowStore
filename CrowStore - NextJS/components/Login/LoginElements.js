@@ -10,6 +10,8 @@ export const UserContainer = styled.div`
 
 `;
 export const LoginContainer = styled.div`
+  margin-top: 10%;
+  margin-left: 60%;
   width: 375px;
   height: 500px;
   padding: 20px;

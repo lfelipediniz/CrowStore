@@ -10,15 +10,19 @@ const ProductDescription = ({ product }) => {
         setSelectedImage(image);
     };
 
-    const handleAddtoCart = (item) => {
-        alert(`Product added to cart: ${item}`);
+    const handleAddToCart = (item) => {
+        let message = "Product added to cart:\n";
+        Object.entries(item).forEach(([key, value]) => {
+            message += `${key}: ${value}\n`;
+        });
+        alert(message);
     };
 
     return (
         <ProductContainer>
             <ProductGallery images={product.images} onSelect={handleImageSelect} />
             <ProductImageContainer src={selectedImage} />
-            <ProductInfo product={product} onAddtoCart={handleAddtoCart} />
+            <ProductInfo product={product} onAddToCart={handleAddToCart} />
         </ProductContainer>
     );
 }

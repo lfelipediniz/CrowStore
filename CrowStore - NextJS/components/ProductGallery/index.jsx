@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Gallery, Thumbnail } from "./ProductGalleryElements.jsx"
 
 const ProductGallery = ({ images, onSelect }) => {

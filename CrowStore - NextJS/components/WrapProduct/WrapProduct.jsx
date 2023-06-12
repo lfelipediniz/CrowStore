@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
-import BodyContainer from "./WrapProductElements";
+import { BodyContainer } from "./WrapProductElements.jsx";
 import ProductDescription from "../ProductDescription"
 import {
     ProductContainer,
@@ -27,7 +27,7 @@ const WrapProduct = () => {
             <Sidebar isOpen={isOpen} toogle={toggle} home />
             <Navbar toogle={toggle} home />
             <BodyContainer>
-                {/* <ProductDescription product={product} /> */}
+                <ProductDescription product={product} />
                 {/* <ScrollableContainer style={{ marginLeft: 0 }}> */}
                 {/*     <ProductContainer> */}
                 {/*         {ProductData.map((product, index) => ( */}

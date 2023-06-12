@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductGallery from "../ProductGallery";
 import ProductInfo from "../ProductInfo";
 import { ProductContainer, ProductImageContainer } from "./ProductDescriptionElements";

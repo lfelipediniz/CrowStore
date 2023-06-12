@@ -1,3 +1,4 @@
+// ProductModal.js
 import React from "react";
 import {
   AddProductContainer,
@@ -8,14 +9,7 @@ import {
   TitleModal,
   Money,
 } from "./ProductModalElements";
-import {
-  Modal,
-  Box,
-  TextField,
-  MenuItem,
-  Button,
-  InputAdornment,
-} from "@mui/material";
+import { Modal, Box, TextField, MenuItem, Button, InputAdornment } from "@mui/material";
 import { FaPhotoVideo } from "react-icons/fa";
 import { colors } from "../../styles/colors";
 
@@ -24,6 +18,8 @@ const ProductModal = ({
   onClose,
   selectedCategory,
   setSelectedCategory,
+  product,
+  onSave,
   categories,
 }) => {
   const [selectedImage, setSelectedImage] = React.useState(null);
@@ -33,6 +29,14 @@ const ProductModal = ({
     if (file && file.type.includes("image")) {
       setSelectedImage(URL.createObjectURL(file));
     }
+  };
+
+  const handleSave = () => {
+    const updatedProduct = {
+      ...product,
+      // Adicione as propriedades do produto que deseja salvar/alterar
+    };
+    onSave(updatedProduct);
   };
 
   return (
@@ -72,6 +76,10 @@ const ProductModal = ({
                 label="Nome do Produto"
                 variant="outlined"
                 sx={{ marginBottom: "25px" }}
+                value={product?.name || ""}
+                onChange={(e) =>
+                  onSave({ ...product, name: e.target.value })
+                }
               />
               <TextField
                 label="Estoque"
@@ -81,6 +89,10 @@ const ProductModal = ({
                   inputProps: { min: 0 },
                 }}
                 type="number"
+                value={product?.stock || ""}
+                onChange={(e) =>
+                  onSave({ ...product, stock: e.target.value })
+                }
               />
               <TextField
                 select
@@ -126,9 +138,13 @@ const ProductModal = ({
                   ),
                 }}
                 type="number"
+                value={product?.price || ""}
+                onChange={(e) =>
+                  onSave({ ...product, price: e.target.value })
+                }
               />
-              <Button variant="contained" onClick={onClose}>
-                Adicionar Produto
+              <Button variant="contained" onClick={handleSave}>
+                {product ? "Salvar Produto" : "Adicionar Produto"}
               </Button>
             </InputInfoContainer>
           </AddProduct>

@@ -15,7 +15,7 @@ import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
-import ProductModal from "../ProductModal"; // Importe o componente de modal personalizado
+import ProductModal from "../ProductModal";
 
 function Admin() {
   const [editingMode, setEditingMode] = useState(false);
@@ -26,7 +26,8 @@ function Admin() {
     "Feminino",
   ]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
-  const [showModal, setShowModal] = useState(false); // Novo estado para controlar a visibilidade do modal
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
@@ -79,12 +80,35 @@ function Admin() {
     product.productName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e, product) => {
+    if (!editingMode) {
+      return; // Se o modo de edição estiver desativado, retorna sem fazer nada
+    }
+    e.preventDefault();
+    if (editingMode) {
+      setShowModal(true);
+      setSelectedProduct(product);
+    }
+  };
+
+  const handleOpenModalCreate = () => {
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedProduct(null);
+  };
+
+  const handleSaveProduct = (product) => {
+    // Implemente a lógica para salvar ou atualizar o produto no sistema
+    console.log("Salvar produto:", product);
+    handleCloseModal();
+  };
+
+  const handleRemoveProduct = (product) => {
+    // Implemente a lógica para remover o produto do sistema
+    console.log("Remover produto:", product);
   };
 
   return (
@@ -113,7 +137,7 @@ function Admin() {
 
                 {/* Adicionar Produto */}
                 {editingMode && (
-                  <ListItem button onClick={handleOpenModal}>
+                  <ListItem button onClick={() => handleOpenModalCreate()}>
                     <ListItemText primary="Adicionar Produto" />
                   </ListItem>
                 )}
@@ -158,21 +182,26 @@ function Admin() {
         <ScrollableContainer>
           <ProductContainer>
             {searchFilteredProducts.map((product, index) => (
-              <ProductCard
-                key={index}
-                img={product.image}
-                productName={product.productName}
-                price={product.price}
-              />
+              <div onClick={(e) => handleOpenModal(e, product)}>
+                <ProductCard
+                  key={index}
+                  img={product.image}
+                  productName={product.productName}
+                  price={product.price}
+                />
+              </div>
             ))}
           </ProductContainer>
         </ScrollableContainer>
       </UserContainer>
 
-      {/* Modal de adicionar produto */}
+      {/* Modal de adicionar/editar produto */}
       <ProductModal
         open={showModal}
         onClose={handleCloseModal}
+        product={selectedProduct}
+        onSave={handleSaveProduct}
+        onRemove={handleRemoveProduct}
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

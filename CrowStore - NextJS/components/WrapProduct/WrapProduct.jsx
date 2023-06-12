@@ -4,13 +4,13 @@ import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import BodyContainer from "./WrapProductElements";
-// import ProductDescription from "../ProductDescription"
+import ProductDescription from "../ProductDescription"
 import {
     ProductContainer,
     ScrollableContainer,
 } from "../User/UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
-import ProductData from "../../fakedata/usersDatabase/productDetails"
+import ProductData from "../../fakedata/usersDatabase/productDetails.json"
 
 const WrapProduct = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,8 +19,8 @@ const WrapProduct = () => {
         setIsOpen(!isOpen);
     };
 
-    // const product = ProductData[1];
-    // console.log(ProductData);
+    const product = ProductData[1];
+    console.log(product);
 
     return (
         <>
@@ -28,18 +28,18 @@ const WrapProduct = () => {
             <Navbar toogle={toggle} home />
             <BodyContainer>
                 {/* <ProductDescription product={product} /> */}
-                <ScrollableContainer style={{ marginLeft: 0 }}>
-                    <ProductContainer>
-                        {ProductData.map((product, index) => (
-                            <ProductCard
-                                key={index}
-                                img={product.image}
-                                productName={product.productName}
-                                price={product.price}
-                            />
-                        ))}
-                    </ProductContainer>
-                </ScrollableContainer>
+                {/* <ScrollableContainer style={{ marginLeft: 0 }}> */}
+                {/*     <ProductContainer> */}
+                {/*         {ProductData.map((product, index) => ( */}
+                {/*             <ProductCard */}
+                {/*                 key={index} */}
+                {/*                 img={product.image} */}
+                {/*                 productName={product.productName} */}
+                {/*                 price={product.price} */}
+                {/*             /> */}
+                {/*         ))} */}
+                {/*     </ProductContainer> */}
+                {/* </ScrollableContainer> */}
             </BodyContainer>
             <Footer />
         </>

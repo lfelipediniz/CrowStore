@@ -1,4 +1,3 @@
-import { colors } from "../../styles/colors";
 import styled from "styled-components";
 
 export const BodyContainer = styled.div`

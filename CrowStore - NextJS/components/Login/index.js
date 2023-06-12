@@ -26,16 +26,17 @@ const handleFormSubmit = (event) => {
   let userobj = {
     "userName": userN,
     "password": senha,
-    "category": "common"
+    "category": ""
   }
-
+  for (var i = 0; i < data.length; i++){
+    if(data[i].category == "admin"){
+      setGlobalState("isAdm", true);
+      } else {
+      setGlobalState("isAdm", false);
+      }
+  }
   for (var i = 0; i < data.length; i++){
     if (data[i].userName == userobj.userName && data[i].password == userobj.password){
-      if(data[i].category == "admin"){
-        setGlobalState("isAdm", true);
-      } else {
-        setGlobalState("isAdm", false);
-      }
       setGlobalState("isLoggedInn", true);
     } 
   }

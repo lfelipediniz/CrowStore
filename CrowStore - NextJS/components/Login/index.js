@@ -21,7 +21,7 @@ const Login = () => {
   setPassword(event.target.value);
 };
 
-const handleFormSubmit = (event) => {
+const handleFormlogin = (event) => {
   event.preventDefault();
   let userobj = {
     "userName": userN,
@@ -43,12 +43,37 @@ const handleFormSubmit = (event) => {
   setUsername('');
   setPassword('');
 }
+
+//
+const handleFormsignup = (event) => {
+  event.preventDefault();
+  let userobj = {
+    "userName": userN,
+    "password": senha,
+    "category": ""
+  }
+  for (var i = 0; i < data.length; i++){
+    if (data[i].userName == userobj.userName && data[i].password == userobj.password){
+      //usuario já existente
+    } else {
+      const database = JSON.parse(data);
+      database.push({
+        userName: userN,
+        password: senha,
+      });
+    
+      fs.writeFileSync(data, JSON.stringify(database));
+      //usuario cadastrado!
+    }
+  }
+
+}
   
     return (
     <WrapContent>
         <LoginContainer>
           <LoginTitle>Login</LoginTitle>
-            <LoginForm onSubmit={handleFormSubmit}>
+            <LoginForm onSubmit={handleFormlogin}>
               <Fragment>
                 <Loginlabel htmlFor="username">Usuário:</Loginlabel>
                 <LoginInput

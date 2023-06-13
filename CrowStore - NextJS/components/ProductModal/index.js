@@ -50,7 +50,7 @@ const ProductModal = ({
   const [selectedColors, setSelectedColors] = useState([]);
   const [isSizeModalOpen, setSizeModalOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
-  const [selectedDescription, setSelectedDescription] = useState(""); // Estado para armazenar a descrição do produto selecionado
+  const [selectedDescription, setSelectedDescription] = useState(""); // Estado para armazenar a descrição do produto
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -65,6 +65,7 @@ const ProductModal = ({
       productName: selectedProductData.productName,
       selectedColors: selectedColors,
       selectedSizes: selectedSizes,
+      description: selectedDescription, // Incluir a descrição atualizada no objeto do produto
     };
     onSave(updatedProduct);
   };
@@ -107,9 +108,9 @@ const ProductModal = ({
     }
 
     if (product?.description) {
-      setSelectedDescription(product.description); // Define a descrição personalizada do produto selecionado
+      setSelectedDescription(product.description); // Atualizar a descrição do produto selecionado
     } else {
-      setSelectedDescription(""); // Limpa a descrição personalizada
+      setSelectedDescription("");
     }
   }, [product]);
 
@@ -223,7 +224,6 @@ const ProductModal = ({
                   })
                 }
               />
-
               <TextField
                 label="Descrição"
                 variant="outlined"
@@ -231,10 +231,11 @@ const ProductModal = ({
                 rows={4}
                 fullWidth
                 sx={{ marginBottom: "25px" }}
-                value={selectedDescription} // Define o valor do campo Descrição como a descrição personalizada
-                onChange={(e) => setSelectedDescription(e.target.value)} // Atualiza a descrição personalizada quando o valor do campo é alterado
+                value={selectedDescription} // Vincular o valor da descrição ao estado selecionado
+                onChange={(e) =>
+                  setSelectedDescription(e.target.value) // Atualizar a descrição do produto selecionado
+                }
               />
-
               <TextField
                 label="Estoque"
                 variant="outlined"
@@ -425,7 +426,7 @@ const ProductModal = ({
                       </List>
                     </AvailableColors>
                     <ColorsTitle>Tamanhos Selecionados</ColorsTitle>
-                    <AvailableSizes>
+                    <AvailableColors>
                       <WrapContent>
                         {selectedSizes.map((size) => (
                           <div key={size} style={{ marginTop: "15px" }}>
@@ -433,7 +434,7 @@ const ProductModal = ({
                           </div>
                         ))}
                       </WrapContent>
-                    </AvailableSizes>
+                    </AvailableColors>
                     <ColorsButton>
                       <SaveButton variant="contained" color="primary">
                         Salvar

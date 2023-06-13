@@ -1,90 +1,244 @@
 [
   {
-    "productName": "Calça Crow",
-    "price": "R$ 99,90",
-    "image": "/CrowStore/imgs/SUETERMANCROW.png",
-    "category": "Sueter",
-    "gender": "boy",
-    "stock": "4"
+      "productName": "Calça Crow",
+      "price": "R$ 99,90",
+      "image": "/CrowStore/imgs/CALCACROW.png",
+      "category": "sueter",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+          "Midnight Blue",
+          "Dark Slate Gray",
+          "Saddle Brown",
+          "Goldenrod",
+          "Light Sky Blue"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Light Salmon",
+          "Lavender",
+          "Dark Olive Green",
+          "Tomato",
+          "Steel Blue"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/SUETERCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/SUETERCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Pale Violet Red",
+          "Medium Sea Green",
+          "Chocolate",
+          "Medium Purple",
+          "Light Slate Gray"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/TOUCACROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Touca Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/TOUCACROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Light Coral",
+          "Dark Sea Green",
+          "Fire Brick",
+          "Cornflower Blue",
+          "Dim Gray"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Light Pink",
+          "Medium Aquamarine",
+          "Sienna",
+          "Blue Violet",
+          "Gainsboro"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Misty Rose",
+          "Light Green",
+          "Dark Goldenrod",
+          "Medium Orchid",
+          "Silver"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Light Salmon",
+          "Pale Green",
+          "Olive Drab",
+          "Dark Orchid",
+          "Dark Gray"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Coral",
+          "Aquamarine",
+          "Maroon",
+          "Purple",
+          "Light Gray"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Indian Red",
+          "Medium Spring Green",
+          "Brown",
+          "Medium Slate Blue",
+          "Dark Khaki"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Moleton Crow",
-    "price": "R$ 149,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+          "Salmon",
+          "Pale Turquoise",
+          "Dark Red",
+          "Slate Blue",
+          "Light Slate Grey"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   },
   {
-    "productName": "Suéter Man Crow",
-    "price": "R$ 79,90",
-    "image": "/CrowStore/imgs/MOLETOMCROW.png",
-    "category": "Moletom",
-    "gender": "girl",
-    "stock": "4"
+      "productName": "Suéter Man Crow",
+      "price": "R$ 79,90",
+      "image": "/CrowStore/imgs/SUETERMANCROW.png",
+      "category": "moletom",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+          "Light Blue",
+          "Medium Turquoise",
+          "Rosy Brown",
+          "Medium Violet Red",
+          "Dark Slate Grey"
+      ],
+      "size": [
+          "PP",
+          "P",
+          "M",
+          "G",
+          "XG"
+      ]
   }
 ]

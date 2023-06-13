@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
+import { Button } from "@mui/material";
 
 export const AddProductContainer = styled.div`
   background-color: ${colors.secondary};
   width: 900px;
-  height: 600px;
+  height: 950px;
   border-radius: 10px;
 `;
 
@@ -68,7 +69,7 @@ export const EditButtonCotainer = styled.div`
 `;
 
 export const AddButton = styled.label`
-  height: 500px;
+  height: 700px;
   width: 400px;
   border-style: dashed;
   border-width: 4px; /* Aumente a largura da borda conforme necessário */
@@ -162,4 +163,28 @@ export const InputInfoContainer = styled.div`
 
 export const Money = styled.p`
   color: ${colors.primary};
+`;
+
+export const RemoveButton = styled(Button)`
+  background-color: ${colors.lightGray};
+  color: ${colors.secondary};
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espaçamento entre o ícone e o texto */
+  
+  svg {
+    font-size: 15px; /* Tamanho do ícone */
+    vertical-align: middle; /* Alinha o ícone verticalmente */
+  }
+  
+  &:hover {
+    background-color: ${colors.ctaBlack};
+    color: ${colors.lightGray};
+  }
+`;
+
+export const SaveButton = styled(Button)`
+  &:hover {
+    background-color: ${colors.ctaHover};
+  }
 `;

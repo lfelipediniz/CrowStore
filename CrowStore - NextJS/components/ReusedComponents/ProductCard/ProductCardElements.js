@@ -4,6 +4,8 @@ export const ProductCardContainer = styled.div`
   margin-top: 30px;
   margin-right: 100px;
   height: 440px;
+
+
 `;
 
 export const ProductInfo = styled.div`

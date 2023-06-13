@@ -116,3 +116,21 @@ export const EditButtonCotainer = styled.div`
   border-radius: 0 7px 7px 0;
 `;
 
+export const ProductCardEdit = styled.div`
+  position: relative;
+  opacity: ${(props) => (props.editingMode ? "0.3" : "1")};
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .edit-icon {
+    font-size: 50px;
+    position: absolute;
+    left: 38%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    color: ${colors.secondary};
+  }
+`;

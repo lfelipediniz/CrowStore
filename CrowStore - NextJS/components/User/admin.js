@@ -9,12 +9,14 @@ import {
   AddProductContainer,
   SidebarContainer,
   EditButtonCotainer,
+  ProductCardEdit,
 } from "./UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+
 import ProductModal from "../ProductModal";
 
 function Admin() {
@@ -180,19 +182,27 @@ function Admin() {
 
         {/* Container de produtos */}
         <ScrollableContainer>
-          <ProductContainer>
-            {searchFilteredProducts.map((product, index) => (
-              <div onClick={(e) => handleOpenModal(e, product)}>
-                <ProductCard
-                  key={index}
-                  img={product.image}
-                  productName={product.productName}
-                  price={product.price}
-                />
-              </div>
-            ))}
-          </ProductContainer>
-        </ScrollableContainer>
+        <ProductContainer>
+          {searchFilteredProducts.map((product, index) => (
+            <ProductCardEdit
+              key={index}
+              onClick={(e) => handleOpenModal(e, product)}
+              editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
+            >
+              <ProductCard
+                img={product.image}
+                productName={product.productName}
+                price={product.price}
+              />
+              {editingMode && (
+                <div className="edit-icon">
+                  <FaEdit />
+                </div>
+              )}
+            </ProductCardEdit>
+          ))}
+        </ProductContainer>
+      </ScrollableContainer>
       </UserContainer>
 
       {/* Modal de adicionar/editar produto */}

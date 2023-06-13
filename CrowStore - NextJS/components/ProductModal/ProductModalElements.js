@@ -150,7 +150,7 @@ export const InputInfoContainer = styled.div`
   }
 
   .MuiButton-root {
-    background-color: ${colors.ctaBlack} !important;
+    background-color: ${colors.textBlack} !important;
     color: white !important;
   }
 
@@ -184,6 +184,7 @@ export const RemoveButton = styled(Button)`
 `;
 
 export const SaveButton = styled(Button)`
+background-color: ${colors.ctaBlack};
   &:hover {
     background-color: ${colors.ctaHover};
   }
@@ -208,9 +209,6 @@ export const ColorsButton = styled.div`
 
   .MuiButton-root {
     background-color: ${colors.ctaBlack} !important;
-
-
-
   }
 `;
 
@@ -267,3 +265,10 @@ export const AvailableColors = styled.div`
 
 
 `;
+
+export const ChangeContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+`
+

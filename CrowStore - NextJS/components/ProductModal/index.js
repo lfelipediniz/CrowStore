@@ -13,6 +13,11 @@ import {
   ColorsTitle,
   AvailableColors,
   ColorsButton,
+  SizesContainer,
+  SizesTitle,
+  AvailableSizes,
+  SizesButton,
+  ChangeContainer,
 } from "./ProductModalElements";
 import {
   Modal,
@@ -87,6 +92,8 @@ const availableColors = [
   "Medium Violet Red",
 ];
 
+const availableSizes = ["PP", "P", "M", "G", "XG"];
+
 const ProductModal = ({
   open,
   onClose,
@@ -98,8 +105,10 @@ const ProductModal = ({
   setSelectedCategory,
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isColorModalOpen, setColorModalOpen] = useState(false); // State to control the color modal
+  const [isColorModalOpen, setColorModalOpen] = useState(false);
   const [selectedColors, setSelectedColors] = useState([]);
+  const [isSizeModalOpen, setSizeModalOpen] = useState(false);
+  const [selectedSizes, setSelectedSizes] = useState([]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -113,6 +122,7 @@ const ProductModal = ({
       ...product,
       productName: selectedProductData.productName,
       selectedColors: selectedColors,
+      selectedSizes: selectedSizes,
     };
     onSave(updatedProduct);
   };
@@ -136,18 +146,22 @@ const ProductModal = ({
       selectedSize: "",
     });
 
-    // Verifica se há uma imagem de produto selecionada
     if (product?.image) {
       setSelectedImage(product.image);
     } else {
       setSelectedImage(null);
     }
 
-    // Verifica se o produto existe e possui cores definidas
     if (product?.colors) {
       setSelectedProductColors(product.colors);
     } else {
       setSelectedProductColors([]);
+    }
+
+    if (product?.sizes) {
+      setSelectedProductSizes(product.sizes);
+    } else {
+      setSelectedProductSizes([]);
     }
   }, [product]);
 
@@ -172,9 +186,36 @@ const ProductModal = ({
     }
   };
 
-  const isColorSelected = (color) => selectedColors.indexOf(color) !== -1;
+  const isColorSelected = (color) =>
+    selectedColors.indexOf(color) !== -1 ||
+    selectedProductColors.includes(color);
+
+  const handleSizeToggle = (size) => () => {
+    const currentIndex = selectedSizes.indexOf(size);
+    const newSelectedSizes = [...selectedSizes];
+
+    if (currentIndex === -1) {
+      newSelectedSizes.push(size);
+    } else {
+      newSelectedSizes.splice(currentIndex, 1);
+    }
+
+    setSelectedSizes(newSelectedSizes);
+  };
+
+  const handleSizeSelectAll = () => {
+    if (selectedSizes.length === availableSizes.length) {
+      setSelectedSizes([]);
+    } else {
+      setSelectedSizes(availableSizes);
+    }
+  };
+
+  const isSizeSelected = (size) =>
+    selectedSizes.indexOf(size) !== -1 || selectedProductSizes.includes(size);
 
   const [selectedProductColors, setSelectedProductColors] = useState([]);
+  const [selectedProductSizes, setSelectedProductSizes] = useState([]);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -187,14 +228,19 @@ const ProductModal = ({
         }}
       >
         <AddProductContainer>
-          {product ? (
-            <RemoveButton variant="contained" onClick={handleRemove}>
-              <FaTrash />
-              Remover Produto
-            </RemoveButton>
-          ) : (
-            <div style={{ height: "40px" }}></div>
-          )}
+          <ChangeContainer>
+            {product ? (
+              <RemoveButton variant="contained" onClick={handleRemove}>
+                <FaTrash />
+                Remover Produto
+              </RemoveButton>
+            ) : (
+              <div style={{ height: "40px" }}></div>
+            )}
+            <SaveButton variant="contained" onClick={handleSave}>
+              Salvar
+            </SaveButton>
+          </ChangeContainer>
           <AddProduct>
             <>
               <AddButton htmlFor="imageUpload">
@@ -211,7 +257,7 @@ const ProductModal = ({
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                hidden // Oculta o elemento input
+                hidden
               />
             </>
 
@@ -255,6 +301,15 @@ const ProductModal = ({
               />
               <TextField
                 select
+                label="Gênero"
+                variant="outlined"
+                sx={{ marginBottom: "25px" }}
+              >
+                <MenuItem value="boy">Masculino</MenuItem>
+                <MenuItem value="girl">Feminino</MenuItem>
+              </TextField>
+              <TextField
+                select
                 label="Categoria"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
@@ -285,7 +340,6 @@ const ProductModal = ({
                 Cores Disponíveis
               </Button>
 
-              {/* Color Modal */}
               <Modal
                 open={isColorModalOpen}
                 onClose={() => setColorModalOpen(false)}
@@ -329,10 +383,7 @@ const ProductModal = ({
                           >
                             <ListItemIcon>
                               <Checkbox
-                                checked={
-                                  isColorSelected(color) ||
-                                  selectedProductColors.includes(color)
-                                }
+                                checked={isColorSelected(color)}
                                 disableRipple
                               />
                             </ListItemIcon>
@@ -352,56 +403,93 @@ const ProductModal = ({
                       </WrapContent>
                     </AvailableColors>
                     <ColorsButton>
-                    <SaveButton
-                      variant="contained"
-                      color="primary"
-                    >
-                      Salvar
-                    </SaveButton>
-                    
+                      <SaveButton variant="contained" color="primary">
+                        Salvar
+                      </SaveButton>
                     </ColorsButton>
                   </ColorsContainer>
                 </Box>
               </Modal>
-              {/* End Color Modal */}
-
-              <TextField
-                select
-                label="Gênero"
-                variant="outlined"
-                sx={{ marginBottom: "25px" }}
-              >
-                <MenuItem value="boy">Masculino</MenuItem>
-                <MenuItem value="girl">Feminino</MenuItem>
-              </TextField>
-
-              <TextField
-                label="Preço"
-                variant="outlined"
-                sx={{ marginBottom: "25px" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Money>R$</Money>
-                    </InputAdornment>
-                  ),
-                }}
-                type="number"
-                onChange={(e) =>
-                  setSelectedProductData({
-                    ...selectedProductData,
-                    price: e.target.value,
-                  })
-                }
-              />
-
-              <SaveButton
+                          
+              <Button
                 variant="contained"
                 color="primary"
-                onClick={handleSave}
+                onClick={() => setSizeModalOpen(true)}
+                sx={{ marginBottom: "25px" }}
               >
-                {product ? "Salvar Produto" : "Adicionar Produto"}
-              </SaveButton>
+                Tamanhos Disponíveis
+              </Button>
+
+              <Modal
+                open={isSizeModalOpen}
+                onClose={() => setSizeModalOpen(false)}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  <ColorsContainer>
+                    <ColorsTitle>Tamanhos Disponíveis</ColorsTitle>
+                    <AvailableColors>
+                      <List sx={{ width: "300px" }}>
+                        <ListItem
+                          button
+                          onClick={handleSizeSelectAll}
+                          key="all"
+                        >
+                          <ListItemIcon>
+                            <Checkbox
+                              checked={
+                                selectedSizes.length === availableSizes.length
+                              }
+                              indeterminate={
+                                selectedSizes.length > 0 &&
+                                selectedSizes.length < availableSizes.length
+                              }
+                              disableRipple
+                            />
+                          </ListItemIcon>
+                          <ListItemText primary="Selecionar Todos" />
+                        </ListItem>
+                        {availableSizes.map((size) => (
+                          <ListItem
+                            button
+                            onClick={handleSizeToggle(size)}
+                            key={size}
+                          >
+                            <ListItemIcon>
+                              <Checkbox
+                                checked={isSizeSelected(size)}
+                                disableRipple
+                              />
+                            </ListItemIcon>
+                            <ListItemText primary={size} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </AvailableColors>
+                    <ColorsTitle>Tamanhos Selecionados</ColorsTitle>
+                    <AvailableColors>
+                      <WrapContent>
+                        {selectedSizes.map((size) => (
+                          <div key={size} style={{ marginTop: "15px" }}>
+                            {size}
+                          </div>
+                        ))}
+                      </WrapContent>
+                    </AvailableColors>
+                    <ColorsButton>
+                      <SaveButton variant="contained" color="primary">
+                        Salvar
+                      </SaveButton>
+                    </ColorsButton>
+                  </ColorsContainer>
+                </Box>
+              </Modal>
             </InputInfoContainer>
           </AddProduct>
         </AddProductContainer>

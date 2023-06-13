@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 export const AddProductContainer = styled.div`
   background-color: ${colors.secondary};
@@ -271,4 +271,3 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 `
-

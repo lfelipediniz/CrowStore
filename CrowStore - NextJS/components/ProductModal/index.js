@@ -13,10 +13,7 @@ import {
   ColorsTitle,
   AvailableColors,
   ColorsButton,
-  SizesContainer,
-  SizesTitle,
   AvailableSizes,
-  SizesButton,
   ChangeContainer,
 } from "./ProductModalElements";
 import {
@@ -33,66 +30,10 @@ import {
   Checkbox,
 } from "@mui/material";
 import { FaPhotoVideo, FaTrash } from "react-icons/fa";
-import { colors } from "../../styles/colors";
 import { WrapContent } from "../ReusedComponents/WrapContent";
 
-const availableColors = [
-  "Midnight Blue",
-  "Dark Slate Gray",
-  "Saddle Brown",
-  "Goldenrod",
-  "Light Sky Blue",
-  "Light Salmon",
-  "Lavender",
-  "Dark Olive Green",
-  "Tomato",
-  "Steel Blue",
-  "Pale Violet Red",
-  "Medium Sea Green",
-  "Chocolate",
-  "Medium Purple",
-  "Light Slate Gray",
-  "Light Coral",
-  "Dark Sea Green",
-  "Fire Brick",
-  "Cornflower Blue",
-  "Dim Gray",
-  "Light Pink",
-  "Medium Aquamarine",
-  "Sienna",
-  "Blue Violet",
-  "Gainsboro",
-  "Misty Rose",
-  "Light Green",
-  "Dark Goldenrod",
-  "Medium Orchid",
-  "Silver",
-  "Pale Green",
-  "Olive Drab",
-  "Dark Orchid",
-  "Dark Gray",
-  "Coral",
-  "Aquamarine",
-  "Maroon",
-  "Purple",
-  "Light Gray",
-  "Indian Red",
-  "Medium Spring Green",
-  "Brown",
-  "Medium Slate Blue",
-  "Dark Khaki",
-  "Salmon",
-  "Pale Turquoise",
-  "Dark Red",
-  "Slate Blue",
-  "Light Slate Grey",
-  "Light Blue",
-  "Medium Turquoise",
-  "Rosy Brown",
-  "Medium Violet Red",
-];
-
-const availableSizes = ["PP", "P", "M", "G", "XG"];
+import availableColors from "../../fakedata/adminContent/colors.json";
+import availableSizes from "../../fakedata/adminContent/sizes.json";
 
 const ProductModal = ({
   open,
@@ -109,6 +50,7 @@ const ProductModal = ({
   const [selectedColors, setSelectedColors] = useState([]);
   const [isSizeModalOpen, setSizeModalOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedDescription, setSelectedDescription] = useState(""); // Estado para armazenar a descrição do produto selecionado
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -162,6 +104,12 @@ const ProductModal = ({
       setSelectedProductSizes(product.sizes);
     } else {
       setSelectedProductSizes([]);
+    }
+
+    if (product?.description) {
+      setSelectedDescription(product.description); // Define a descrição personalizada do produto selecionado
+    } else {
+      setSelectedDescription(""); // Limpa a descrição personalizada
     }
   }, [product]);
 
@@ -275,6 +223,7 @@ const ProductModal = ({
                   })
                 }
               />
+
               <TextField
                 label="Descrição"
                 variant="outlined"
@@ -282,7 +231,10 @@ const ProductModal = ({
                 rows={4}
                 fullWidth
                 sx={{ marginBottom: "25px" }}
+                value={selectedDescription} // Define o valor do campo Descrição como a descrição personalizada
+                onChange={(e) => setSelectedDescription(e.target.value)} // Atualiza a descrição personalizada quando o valor do campo é alterado
               />
+
               <TextField
                 label="Estoque"
                 variant="outlined"
@@ -410,7 +362,7 @@ const ProductModal = ({
                   </ColorsContainer>
                 </Box>
               </Modal>
-                          
+
               <Button
                 variant="contained"
                 color="primary"
@@ -473,7 +425,7 @@ const ProductModal = ({
                       </List>
                     </AvailableColors>
                     <ColorsTitle>Tamanhos Selecionados</ColorsTitle>
-                    <AvailableColors>
+                    <AvailableSizes>
                       <WrapContent>
                         {selectedSizes.map((size) => (
                           <div key={size} style={{ marginTop: "15px" }}>
@@ -481,7 +433,7 @@ const ProductModal = ({
                           </div>
                         ))}
                       </WrapContent>
-                    </AvailableColors>
+                    </AvailableSizes>
                     <ColorsButton>
                       <SaveButton variant="contained" color="primary">
                         Salvar

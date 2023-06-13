@@ -86,12 +86,12 @@ const ProductModal = ({
         }}
       >
         <AddProductContainer>
-          {product && (
+          {product ? (
             <RemoveButton variant="contained" onClick={handleRemove}>
               <FaTrash />
               Remover Produto
             </RemoveButton>
-          )}
+          ) : (<div style={{ height: '40px' }} ></div>)}
           <AddProduct>
             <>
               <AddButton htmlFor="imageUpload">

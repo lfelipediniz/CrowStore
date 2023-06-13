@@ -188,3 +188,82 @@ export const SaveButton = styled(Button)`
     background-color: ${colors.ctaHover};
   }
 `;
+
+
+export const ColorsContainer = styled.div`
+
+background-color: ${colors.secondary};
+height: 565px;
+width: 500px;
+border-radius: 10px;
+
+`
+
+export const ColorsButton = styled.div`
+  /* Align button to the right */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+  .MuiButton-root {
+    background-color: ${colors.ctaBlack} !important;
+
+
+
+  }
+`;
+
+export const ColorsTitle = styled.h3`
+color: ${colors.primary};
+padding: 20px 10px 0px 10px;
+;
+`
+
+export const AvailableColors = styled.div`
+  height: 220px;
+  overflow: auto;
+  color: ${colors.primary};
+
+  & > div {
+    margin-bottom: 20px;
+  }
+
+  /* Hide Scroll */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: transparent transparent; /* Firefox */
+  &::-webkit-scrollbar {
+    width: 6px; /* Largura da barra de rolagem */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Cor do "polegar" da barra de rolagem */
+  }
+
+  /* Indicador de rolagem */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(
+      ${parseInt(colors.primary.slice(1, 3), 16)},
+      ${parseInt(colors.primary.slice(3, 5), 16)},
+      ${parseInt(colors.primary.slice(5, 7), 16)},
+      0.75
+    );
+    border-radius: 3px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  /* Change Checkbox color */
+  .MuiCheckbox-colorPrimary.Mui-checked {
+    color: ${colors.ctaBlack} !important;
+  }
+
+  .MuiCheckbox-colorPrimary {
+  color: ${colors.primary} !important;
+}
+
+
+`;

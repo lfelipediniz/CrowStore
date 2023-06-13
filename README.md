@@ -4,7 +4,8 @@
   <img width="200" src="Milestone1/mockup-imgs/crow-store.png">
 </p>
 
-## Project Report
+## Enter our [website](https://crowstore.vercel.app/)!
+
 
 ### Authors
 

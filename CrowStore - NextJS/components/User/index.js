@@ -5,31 +5,31 @@ import Admin from "./admin";
 import CommonUser from "./common";
 import { createGlobalState } from "react-hooks-global-state";
 
-
-const {setGlobalState, useGlobalState} = createGlobalState({
+const { setGlobalState, useGlobalState } = createGlobalState({
   isLoggedInn: false,
   isAdm: false,
-  userN: '',
-  senha: '',
+  userN: "",
+  senha: "",
 });
 
-export {setGlobalState, useGlobalState};
-
+export { setGlobalState, useGlobalState };
 
 function User() {
   const [checklgn] = useGlobalState("isLoggedInn");
   const [checkadm] = useGlobalState("isAdm");
 
-  
   return (
     <>
       {checklgn ? (
-        checkadm ? <Admin /> : <CommonUser />
+        checkadm ? (
+          <Admin />
+        ) : (
+          <CommonUser />
+        )
       ) : (
-        //  <WrapContent>
-        //    <Login />
-        //    </WrapContent>
-        <Admin />
+        <WrapContent>
+          <Login />
+        </WrapContent>
       )}
     </>
   );

@@ -118,7 +118,7 @@ export const EditButtonCotainer = styled.div`
 
 export const ProductCardEdit = styled.div`
   position: relative;
-  opacity: ${(props) => (props.editingMode ? "0.3" : "1")};
+  opacity: ${(props) => (props.editingMode ? "0.6" : "1")};
   transition: opacity 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -131,6 +131,6 @@ export const ProductCardEdit = styled.div`
     position: absolute;
     left: 38%; /* Centraliza horizontalmente */
     transform: translateX(-50%); /* Centraliza horizontalmente */
-    color: ${colors.secondary};
+    color: ${colors.primary} !important; 
   }
 `;

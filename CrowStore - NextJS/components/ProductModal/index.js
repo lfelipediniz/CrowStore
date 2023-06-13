@@ -86,16 +86,12 @@ const ProductModal = ({
         }}
       >
         <AddProductContainer>
-
-        {product && (
-          <RemoveButton
-            variant="contained"
-            onClick={handleRemove}
-          >
-            <FaTrash />
-            Remover Produto
-          </RemoveButton>
-        )}
+          {product && (
+            <RemoveButton variant="contained" onClick={handleRemove}>
+              <FaTrash />
+              Remover Produto
+            </RemoveButton>
+          )}
           <AddProduct>
             <>
               <AddButton htmlFor="imageUpload">
@@ -130,7 +126,7 @@ const ProductModal = ({
                   })
                 }
               />
-                 <TextField
+              <TextField
                 label="Descrição"
                 variant="outlined"
                 multiline
@@ -175,7 +171,12 @@ const ProductModal = ({
                     </MenuItem>
                   ))}
               </TextField>
-              <TextField
+            </InputInfoContainer>
+            <InputInfoContainer>
+            
+            <>
+            <TitleModal></TitleModal>
+            <TextField
                 select
                 label="Gênero"
                 variant="outlined"
@@ -184,75 +185,77 @@ const ProductModal = ({
                 <MenuItem value="boy">Masculino</MenuItem>
                 <MenuItem value="girl">Feminino</MenuItem>
               </TextField>
-              <TextField
-                label="Preço"
-                variant="outlined"
-                sx={{ marginBottom: "25px" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Money>R$</Money>
-                    </InputAdornment>
-                  ),
-                }}
-                type="number"
-                onChange={(e) =>
-                  setSelectedProductData({
-                    ...selectedProductData,
-                    price: e.target.value,
-                  })
-                }
-              />
-              {product && (
-                <TextField
-                  select
-                  label="Cores"
-                  variant="outlined"
-                  sx={{ marginBottom: "25px" }}
-                  value={selectedProductData.selectedColor}
-                  onChange={(e) =>
-                    setSelectedProductData({
-                      ...selectedProductData,
-                      selectedColor: e.target.value,
-                    })
-                  }
-                >
-                  {product.colors.map((color, index) => (
-                    <MenuItem key={index} value={color}>
-                      {color}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
-              {product && (
-                <TextField
-                  select
-                  label="Tamanho"
-                  variant="outlined"
-                  sx={{ marginBottom: "25px" }}
-                  value={selectedProductData.selectedSize}
-                  onChange={(e) =>
-                    setSelectedProductData({
-                      ...selectedProductData,
-                      selectedSize: e.target.value,
-                    })
-                  }
-                >
-                  {product.size.map((size, index) => (
-                    <MenuItem key={index} value={size}>
-                      {size}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              )}
 
-              <SaveButton
-                variant="contained"
-                color="primary"
-                onClick={handleSave}
-              >
-                {product ? "Salvar Produto" : "Adicionar Produto"}
-              </SaveButton>
+                <TextField
+                  label="Preço"
+                  variant="outlined"
+                  sx={{ marginBottom: "25px" }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Money>R$</Money>
+                      </InputAdornment>
+                    ),
+                  }}
+                  type="number"
+                  onChange={(e) =>
+                    setSelectedProductData({
+                      ...selectedProductData,
+                      price: e.target.value,
+                    })
+                  }
+                />
+                {product && (
+                  <TextField
+                    select
+                    label="Cores"
+                    variant="outlined"
+                    sx={{ marginBottom: "25px" }}
+                    value={selectedProductData.selectedColor}
+                    onChange={(e) =>
+                      setSelectedProductData({
+                        ...selectedProductData,
+                        selectedColor: e.target.value,
+                      })
+                    }
+                  >
+                    {product.colors.map((color, index) => (
+                      <MenuItem key={index} value={color}>
+                        {color}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                )}
+                {product && (
+                  <TextField
+                    select
+                    label="Tamanho"
+                    variant="outlined"
+                    sx={{ marginBottom: "25px" }}
+                    value={selectedProductData.selectedSize}
+                    onChange={(e) =>
+                      setSelectedProductData({
+                        ...selectedProductData,
+                        selectedSize: e.target.value,
+                      })
+                    }
+                  >
+                    {product.size.map((size, index) => (
+                      <MenuItem key={index} value={size}>
+                        {size}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                )}
+
+                <SaveButton
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSave}
+                >
+                  {product ? "Salvar Produto" : "Adicionar Produto"}
+                </SaveButton>
+              </>
             </InputInfoContainer>
           </AddProduct>
         </AddProductContainer>

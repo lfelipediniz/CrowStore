@@ -5,8 +5,8 @@ import { Button } from "@mui/material";
 
 export const AddProductContainer = styled.div`
   background-color: ${colors.secondary};
-  width: 900px;
-  height: 950px;
+  width: 1100px;
+  height: 650px;
   border-radius: 10px;
 `;
 
@@ -69,7 +69,7 @@ export const EditButtonCotainer = styled.div`
 `;
 
 export const AddButton = styled.label`
-  height: 700px;
+  height: 500px;
   width: 400px;
   border-style: dashed;
   border-width: 4px; /* Aumente a largura da borda conforme necessário */
@@ -173,7 +173,7 @@ export const RemoveButton = styled(Button)`
   gap: 0.5rem; /* Espaçamento entre o ícone e o texto */
   
   svg {
-    font-size: 15px; /* Tamanho do ícone */
+    font-size: px; /* Tamanho do ícone */
     vertical-align: middle; /* Alinha o ícone verticalmente */
   }
   

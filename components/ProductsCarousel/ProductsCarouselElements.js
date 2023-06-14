@@ -1,24 +1,28 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
-import { fonts } from "../../styles/fonts";
+import {fonts} from "../../styles/fonts"
 
-export const InfoContainer = styled.div`
+export const Container = styled.div`
+  padding-top: 3rem;
+  width: 100%;
   height: auto;
   background-color: ${colors.primary};
-
-  display: grid;
-  place-items: center;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 `;
 
 export const ShowCaseWrap = styled.div`
+  display: flex;
+flex-direction: row;
   @media (min-width: 2000px) {
-    display: grid;
-
-    overflow: hidden;
-    width: 1440px;
+    place-items: center;
   }
-`;
+`
 
 export const BtnContainer = styled.div``;
 
@@ -63,16 +67,10 @@ export const Boy = styled.div`
   gap: 8px;
 `;
 
-export const ProductContainer = styled.div`
-  .CarouselContainer {
-    display: flex;
-  }
-`;
-
 export const ProductArrows = styled.div`
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  background-color: ${colors.primary};
 `;
 
 export const ButtonArrow = styled.button`

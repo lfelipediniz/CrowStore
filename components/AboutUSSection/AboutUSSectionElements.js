@@ -23,7 +23,7 @@ export const InfoWrapper = styled.div`
     display: grid;
 
     overflow: hidden;
-    width: 1430px;
+    width: 1440px;
   }
   
 
@@ -63,7 +63,7 @@ export const AboutGif = styled(Image)`
 `;
 
 export const HorizontalLogo = styled(Image)`
-  width: 160px;
+
 `;
 
 export const AboutText = styled.p`

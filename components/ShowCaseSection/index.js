@@ -12,6 +12,7 @@ import {
   ButtonArrow,
   ProductArrows,
   Subtitle,
+  ShowCaseWrap,
 } from "./ShowCaseSectionElements";
 
 import ProductData from "../../fakedata/showcaseContent/products.json";
@@ -89,7 +90,18 @@ const InfoSection = ({ subtitle }) => {
 
   const updateProductsPerSlide = () => {
     const screenWidth = window.innerWidth;
-    const newProductsPerSlide = Math.floor(screenWidth / 238);
+    let newProductsPerSlide;
+    if (screenWidth < 570) {
+      newProductsPerSlide = 1;
+    } else if (screenWidth < 800) {
+      newProductsPerSlide = 2;
+    } else if (screenWidth < 1000) {
+      newProductsPerSlide = 3;
+    } else if (screenWidth < 1340) {
+      newProductsPerSlide = 4;
+    } else {
+      newProductsPerSlide = 5;
+    }
     setProductsPerSlide(newProductsPerSlide);
   };
 
@@ -109,62 +121,64 @@ const InfoSection = ({ subtitle }) => {
 
   return (
     <InfoContainer id="showcase">
-      <WrapContent>
-        <BtnContainer>
-          <ShowcaseGenderBtn>
-            <GenderBtn onClick={() => handleFilterSelection("all")} selected={selectedFilter === "all"}>
-              <IconContainer>
-                <FaCrow />
-                Todos
-              </IconContainer>
-            </GenderBtn>
-            <GenderBtn onClick={() => handleFilterSelection("girl")} selected={selectedFilter === "girl"}>
-              <IconContainer>
-                <FaFemale />
-                Feminino
-              </IconContainer>
-            </GenderBtn>
-            <GenderBtn onClick={() => handleFilterSelection("boy")} selected={selectedFilter === "boy"}>
-              <IconContainer>
-                <FaMale />
-                Masculino
-              </IconContainer>
-            </GenderBtn>
-          </ShowcaseGenderBtn>
-        </BtnContainer>
+      <ShowCaseWrap>
+        <WrapContent>
+          <BtnContainer>
+            <ShowcaseGenderBtn>
+              <GenderBtn onClick={() => handleFilterSelection("all")} selected={selectedFilter === "all"}>
+                <IconContainer>
+                  <FaCrow />
+                  Todos
+                </IconContainer>
+              </GenderBtn>
+              <GenderBtn onClick={() => handleFilterSelection("girl")} selected={selectedFilter === "girl"}>
+                <IconContainer>
+                  <FaFemale />
+                  Feminino
+                </IconContainer>
+              </GenderBtn>
+              <GenderBtn onClick={() => handleFilterSelection("boy")} selected={selectedFilter === "boy"}>
+                <IconContainer>
+                  <FaMale />
+                  Masculino
+                </IconContainer>
+              </GenderBtn>
+            </ShowcaseGenderBtn>
+          </BtnContainer>
 
-        <Subtitle>{subtitle}</Subtitle>
+          <Subtitle>{subtitle}</Subtitle>
 
-        <ProductContainer>
-          <SwipeableViews
-            index={index}
-            onChangeIndex={handleChangeIndex}
-            enableMouseEvents={false}
-            interval={null}
-            resistance
-          >
-            {renderContent().reduce((acc, item, index) => {
-              if (index % productsPerSlide === 0) {
-                acc.push(
-                  <div key={`slide-${index / productsPerSlide}`} className="CarouselContainer">
-                    {renderContent().slice(index, index + productsPerSlide)}
-                  </div>
-                );
-              }
-              return acc;
-            }, [])}
-          </SwipeableViews>
-        </ProductContainer>
+          <ProductContainer>
+            <SwipeableViews
+              index={index}
+              onChangeIndex={handleChangeIndex}
+              enableMouseEvents={false}
+              interval={null}
+              resistance
+            >
+              {renderContent().reduce((acc, item, index) => {
+                if (index % productsPerSlide === 0) {
+                  acc.push(
+                    <div key={`slide-${index / productsPerSlide}`} className="CarouselContainer">
+                      {renderContent().slice(index, index + productsPerSlide)}
+                    </div>
+                  );
+                }
+                return acc;
+              }, [])}
+            </SwipeableViews>
+          </ProductContainer>
 
-        <ProductArrows>
-          <ButtonArrow onClick={handlePrevSlide}>
-            <FaAngleLeft />
-          </ButtonArrow>
-          <ButtonArrow onClick={handleNextSlide}>
-            <FaAngleRight />
-          </ButtonArrow>
-        </ProductArrows>
-      </WrapContent>
+          <ProductArrows>
+            <ButtonArrow onClick={handlePrevSlide}>
+              <FaAngleLeft />
+            </ButtonArrow>
+            <ButtonArrow onClick={handleNextSlide}>
+              <FaAngleRight />
+            </ButtonArrow>
+          </ProductArrows>
+        </WrapContent>
+      </ShowCaseWrap>
     </InfoContainer>
   );
 };

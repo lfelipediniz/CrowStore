@@ -4,6 +4,7 @@ import bannerImage from "../../public/CrowStore/imgs/bannerJaqueta.png";
 
 export const HeroContainer = styled.div`
   @media (min-width: 2000px) {
+    background-color: ${colors.primary};
     display: grid;
     place-items: center;
     overflow: hidden;

@@ -1,31 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 
-export const InfoContainer = styled.div`
-  height: auto;
-  background-color: ${colors.primary};
+export const Container = styled.div`
+background-color: ${colors.primary};
+padding: 80px 0;
 
-  display: grid;
-  place-items: center;
-  overflow: hidden;
 `;
-
-export const ShowCaseWrap = styled.div`
-  @media (min-width: 2000px) {
-    display: grid;
-
-    overflow: hidden;
-    width: 1440px;
-  }
-`;
-
-export const BtnContainer = styled.div``;
 
 export const ShowcaseGenderBtn = styled.div`
   display: flex;
   justify-content: center;
-  margin: 20px 0;
 `;
 
 export const GenderBtn = styled.button`
@@ -37,15 +22,14 @@ export const GenderBtn = styled.button`
   text-decoration: none;
   cursor: pointer;
 
+  color: ${colors.placeHolder};
+
   ${(props) =>
-    props.selected
-      ? `
-    text-decoration: underline;
-    color: ${colors.textBlack};
-  `
-      : `
-    color: ${colors.placeHolder};
-  `}
+    props.selected &&
+    css`
+      text-decoration: underline;
+      color: ${colors.secondary};
+    `}
 `;
 
 export const IconContainer = styled.div`
@@ -63,33 +47,7 @@ export const Boy = styled.div`
   gap: 8px;
 `;
 
-export const ProductContainer = styled.div`
-  .CarouselContainer {
-    display: flex;
-  }
-`;
-
-export const ProductArrows = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
-`;
-
-export const ButtonArrow = styled.button`
-  background-color: transparent;
-  border: none;
-  color: ${colors.textBlack};
-  cursor: pointer;
-  font-size: 35px;
-  outline: none;
-  padding: 0;
-  transition: transform 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-
 export const Subtitle = styled.h3`
-  color: ${colors.textBlack};
-`;
+
+`
+

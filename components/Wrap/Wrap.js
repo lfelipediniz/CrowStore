@@ -6,7 +6,7 @@ import FAQ from "../FAQSection";
 import Footer from "../Footer";
 import AboutUSSection from "../AboutUSSection";
 import ShowCaseSection from "../ShowCaseSection";
-import ShowCase from "../ShowCaseSection/showcase";
+
 
 const Wrap = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -22,8 +22,7 @@ const Wrap = () => {
 
             <HeroSection />
 
-           {/* <ShowCaseSection subtitle="Lançamento"></ShowCaseSection> */}
-           <ShowCase />
+           <ShowCaseSection />
             <AboutUSSection />
             <FAQ />
             <Footer />

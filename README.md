@@ -21,7 +21,7 @@ The CrowStore is a project for an online store for clothing. It's based off of a
 
 Its structure follows closely its homepage, where all other pages can be directly accessed, such as product listings, searching and administrator's controls.
 
-### How to run Next JS project
+### Build Procedures
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -33,7 +33,7 @@ installed on your system.
 To automatically install all dependencies needed on the project just run: 
 
 ```bash
-cd CrowStore\ -\ NextJS/
+cd CrowStore
 
 npm i
 # or
@@ -45,9 +45,9 @@ yarn install
 Run the development server:
 
 ```bash
-cd CrowStore\ -\ NextJS/
+cd CrowStore
 
-npm run dev
+npm run dev  
 # or
 yarn dev
 ```
@@ -55,6 +55,7 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Or, you can access it to visuaalization through this [link](https://crowstore.vercel.app/) here.
 
 #### Learn More
 
@@ -130,46 +131,6 @@ For the second delivery, you already have an application usable when running the
 ### Test Results
 
 We follow the philosophy of testing while the application is running. These tests forever served as a greater visualization of the implementation of new features, observing when a new feature was added, so that none of the others were compromised in the process and, if they were, they should be fixed.
-
-### Build Procedures
-
-You can clone the repository using the command: 
-git clone https://github.com/lfelipediniz/CrowStore
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-#### Automatically install dependencies
-
-First of all, it's needed to have [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) a
-installed on your system.
-
-To automatically install all dependencies needed on the project just run: 
-
-```bash
-cd CrowStore\ -\ NextJS/
-
-npm i
-# or
-yarn install
-```
-
-#### Getting Started
-
-Run the development server:
-
-```bash
-cd CrowStore\ -\ NextJS/
-
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-Or, you can access it to visuaalization through this [link](https://crowstore.vercel.app/) here.
-
 
 ### Problems
 Some problems still need to be documented, like some warnings in the console, and they will be in the future, because some of those problems are due to unfinished project steps.

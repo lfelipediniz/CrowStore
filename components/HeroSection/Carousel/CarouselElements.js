@@ -7,7 +7,12 @@ export const Slide = styled.div`
   width: 100%;
   color: #fff;
   align-items: end;
+  max-width: 100%; /* Defina o limite de largura desejado para telas maiores */
   display: flex;
+
+  @media (max-width: 4000px) {
+    max-width: 4000px; /* Defina o limite de largura desejado para telas menores */
+  }
 
   @media (max-width: 900px) {
     height: 300px;

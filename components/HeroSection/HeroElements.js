@@ -4,10 +4,9 @@ import bannerImage from "../../public/CrowStore/imgs/bannerJaqueta.png";
 
 
 export const HeroContainer = styled.div`
-  @media (max-width: 768px) {
-  }
-  @media (max-width: 480px) {
-  }
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 `;
 
 export const HeroWrapper = styled.div`

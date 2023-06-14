@@ -113,5 +113,28 @@
   "XG"
   ],
   "description": "Este moletom CC é perfeito para se manter aquecido e estiloso nos dias mais frios. Com um design moderno e confortável, é uma peça essencial para o seu guarda-roupa de inverno."
+  },
+  {
+    "productName": "Suéter Man Crow",
+    "price": "R$ 99,90",
+    "image": "/CrowStore/imgs/SUETERMANCROW.png",
+    "category": "Moletom",
+    "gender": "boy",
+    "stock": "4",
+    "colors": [
+      "Light Blue",
+      "Medium Turquoise",
+      "Rosy Brown",
+      "Medium Violet Red",
+      "Dark Slate Grey"
+    ],
+    "size": [
+      "PP",
+      "P",
+      "M",
+      "G",
+      "XG"
+    ],
+    "description": "Este suéter Crow é perfeito para compor looks boys cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
   }
   ]

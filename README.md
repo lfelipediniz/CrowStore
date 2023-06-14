@@ -4,7 +4,8 @@
   <img width="200" src="Milestone1/mockup-imgs/crow-store.png">
 </p>
 
-## Project Report
+## Enter our [website](https://crowstore.vercel.app/)!
+
 
 ### Authors
 
@@ -20,7 +21,7 @@ The CrowStore is a project for an online store for clothing. It's based off of a
 
 Its structure follows closely its homepage, where all other pages can be directly accessed, such as product listings, searching and administrator's controls.
 
-### How to run Next JS project
+### Build Procedures
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -32,7 +33,7 @@ installed on your system.
 To automatically install all dependencies needed on the project just run: 
 
 ```bash
-cd CrowStore\ -\ NextJS/
+cd CrowStore
 
 npm i
 # or
@@ -44,9 +45,9 @@ yarn install
 Run the development server:
 
 ```bash
-cd CrowStore\ -\ NextJS/
+cd CrowStore
 
-npm run dev
+npm run dev  
 # or
 yarn dev
 ```
@@ -54,6 +55,7 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Or, you can access it to visuaalization through this [link](https://crowstore.vercel.app/) here.
 
 #### Learn More
 
@@ -114,12 +116,26 @@ Samples of this site's pages appearance can be found in this [**folder**](https:
 
 ### Comments About the Code
 
+A comment about the mockups and the navigation diagram developed. We are trying to faithfully follow what was proposed through mockups and the navigation diagram. We believe that we will be very faithful to what was presented through them.
+
+For the first delivery, the mockup was used and now the react backend, with elements based on the aesthetics presented by the prototype initially presented as an idea for the site.
+
+For the second delivery, polishing and a large part of the backend of the project were done, aiming at a quality delivery. In addition, the visualization of the same in different screen resolutions was also thought.
+
 ### Test Plan
+
+The initial plan is to use the navigation diagram to test the full functionality of the site.
+
+For the second delivery, you already have an application usable when running the application (frontend and backend together), facilitating the testing of its functionalities.
 
 ### Test Results
 
-### Build Procedures
+We follow the philosophy of testing while the application is running. These tests forever served as a greater visualization of the implementation of new features, observing when a new feature was added, so that none of the others were compromised in the process and, if they were, they should be fixed.
 
 ### Problems
+Some problems still need to be documented, like some warnings in the console, and they will be in the future, because some of those problems are due to unfinished project steps.
 
 ### Comments
+
+Aditional comments:
+The project is going as expected, and we are on the way to deliver a great website.

@@ -1,85 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   ButtonArrow,
   Container,
   ProductArrows,
-  BtnContainer,
   ShowcaseGenderBtn,
   IconContainer,
   GenderBtn,
   Subtitle,
 } from "./ShowCaseSectionElements";
-import ProductCard from "../ReusedComponents/ProductCard";
 import ProductCarousel from "../ProductsCarousel";
 import ProductData from "../../fakedata/showcaseContent/products.json";
+import PopularData from "../../fakedata/showcaseContent/popular.json";
 
-import {WrapContent} from "../ReusedComponents/WrapContent";
-import {
-  FaCrow,
-  FaFemale,
-  FaMale,
-} from "react-icons/fa";
+import { WrapContent } from "../ReusedComponents/WrapContent";
+import { FaCrow, FaFemale, FaMale } from "react-icons/fa";
 
 function ShowCase() {
   const [selectedGender, setSelectedGender] = useState("all");
+  const productCarouselRef = useRef();
 
   const handleGenderSelection = (gender) => {
     setSelectedGender(gender);
+    productCarouselRef.current?.handleNextProduct();
   };
 
-  return (
+  const filteredProductData = ProductData.filter(
+    (product) => selectedGender === "all" || product.gender === selectedGender
+  );
 
-      <Container id="showcase">
-        <ShowcaseGenderBtn>
-          <GenderBtn
-            selected={selectedGender === "all"}
-            onClick={() => handleGenderSelection("all")}
-          >
-            <IconContainer>
-              <FaCrow />
-              Todos
-            </IconContainer>
-          </GenderBtn>
-          <GenderBtn
-            selected={selectedGender === "girl"}
-            onClick={() => handleGenderSelection("girl")}
-          >
-            <IconContainer>
-              <FaFemale />
-              Feminino
-            </IconContainer>
-          </GenderBtn>
-          <GenderBtn
-            selected={selectedGender === "boy"}
-            onClick={() => handleGenderSelection("boy")}
-          >
-            <IconContainer>
-              <FaMale />
-              Masculino
-            </IconContainer>
-          </GenderBtn>
-        </ShowcaseGenderBtn>
+  const filteredPopularData = PopularData.filter(
+    (product) => selectedGender === "all" || product.gender === selectedGender
+  );
+
+  return (
+    <Container id="showcase">
+      <ShowcaseGenderBtn>
+        <GenderBtn
+          selected={selectedGender === "all"}
+          onClick={() => handleGenderSelection("all")}
+        >
+          <IconContainer>
+            <FaCrow />
+            Todos
+          </IconContainer>
+        </GenderBtn>
+        <GenderBtn
+          selected={selectedGender === "girl"}
+          onClick={() => handleGenderSelection("girl")}
+        >
+          <IconContainer>
+            <FaFemale />
+            Feminino
+          </IconContainer>
+        </GenderBtn>
+        <GenderBtn
+          selected={selectedGender === "boy"}
+          onClick={() => handleGenderSelection("boy")}
+        >
+          <IconContainer>
+            <FaMale />
+            Masculino
+          </IconContainer>
+        </GenderBtn>
+      </ShowcaseGenderBtn>
       <ProductCarousel
-        data={
-          selectedGender === "all"
-            ? ProductData
-            : ProductData.filter((product) => product.gender === selectedGender)
-        }
+        ref={productCarouselRef}
+        data={filteredProductData}
         name="Lançamentos"
       />
 
-
       <ProductCarousel
-        data={
-          selectedGender === "all"
-            ? ProductData
-            : ProductData.filter((product) => product.gender === selectedGender)
-        }
+        ref={productCarouselRef}
+        data={filteredPopularData}
         name="Populares"
       />
-
-      </Container>
-
+    </Container>
   );
 }
 

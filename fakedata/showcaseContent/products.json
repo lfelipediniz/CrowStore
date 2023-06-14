@@ -1,255 +1,187 @@
 [
     {
-        "productName": "Calça Crow",
-        "price": "R$ 99,90",
-        "image": "/CrowStore/imgs/CALCACROW.png",
-        "category": "sueter",
-        "gender": "boy",
-        "stock": "4",
-        "colors": [
-            "Midnight Blue",
-            "Dark Slate Gray",
-            "Saddle Brown",
-            "Goldenrod",
-            "Light Sky Blue"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Esta calça Crow é perfeita para um visual moderno e despojado. Feita com materiais de alta qualidade, oferece conforto e estilo ao mesmo tempo."
+      "productName": "Moletom CC",
+      "price": "R$ 129,90",
+      "image": "/CrowStore/imgs/B.png",
+      "category": "Moletom",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+        "Midnight Blue",
+        "Dark Slate Gray",
+        "Saddle Brown",
+        "Goldenrod",
+        "Light Sky Blue"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Este moletom CC é perfeito para se manter aquecido e estiloso nos dias mais frios. Com um design moderno e confortável, é uma peça essencial para o seu guarda-roupa de inverno."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Light Salmon",
-            "Lavender",
-            "Dark Olive Green",
-            "Tomato",
-            "Steel Blue"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça indispensável no guarda-roupa feminino. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
+      "productName": "Moletom Crow girl",
+      "price": "R$ 159,90",
+      "image": "/CrowStore/imgs/MOLETOMCROW.png",
+      "category": "Moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+        "Light Salmon",
+        "Lavender",
+        "Dark Olive Green",
+        "Tomato",
+        "Steel Blue"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Este moletom Crow é uma peça indispensável no guarda-roupa girl. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/SUETERCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Pale Violet Red",
-            "Medium Sea Green",
-            "Chocolate",
-            "Medium Purple",
-            "Light Slate Gray"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este suéter Crow é uma ótima opção para compor looks confortáveis e estilosos. Com um toque macio e aconchegante, você vai se sentir incrível usando essa peça."
+      "productName": "Calça Listrada",
+      "price": "R$ 89,90",
+      "image": "/CrowStore/imgs/A.png",
+      "category": "Calça",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+        "Light Pink",
+        "Medium Aquamarine",
+        "Sienna",
+        "Blue Violet",
+        "Gainsboro"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Esta calça listrada é perfeita para compor looks descolados e cheios de estilo. Feita com tecido de alta qualidade, oferece conforto e um visual moderno."
     },
     {
-        "productName": "Touca Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/TOUCACROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Light Coral",
-            "Dark Sea Green",
-            "Fire Brick",
-            "Cornflower Blue",
-            "Dim Gray"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Esta touca Crow é perfeita para dar um toque de estilo ao seu look. Feita com um tecido macio e quentinho, ela vai manter sua cabeça protegida e estilosa nos dias mais frios."
+      "productName": "Moletom Crow girl",
+      "price": "R$ 159,90",
+      "image": "/CrowStore/imgs/SUETERCROW.png",
+      "category": "Moletom",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+        "Pale Violet Red",
+        "Medium Sea Green",
+        "Chocolate",
+        "Medium Purple",
+        "Light Slate Gray"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Este suéter Crow é uma ótima opção para compor looks confortáveis e estilosos. Com um toque macio e aconchegante, você vai se sentir incrível usando essa peça."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Light Pink",
-            "Medium Aquamarine",
-            "Sienna",
-            "Blue Violet",
-            "Gainsboro"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça versátil e estilosa. Com um design moderno e cores incríveis, é perfeito para compor looks casuais e confortáveis."
+      "productName": "Camisa Kiss",
+      "price": "R$ 119,90",
+      "image": "/CrowStore/imgs/C.png",
+      "category": "Camisa",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+        "Misty Rose",
+        "Light Green",
+        "Dark Goldenrod",
+        "Medium Orchid",
+        "Silver"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Esta camisa Kiss é perfeita para os fãs da banda de rock. Com um design autêntico e estiloso, é uma peça essencial para expressar o seu estilo musical."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Misty Rose",
-            "Light Green",
-            "Dark Goldenrod",
-            "Medium Orchid",
-            "Silver"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça confortável e estilosa para diversas ocasiões. Com um tecido macio e toque agradável, você vai se sentir incrível usando esse moletom."
+      "productName": "Touca Crow Feminina",
+      "price": "R$ 49,90",
+      "image": "/CrowStore/imgs/TOUCACROW.png",
+      "category": "Acessório",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+        "Light Coral",
+        "Dark Sea Green",
+        "Fire Brick",
+        "Cornflower Blue",
+        "Dim Gray"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Esta touca Crow é perfeita para dar um toque de estilo ao seu look. Feita com um tecido macio e quentinho, ela vai manter sua cabeça protegida e estilosa nos dias mais frios."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Light Salmon",
-            "Pale Green",
-            "Olive Drab",
-            "Dark Orchid",
-            "Dark Gray"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça elegante e confortável. Com um design moderno e cores incríveis, é perfeito para se destacar em qualquer ocasião."
+      "productName": "Jaqueta Inverno Feminina",
+      "price": "R$ 189,90",
+      "image": "/CrowStore/imgs/F.png",
+      "category": "Jaqueta",
+      "gender": "girl",
+      "stock": "4",
+      "colors": [
+        "Light Salmon",
+        "Pale Green",
+        "Olive Drab",
+        "Dark Orchid",
+        "Dark Gray"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Esta jaqueta de inverno é perfeita para enfrentar o frio com muito estilo. Com um design moderno e detalhes elegantes, mantém você aquecida e fashion durante toda a estação."
     },
     {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Coral",
-            "Aquamarine",
-            "Maroon",
-            "Purple",
-            "Light Gray"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça confortável e estilosa para o dia a dia. Com um design moderno e cores vibrantes, você vai arrasar em qualquer ocasião."
-    },
-    {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Indian Red",
-            "Medium Spring Green",
-            "Brown",
-            "Medium Slate Blue",
-            "Dark Khaki"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça versátil e estilosa. Com um design moderno e cores marcantes, é perfeito para se destacar em qualquer ocasião."
-    },
-    {
-        "productName": "Moletom Crow",
-        "price": "R$ 149,90",
-        "image": "/CrowStore/imgs/MOLETOMCROW.png",
-        "category": "moletom",
-        "gender": "girl",
-        "stock": "4",
-        "colors": [
-            "Salmon",
-            "Pale Turquoise",
-            "Dark Red",
-            "Slate Blue",
-            "Light Slate Grey"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este moletom Crow é uma peça confortável e estilosa para o dia a dia. Com um design moderno e cores incríveis, você vai arrasar em qualquer ocasião."
-    },
-    {
-        "productName": "Suéter Man Crow",
-        "price": "R$ 79,90",
-        "image": "/CrowStore/imgs/SUETERMANCROW.png",
-        "category": "moletom",
-        "gender": "boy",
-        "stock": "4",
-        "colors": [
-            "Light Blue",
-            "Medium Turquoise",
-            "Rosy Brown",
-            "Medium Violet Red",
-            "Dark Slate Grey"
-        ],
-        "size": [
-            "PP",
-            "P",
-            "M",
-            "G",
-            "XG"
-        ],
-        "description": "Este suéter Crow é perfeito para compor looks masculinos cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
+      "productName": "Suéter Man Crow",
+      "price": "R$ 99,90",
+      "image": "/CrowStore/imgs/SUETERMANCROW.png",
+      "category": "Moletom",
+      "gender": "boy",
+      "stock": "4",
+      "colors": [
+        "Light Blue",
+        "Medium Turquoise",
+        "Rosy Brown",
+        "Medium Violet Red",
+        "Dark Slate Grey"
+      ],
+      "size": [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "XG"
+      ],
+      "description": "Este suéter Crow é perfeito para compor looks boys cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
     }
-]
+  ]
+  

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ButtonArrow, Container, ProductArrows, Subtitle } from "./ProductsCarouselElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-function ProductCarousel({ data, name = "" }) {
+
+function ProductCarousel({ data, name }) {
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -24,10 +25,9 @@ function ProductCarousel({ data, name = "" }) {
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
   const [currentProduct, setCurrentProduct] = React.useState(0);
+
   const handleNextProduct = () => {
-    setCurrentProduct(
-      (prevIndex) => (prevIndex + productsPerPage) % totalProducts
-    );
+    setCurrentProduct((prevIndex) => (prevIndex + productsPerPage) % totalProducts);
   };
 
   const handlePrevProduct = () => {
@@ -40,11 +40,10 @@ function ProductCarousel({ data, name = "" }) {
 
   return (
     <>
-    <Container>
-    <Subtitle>{name}</Subtitle>
-    </Container>
       <Container>
-
+        <Subtitle>{name}</Subtitle>
+      </Container>
+      <Container>
         {data.slice(currentProduct, currentProduct + productsPerPage).map((product, index) => (
           <ProductCard
             key={`product-${index}`}
@@ -55,14 +54,12 @@ function ProductCarousel({ data, name = "" }) {
         ))}
       </Container>
       <ProductArrows>
-      <ProductArrows>
-            <ButtonArrow onClick={handlePrevProduct}>
-              <FaAngleLeft />
-            </ButtonArrow>
-            <ButtonArrow onClick={handleNextProduct}>
-              <FaAngleRight />
-            </ButtonArrow>
-          </ProductArrows>
+        <ButtonArrow onClick={handlePrevProduct}>
+          <FaAngleLeft />
+        </ButtonArrow>
+        <ButtonArrow onClick={handleNextProduct}>
+          <FaAngleRight />
+        </ButtonArrow>
       </ProductArrows>
     </>
   );

@@ -115,21 +115,21 @@ Samples of this site's pages appearance can be found in this [**folder**](https:
 
 ### Comments About the Code
 
-Um comentário sobre os mockups e o diagrama de navegação desenvolvidos.Estamos tentando seguir fielmente o que foi proposto por meio de mockups e pelo diagrama de navegação. Acreditamos que seremos bastante fiéis ao que foi apresentado por meio dos mesmos.
+A comment about the mockups and the navigation diagram developed. We are trying to faithfully follow what was proposed through mockups and the navigation diagram. We believe that we will be very faithful to what was presented through them.
 
-Para a primeira entrega, foram utilizados o mockup e agora o backend em react, com elementos baseados na estética apresentada pelo protótipo apresentado inicialmente como uma ideia para o site. 
+For the first delivery, the mockup was used and now the react backend, with elements based on the aesthetics presented by the prototype initially presented as an idea for the site.
 
-Para a segunda entrega, foi feito um polimento e uma grande parte do backend do projeto, visando uma entrega de qualidade. Além disso, foi também pensado a visualização do mesmo em diferentes resoluções de telas.
+For the second delivery, polishing and a large part of the backend of the project were done, aiming at a quality delivery. In addition, the visualization of the same in different screen resolutions was also thought.
 
 ### Test Plan
 
-O plano inicial é utilizar o diagrama de navegação, para testar a total funcionalidade do site.
+The initial plan is to use the navigation diagram to test the full functionality of the site.
 
-Para a segunda entrega, já se tem uma aplicação utilizavel quando rodando a aplicação (frontend e backend em conjunto), facilitando o teste das funcionalidades da mesma.
+For the second delivery, you already have an application usable when running the application (frontend and backend together), facilitating the testing of its functionalities.
 
 ### Test Results
 
-Seguimos a filosofia do teste com o aplicativo rodando. Estes testes serviram para sempre uma maior visualização da implementação de novas funcionalidades, observando quando uma nova funcionalidade era adicionada, para que nenhuma das outras fossem comprometidas no processo e, que se fossem, deveriam ser consertadas.
+We follow the philosophy of testing while the application is running. These tests forever served as a greater visualization of the implementation of new features, observing when a new feature was added, so that none of the others were compromised in the process and, if they were, they should be fixed.
 
 ### Build Procedures
 

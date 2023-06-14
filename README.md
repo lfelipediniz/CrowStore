@@ -115,12 +115,66 @@ Samples of this site's pages appearance can be found in this [**folder**](https:
 
 ### Comments About the Code
 
+Um comentário sobre os mockups e o diagrama de navegação desenvolvidos.Estamos tentando seguir fielmente o que foi proposto por meio de mockups e pelo diagrama de navegação. Acreditamos que seremos bastante fiéis ao que foi apresentado por meio dos mesmos.
+
+Para a primeira entrega, foram utilizados o mockup e agora o backend em react, com elementos baseados na estética apresentada pelo protótipo apresentado inicialmente como uma ideia para o site. 
+
+Para a segunda entrega, foi feito um polimento e uma grande parte do backend do projeto, visando uma entrega de qualidade. Além disso, foi também pensado a visualização do mesmo em diferentes resoluções de telas.
+
 ### Test Plan
+
+O plano inicial é utilizar o diagrama de navegação, para testar a total funcionalidade do site.
+
+Para a segunda entrega, já se tem uma aplicação utilizavel quando rodando a aplicação (frontend e backend em conjunto), facilitando o teste das funcionalidades da mesma.
 
 ### Test Results
 
+Seguimos a filosofia do teste com o aplicativo rodando. Estes testes serviram para sempre uma maior visualização da implementação de novas funcionalidades, observando quando uma nova funcionalidade era adicionada, para que nenhuma das outras fossem comprometidas no processo e, que se fossem, deveriam ser consertadas.
+
 ### Build Procedures
 
+You can clone the repository using the command: 
+git clone https://github.com/lfelipediniz/CrowStore
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+#### Automatically install dependencies
+
+First of all, it's needed to have [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) a
+installed on your system.
+
+To automatically install all dependencies needed on the project just run: 
+
+```bash
+cd CrowStore\ -\ NextJS/
+
+npm i
+# or
+yarn install
+```
+
+#### Getting Started
+
+Run the development server:
+
+```bash
+cd CrowStore\ -\ NextJS/
+
+npm run dev
+# or
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Or, you can access it to visuaalization through this [link](https://crowstore.vercel.app/) here.
+
+
 ### Problems
+Some problems still need to be documented, like some warnings in the console, and they will be in the future, because some of those problems are due to unfinished project steps.
 
 ### Comments
+
+Aditional comments:
+The project is going as expected, and we are on the way to deliver a great website.

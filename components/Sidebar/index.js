@@ -30,31 +30,9 @@ const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          {isHomePage ? (
-            <>
-              <LinkS to="showcase" href="#showcase">
-                <SidebarItemS onClick={toggle}>Vitrine</SidebarItemS>
-              </LinkS>
-              <LinkS to="aboutus" href="#aboutus">
-                <SidebarItemS onClick={toggle}>Sobre nós</SidebarItemS>
-              </LinkS>
-              <LinkS to="doubts" href="#doubts">
-                <SidebarItemS onClick={toggle}>Dúvidas</SidebarItemS>
-              </LinkS>
-            </>
-          ) : (
-            <>
-              <Link href="/#showcase">
-                <SidebarItem onClick={toggle}>Vitrine</SidebarItem>
-              </Link>
-              <Link href="/#aboutus">
-                <SidebarItem onClick={toggle}>Sobre nós</SidebarItem>
-              </Link>
-              <Link href="/#doubts">
-                <SidebarItem onClick={toggle}>Dúvidas</SidebarItem>
-              </Link>
-            </>
-          )}
+          <Link href="/">
+            <SidebarItem onClick={toggle}>Home</SidebarItem>
+          </Link>
 
           <Link href="/user">
             <SidebarItemS onClick={toggle}>Meu Perfil</SidebarItemS>

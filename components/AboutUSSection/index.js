@@ -13,7 +13,7 @@ const AboutUSSection = () => {
   return (
     <>
       <InfoContainer id="aboutus">
-        <InfoWrapper>
+        <InfoWrapper >
           <AboutRectangle>
             <WrapContent>
               <AboutGif

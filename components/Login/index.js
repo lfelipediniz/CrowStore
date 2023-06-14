@@ -26,14 +26,18 @@ const handleFormlogin = (event) => {
   let userobj = {
     "userName": userN,
     "password": senha,
-    "category": ""
+    "category": "common"
+  }
+
+  let admobj = {
+    "userName": userN,
+    "password": senha,
+    "category": "admin"
   }
   for (var i = 0; i < data.length; i++){
-    if(data[i].category == "admin"){
+    if (data[i].userName == admobj.userName && data[i].password == admobj.password && data[i].category == admobj.ca){
       setGlobalState("isAdm", true);
-      } else {
-      setGlobalState("isAdm", false);
-      }
+    } 
   }
   for (var i = 0; i < data.length; i++){
     if (data[i].userName == userobj.userName && data[i].password == userobj.password){
@@ -93,8 +97,8 @@ const handleFormsignup = (event) => {
                 />
               </Fragment>
               <Loginbut type="submit" className="botao">Login</Loginbut>
-              <Loginbut1 type="submit" className="botao1">Cadastrar-se</Loginbut1>
               </LoginForm>
+              <Loginbut1 onClick={handleFormsignup} className="botao1">Cadastrar-se</Loginbut1>
             </LoginContainer>
       </WrapContent>
     );

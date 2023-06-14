@@ -17,7 +17,6 @@ export { setGlobalState, useGlobalState };
 function User() {
   const [checklgn] = useGlobalState("isLoggedInn");
   const [checkadm] = useGlobalState("isAdm");
-
   return (
     <>
       {checklgn ? (

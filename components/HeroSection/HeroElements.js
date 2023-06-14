@@ -8,6 +8,12 @@ export const HeroContainer = styled.div`
     place-items: center;
     overflow: hidden;
   }
+
+  @media (max-width: 900px) {
+    place-items: center;
+    overflow: hidden;
+  }
+
 `;
 
 export const HeroWrapper = styled.div`

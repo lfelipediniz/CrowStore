@@ -10,8 +10,11 @@ export const Slide = styled.div`
   display: flex;
 
   overflow-x: hidden; /* Oculta o conteúdo que excede a largura da tela */
-
   @media (max-width: 900px) {
+    height: 500px;
+  }
+
+  @media (max-width: 500px) {
     height: 300px;
   }
 `;
@@ -29,8 +32,9 @@ export const BannerRetangule = styled.div`
   @media (max-width: 900px) {
     width: 165px;
     height: 50px;
-    margin-bottom: 30px;
-    margin-left: 0;
+    margin-bottom: 20px;
+    margin-left: -15px;
+    
   }
 `;
 
@@ -69,6 +73,10 @@ export const Slide1 = styled(Slide)`
   background-size: cover;
   position: relative;
 
+  @media (max-width: 900px) {
+    background-image: url("/CrowStore/imgs/bannerJaquetaM.png");
+  }
+
   @media (max-width: 640px) {
     margin-top: 80px;
   }
@@ -78,6 +86,11 @@ export const Slide2 = styled(Slide)`
   background-image: url("/CrowStore/imgs/bannerWhite.png");
   background-size: cover;
 
+  @media (max-width: 900px) {
+    background-image: url("/CrowStore/imgs/bannerWhiteM.png");
+  }
+
+
   @media (max-width: 640px) {
     margin-top: 80px;
   }
@@ -86,6 +99,11 @@ export const Slide2 = styled(Slide)`
 export const Slide3 = styled(Slide)`
   background-image: url("/CrowStore/imgs/bannerConjuntoOutono.png");
   background-size: cover;
+
+  @media (max-width: 900px) {
+    background-image: url("/CrowStore/imgs/bannerConjuntoOutonoM.png");
+  }
+
 
   @media (max-width: 640px) {
     margin-top: 80px;

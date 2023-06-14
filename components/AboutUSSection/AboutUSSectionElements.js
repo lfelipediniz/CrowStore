@@ -5,14 +5,27 @@ import Image from "next/image";
 
 export const InfoContainer = styled.div`
   background-color: ${colors.primary};
+    @media (min-width: 2000px) {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
 `;
 
 export const InfoWrapper = styled.div`
-  align-items: center;
   background-image: url(CrowStore/imgs/aboutBanner.png);
   background-size: cover;
   display: flex;
   height: 693px;
+
+
+  @media (min-width: 2000px) {
+    display: grid;
+
+    overflow: hidden;
+    width: 1430px;
+  }
+  
 
   @media (max-width: 900px) {
     background-image: none;
@@ -25,8 +38,9 @@ export const AboutRectangle = styled.div`
   height: 300px;
   background-color: ${colors.primary};
   padding: 30px;
-  margin-top: 200px;
+  margin-top: 300px;
   font-size: 15px;
+
 
   @media (max-width: 900px) {
     background-color: transparent;

@@ -7,12 +7,9 @@ export const Slide = styled.div`
   width: 100%;
   color: #fff;
   align-items: end;
-  max-width: 100%; /* Defina o limite de largura desejado para telas maiores */
   display: flex;
 
-  @media (max-width: 4000px) {
-    max-width: 4000px; /* Defina o limite de largura desejado para telas menores */
-  }
+  overflow-x: hidden; /* Oculta o conteúdo que excede a largura da tela */
 
   @media (max-width: 900px) {
     height: 300px;
@@ -49,11 +46,9 @@ export const BannerText = styled.text`
   margin-left: 0;
 
   @media (max-width: 900px) {
-font-size: 15px;
+    font-size: 15px;
   }
 `;
-
-
 
 export const BannerArrow = styled.button`
   background: none;
@@ -65,9 +60,8 @@ export const BannerArrow = styled.button`
   font-size: 30px;
 
   @media (max-width: 900px) {
-  display: none;
+    display: none;
   }
-
 `;
 
 export const Slide1 = styled(Slide)`
@@ -86,7 +80,6 @@ export const Slide2 = styled(Slide)`
 
   @media (max-width: 640px) {
     margin-top: 80px;
-
   }
 `;
 
@@ -96,6 +89,5 @@ export const Slide3 = styled(Slide)`
 
   @media (max-width: 640px) {
     margin-top: 80px;
-
   }
 `;

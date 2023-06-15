@@ -11,6 +11,7 @@ import {
   Loginbut1,
   UserContainer,
   LoginWrap,
+  LoginBtnContainer,
 } from "../Login/LoginElements";
 import { setGlobalState, useGlobalState } from "../User/index";
 import data from "../../fakedata/usersDatabase/users.json";
@@ -98,22 +99,25 @@ const Login = () => {
                   onChange={handleUsernameChange}
                 />
               </Fragment>
-              <Fragment>
-                <Loginlabel htmlFor="password">Senha</Loginlabel>
-                <LoginInput
-                  type="password"
-                  id="password"
-                  value={senha}
-                  onChange={handlePasswordChange}
-                />
-              </Fragment>
-              <Loginbut type="submit" className="botao">
-                Login
-              </Loginbut>
+
+              <Loginlabel htmlFor="password">Senha</Loginlabel>
+              <LoginInput
+                type="password"
+                id="password"
+                value={senha}
+                onChange={handlePasswordChange}
+              />
             </LoginForm>
-            <Loginbut1 onClick={handleFormsignup} className="botao1">
+              <LoginBtnContainer>
+                {" "}
+                <Loginbut type="submit" className="botao">
+                  Login
+                </Loginbut>
+
+            <Loginbut onClick={handleFormsignup} className="botao1">
               Cadastrar-se
-            </Loginbut1>
+            </Loginbut>
+              </LoginBtnContainer>
           </LoginContainer>
         </WrapContent>
       </UserContainer>

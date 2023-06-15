@@ -22,21 +22,32 @@ export const UserContainer = styled.div`
 
   @media (min-width: 2000px) {
     display: grid;
-
     overflow: hidden;
     width: 1440px;
+  }
+
+  @media (max-width: 1120px) {
+    background-image: none;
+    justify-content: center; /* Adicione esta linha para centralizar a div */
   }
 `;
 
 export const LoginContainer = styled.div`
-margin-top: 150px;
-margin-right: 80px;
+  margin-top: 150px;
+  margin-right: 80px;
   width: 375px;
   height: 500px;
   padding: 20px;
   background-color: ${colors.secondary};
+  border-radius: 5px;
 
-  
+  @media (max-width: 1120px) {
+    margin-right: 0px;
+  }
+
+  @media (max-width: 425px) {
+    width: auto;
+  }
 `;
 
 export const LoginTitle = styled.h2`
@@ -44,6 +55,10 @@ export const LoginTitle = styled.h2`
   text-align: center;
   margin-top: 10%;
   font-size: 50px;
+
+  @media (max-width: 425px) {
+    font-size: ${fonts.headingM};
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -67,27 +82,28 @@ export const LoginInput = styled.input`
 `;
 
 export const Loginbut = styled.button`
-  display: block;
-  width: 35%;
+  width: 130px;
   height: 50px;
   padding: 10px;
-  margin-left: 10%;
-  margin-top: 75px;
   background-color: ${colors.primary};
   color: ${colors.secondary};
   border: none;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  font-size: 15px;  
+  font-size: 15px;
+  border-radius: 3px;
+
+  @media (max-width: 425px) {
+width: 100%;
+padding: 0;
+  }
 `;
 
 export const Loginbut1 = styled.button`
-  display: block;
   width: 35%;
   height: 50px;
   padding: 10px;
-  margin-top: -15%;
   margin-left: 50%;
   background-color: ${colors.primary};
   color: ${colors.secondary};
@@ -98,4 +114,19 @@ export const Loginbut1 = styled.button`
   font-size: 15px;
 `;
 
+export const LoginBtnContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding: 10px;
 
+  @media (max-width: 425px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Adicione esta linha para centralizar os botões verticalmente */
+    justify-content: center; /* Adicione esta linha para centralizar os botões horizontalmente */
+    padding: 0;
+    gap: 20px;
+  }
+`;

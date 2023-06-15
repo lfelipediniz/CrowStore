@@ -142,9 +142,11 @@ export const QuantityInput = styled.input`
 export const TotalContainer = styled.div`
   border-top: 1px solid ${colors.textBlack};
 
-  @media (max-width: 1120px) {
-    display: none;
+    @media (max-width: 1120px) {
+    margin-top: 50px;
   }
+
+
 `;
 
 export const H3 = styled.h3`

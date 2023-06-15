@@ -62,57 +62,13 @@ const Cart = ({ onCartUpdate }) => {
   };
 
   return (
-
     // Produtos Mobile
-    <StyledCart>
-      {products.map((product, index) => (
-        <MobileProduct key={index}>
-
-          <ProductImage src={product.image} alt={product.productName} />
-          <ProductDescription>
-          <Row>
-                <QuantityLabel htmlFor={`quantity${index}`}>
-                  Quantidade:
-                </QuantityLabel>
-                <QuantityInput
-                  type="number"
-                  name={`quantity${index}`}
-                  value={quantities[index]}
-                  min="1"
-                  max={product.stock}
-                  onChange={(e) => updateQuantity(index, e.target.value)}
-                />
-              </Row>
-            <ProductId>
-              <H3>{product.productName}</H3>
-            </ProductId>
-            <ProductPricing>
-              <Row>
-                <H3>Preço:</H3>
-                <H3>
-                  {product.price}
-                  </H3>
-              </Row>
-            </ProductPricing>
-
-          </ProductDescription>
-          <RemoveButton onClick={() => removeProduct(index)}>
-                Remover
-              </RemoveButton>
-        </MobileProduct>
-      ))}
-    
-      {products.map((product, index) => (
-        <ProductContainer key={index}>
-          <ProductImage src={product.image} alt={product.productName} />
-          <ProductDescription>
-            <ProductId>
-              <H2>{product.productName}</H2>
-              <RemoveButton onClick={() => removeProduct(index)}>
-                Remover
-              </RemoveButton>
-            </ProductId>
-            <ProductPricing>
+    <>
+      <StyledCart>
+        {products.map((product, index) => (
+          <MobileProduct key={index}>
+            <ProductImage src={product.image} alt={product.productName} />
+            <ProductDescription>
               <Row>
                 <QuantityLabel htmlFor={`quantity${index}`}>
                   Quantidade:
@@ -126,31 +82,69 @@ const Cart = ({ onCartUpdate }) => {
                   onChange={(e) => updateQuantity(index, e.target.value)}
                 />
               </Row>
-              <Row>
-                <H3>Preço:</H3>
-                <p>
-                  <strong>{product.price}</strong>
-                </p>
-              </Row>
-            </ProductPricing>
-          </ProductDescription>
-        </ProductContainer>
-      ))}
+              <ProductId>
+                <H3>{product.productName}</H3>
+              </ProductId>
+              <ProductPricing>
+                <Row>
+                  <H3>Preço:</H3>
+                  <H3>{product.price}</H3>
+                </Row>
+              </ProductPricing>
+            </ProductDescription>
+            <RemoveButton onClick={() => removeProduct(index)}>
+              Remover
+            </RemoveButton>
+          </MobileProduct>
+        ))}
+
+        {products.map((product, index) => (
+          <ProductContainer key={index}>
+            <ProductImage src={product.image} alt={product.productName} />
+            <ProductDescription>
+              <ProductId>
+                <H2>{product.productName}</H2>
+                <RemoveButton onClick={() => removeProduct(index)}>
+                  Remover
+                </RemoveButton>
+              </ProductId>
+              <ProductPricing>
+                <Row>
+                  <QuantityLabel htmlFor={`quantity${index}`}>
+                    Quantidade:
+                  </QuantityLabel>
+                  <QuantityInput
+                    type="number"
+                    name={`quantity${index}`}
+                    value={quantities[index]}
+                    min="1"
+                    max={product.stock}
+                    onChange={(e) => updateQuantity(index, e.target.value)}
+                  />
+                </Row>
+                <Row>
+                  <H3>Preço:</H3>
+                  <p>
+                    <strong>{product.price}</strong>
+                  </p>
+                </Row>
+              </ProductPricing>
+            </ProductDescription>
+          </ProductContainer>
+        ))}
+      </StyledCart>
       <TotalContainer>
         <Row>
           <H2>Frete:</H2>
-          <p>
-            <strong>{"{Frete}"}</strong>
-          </p>
+
+          <H2>{"{Frete}"}</H2>
         </Row>
         <Row>
           <H2>Total:</H2>
-          <p>
-            <strong>{calculateTotalPrice()}</strong>
-          </p>
+          <H2>{calculateTotalPrice()}</H2>
         </Row>
       </TotalContainer>
-    </StyledCart>
+    </>
   );
 };
 

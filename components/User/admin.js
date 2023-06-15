@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { WrapContent } from "../ReusedComponents/WrapContent";
 import {
-  UserContainer,
-  RemoveButton,
-  ProductContainer,
-  ScrollableContainer,
-  SearchContainer,
-  AddProductContainer,
+  Container,
+  SideNav,
+  SearchBarContainer,
+  Content,
   SidebarContainer,
   EditButtonCotainer,
+  ProductContainer,
   ProductCardEdit,
+  RemoveButton,
 } from "./UserElements";
+
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
@@ -19,7 +19,7 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 import ProductModal from "../ProductModal";
 
-function Admin() {
+const Admin = () => {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [categories, setCategories] = useState([
@@ -115,73 +115,63 @@ function Admin() {
 
   return (
     <>
-      {/* Container de pesquisa */}
-      <SearchContainer>
-        <WrapContent>
-          <SearchBar onChange={setSearchTerm} />
-        </WrapContent>
-      </SearchContainer>
+    <Container>
 
-      <UserContainer>
-        <WrapContent>
-          <SidebarContainer>
-            {/* Sidebar */}
-            <Box>
-              <List>
-                {/* Modo de edição */}
-                <EditButtonCotainer>
-                  <ListItem button onClick={toggleEditingMode}>
-                    <ListItemText
-                      primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
-                    />
-                  </ListItem>
-                </EditButtonCotainer>
+      <SideNav>
+        <Box>
+          <List>
+            {/* Modo de edição */}
+            <EditButtonCotainer>
+              <ListItem button onClick={toggleEditingMode}>
+                <ListItemText
+                  primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                />
+              </ListItem>
+            </EditButtonCotainer>
 
-                {/* Adicionar Produto */}
-                {editingMode && (
-                  <ListItem button onClick={() => handleOpenModalCreate()}>
-                    <ListItemText primary="Adicionar Produto" />
-                  </ListItem>
-                )}
+            {/* Adicionar Produto */}
+            {editingMode && (
+              <ListItem button onClick={() => handleOpenModalCreate()}>
+                <ListItemText primary="Adicionar Produto" />
+              </ListItem>
+            )}
 
-                {/* Adicionar Categoria */}
-                {editingMode && (
-                  <>
-                    <ListItem button onClick={handleAddCategory}>
-                      <ListItemText primary="Adicionar Categoria" />
-                    </ListItem>
-                    <Divider />
-                  </>
-                )}
+            {/* Adicionar Categoria */}
+            {editingMode && (
+              <>
+                <ListItem button onClick={handleAddCategory}>
+                  <ListItemText primary="Adicionar Categoria" />
+                </ListItem>
+                <Divider />
+              </>
+            )}
 
-                {/* Categorias */}
-                {categories.map((category, index) => (
-                  <ListItem
-                    key={index}
-                    button
-                    selected={selectedCategory === category}
-                    onClick={() => handleCategoryClick(category)}
-                  >
-                    <ListItemText primary={category} />
-                    {category !== "Todos" &&
-                      category !== "Masculino" &&
-                      category !== "Feminino" &&
-                      editingMode && (
-                        <RemoveButton
-                          onClick={() => handleRemoveCategory(index)}
-                        >
-                          <FaTrashAlt />
-                        </RemoveButton>
-                      )}
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-          </SidebarContainer>
-        </WrapContent>
-
-        {/* Container de produtos */}
-        <ScrollableContainer>
+            {/* Categorias */}
+            {categories.map((category, index) => (
+              <ListItem
+                key={index}
+                button
+                selected={selectedCategory === category}
+                onClick={() => handleCategoryClick(category)}
+              >
+                <ListItemText primary={category} />
+                {category !== "Todos" &&
+                  category !== "Masculino" &&
+                  category !== "Feminino" &&
+                  editingMode && (
+                    <RemoveButton onClick={() => handleRemoveCategory(index)}>
+                      <FaTrashAlt />
+                    </RemoveButton>
+                  )}
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </SideNav>
+      <SearchBarContainer>
+      <SearchBar onChange={setSearchTerm} />
+      </SearchBarContainer>
+      <Content>
         <ProductContainer>
           {searchFilteredProducts.map((product, index) => (
             <ProductCardEdit
@@ -202,8 +192,7 @@ function Admin() {
             </ProductCardEdit>
           ))}
         </ProductContainer>
-      </ScrollableContainer>
-      </UserContainer>
+      </Content>
 
       {/* Modal de adicionar/editar produto */}
       <ProductModal
@@ -216,8 +205,9 @@ function Admin() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
+    </Container>
     </>
   );
-}
+};
 
 export default Admin;

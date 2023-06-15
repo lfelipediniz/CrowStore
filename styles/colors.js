@@ -7,7 +7,7 @@ export const colors = {
     textBlack: "#4E4E4E",
     gray: "#808080",
     white: "#FFFFFF",
-    lightGray: "#E8E8E8",
+    lightGray: "#EFEFEF",
     placeHolder: "#A6A6A6",
     input: "#DFDFDF"
 }

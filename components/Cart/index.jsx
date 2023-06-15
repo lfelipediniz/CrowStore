@@ -123,7 +123,7 @@ const Cart = ({ onCartUpdate }) => {
                   />
                 </Row>
                 <Row>
-                  <H3>Preço:</H3>
+                  <H3></H3>
                   <p>
                     <strong>{product.price}</strong>
                   </p>

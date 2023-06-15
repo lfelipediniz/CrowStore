@@ -134,11 +134,13 @@ export const QuantityInput = styled.input`
   text-align: right;
   height: 40px;
   width: 64px;
-
+  background-color: rgba(${parseInt(colors.lightGray.slice(1, 3), 16)}, ${parseInt(colors.lightGray.slice(3, 5), 16)}, ${parseInt(colors.lightGray.slice(5, 7), 16)}, 0.75);
+  border: 1px solid ${colors.textBlack};
+  border-radius: 3px;
+  
   @media (max-width: 1120px) {
     height: 25px;
     width: auto;
-    border-radius: 2px;
   }
 `;
 

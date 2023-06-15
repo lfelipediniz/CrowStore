@@ -26,7 +26,9 @@ function User() {
           <CommonUser />
         )
       ) : (
-        <Admin />
+        <WrapContent>
+          <Login />
+        </WrapContent>
       )}
     </>
   );

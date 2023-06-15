@@ -37,12 +37,12 @@ export const IconContainer = styled.div`
   gap: 8px;
 `;
 
-export const Girl = styled.div`
+export const feminino = styled.div`
   display: flex;
   gap: 8px;
 `;
 
-export const Boy = styled.div`
+export const masculino = styled.div`
   display: flex;
   gap: 8px;
 `;

@@ -258,8 +258,8 @@ const ProductModal = ({
                 variant="outlined"
                 sx={{ marginBottom: "25px" }}
               >
-                <MenuItem value="boy">Masculino</MenuItem>
-                <MenuItem value="girl">Feminino</MenuItem>
+                <MenuItem value="masculino">Masculino</MenuItem>
+                <MenuItem value="feminino">Feminino</MenuItem>
               </TextField>
               <TextField
                 select

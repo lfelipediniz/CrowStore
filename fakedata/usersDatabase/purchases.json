@@ -4,7 +4,7 @@
         "price": "R$ 99,90",
         "image": "/CrowStore/imgs/CALCACROW.png",
         "category": "sueter",
-        "gender": "boy",
+        "gender": "masculino",
         "stock": "4"
     },
     {
@@ -12,7 +12,7 @@
         "price": "R$ 149,90",
         "image": "/CrowStore/imgs/MOLETOMCROW.png",
         "category": "moletom",
-        "gender": "girl",
+        "gender": "feminino",
         "stock": "4"
     },
     {
@@ -20,7 +20,7 @@
         "price": "R$ 79,90",
         "image": "/CrowStore/imgs/SUETERMANCROW.png",
         "category": "moletom",
-        "gender": "boy",
+        "gender": "masculino",
         "stock": "4"
     }
 ]

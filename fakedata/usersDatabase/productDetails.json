@@ -10,7 +10,7 @@
             "/CrowStore/imgs/CALCACROW5.jpg"
         ],
         "category": "calca",
-        "gender": "boy",
+        "gender": "masculino",
         "size": {
             "PP": {
                 "colors": {
@@ -71,7 +71,7 @@
             "/CrowStore/imgs/MoletomCrow/5.jpg"
         ],
         "category": "moletom",
-        "gender": "girl",
+        "gender": "feminino",
         "size": {
             "PP": {
                 "colors": {
@@ -132,7 +132,7 @@
             "/CrowStore/imgs/TOUCACROW5.jpg"
         ],
         "category": "moletom",
-        "gender": "girl",
+        "gender": "feminino",
         "size": {
             "PP": {
                 "colors": {
@@ -193,7 +193,7 @@
             "/CrowStore/imgs/SUETERMANCROW5.jpg"
         ],
         "category": "moletom",
-        "gender": "boy",
+        "gender": "masculino",
         "size": {
             "PP": {
                 "colors": {

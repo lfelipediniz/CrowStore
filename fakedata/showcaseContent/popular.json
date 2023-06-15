@@ -4,7 +4,7 @@
   "price": "R$ 89,90",
   "image": "/CrowStore/imgs/A.png",
   "category": "Calça",
-  "gender": "boy",
+  "gender": "masculino",
   "stock": "4",
   "colors": [
   "Light Pink",
@@ -27,7 +27,7 @@
   "price": "R$ 119,90",
   "image": "/CrowStore/imgs/C.png",
   "category": "Camisa",
-  "gender": "boy",
+  "gender": "masculino",
   "stock": "4",
   "colors": [
   "Misty Rose",
@@ -46,11 +46,11 @@
   "description": "Esta camisa Kiss é perfeita para os fãs da banda de rock. Com um design autêntico e estiloso, é uma peça essencial para expressar o seu estilo musical."
   },
   {
-  "productName": "Moletom Crow girl",
+  "productName": "Moletom Crow feminino",
   "price": "R$ 159,90",
   "image": "/CrowStore/imgs/MOLETOMCROW.png",
   "category": "Moletom",
-  "gender": "girl",
+  "gender": "feminino",
   "stock": "4",
   "colors": [
   "Light Salmon",
@@ -66,14 +66,14 @@
   "G",
   "XG"
   ],
-  "description": "Este moletom Crow é uma peça indispensável no guarda-roupa girl. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
+  "description": "Este moletom Crow é uma peça indispensável no guarda-roupa feminino. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
   },
   {
-  "productName": "Moletom Crow girl",
+  "productName": "Moletom Crow feminino",
   "price": "R$ 159,90",
   "image": "/CrowStore/imgs/SUETERCROW.png",
   "category": "Moletom",
-  "gender": "girl",
+  "gender": "feminino",
   "stock": "4",
   "colors": [
   "Pale Violet Red",
@@ -96,7 +96,7 @@
   "price": "R$ 129,90",
   "image": "/CrowStore/imgs/B.png",
   "category": "Moletom",
-  "gender": "boy",
+  "gender": "masculino",
   "stock": "4",
   "colors": [
   "Midnight Blue",
@@ -119,7 +119,7 @@
     "price": "R$ 99,90",
     "image": "/CrowStore/imgs/SUETERMANCROW.png",
     "category": "Moletom",
-    "gender": "boy",
+    "gender": "masculino",
     "stock": "4",
     "colors": [
       "Light Blue",
@@ -135,6 +135,6 @@
       "G",
       "XG"
     ],
-    "description": "Este suéter Crow é perfeito para compor looks boys cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
+    "description": "Este suéter Crow é perfeito para compor looks masculinos cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
   }
   ]

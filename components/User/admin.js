@@ -94,8 +94,8 @@ const Admin = () => {
       : Products.filter(
           (product) =>
             product.category === selectedCategory ||
-            (selectedCategory === "Masculino" && product.gender === "boy") ||
-            (selectedCategory === "Feminino" && product.gender === "girl")
+            (selectedCategory === "Masculino" && product.gender === "masculino") ||
+            (selectedCategory === "Feminino" && product.gender === "feminino")
         );
 
   const [searchTerm, setSearchTerm] = useState("");

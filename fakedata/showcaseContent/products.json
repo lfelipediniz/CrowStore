@@ -4,7 +4,7 @@
       "price": "R$ 129,90",
       "image": "/CrowStore/imgs/B.png",
       "category": "Moletom",
-      "gender": "boy",
+      "gender": "masculino",
       "stock": "4",
       "colors": [
         "Midnight Blue",
@@ -23,11 +23,11 @@
       "description": "Este moletom CC é perfeito para se manter aquecido e estiloso nos dias mais frios. Com um design moderno e confortável, é uma peça essencial para o seu guarda-roupa de inverno."
     },
     {
-      "productName": "Moletom Crow girl",
+      "productName": "Moletom Crow feminino",
       "price": "R$ 159,90",
       "image": "/CrowStore/imgs/MOLETOMCROW.png",
       "category": "Moletom",
-      "gender": "girl",
+      "gender": "feminino",
       "stock": "4",
       "colors": [
         "Light Salmon",
@@ -43,14 +43,14 @@
         "G",
         "XG"
       ],
-      "description": "Este moletom Crow é uma peça indispensável no guarda-roupa girl. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
+      "description": "Este moletom Crow é uma peça indispensável no guarda-roupa feminino. Com um design moderno e elegante, mantém você aquecida e estilosa nos dias mais frios."
     },
     {
       "productName": "Calça Listrada",
       "price": "R$ 89,90",
       "image": "/CrowStore/imgs/A.png",
       "category": "Calça",
-      "gender": "boy",
+      "gender": "masculino",
       "stock": "4",
       "colors": [
         "Light Pink",
@@ -69,11 +69,11 @@
       "description": "Esta calça listrada é perfeita para compor looks descolados e cheios de estilo. Feita com tecido de alta qualidade, oferece conforto e um visual moderno."
     },
     {
-      "productName": "Moletom Crow girl",
+      "productName": "Moletom Crow feminino",
       "price": "R$ 159,90",
       "image": "/CrowStore/imgs/SUETERCROW.png",
       "category": "Moletom",
-      "gender": "girl",
+      "gender": "feminino",
       "stock": "4",
       "colors": [
         "Pale Violet Red",
@@ -96,7 +96,7 @@
       "price": "R$ 119,90",
       "image": "/CrowStore/imgs/C.png",
       "category": "Camisa",
-      "gender": "boy",
+      "gender": "masculino",
       "stock": "4",
       "colors": [
         "Misty Rose",
@@ -119,7 +119,7 @@
       "price": "R$ 49,90",
       "image": "/CrowStore/imgs/TOUCACROW.png",
       "category": "Acessório",
-      "gender": "girl",
+      "gender": "feminino",
       "stock": "4",
       "colors": [
         "Light Coral",
@@ -142,7 +142,7 @@
       "price": "R$ 189,90",
       "image": "/CrowStore/imgs/F.png",
       "category": "Jaqueta",
-      "gender": "girl",
+      "gender": "feminino",
       "stock": "4",
       "colors": [
         "Light Salmon",
@@ -165,7 +165,7 @@
       "price": "R$ 99,90",
       "image": "/CrowStore/imgs/SUETERMANCROW.png",
       "category": "Moletom",
-      "gender": "boy",
+      "gender": "masculino",
       "stock": "4",
       "colors": [
         "Light Blue",
@@ -181,7 +181,7 @@
         "G",
         "XG"
       ],
-      "description": "Este suéter Crow é perfeito para compor looks boys cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
+      "description": "Este suéter Crow é perfeito para compor looks masculinos cheios de estilo. Feito com materiais de alta qualidade, oferece conforto e elegância em todas as ocasiões."
     }
   ]
   

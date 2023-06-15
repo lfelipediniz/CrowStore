@@ -45,8 +45,8 @@ function ShowCase() {
           </IconContainer>
         </GenderBtn>
         <GenderBtn
-          selected={selectedGender === "girl"}
-          onClick={() => handleGenderSelection("girl")}
+          selected={selectedGender === "feminino"}
+          onClick={() => handleGenderSelection("feminino")}
         >
           <IconContainer>
             <FaFemale />
@@ -54,8 +54,8 @@ function ShowCase() {
           </IconContainer>
         </GenderBtn>
         <GenderBtn
-          selected={selectedGender === "boy"}
-          onClick={() => handleGenderSelection("boy")}
+          selected={selectedGender === "masculino"}
+          onClick={() => handleGenderSelection("masculino")}
         >
           <IconContainer>
             <FaMale />

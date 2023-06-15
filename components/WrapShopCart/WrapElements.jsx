@@ -3,28 +3,53 @@ import styled from "styled-components";
 
 export const ShopcartWrapper = styled.div`
   background-color: ${colors.primary};
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-  
+  @media (max-width: 1120px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  @media (max-width: 570px) {
+    padding: 10px;
+  }
 `;
 
 export const ShopcartContainer = styled.div`
   display: grid;
-
-  overflow: hidden;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   max-width: 2000px;
+
+  @media (max-width: 1120px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width: 570px) {
+    gap: 10px;
+  }
 `;
 
 export const ProductContainer = styled.div`
   padding: 20px;
+
+  @media (max-width: 570px) {
+    padding: 10px;
+  }
 `;
 
 export const PaymentContainer = styled.div`
   padding: 20px;
+
+  @media (max-width: 570px) {
+    padding: 10px;
+  }
 `;
 
 export const Header = styled.h1`
@@ -35,9 +60,15 @@ export const Header = styled.h1`
   margin-bottom: 0;
   padding-bottom: 32px;
   border-bottom: 1px solid ${colors.textBlack};
+
+
 `;
 
 export const Link = styled.a`
   color: ${colors.textBlack};
   width: 100%;
+
+  @media (max-width: 1120px) {
+    margin-top: 20px;
+  }
 `;

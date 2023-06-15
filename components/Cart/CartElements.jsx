@@ -17,6 +17,10 @@ export const StyledCart = styled.div`
 export const ProductContainer = styled.div`
   background-color: ${colors.lightGray};
   width: 550px;
+
+  /* @media (max-width: 560px) {
+    display: none;
+} */
   height: 256px;
   position: relative;
   margin-bottom: 32px;

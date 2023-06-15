@@ -1,5 +1,6 @@
 import { colors } from "../../styles/colors";
 import styled from "styled-components";
+import { fonts } from "../../styles/fonts";
 
 export const PaymentOptionsContainer = styled.div`
     background-color: ${colors.secondary};
@@ -30,9 +31,17 @@ export const PaymentOptionsContainer = styled.div`
         padding: 8px 0
     }
 
-    @media (max-width: 464px) {
-        width: 100%
-    }
+    @media (max-width: 1120px) {
+      width: 90vh;
+  }
+
+  @media (max-width: 660px) {
+      width: 380px;
+  }
+
+  @media (max-width: 370px) {
+      width: 320px;
+  }
 
 
 `;
@@ -43,6 +52,11 @@ export const PaymentLogo = styled.img`
   margin: 0 auto;
   display: block;
   padding-bottom: 50px;
+
+  @media (max-width: 660px) {
+      width: 180px;
+  }
+
 `;
 
 export const PaymentLogoContainer = styled.div`
@@ -67,12 +81,21 @@ export const Option = styled.div`
   img {
     height: auto;
     margin-bottom: 16px;
+
+      @media (max-width: 660px) {
+      width: 40px;
+  }
   }
 `;
 
 export const OptionLabel = styled.label`
   text-align: center;
-  color: ${props => (props.selected ? "#ff6765" : "inherit")};
+  color: ${props => (props.selected ? colors.ctaBlack : "inherit")};
+
+      @media (max-width: 660px) {
+      font-size: ${fonts.textM};
+  }
+
 `;
 
 export const ContactInfo = styled.div`

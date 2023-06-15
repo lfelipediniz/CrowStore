@@ -5,14 +5,7 @@ import { fonts } from "../../styles/fonts";
 export const StyledCart = styled.div`
   order: 0;
 
-  @media (max-width: 864px) {
-    width: 100%;
-  }
 
-  @media (min-width: 864px) {
-    flex-grow: 1;
-    margin-right: 16px;
-  }
 
   @media (max-width: 1120px) {
     display: flex;
@@ -134,8 +127,9 @@ export const QuantityInput = styled.input`
   width: 64px;
 
   @media (max-width: 1120px) {
-    height: 30px;
+    height: 25px;
     width: auto;
+    border-radius: 2px;
   }
 `;
 

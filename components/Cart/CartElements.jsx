@@ -40,6 +40,12 @@ export const ProductImage = styled.img`
   object-position: center;
 
     border-radius: 5px 0 0 5px;
+
+    @media (max-width: 1120px) {
+    width: 230px;
+
+    border-radius: 5px 5px 0 0px;
+  }
 `;
 
 export const ProductDescription = styled.div`

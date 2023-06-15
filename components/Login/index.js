@@ -8,6 +8,7 @@ import data from '../../fakedata/usersDatabase/users.json';
 
 
 
+
 const Login = () => {
 
   const [userN, setUsername] = useState('');
@@ -35,7 +36,7 @@ const handleFormlogin = (event) => {
     "category": "admin"
   }
   for (var i = 0; i < data.length; i++){
-    if (data[i].userName == admobj.userName && data[i].password == admobj.password && data[i].category == admobj.ca){
+    if (data[i].userName == admobj.userName && data[i].password == admobj.password && data[i].category == admobj.category){
       setGlobalState("isAdm", true);
     } 
   }
@@ -56,17 +57,14 @@ const handleFormsignup = (event) => {
     "password": senha,
     "category": ""
   }
+
+      
   for (var i = 0; i < data.length; i++){
     if (data[i].userName == userobj.userName && data[i].password == userobj.password){
       //usuario já existente
     } else {
-      const database = JSON.parse(data);
-      database.push({
-        userName: userN,
-        password: senha,
-      });
-    
-      fs.writeFileSync(data, JSON.stringify(database));
+      
+      
       //usuario cadastrado!
     }
   }

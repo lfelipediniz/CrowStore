@@ -4,6 +4,7 @@ import { colors } from '../../styles/colors';
 export const Container = styled.div`
   margin-top: 100px;
   display: grid;
+  background-color: ${colors.primary}; /* Adicionado */
   grid-template-columns: 200px auto;
   grid-template-rows: auto auto;
   grid-template-areas:
@@ -57,12 +58,14 @@ export const SearchBarContainer = styled.div`
   grid-area: pesquisa;
   margin-top: -100px;
   margin-bottom: 50px;
+  background-color: ${colors.primary};
 
 `;
 
 export const Content = styled.div`
   grid-area: conteudo;
   overflow-y: auto;
+
 
     /* Hide Scroll */
     scrollbar-width: thin; /* Firefox */

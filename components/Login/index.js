@@ -110,7 +110,7 @@ const Login = () => {
             </LoginForm>
               <LoginBtnContainer>
                 {" "}
-                <Loginbut type="submit" className="botao">
+                <Loginbut onClick={handleFormlogin} className="botao">
                   Login
                 </Loginbut>
 

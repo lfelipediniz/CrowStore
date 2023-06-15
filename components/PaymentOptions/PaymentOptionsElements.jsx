@@ -81,7 +81,7 @@ export const Option = styled.div`
   img {
     height: auto;
     margin-bottom: 20px;
-    width: 80px;
+    width: 60px;
 
       @media (max-width: 660px) {
       width: 50px;

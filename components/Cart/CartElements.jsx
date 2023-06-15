@@ -6,7 +6,6 @@ export const StyledCart = styled.div`
   order: 0;
 
 
-
   @media (max-width: 1120px) {
     display: flex;
     flex-direction: row;
@@ -26,6 +25,7 @@ export const ProductContainer = styled.div`
   margin-bottom: 32px;
   display: flex;
   align-items: stretch;
+  border-radius: 5px;
 
   @media (max-width: 1120px) {
     display: none;
@@ -38,6 +38,8 @@ export const ProductImage = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: center;
+
+    border-radius: 5px 0 0 5px;
 `;
 
 export const ProductDescription = styled.div`
@@ -79,6 +81,7 @@ export const RemoveButton = styled.button`
   height: 36px;
   padding: 8px 16px;
   margin-left: auto;
+  border-radius: 3px;
 
   @media (max-width: 1120px) {
     margin-left: 0;

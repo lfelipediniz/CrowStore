@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   SideNav,
@@ -31,7 +31,30 @@ const Admin = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1115 && editingMode) {
+        setEditingMode(false);
+        setShowModal(false);
+        alert("Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px");
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [editingMode]);
+
   const toggleEditingMode = () => {
+    if (window.innerWidth < 1115) {
+      alert("Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px");
+      return;
+    }
+
     setEditingMode(!editingMode);
   };
 
@@ -115,97 +138,98 @@ const Admin = () => {
 
   return (
     <>
-    <Container>
-
-      <SideNav>
-        <Box>
-          <List>
-            {/* Modo de edição */}
-            <EditButtonCotainer>
-              <ListItem button onClick={toggleEditingMode}>
-                <ListItemText
-                  primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
-                />
-              </ListItem>
-            </EditButtonCotainer>
-
-            {/* Adicionar Produto */}
-            {editingMode && (
-              <ListItem button onClick={() => handleOpenModalCreate()}>
-                <ListItemText primary="Adicionar Produto" />
-              </ListItem>
-            )}
-
-            {/* Adicionar Categoria */}
-            {editingMode && (
-              <>
-                <ListItem button onClick={handleAddCategory}>
-                  <ListItemText primary="Adicionar Categoria" />
+      <Container>
+        <SideNav>
+          <Box>
+            <List>
+              {/* Modo de edição */}
+              <EditButtonCotainer>
+                <ListItem button onClick={toggleEditingMode}>
+                  <ListItemText
+                    primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                  />
                 </ListItem>
-                <Divider />
-              </>
-            )}
+              </EditButtonCotainer>
 
-            {/* Categorias */}
-            {categories.map((category, index) => (
-              <ListItem
-                key={index}
-                button
-                selected={selectedCategory === category}
-                onClick={() => handleCategoryClick(category)}
-              >
-                <ListItemText primary={category} />
-                {category !== "Todos" &&
-                  category !== "Masculino" &&
-                  category !== "Feminino" &&
-                  editingMode && (
-                    <RemoveButton onClick={() => handleRemoveCategory(index)}>
-                      <FaTrashAlt />
-                    </RemoveButton>
-                  )}
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </SideNav>
-      <SearchBarContainer>
-      <SearchBar onChange={setSearchTerm} />
-      </SearchBarContainer>
-      <Content>
-        <ProductContainer>
-          {searchFilteredProducts.map((product, index) => (
-            <ProductCardEdit
-              key={index}
-              onClick={(e) => handleOpenModal(e, product)}
-              editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
-            >
-              <ProductCard
-                img={product.image}
-                productName={product.productName}
-                price={product.price}
-              />
+              {/* Adicionar Produto */}
               {editingMode && (
-                <div className="edit-icon">
-                  <FaEdit />
-                </div>
+                <ListItem button onClick={() => handleOpenModalCreate()}>
+                  <ListItemText primary="Adicionar Produto" />
+                </ListItem>
               )}
-            </ProductCardEdit>
-          ))}
-        </ProductContainer>
-      </Content>
 
-      {/* Modal de adicionar/editar produto */}
-      <ProductModal
-        open={showModal}
-        onClose={handleCloseModal}
-        product={selectedProduct}
-        onSave={handleSaveProduct}
-        onRemove={handleRemoveProduct}
-        categories={categories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
-    </Container>
+              {/* Adicionar Categoria */}
+              {editingMode && (
+                <>
+                  <ListItem button onClick={handleAddCategory}>
+                    <ListItemText primary="Adicionar Categoria" />
+                  </ListItem>
+                  <Divider />
+                </>
+              )}
+
+              {/* Categorias */}
+              {categories.map((category, index) => (
+                <ListItem
+                  key={index}
+                  button
+                  selected={selectedCategory === category}
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  <ListItemText primary={category} />
+                  {category !== "Todos" &&
+                    category !== "Masculino" &&
+                    category !== "Feminino" &&
+                    editingMode && (
+                      <RemoveButton
+                        onClick={() => handleRemoveCategory(index)}
+                      >
+                        <FaTrashAlt />
+                      </RemoveButton>
+                    )}
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </SideNav>
+        <SearchBarContainer>
+          <SearchBar onChange={setSearchTerm} />
+        </SearchBarContainer>
+        <Content>
+          <ProductContainer>
+            {searchFilteredProducts.map((product, index) => (
+              <ProductCardEdit
+                key={index}
+                onClick={(e) => handleOpenModal(e, product)}
+                editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
+              >
+                <ProductCard
+                  img={product.image}
+                  productName={product.productName}
+                  price={product.price}
+                />
+                {editingMode && (
+                  <div className="edit-icon">
+                    <FaEdit />
+                  </div>
+                )}
+              </ProductCardEdit>
+            ))}
+          </ProductContainer>
+        </Content>
+
+        {/* Modal de adicionar/editar produto */}
+        <ProductModal
+          open={showModal}
+          onClose={handleCloseModal}
+          product={selectedProduct}
+          onSave={handleSaveProduct}
+          onRemove={handleRemoveProduct}
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      </Container>
     </>
   );
 };

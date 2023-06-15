@@ -34,20 +34,20 @@ margin-right: 80px;
   width: 375px;
   height: 500px;
   padding: 20px;
-  background-color: black;
+  background-color: ${colors.secondary};
 
   
 `;
 
 export const LoginTitle = styled.h2`
-  color: white;
+  color: ${colors.primary};
   text-align: center;
   margin-top: 10%;
   font-size: 50px;
 `;
 
 export const LoginForm = styled.form`
-  color: white;
+  color: ${colors.primary};
   margin-top: 25%;  
 `;
 
@@ -57,13 +57,13 @@ export const Loginlabel = styled.label`
 `;
 
 export const LoginInput = styled.input`
-  color: white;
+  color: ${colors.primary};
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
   border: none;
-  border-bottom: 1px solid white;
-  background-color: black;
+  border-bottom: 1px solid ${colors.primary};
+  background-color: ${colors.secondary};
 `;
 
 export const Loginbut = styled.button`
@@ -73,8 +73,8 @@ export const Loginbut = styled.button`
   padding: 10px;
   margin-left: 10%;
   margin-top: 75px;
-  background-color: white;
-  color: black;
+  background-color: ${colors.primary};
+  color: ${colors.secondary};
   border: none;
   text-align: center;
   text-decoration: none;
@@ -89,8 +89,8 @@ export const Loginbut1 = styled.button`
   padding: 10px;
   margin-top: -15%;
   margin-left: 50%;
-  background-color: white;
-  color: black;
+  background-color: ${colors.primary};
+  color: ${colors.secondary};
   border: none;
   text-align: center;
   text-decoration: none;

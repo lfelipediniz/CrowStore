@@ -63,6 +63,8 @@ const WrapShopCart = () => {
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
       <WrapContent>
+
+
         
       <Header>Meu Carrinho</Header>
     <Link>≪ Continuar comprando</Link>

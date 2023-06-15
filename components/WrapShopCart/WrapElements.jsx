@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${colors.primary};
-`
+`;
 
 export const ShopcartWrapper = styled.div`
   background-color: ${colors.primary};
@@ -63,9 +63,12 @@ export const Header = styled.h1`
   width: 100%;
   margin-bottom: 0;
   padding-bottom: 32px;
+  margin-bottom: 20px;
   border-bottom: 1px solid ${colors.textBlack};
 
-
+  @media (max-width: 1120px) {
+    font-size: 1.5em;
+  }
 `;
 
 export const Link = styled.a`

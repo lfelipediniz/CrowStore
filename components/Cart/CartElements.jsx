@@ -16,7 +16,7 @@ export const StyledCart = styled.div`
 
 export const ProductContainer = styled.div`
   background-color: ${colors.lightGray};
-  width: 100%;
+  width: 550px;
   height: 256px;
   position: relative;
   margin-bottom: 32px;

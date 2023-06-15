@@ -9,6 +9,7 @@ import {
     ContactInfo,
     ConfirmButton,
 } from "./PaymentOptionsElements";
+import { PaymentContainer } from "../WrapShopCart/WrapElements";
 
 const PaymentForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
@@ -87,7 +88,6 @@ const PaymentForm = ({ onSubmit }) => {
         <PaymentOptionsContainer>
             <PaymentLogo src="/CrowStore/imgs/CROWPayments.svg" alt="Crow Store Payments" />
             <form onSubmit={handleSubmit}>
-                <p>Forma de Pagamento</p>
                 <ModalityContainer>
                     <Option
                         onClick={() => handlePaymentMethodChange("pix")}

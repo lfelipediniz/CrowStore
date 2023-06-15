@@ -6,6 +6,7 @@ export const PaymentOptionsContainer = styled.div`
     padding: 32px;
     flex-basis: 448px;
     order: 1;
+    border-radius: 5px;
 
     * {
         color: ${colors.white}
@@ -39,7 +40,16 @@ export const PaymentOptionsContainer = styled.div`
 export const PaymentLogo = styled.img`
   width: 280px;
   height: auto;
-  margin: 32px 52px;
+  margin: 0 auto;
+  display: block;
+  padding-bottom: 50px;
+`;
+
+export const PaymentLogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Defina a altura desejada para a div */
 `;
 
 export const ModalityContainer = styled.div`

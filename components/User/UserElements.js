@@ -100,7 +100,7 @@ export const SearchContainer = styled.div`
 `;
 
 export const ScrollableContainer = styled.div`
-  grid-area: scrollable;
+padding-top: 50px;
   overflow-y: auto;
   max-height: calc(100vh);
   width: 100%;

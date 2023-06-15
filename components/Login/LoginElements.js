@@ -2,20 +2,41 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 
+export const LoginWrap = styled.div`
+background-color: ${colors.primary};
+@media (min-width: 2000px) {
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }`
+
 export const UserContainer = styled.div`
   padding: 3rem 0;
   width: 100%;
   height: auto;
   background-color: ${colors.primary};
+  background-image: url(CrowStore/imgs/bannerLogin.png);
+  background-size: cover;
+  display: flex;
+  justify-content: flex-end;
 
+  @media (min-width: 2000px) {
+    display: grid;
+
+    overflow: hidden;
+    width: 1440px;
+  }
 `;
+
 export const LoginContainer = styled.div`
-  margin-top: 10%;
-  margin-left: 60%;
+margin-top: 150px;
+margin-right: 80px;
   width: 375px;
   height: 500px;
   padding: 20px;
   background-color: black;
+
+  
 `;
 
 export const LoginTitle = styled.h2`

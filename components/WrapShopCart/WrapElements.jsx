@@ -1,6 +1,10 @@
 import { colors } from "../../styles/colors";
 import styled from "styled-components";
 
+export const Container = styled.div`
+  background-color: ${colors.primary};
+`
+
 export const ShopcartWrapper = styled.div`
   background-color: ${colors.primary};
   display: grid;

@@ -7,7 +7,7 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Cart from "../Cart";
 import PaymentOptions from "../PaymentOptions";
-import { BodyContainer, Header, Link, ShopcartContainer, ProductContainer, PaymentContainer, ShopcartWrapper,} from "./WrapElements.jsx";
+import { BodyContainer, Header, Link, ShopcartContainer, ProductContainer, PaymentContainer, ShopcartWrapper, Container,} from "./WrapElements.jsx";
 import {WrapContent} from "../../components/ReusedComponents/WrapContent"
 const WrapShopCart = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,10 +59,11 @@ const WrapShopCart = () => {
 
   return (
     <>
+      <Container>
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
-
       <WrapContent>
+        
       <Header>Meu Carrinho</Header>
     <Link>≪ Continuar comprando</Link>
     </WrapContent>
@@ -74,7 +75,9 @@ const WrapShopCart = () => {
         <PaymentContainer>
         <PaymentOptions onSubmit={handleSubmission} />
         </PaymentContainer>
-      </ShopcartContainer></ShopcartWrapper>
+      </ShopcartContainer>
+      </ShopcartWrapper>
+      </Container>
       <Footer />
     </>
   );

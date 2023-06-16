@@ -70,6 +70,10 @@ To enter administrator mode just put these data:
 - Login: joaopereiraadm
 - Password: 12345
 
+To enter common user mode just put these data:
+- Login: joaopereira
+- Password: 12345678
+
 ## Navigation Diagram
 
 ```mermaid

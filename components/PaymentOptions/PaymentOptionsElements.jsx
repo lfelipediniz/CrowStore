@@ -115,4 +115,5 @@ border: 0;
 padding: 16px 32px;
 margin: 16px auto;
 display: block;
+border-radius: 5px;
 `;

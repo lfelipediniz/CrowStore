@@ -16,6 +16,8 @@ export const Container = styled.div`
 export const SideNav = styled.div`
   grid-area: sidenav;
   overflow-y: auto;
+  height: 400px;
+  margin-left: 25px;
   background-color: rgba(
     ${parseInt(colors.secondary.slice(1, 3), 16)},
     ${parseInt(colors.secondary.slice(3, 5), 16)},
@@ -24,7 +26,8 @@ export const SideNav = styled.div`
   );
 
   color: ${colors.primary};
-  border-radius: 0 10px 10px 0;
+
+  border-radius: 5px;
 
     /* Hide Scroll */
     scrollbar-width: thin; /* Firefox */
@@ -179,7 +182,7 @@ export const SidebarContainer = styled.div`
 export const EditButtonCotainer = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
   background-color: ${colors.cta};
-  border-radius: 0 7px 7px 0;
+
 `;
 
 export const ProductCardEdit = styled.div`

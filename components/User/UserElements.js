@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 import { colors } from '../../styles/colors';
+import { fonts } from '../../styles/fonts';
+
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 
 export const Container = styled.div`
   margin-top: 100px;
@@ -204,3 +211,33 @@ export const ProductCardEdit = styled.div`
   }
 `;
 
+// common
+
+export const Hi = styled.h2`
+font-size: ${fonts.headingM};
+padding: 10px;
+margin-top: 10px;
+`
+
+export const Form = styled('form')`
+  display: grid;
+  gap: 16px;
+  max-width: 300px;
+  margin: 0 auto;
+`;
+
+export const UploadButton = styled('button')`
+  background-color: #f50057;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+export const AvatarContainer = styled(Box)`
+display: grid;
+grid-template-columns: 1fr auto;
+align-items: center;
+gap: 16px;
+`;

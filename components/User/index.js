@@ -26,8 +26,10 @@ function User() {
           <CommonUser />
         )
       ) : (
-          <Login />
+          // <Login />
+          <CommonUser />
       )}
+      
     </>
   );
 }

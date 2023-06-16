@@ -46,6 +46,10 @@ export const LoginContainer = styled.div`
   }
 
   @media (max-width: 425px) {
+    width: 300px;
+  }
+
+  @media (max-width: 330px) {
     width: auto;
   }
 `;

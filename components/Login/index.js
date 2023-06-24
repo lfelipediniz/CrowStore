@@ -1,5 +1,9 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
+import {
+    Alert,
+    AlertTitle
+} from "@mui/material";
 import {
     LoginContainer,
     LoginTitle,
@@ -11,13 +15,16 @@ import {
     LoginWrap,
     LoginBtnContainer,
 } from "../Login/LoginElements";
-import { collection, query, where, getDocs, getFirestore } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, getFirestore } from "firebase/firestore";
+import { setGlobalState } from "../User/index";
 import firebase from "../../services/firebase.jsx";
-import { setGlobalState, useGlobalState } from "../User/index";
 
 const Login = () => {
     const [userN, setUsername] = useState("");
     const [senha, setPassword] = useState("");
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("");
+    const [alertSeverity, setAlertSeverity] = useState("success");
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -25,6 +32,12 @@ const Login = () => {
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+    };
+
+    const showAlert = (message, severity) => {
+        setAlertMessage(message);
+        setAlertSeverity(severity);
+        setAlertOpen(true);
     };
 
     const handleFormlogin = async (event) => {
@@ -53,20 +66,26 @@ const Login = () => {
 
     const handleFormsignup = async (event) => {
         event.preventDefault();
-        const usersRef = collection(firebase.firestore, "users");
+        const usersRef = collection(getFirestore(firebase), "users");
         const q = query(usersRef, where("userName", "==", userN));
         const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
+        // Check if input fields are empty
+        if (userN.trim() === "" || senha.trim() === "") {
+            // Handle empty fields error
+            showAlert("Por favor preencha a todos os campos.", "warning");
+        } else if (!querySnapshot.empty) {
             // User already exists
+            showAlert("Este usuário já existe. Por favor escolha outro nome de usuário.", "error");
         } else {
             // Register user in Firestore
             const newUser = {
                 userName: userN,
                 password: senha,
-                category: "",
+                category: "common",
             };
             await addDoc(usersRef, newUser);
+            handleFormlogin(event);
         }
     };
 
@@ -95,6 +114,14 @@ const Login = () => {
                                 onChange={handlePasswordChange}
                             />
                         </LoginForm>
+                        {alertOpen && (
+                            <Alert variant="filled" severity={alertSeverity}>
+                                <AlertTitle>
+                                    {alertSeverity === "error" ? "Error" : alertSeverity === "warning" ? "Warning" : "Success"}
+                                </AlertTitle>
+                                {alertMessage}
+                            </Alert>
+                        )}
                         <LoginBtnContainer>
                             {" "}
                             <Loginbut onClick={handleFormlogin} className="botao">

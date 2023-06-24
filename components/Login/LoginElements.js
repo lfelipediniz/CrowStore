@@ -36,7 +36,6 @@ export const LoginContainer = styled.div`
   margin-top: 150px;
   margin-right: 80px;
   width: 375px;
-  height: 500px;
   padding: 20px;
   background-color: ${colors.secondary};
   border-radius: 5px;

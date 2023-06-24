@@ -3,7 +3,7 @@ import '../styles/globals.css'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import firebase from './_firebase.jsx'
+// import firestore from './_firestore.jsx'
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter()

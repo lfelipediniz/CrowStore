@@ -10,7 +10,7 @@ import {
     LoginForm,
     Loginlabel,
     LoginInput,
-    Loginbut,
+    LoginBtn,
     UserContainer,
     LoginWrap,
     LoginBtnContainer,
@@ -22,16 +22,22 @@ import firebase from "../../services/firebase.jsx";
 const Login = () => {
     const [userN, setUsername] = useState("");
     const [senha, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [isSigningUp, setIsSigningUp] = useState(false);
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertSeverity, setAlertSeverity] = useState("success");
 
-    const handleUsernameChange = (event) => {
+    const HandleUsernameChange = (event) => {
         setUsername(event.target.value);
     };
 
-    const handlePasswordChange = (event) => {
+    const HandlePasswordChange = (event) => {
         setPassword(event.target.value);
+    };
+
+    const HandleEmailChange = (event) => {
+        setEmail(event.target.value);
     };
 
     const showAlert = (message, severity) => {
@@ -40,8 +46,16 @@ const Login = () => {
         setAlertOpen(true);
     };
 
-    const handleFormlogin = async (event) => {
+    const HandleLogin = async (event) => {
         event.preventDefault();
+
+        // Check if input fields are empty
+        console.log(userN, senha);
+        if (userN.trim() === "" || senha.trim() === "") {
+            showAlert("Por favor preencha todos os campos.", "warning");
+            return;
+        }
+
         const usersRef = collection(getFirestore(firebase), "users");
         const q = query(
             usersRef,
@@ -57,6 +71,8 @@ const Login = () => {
                 setGlobalState("isAdm", true);
             }
             setGlobalState("isLoggedInn", true);
+        } else {
+            showAlert("Usuário ou senha inválidos.", "error");
         }
 
         setUsername("");
@@ -64,7 +80,7 @@ const Login = () => {
     };
 
 
-    const handleFormsignup = async (event) => {
+    const HandleSignUp = async (event) => {
         event.preventDefault();
         const usersRef = collection(getFirestore(firebase), "users");
         const q = query(usersRef, where("userName", "==", userN));
@@ -85,8 +101,15 @@ const Login = () => {
                 category: "common",
             };
             await addDoc(usersRef, newUser);
-            handleFormlogin(event);
+            HandleLogin(event);
         }
+    };
+
+    const HandleToggleForm = () => {
+        setIsSigningUp((prevState) => !prevState);
+        setUsername("");
+        setPassword("");
+        setEmail("");
     };
 
     return (
@@ -94,25 +117,35 @@ const Login = () => {
             <UserContainer>
                 <WrapContent>
                     <LoginContainer>
-                        <LoginTitle>Login</LoginTitle>
-                        <LoginForm onSubmit={handleFormlogin}>
-                            <Fragment>
-                                <Loginlabel htmlFor="username">Usuário:</Loginlabel>
-                                <LoginInput
-                                    type="text"
-                                    id="username"
-                                    value={userN}
-                                    onChange={handleUsernameChange}
-                                />
-                            </Fragment>
-
-                            <Loginlabel htmlFor="password">Senha</Loginlabel>
+                        <LoginTitle>{isSigningUp ? "Cadastro" : "Login"}</LoginTitle>
+                        <LoginForm onSubmit={isSigningUp ? HandleSignUp : HandleLogin}>
+                            <Loginlabel htmlFor="username">Usuário:</Loginlabel>
+                            <LoginInput
+                                type="text"
+                                id="username"
+                                value={userN}
+                                onChange={HandleUsernameChange}
+                            />
+                            <Loginlabel htmlFor="password">Senha:</Loginlabel>
                             <LoginInput
                                 type="password"
                                 id="password"
                                 value={senha}
-                                onChange={handlePasswordChange}
+                                onChange={HandlePasswordChange}
                             />
+                            {isSigningUp && (
+                                <>
+
+                                    <Loginlabel htmlFor="email">E-mail:</Loginlabel>
+                                    <LoginInput
+                                        type="email"
+                                        id="email"
+                                        value={email}
+                                        onChange={HandleEmailChange}
+                                    />
+                                </>
+                            )}
+
                         </LoginForm>
                         {alertOpen && (
                             <Alert variant="filled" severity={alertSeverity}>
@@ -123,14 +156,12 @@ const Login = () => {
                             </Alert>
                         )}
                         <LoginBtnContainer>
-                            {" "}
-                            <Loginbut onClick={handleFormlogin} className="botao">
-                                Login
-                            </Loginbut>
-
-                            <Loginbut onClick={handleFormsignup} className="botao1">
-                                Cadastrar-se
-                            </Loginbut>
+                            <LoginBtn onClick={HandleToggleForm}>
+                                {isSigningUp ? "< Login" : "Cadastrar-se >"}
+                            </LoginBtn>
+                            <LoginBtn type="submit">
+                                {isSigningUp ? "Confirmar" : "Acessar"}
+                            </LoginBtn>
                         </LoginBtnContainer>
                     </LoginContainer>
                 </WrapContent>

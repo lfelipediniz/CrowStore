@@ -70,7 +70,7 @@ const Login = () => {
             if (user.category === "admin") {
                 setGlobalState("isAdm", true);
             }
-            setGlobalState("isLoggedInn", true);
+            setGlobalState("isLoggedIn", true);
         } else {
             showAlert("Usuário ou senha inválidos.", "error");
         }
@@ -82,27 +82,33 @@ const Login = () => {
 
     const HandleSignUp = async (event) => {
         event.preventDefault();
+        console.log("I'm inside!")
+        if (userN.trim() === "" || senha.trim() === "") {
+            // Handle empty fields error
+            showAlert("Por favor preencha a todos os campos.", "warning");
+            console.log("Heya!")
+            return;
+        }
+
         const usersRef = collection(getFirestore(firebase), "users");
         const q = query(usersRef, where("userName", "==", userN));
         const querySnapshot = await getDocs(q);
 
         // Check if input fields are empty
-        if (userN.trim() === "" || senha.trim() === "") {
-            // Handle empty fields error
-            showAlert("Por favor preencha a todos os campos.", "warning");
-        } else if (!querySnapshot.empty) {
+        if (!querySnapshot.empty) {
             // User already exists
             showAlert("Este usuário já existe. Por favor escolha outro nome de usuário.", "error");
-        } else {
-            // Register user in Firestore
-            const newUser = {
-                userName: userN,
-                password: senha,
-                category: "common",
-            };
-            await addDoc(usersRef, newUser);
-            HandleLogin(event);
+            return;
         }
+
+        // Register user in Firestore
+        const newUser = {
+            userName: userN,
+            password: senha,
+            category: "common",
+        };
+        await addDoc(usersRef, newUser);
+        HandleLogin(event);
     };
 
     const HandleToggleForm = () => {
@@ -159,7 +165,7 @@ const Login = () => {
                             <LoginBtn onClick={HandleToggleForm}>
                                 {isSigningUp ? "< Login" : "Cadastrar-se >"}
                             </LoginBtn>
-                            <LoginBtn type="submit">
+                            <LoginBtn type="submit" onClick={isSigningUp ? HandleSignUp : HandleLogin}>
                                 {isSigningUp ? "Confirmar" : "Acessar"}
                             </LoginBtn>
                         </LoginBtnContainer>

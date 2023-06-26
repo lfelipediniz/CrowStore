@@ -35,10 +35,14 @@ export const UserContainer = styled.div`
 export const LoginContainer = styled.div`
   margin-top: 150px;
   margin-right: 80px;
-  width: 375px;
+  width: 384px;
+  height: 512px;
   padding: 20px;
   background-color: ${colors.secondary};
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (max-width: 1120px) {
     margin-right: 0px;
@@ -105,16 +109,18 @@ padding: 0;
 
 export const LoginBtnContainer = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: auto;
   padding: 10px;
+  align-self: flex-end; 
 
   @media (max-width: 425px) {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     padding: 0;
     gap: 20px;
   }

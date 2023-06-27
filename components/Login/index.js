@@ -16,8 +16,9 @@ import {
     LoginBtnContainer,
 } from "../Login/LoginElements";
 import { collection, query, where, getDocs, addDoc, getFirestore } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { setGlobalState } from "../User/index";
-import firebase from "../../services/firebase.jsx";
+import firebase from "/services/firebase.jsx";
 
 const Login = () => {
     const [userN, setUsername] = useState("");
@@ -27,6 +28,7 @@ const Login = () => {
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState("");
     const [alertSeverity, setAlertSeverity] = useState("success");
+    const auth = getAuth(firebase);
 
     const HandleUsernameChange = (event) => {
         setUsername(event.target.value);
@@ -56,66 +58,70 @@ const Login = () => {
             return;
         }
 
-        const usersRef = collection(getFirestore(firebase), "users");
-        const q = query(
-            usersRef,
-            where("userName", "==", userN),
-            where("password", "==", senha)
-        );
-        const querySnapshot = await getDocs(q);
+        try {
+            await signInWithEmailAndPassword(email, senha);
+            const user = auth.currentUser;
 
-        if (!querySnapshot.empty) {
-            const user = querySnapshot.docs[0].data();
-
-            if (user.category === "admin") {
-                setGlobalState("isAdm", true);
+            if (user) {
+                if (user.category === "admin") {
+                    // Update the global state variable
+                    setGlobalState("isAdm", true);
+                }
+                setGlobalState("isLoggedInn", true);
+            } else {
+                showAlert("Usuário ou senha inválidos.", "error");
             }
-            setGlobalState("isLoggedIn", true);
-        } else {
-            showAlert("Usuário ou senha inválidos.", "error");
-        }
 
-        setUsername("");
-        setPassword("");
+            setUsername("");
+            setPassword("");
+        } catch (error) {
+            showAlert(error.message, "error");
+        }
     };
 
 
     const HandleSignUp = async (event) => {
         event.preventDefault();
-        console.log("I'm inside!")
+
         if (userN.trim() === "" || senha.trim() === "") {
-            // Handle empty fields error
-            showAlert("Por favor preencha a todos os campos.", "warning");
-            console.log("Heya!")
+            showAlert("Por favor preencha todos os campos.", "warning");
             return;
         }
 
-        const usersRef = collection(getFirestore(firebase), "users");
-        const q = query(usersRef, where("userName", "==", userN));
-        const querySnapshot = await getDocs(q);
+        try {
+            const usersRef = collection(getFirestore(firebase), "users");
+            const q = query(usersRef, where("userName", "==", userN));
+            const querySnapshot = await getDocs(q);
 
-        // Check if input fields are empty
-        if (!querySnapshot.empty) {
-            // User already exists
-            showAlert("Este usuário já existe. Por favor escolha outro nome de usuário.", "error");
-            return;
+            if (!querySnapshot.empty) {
+                showAlert(
+                    "Este usuário já existe. Por favor escolha outro nome de usuário.",
+                    "error"
+                );
+                return;
+            }
+
+            await createUserWithEmailAndPassword(email, senha);
+
+            // Register user in Firestore or other collections if needed
+            const newUser = {
+                userName: userN,
+                password: senha,
+                category: "common",
+            };
+            await addDoc(usersRef, newUser);
+
+            HandleLogin(event);
+        } catch (error) {
+            showAlert(error.message, "error");
         }
-
-        // Register user in Firestore
-        const newUser = {
-            userName: userN,
-            password: senha,
-            category: "common",
-        };
-        await addDoc(usersRef, newUser);
-        HandleLogin(event);
     };
 
     const HandleToggleForm = () => {
         setIsSigningUp((prevState) => !prevState);
-        setUsername("");
-        setPassword("");
-        setEmail("");
+        setAlertOpen(false);
+        setAlertMessage("");
+        setAlertSeverity("success");
     };
 
     return (

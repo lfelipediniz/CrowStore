@@ -36,13 +36,14 @@ export const LoginContainer = styled.div`
   margin-top: 150px;
   margin-right: 80px;
   width: 384px;
-  height: 512px;
+  min-height: 512px;
   padding: 20px;
   background-color: ${colors.secondary};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 32px;
 
   @media (max-width: 1120px) {
     margin-right: 0px;
@@ -113,7 +114,6 @@ export const LoginBtnContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: auto;
-  padding: 10px;
   align-self: flex-end; 
 
   @media (max-width: 425px) {
@@ -122,6 +122,5 @@ export const LoginBtnContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0;
-    gap: 20px;
   }
 `;

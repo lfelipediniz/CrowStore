@@ -5,7 +5,7 @@ import CommonUser from "./common";
 import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, useGlobalState } = createGlobalState({
-    isLoggedInn: false,
+    isLoggedIn: false,
     isAdm: false,
     userN: "",
     senha: "",
@@ -14,7 +14,7 @@ const { setGlobalState, useGlobalState } = createGlobalState({
 export { setGlobalState, useGlobalState };
 
 function User() {
-    const [checklgn] = useGlobalState("isLoggedInn");
+    const [checklgn] = useGlobalState("isLoggedIn");
     const [checkadm] = useGlobalState("isAdm");
     return (
         <>

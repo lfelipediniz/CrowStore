@@ -28,22 +28,18 @@ export const UserContainer = styled.div`
 
   @media (max-width: 1120px) {
     background-image: none;
-    justify-content: center; 
+    justify-content: center; /* Adicione esta linha para centralizar a div */
   }
 `;
 
 export const LoginContainer = styled.div`
   margin-top: 150px;
   margin-right: 80px;
-  width: 384px;
-  min-height: 512px;
+  width: 375px;
+  height: 500px;
   padding: 20px;
   background-color: ${colors.secondary};
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
 
   @media (max-width: 1120px) {
     margin-right: 0px;
@@ -89,7 +85,7 @@ export const LoginInput = styled.input`
   background-color: ${colors.secondary};
 `;
 
-export const LoginBtn = styled.button`
+export const Loginbut = styled.button`
   width: 130px;
   height: 50px;
   padding: 10px;
@@ -108,19 +104,33 @@ padding: 0;
   }
 `;
 
+export const Loginbut1 = styled.button`
+  width: 35%;
+  height: 50px;
+  padding: 10px;
+  margin-left: 50%;
+  background-color: ${colors.primary};
+  color: ${colors.secondary};
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 15px;
+`;
+
 export const LoginBtnContainer = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: auto;
-  align-self: flex-end; 
+  margin-top: 25px;
+  padding: 10px;
 
   @media (max-width: 425px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Adicione esta linha para centralizar os botões verticalmente */
+    justify-content: center; /* Adicione esta linha para centralizar os botões horizontalmente */
     padding: 0;
+    gap: 20px;
   }
 `;

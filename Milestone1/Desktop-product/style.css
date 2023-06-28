@@ -98,7 +98,7 @@ a {
     float: left;
 }
 
-#product-info {
+#description {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -147,24 +147,24 @@ button {
 }
 
 #color1 {
-    background-color: HotPink;
+    background-color: #FFAAA5;
     border-width: 3px;
 }
 
 #color2 {
-    background-color: Coral;
+    background-color: #FFD3B6;
 }
 
 #color3 {
-    background-color: MediumAquamarine;
+    background-color: #FFD3B6;
 }
 
 #color4 {
-    background-color: MediumTurquoise;
+    background-color: #A8E6CF;
 }
 
 #color5 {
-    background-color: RebeccaPurple;
+    background-color: #FF8B94;
 }
 
 #pp {

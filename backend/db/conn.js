@@ -1,9 +1,8 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
-async function main(){
-
+async function main() {
     await mongoose.connect('mongodb://localhost:27017/crowstore')
-    console.log("Conectou ao Moogoose!")
+    console.log("Conectou ao Mongoose")
 }
 
 main().catch((err) => console.log(err))

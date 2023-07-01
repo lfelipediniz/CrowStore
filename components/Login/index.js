@@ -1,24 +1,32 @@
-import React, { Fragment, useContext, useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
+import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import {
+  LoginWrap,
+  UserContainer,
   LoginContainer,
   LoginTitle,
-  LoginForm,
-  Loginlabel,
-  LoginInput,
-  Loginbut,
-  Loginbut1,
-  UserContainer,
-  LoginWrap,
   LoginBtnContainer,
+  FloatingStack,
 } from "../Login/LoginElements";
-import { setGlobalState, useGlobalState } from "../User/index";
-import data from "../../fakedata/usersDatabase/users.json";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { colors } from "../../styles/colors";
+
+import Alert from "@mui/material/Alert";
 
 const Login = () => {
   const [userN, setUsername] = useState("");
   const [senha, setPassword] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [email, setEmail] = useState("");
+  const [nome, setNome] = useState("");
+  const [confirmSenha, setConfirmSenha] = useState("");
+  const [isCadastrando, setIsCadastrando] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isPhoneFocused, setIsPhoneFocused] = useState(false);
+  const [isPhoneInvalid, setIsPhoneInvalid] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -28,100 +36,277 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
-  const handleFormlogin = (event) => {
-    event.preventDefault();
-    let userobj = {
-      userName: userN,
-      password: senha,
-      category: "common",
-    };
-
-    let admobj = {
-      userName: userN,
-      password: senha,
-      category: "admin",
-    };
-    for (var i = 0; i < data.length; i++) {
-      if (
-        data[i].userName == admobj.userName &&
-        data[i].password == admobj.password &&
-        data[i].category == admobj.category
-      ) {
-        setGlobalState("isAdm", true);
-      }
-    }
-    for (var i = 0; i < data.length; i++) {
-      if (
-        data[i].userName == userobj.userName &&
-        data[i].password == userobj.password
-      ) {
-        setGlobalState("isLoggedInn", true);
-      }
-    }
-    setUsername("");
-    setPassword("");
+  const handleCPFChange = (event) => {
+    setCpf(event.target.value);
   };
 
-  //
+  const handleTelefoneChange = (event) => {
+    const rawValue = event.target.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+    const formattedValue = formatPhoneNumber(rawValue); // Formata o número de telefone
+
+    // Verifica se o número de telefone possui menos de 11 dígitos
+    if (formattedValue.length < 11) {
+      setIsPhoneInvalid(true);
+    } else {
+      setIsPhoneInvalid(false);
+    }
+
+    setTelefone(formattedValue);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleNomeChange = (event) => {
+    setNome(event.target.value);
+  };
+
+  const handleConfirmSenhaChange = (event) => {
+    setConfirmSenha(event.target.value);
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
+  const handleFormlogin = (event) => {
+    // Lógica para fazer login
+  };
+
   const handleFormsignup = (event) => {
     event.preventDefault();
-    let userobj = {
-      userName: userN,
-      password: senha,
-      category: "",
-    };
 
-    for (var i = 0; i < data.length; i++) {
-      if (
-        data[i].userName == userobj.userName &&
-        data[i].password == userobj.password
-      ) {
-        //usuario já existente
-      } else {
-        //usuario cadastrado!
+    if (isCadastrando) {
+      // Lógica para cadastrar o usuário
+
+      // Exemplo de alerta
+      alert("Usuário cadastrado com sucesso");
+
+      // Reiniciar o estado do formulário
+      setCpf("");
+      setTelefone("");
+      setEmail("");
+      setNome("");
+      setConfirmSenha("");
+      setIsCadastrando(false);
+    } else {
+      // Alternar para o modo de cadastro
+      setIsCadastrando(true);
+    }
+  };
+
+  const handlePhoneFocus = () => {
+    setIsPhoneFocused(true);
+  };
+
+  const handlePhoneBlur = () => {
+    setIsPhoneFocused(false);
+    if (telefone.length < 11) {
+      setIsPhoneInvalid(true);
+    } else {
+      setIsPhoneInvalid(false);
+    }
+  };
+
+  const formatPhoneNumber = (phoneNumber) => {
+    const cleaned = phoneNumber.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+
+    // Verifica se o número possui mais de 10 dígitos e formata como (XX)XXXXX-XXXX
+    if (cleaned.length > 10) {
+      const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+      if (match) {
+        return `(${match[1]})${match[2]}-${match[3]}`;
       }
     }
+
+    // Retorna o número sem formatação caso não atenda aos critérios acima
+    return cleaned;
   };
 
   return (
-    <LoginWrap>
-      <UserContainer>
-        <WrapContent>
-          <LoginContainer>
-            <LoginTitle>Login</LoginTitle>
-            <LoginForm onSubmit={handleFormlogin}>
-              <Fragment>
-                <Loginlabel htmlFor="username">Usuário:</Loginlabel>
-                <LoginInput
-                  type="text"
-                  id="username"
-                  value={userN}
-                  onChange={handleUsernameChange}
-                />
-              </Fragment>
- 
-              <Loginlabel htmlFor="password">Senha</Loginlabel>
-              <LoginInput
-                type="password"
-                id="password"
-                value={senha}
-                onChange={handlePasswordChange}
-              />
-            </LoginForm>
-              <LoginBtnContainer>
-                {" "}
-                <Loginbut onClick={handleFormlogin} className="botao">
-                  Login
-                </Loginbut>
+    <>
+      <FloatingStack>
+        {isPhoneInvalid && !isPhoneFocused && (
+          <Alert severity="error">
+            O número de telefone deve ter pelo menos 11 dígitos.
+          </Alert>
+        )}
+      </FloatingStack>
 
-            <Loginbut onClick={handleFormsignup} className="botao1">
-              Cadastrar-se
-            </Loginbut>
-              </LoginBtnContainer>
-          </LoginContainer>
-        </WrapContent>
-      </UserContainer>
-    </LoginWrap>
+      <LoginWrap>
+        <UserContainer>
+          <WrapContent>
+            <LoginContainer
+              style={isCadastrando ? { height: "650px", marginTop: 50 } : {}}
+            >
+              {isCadastrando ? <LoginTitle>Bem vindo!</LoginTitle> : <LoginTitle>Login</LoginTitle>}
+
+              <form
+                style={isCadastrando ? { marginTop: 10 } : { marginTop: "25%" }}
+              >
+                <>
+                  <TextField
+                    label="Email"
+                    type="text"
+                    value={userN}
+                    onChange={handleUsernameChange}
+                    variant="standard"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{ style: { color: colors.primary } }}
+                    InputProps={{ style: { color: colors.primary } }}
+                  />
+                </>
+
+                <TextField
+                  label="Senha"
+                  type={showPassword ? "text" : "password"}
+                  value={senha}
+                  onChange={handlePasswordChange}
+                  variant="standard"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{ style: { color: colors.primary } }}
+                  InputProps={{ style: { color: colors.primary } }}
+                  InputProps={{
+                    style: { color: colors.primary },
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {!showPassword ? (
+                            <FaEyeSlash style={{ color: colors.primary }} />
+                          ) : (
+                            <FaEye style={{ color: colors.primary }} />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  style={{ color: colors.primary }}
+                />
+
+                {isCadastrando && (
+                  <>
+                    <TextField
+                      label="Confirmar Senha"
+                      type={showConfirmPassword ? "text" : "password"}
+                      value={confirmSenha}
+                      onChange={handleConfirmSenhaChange}
+                      variant="standard"
+                      fullWidth
+                      margin="normal"
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{
+                        style: { color: colors.primary },
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowConfirmPassword}
+                              onMouseDown={handleMouseDownPassword}
+                              edge="end"
+                            >
+                              {!showConfirmPassword ? (
+                                <FaEyeSlash style={{ color: colors.primary }} />
+                              ) : (
+                                <FaEye style={{ color: colors.primary }} />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      style={{ color: colors.primary }}
+                    />
+                    <TextField
+                      label="Nome"
+                      type="text"
+                      value={nome}
+                      onChange={handleNomeChange}
+                      variant="standard"
+                      fullWidth
+                      margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
+                    />
+
+                    <TextField
+                      label="CPF"
+                      type="text"
+                      value={cpf}
+                      onChange={handleCPFChange}
+                      variant="standard"
+                      fullWidth
+                      margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
+                    />
+
+                    <TextField
+                      label="Telefone"
+                      type="tel"
+                      value={telefone}
+                      onChange={handleTelefoneChange}
+                      onFocus={handlePhoneFocus}
+                      onBlur={handlePhoneBlur}
+                      error={isPhoneInvalid}
+                      variant="standard"
+                      fullWidth
+                      margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
+                    />
+                  </>
+                )}
+
+                <LoginBtnContainer
+                  style={
+                    isCadastrando
+                      ? { justifyContent: "center" }
+                      : { justifyContent: "space-between" }
+                  }
+                >
+                  <Button
+                    onClick={isCadastrando ? handleFormsignup : handleFormlogin}
+                    variant="contained"
+                    color="primary"
+                    style={{ color: colors.primary }}
+                  >
+                    {isCadastrando ? "Cadastrar" : "Entrar"}
+                  </Button>
+                  {!isCadastrando && (
+                    <Button
+                      onClick={() => setIsCadastrando(true)}
+                      variant="outlined"
+                      color="primary"
+                      style={{ color: colors.primary }}
+                    >
+                      Cadastre-se
+                    </Button>
+                  )}
+                </LoginBtnContainer>
+              </form>
+            </LoginContainer>
+          </WrapContent>
+        </UserContainer>
+      </LoginWrap>
+    </>
   );
 };
 

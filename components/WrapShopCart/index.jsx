@@ -67,7 +67,7 @@ const WrapShopCart = () => {
 
         
       <Header>Meu Carrinho</Header>
-    <Link>≪ Continuar comprando</Link>
+    <Link href="/">≪ Continuar comprando</Link>
     </WrapContent>
     <ShopcartWrapper>
       <ShopcartContainer>

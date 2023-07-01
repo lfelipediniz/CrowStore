@@ -74,6 +74,7 @@ export const Header = styled.h1`
 export const Link = styled.a`
   color: ${colors.textBlack};
   width: 100%;
+    cursor: pointer;
 
   @media (max-width: 1120px) {
     margin-top: 20px;

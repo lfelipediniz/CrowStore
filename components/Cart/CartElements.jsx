@@ -88,6 +88,7 @@ export const RemoveButton = styled.button`
   padding: 8px 16px;
   margin-left: auto;
   border-radius: 3px;
+  cursor: pointer;
 
   @media (max-width: 1120px) {
     margin-left: 0;

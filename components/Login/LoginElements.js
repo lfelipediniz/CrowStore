@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
+import Stack from "@mui/material/Stack";
 
 export const LoginWrap = styled.div`
 background-color: ${colors.primary};
@@ -33,11 +34,11 @@ export const UserContainer = styled.div`
 `;
 
 export const LoginContainer = styled.div`
-  margin-top: 150px;
+  margin-top:200px;
   margin-right: 80px;
   width: 375px;
   height: 500px;
-  padding: 20px;
+  padding: 30px;
   background-color: ${colors.secondary};
   border-radius: 5px;
 
@@ -58,7 +59,7 @@ export const LoginTitle = styled.h2`
   color: ${colors.primary};
   text-align: center;
   margin-top: 10%;
-  font-size: 50px;
+  font-size: 40px;
 
   @media (max-width: 425px) {
     font-size: ${fonts.headingM};
@@ -67,7 +68,6 @@ export const LoginTitle = styled.h2`
 
 export const LoginForm = styled.form`
   color: ${colors.primary};
-  margin-top: 25%;  
 `;
 
 export const Loginlabel = styled.label`
@@ -121,9 +121,7 @@ export const Loginbut1 = styled.button`
 export const LoginBtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  margin-top: 25px;
-  padding: 10px;
+  margin-top: 30px;
 
   @media (max-width: 425px) {
     display: flex;
@@ -133,4 +131,15 @@ export const LoginBtnContainer = styled.div`
     padding: 0;
     gap: 20px;
   }
+`;
+
+export const FloatingStack = styled(Stack)`
+  width: 95%;
+  margin-top: 15px;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
 `;

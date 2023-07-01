@@ -1,9 +1,9 @@
 export const colors = {
     primary: "#FFFBFE",
     secondary: "#262626",
-    cta: "#E71D36",
-    ctaBlack: "#F96666",
-    ctaHover: "#BC001D",
+    cta: "#1976D2",
+    ctaBlack: "#7EBFFF",
+    ctaHover: "#D23C53",
     textBlack: "#4E4E4E",
     gray: "#808080",
     white: "#FFFFFF",

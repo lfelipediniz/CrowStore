@@ -1,5 +1,5 @@
-const mongoose = require('../db/conn')
-const { Schema } = mongoose
+const mongoose = require('../db/conn');
+const { Schema } = mongoose;
 
 const ClothingModel = new mongoose.Schema({
     size: {
@@ -21,47 +21,40 @@ const ClothingModel = new mongoose.Schema({
         },
         required: true
     }
-})
+});
 
-const ClothingType = mongoose.model(
-    'ClothingType',
-    new Schema({
-        name: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        tags: {
-            type: Array,
-            required: true
-        },
-        gender: {
-            type: String,
-            enum: ['Masculino', 'Feminino', 'Unissex'],
-            required: true
-        },
-        price: {
-            type: Number,
-            validate: {
-                validator: {
-                    function(value) {
-                        return value >= 0;
-                    },
-                    message: 'O preço necessita ser um valor positivo'
-                },
-            },
-            required: true
-        },
-
-        images: {
-            type: Array,
-            required: true
-        },
-
-        AvailableModels: [ClothingModel]
+const ClothingTypeSchema = new Schema({
+    name: {
+        type: String,
+        unique: true,
+        required: true
     },
-        { timestamps: true },
-    ),
-)
+    tags: {
+        type: Array,
+        required: true
+    },
+    gender: {
+        type: String,
+        enum: ['Masculino', 'Feminino', 'Unissex'],
+        required: true
+    },
+    price: {
+        type: Number,
+        validate: {
+            validator: function(value) {
+                return value >= 0;
+            },
+            message: 'O preço necessita ser um valor positivo'
+        },
+        required: true
+    },
+    images: {
+        type: Array,
+        required: true
+    },
+    AvailableModels: [ClothingModel]
+}, { timestamps: true });
 
-module.exports = ClothingType
+const ClothingType = mongoose.model('ClothingType', ClothingTypeSchema);
+
+module.exports = ClothingType;

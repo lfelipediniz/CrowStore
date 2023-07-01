@@ -29,6 +29,8 @@ const Login = () => {
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [isCPFFocused, setIsCPFFocused] = useState(false);
   const [isCPFInvalid, setIsCPFInvalid] = useState(false);
+  const [isEmailFocused, setIsEmailFocused] = useState(false);
+  const [isConfirmSenhaFocused, setIsconfirmSenhaFocused] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -131,6 +133,22 @@ const Login = () => {
     setIsCPFFocused(true);
   };
 
+  const handleEmailFocus = () => {
+    setIsEmailFocused(true);
+  };
+
+  const handleConfirmSenhaFocus = () => {
+    setIsconfirmSenhaFocused(true);
+  };
+
+  const handleConfirmSenhaBlur = () => {
+    setIsconfirmSenhaFocused(false);
+  };
+
+  const handleEmailBlur = () => {
+    setIsEmailFocused(false);
+  };
+
   const handlePhoneBlur = () => {
     setIsPhoneFocused(false);
     if (telefone.length < 11) {
@@ -183,23 +201,26 @@ const Login = () => {
     event.preventDefault();
     setIsCadastrando(false);
   };
-  
 
   return (
     <>
       <FloatingStack>
-        {isPhoneInvalid && !isPhoneFocused && (
+        {isPhoneInvalid && isPhoneFocused && (
           <Alert severity="error">
             O número de telefone deve ter pelo menos 11 dígitos.
           </Alert>
         )}
 
-        {isEmailInvalid && (
+        {isEmailInvalid && isEmailFocused && (
           <Alert severity="error">O email digitado não é válido.</Alert>
         )}
 
-        {isCPFInvalid && !isCPFFocused && (
+        {isCPFInvalid && isCPFFocused && (
           <Alert severity="error">O CPF digitado não é válido.</Alert>
+        )}
+
+        {senha !== confirmSenha && isConfirmSenhaFocused && (
+          <Alert severity="error">As senhas não são iguais!</Alert>
         )}
       </FloatingStack>
 
@@ -224,6 +245,8 @@ const Login = () => {
                     type="email"
                     value={email}
                     onChange={handleEmailChange}
+                    onFocus={handleEmailFocus}
+                    onBlur={handleEmailBlur}
                     variant="standard"
                     fullWidth
                     size="small"
@@ -276,7 +299,10 @@ const Login = () => {
                       type={showConfirmPassword ? "text" : "password"}
                       value={confirmSenha}
                       onChange={handleConfirmSenhaChange}
+                      onFocus={handleConfirmSenhaFocus}
+                      onBlur={handleConfirmSenhaBlur}
                       variant="standard"
+                      error={senha !== confirmSenha}
                       fullWidth
                       size="small"
                       margin="normal"
@@ -422,7 +448,13 @@ const Login = () => {
                   </div>
 
                   {!isCadastrando && (
-                    <div style={{ display: "flex", justifyContent: "center", marginTop: 15}}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: 15,
+                      }}
+                    >
                       <Button
                         onClick={() => setIsCadastrando(true)}
                         variant="outlined"
@@ -464,10 +496,14 @@ const Login = () => {
                   </div>
 
                   <p style={{ marginTop: 10, textAlign: "center" }}>
-    <a href="/" onClick={handleLoginLinkClick} style={{ color: colors.primary }}>
-      Já tem uma conta? Faça login aqui!
-    </a>
-  </p>
+                    <a
+                      href="/"
+                      onClick={handleLoginLinkClick}
+                      style={{ color: colors.primary }}
+                    >
+                      Já tem uma conta? Faça login aqui!
+                    </a>
+                  </p>
                 </>
               )}
             </LoginContainer>

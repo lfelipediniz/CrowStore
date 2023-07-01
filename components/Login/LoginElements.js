@@ -59,7 +59,7 @@ export const LoginTitle = styled.h2`
   color: ${colors.primary};
   text-align: center;
   margin-top: 10%;
-  font-size: 40px;
+  font-size: 20px;
 
   @media (max-width: 425px) {
     font-size: ${fonts.headingM};
@@ -121,7 +121,7 @@ export const Loginbut1 = styled.button`
 export const LoginBtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
+  margin-top: 20px;
 
   @media (max-width: 425px) {
     display: flex;

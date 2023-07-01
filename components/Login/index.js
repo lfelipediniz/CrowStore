@@ -11,7 +11,6 @@ import {
 } from "../Login/LoginElements";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { colors } from "../../styles/colors";
-
 import Alert from "@mui/material/Alert";
 
 const Login = () => {
@@ -70,13 +69,11 @@ const Login = () => {
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
 
-    // Verifica se o email possui um @ e um domínio válido
-    if (isValidEmail(emailValue)) {
-      setIsEmailInvalid(false);
-    } else {
-      setIsEmailInvalid(true);
-    }
+    // Verifica se o email é válido usando uma expressão regular
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailRegex.test(emailValue);
 
+    setIsEmailInvalid(!isValidEmail);
     setEmail(emailValue);
   };
 
@@ -182,10 +179,11 @@ const Login = () => {
     return cleaned;
   };
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const handleLoginLinkClick = (event) => {
+    event.preventDefault();
+    setIsCadastrando(false);
   };
+  
 
   return (
     <>
@@ -214,7 +212,7 @@ const Login = () => {
               {isCadastrando ? (
                 <LoginTitle>Bem vindo!</LoginTitle>
               ) : (
-                <LoginTitle>Login</LoginTitle>
+                <LoginTitle style={{ fontSize: 40 }}>Login</LoginTitle>
               )}
 
               <form
@@ -223,11 +221,12 @@ const Login = () => {
                 <>
                   <TextField
                     label="Email"
-                    type="text"
-                    value={userN}
-                    onChange={handleUsernameChange}
+                    type="email"
+                    value={email}
+                    onChange={handleEmailChange}
                     variant="standard"
                     fullWidth
+                    size="small"
                     margin="normal"
                     InputLabelProps={{ style: { color: colors.primary } }}
                     InputProps={{
@@ -245,6 +244,7 @@ const Login = () => {
                   onChange={handlePasswordChange}
                   variant="standard"
                   fullWidth
+                  size="small"
                   margin="normal"
                   InputLabelProps={{ style: { color: colors.primary } }}
                   InputProps={{
@@ -278,6 +278,7 @@ const Login = () => {
                       onChange={handleConfirmSenhaChange}
                       variant="standard"
                       fullWidth
+                      size="small"
                       margin="normal"
                       InputLabelProps={{ style: { color: colors.primary } }}
                       InputProps={{
@@ -308,6 +309,7 @@ const Login = () => {
                       onChange={handleNomeChange}
                       variant="standard"
                       fullWidth
+                      size="small"
                       margin="normal"
                       InputLabelProps={{ style: { color: colors.primary } }}
                       InputProps={{
@@ -326,6 +328,7 @@ const Login = () => {
                       variant="standard"
                       error={isCPFInvalid}
                       fullWidth
+                      size="small"
                       margin="normal"
                       InputLabelProps={{ style: { color: colors.primary } }}
                       InputProps={{
@@ -344,6 +347,7 @@ const Login = () => {
                       error={isPhoneInvalid}
                       variant="standard"
                       fullWidth
+                      size="small"
                       margin="normal"
                       InputLabelProps={{ style: { color: colors.primary } }}
                       InputProps={{
@@ -361,6 +365,23 @@ const Login = () => {
                       : { justifyContent: "space-between" }
                   }
                 >
+                  {!isCadastrando && (
+                    <p
+                      style={{
+                        marginTop: 10,
+                        textAlign: "center",
+                        fontSize: 15,
+                      }}
+                    >
+                      <a
+                        href="mailto:contato@meusite.com"
+                        style={{ color: colors.primary }}
+                      >
+                        Esqueci minha senha
+                      </a>
+                    </p>
+                  )}
+
                   <Button
                     onClick={isCadastrando ? handleFormsignup : handleFormlogin}
                     variant="contained"
@@ -368,19 +389,87 @@ const Login = () => {
                   >
                     {isCadastrando ? "Cadastrar" : "Entrar"}
                   </Button>
-
-                  {!isCadastrando && (
-                    <Button
-                      onClick={() => setIsCadastrando(true)}
-                      variant="outlined"
-                      color="primary"
-                      style={{ color: colors.primary }}
-                    >
-                      Cadastre-se
-                    </Button>
-                  )}
                 </LoginBtnContainer>
               </form>
+
+              {!isCadastrando ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: 10,
+                    }}
+                  >
+                    <hr
+                      style={{
+                        flex: "1",
+                        backgroundColor: colors.textBlack,
+                        height: 1,
+                      }}
+                    />
+                    <span style={{ color: colors.textBlack, margin: "0 10px" }}>
+                      ou
+                    </span>
+                    <hr
+                      style={{
+                        flex: "1",
+                        backgroundColor: colors.textBlack,
+                        height: 1,
+                      }}
+                    />
+                  </div>
+
+                  {!isCadastrando && (
+                    <div style={{ display: "flex", justifyContent: "center", marginTop: 15}}>
+                      <Button
+                        onClick={() => setIsCadastrando(true)}
+                        variant="outlined"
+                        color="primary"
+                        style={{ color: colors.primary }}
+                      >
+                        Cadastre-se
+                      </Button>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: 10,
+                    }}
+                  >
+                    <hr
+                      style={{
+                        flex: "1",
+                        backgroundColor: colors.textBlack,
+                        height: 1,
+                      }}
+                    />
+                    <span style={{ color: colors.textBlack, margin: "0 10px" }}>
+                      ou
+                    </span>
+                    <hr
+                      style={{
+                        flex: "1",
+                        backgroundColor: colors.textBlack,
+                        height: 1,
+                      }}
+                    />
+                  </div>
+
+                  <p style={{ marginTop: 10, textAlign: "center" }}>
+    <a href="/" onClick={handleLoginLinkClick} style={{ color: colors.primary }}>
+      Já tem uma conta? Faça login aqui!
+    </a>
+  </p>
+                </>
+              )}
             </LoginContainer>
           </WrapContent>
         </UserContainer>

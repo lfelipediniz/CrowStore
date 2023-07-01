@@ -143,7 +143,7 @@ module.exports = class UserController {
     const token = getToken(req);
 
     // when I'm using await it stops working, this needs to be analyzed
-    const user = getUserByToken(token); 
+    const user = getUserByToken(token);
 
     const { name, email, phone, password, confirmpassword } = req.body;
 
@@ -174,17 +174,32 @@ module.exports = class UserController {
       res.status(422).json({ message: "O phone é obrigatório!" });
       return;
     }
-    if (!password) {
-      res.status(422).json({ message: "A password é obrigatória!" });
-      return;
-    }
-    if (!confirmpassword) {
-      res.status(422).json({ message: "A confirmpassword é obrigatória!" });
-      return;
-    }
+
+    user.phone = phone;
 
     if (password !== confirmpassword) {
-      res.status(422).json({ message: "As senhas precisam ser iguais!" });
+      res.status(422).json({ message: "As senhas não conferem!" });
+    } else if (password === confirmpassword && password != null) {
+      // creating password
+
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(password, salt);
+
+      user.password = passwordHash;
+    }
+
+    try {
+      // returns user update data
+
+      await User.findOneAndUpdate(
+        { _id: user.id },
+        { $set: user },
+        { new: true }
+      );
+
+      res.status(200).json({ message: "Usuário atualizado com sucesso!" });
+    } catch (err) {
+      res.status(500).json({ message: err });
       return;
     }
   }

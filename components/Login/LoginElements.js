@@ -59,7 +59,7 @@ export const LoginTitle = styled.h2`
   color: ${colors.primary};
   text-align: center;
   margin-top: 10%;
-  font-size: 50px;
+  font-size: 40px;
 
   @media (max-width: 425px) {
     font-size: ${fonts.headingM};

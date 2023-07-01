@@ -10,6 +10,7 @@ import {
   FloatingStack,
 } from "../Login/LoginElements";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { colors } from "../../styles/colors";
 
 import Alert from "@mui/material/Alert";
 
@@ -144,8 +145,10 @@ const Login = () => {
       <LoginWrap>
         <UserContainer>
           <WrapContent>
-            <LoginContainer style={isCadastrando ? { height: "650px", marginTop: 50 } : {}}>
-              {!isCadastrando && <LoginTitle>Login</LoginTitle>}
+            <LoginContainer
+              style={isCadastrando ? { height: "650px", marginTop: 50 } : {}}
+            >
+              {isCadastrando ? <LoginTitle>Bem vindo!</LoginTitle> : <LoginTitle>Login</LoginTitle>}
 
               <form
                 style={isCadastrando ? { marginTop: 10 } : { marginTop: "25%" }}
@@ -159,6 +162,8 @@ const Login = () => {
                     variant="standard"
                     fullWidth
                     margin="normal"
+                    InputLabelProps={{ style: { color: colors.primary } }}
+                    InputProps={{ style: { color: colors.primary } }}
                   />
                 </>
 
@@ -170,6 +175,8 @@ const Login = () => {
                   variant="standard"
                   fullWidth
                   margin="normal"
+                  InputLabelProps={{ style: { color: colors.primary } }}
+                  InputProps={{ style: { color: colors.primary } }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -179,11 +186,16 @@ const Login = () => {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? <FaEyeSlash /> : <FaEye />}
+                          {showPassword ? (
+                            <FaEyeSlash style={{ color: colors.primary }} />
+                          ) : (
+                            <FaEye style={{ color: colors.primary }} />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
                   }}
+                  style={{ color: colors.primary }}
                 />
 
                 {isCadastrando && (
@@ -196,6 +208,8 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">
@@ -205,11 +219,16 @@ const Login = () => {
                               onMouseDown={handleMouseDownPassword}
                               edge="end"
                             >
-                              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                              {showConfirmPassword ? (
+                                <FaEyeSlash style={{ color: colors.primary }} />
+                              ) : (
+                                <FaEye style={{ color: colors.primary }} />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         ),
                       }}
+                      style={{ color: colors.primary }}
                     />
                     <TextField
                       label="Nome"
@@ -219,16 +238,9 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
-                    />
-
-                    <TextField
-                      label="Email"
-                      type="email"
-                      value={email}
-                      onChange={handleEmailChange}
-                      variant="standard"
-                      fullWidth
-                      margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
                     />
 
                     <TextField
@@ -239,6 +251,9 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
                     />
 
                     <TextField
@@ -252,6 +267,9 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
+                      style={{ color: colors.primary }}
+                      InputLabelProps={{ style: { color: colors.primary } }}
+                      InputProps={{ style: { color: colors.primary } }}
                     />
                   </>
                 )}
@@ -267,6 +285,7 @@ const Login = () => {
                     onClick={isCadastrando ? handleFormsignup : handleFormlogin}
                     variant="contained"
                     color="primary"
+                    style={{ color: colors.primary }}
                   >
                     {isCadastrando ? "Cadastrar" : "Entrar"}
                   </Button>
@@ -275,6 +294,7 @@ const Login = () => {
                       onClick={() => setIsCadastrando(true)}
                       variant="outlined"
                       color="primary"
+                      style={{ color: colors.primary }}
                     >
                       Cadastre-se
                     </Button>

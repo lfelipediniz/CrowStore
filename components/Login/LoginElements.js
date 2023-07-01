@@ -38,7 +38,7 @@ export const LoginContainer = styled.div`
   margin-right: 80px;
   width: 375px;
   height: 500px;
-  padding: 20px;
+  padding: 30px;
   background-color: ${colors.secondary};
   border-radius: 5px;
 
@@ -121,8 +121,7 @@ export const Loginbut1 = styled.button`
 export const LoginBtnContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 25px;
-  padding: 10px;
+  margin-top: 30px;
 
   @media (max-width: 425px) {
     display: flex;

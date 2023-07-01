@@ -178,6 +178,7 @@ const Login = () => {
                   InputLabelProps={{ style: { color: colors.primary } }}
                   InputProps={{ style: { color: colors.primary } }}
                   InputProps={{
+                    style: { color: colors.primary },
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
@@ -186,7 +187,7 @@ const Login = () => {
                           onMouseDown={handleMouseDownPassword}
                           edge="end"
                         >
-                          {showPassword ? (
+                          {!showPassword ? (
                             <FaEyeSlash style={{ color: colors.primary }} />
                           ) : (
                             <FaEye style={{ color: colors.primary }} />
@@ -209,8 +210,8 @@ const Login = () => {
                       fullWidth
                       margin="normal"
                       InputLabelProps={{ style: { color: colors.primary } }}
-                      InputProps={{ style: { color: colors.primary } }}
                       InputProps={{
+                        style: { color: colors.primary },
                         endAdornment: (
                           <InputAdornment position="end">
                             <IconButton
@@ -219,7 +220,7 @@ const Login = () => {
                               onMouseDown={handleMouseDownPassword}
                               edge="end"
                             >
-                              {showConfirmPassword ? (
+                              {!showConfirmPassword ? (
                                 <FaEyeSlash style={{ color: colors.primary }} />
                               ) : (
                                 <FaEye style={{ color: colors.primary }} />

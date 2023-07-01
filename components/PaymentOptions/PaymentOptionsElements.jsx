@@ -77,6 +77,7 @@ export const Option = styled.div`
   flex-direction: column;
   align-items: center;
   flex-basis: 48%;
+    cursor: pointer;
 
   img {
     height: auto;

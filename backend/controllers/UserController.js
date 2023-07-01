@@ -122,7 +122,7 @@ module.exports = class UserController {
   static async getUserById(req, res){
 
     const id = req.params.id
-    
+
     // to get the user without the password
     const user = await User.findById(id).select('-password')
 
@@ -132,5 +132,13 @@ module.exports = class UserController {
     }
 
     res.status(200).json({user})
+  }
+
+
+  static async editUser(req, res) {
+    res.status(200).json({
+        message: 'Update feito com sucesso!',
+    })
+    return
   }
 };

@@ -1,9 +1,11 @@
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 // helpers
 const createUserToken = require("../helpers/create-user-token");
 const getToken = require("../helpers/get-token");
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const jwt = require('jsonwebtoken')
+const getUserByToken = require("../helpers/get-user-by-token");
 
 module.exports = class UserController {
   static async register(req, res) {
@@ -119,26 +121,71 @@ module.exports = class UserController {
     res.status(200).send(currentUser);
   }
 
-  static async getUserById(req, res){
-
-    const id = req.params.id
+  static async getUserById(req, res) {
+    const id = req.params.id;
 
     // to get the user without the password
-    const user = await User.findById(id).select('-password')
+    const user = await User.findById(id).select("-password");
 
-    if(!user){
-        res.status(422).json({ message: "Usuário não encontrado!" });
-        return
+    if (!user) {
+      res.status(422).json({ message: "Usuário não encontrado!" });
+      return;
     }
 
-    res.status(200).json({user})
+    res.status(200).json({ user });
   }
 
-
   static async editUser(req, res) {
-    res.status(200).json({
-        message: 'Update feito com sucesso!',
-    })
-    return
+    const id = req.params.id;
+
+    // check if user exists
+
+    const token = getToken(req);
+
+    // when I'm using await it stops working, this needs to be analyzed
+    const user = getUserByToken(token); 
+
+    const { name, email, phone, password, confirmpassword } = req.body;
+
+    let image = ``;
+
+    //validations
+
+    if (!name) {
+      res.status(422).json({ message: "O nome é obrigatório!" });
+      return;
+    }
+    if (!email) {
+      res.status(422).json({ message: "O email é obrigatório!" });
+      return;
+    }
+
+    //check if email has already taken
+    const userExists = await User.findOne({ email: email });
+
+    if (user.email !== email && userExists) {
+      res.status(422).json({ message: "Email já cadastrado!" });
+      return;
+    }
+
+    user.email = email;
+
+    if (!phone) {
+      res.status(422).json({ message: "O phone é obrigatório!" });
+      return;
+    }
+    if (!password) {
+      res.status(422).json({ message: "A password é obrigatória!" });
+      return;
+    }
+    if (!confirmpassword) {
+      res.status(422).json({ message: "A confirmpassword é obrigatória!" });
+      return;
+    }
+
+    if (password !== confirmpassword) {
+      res.status(422).json({ message: "As senhas precisam ser iguais!" });
+      return;
+    }
   }
 };

@@ -142,4 +142,8 @@ export const FloatingStack = styled(Stack)`
   transform: translate(-50%, -50%);
   align-items: center;
   justify-content: center;
+  
+  & > * + * {
+    margin-top: 10px;
+  }
 `;

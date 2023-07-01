@@ -27,6 +27,9 @@ const Login = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
   const [isPhoneInvalid, setIsPhoneInvalid] = useState(false);
+  const [isEmailInvalid, setIsEmailInvalid] = useState(false);
+  const [isCPFFocused, setIsCPFFocused] = useState(false);
+  const [isCPFInvalid, setIsCPFInvalid] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -37,7 +40,17 @@ const Login = () => {
   };
 
   const handleCPFChange = (event) => {
-    setCpf(event.target.value);
+    const rawValue = event.target.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+    const formattedValue = formatCPF(rawValue); // Formata o CPF
+
+    // Verifica se o CPF possui 11 dígitos
+    if (formattedValue.length < 11) {
+      setIsCPFInvalid(true);
+    } else {
+      setIsCPFInvalid(false);
+    }
+
+    setCpf(formattedValue);
   };
 
   const handleTelefoneChange = (event) => {
@@ -55,7 +68,16 @@ const Login = () => {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    const emailValue = event.target.value;
+
+    // Verifica se o email possui um @ e um domínio válido
+    if (isValidEmail(emailValue)) {
+      setIsEmailInvalid(false);
+    } else {
+      setIsEmailInvalid(true);
+    }
+
+    setEmail(emailValue);
   };
 
   const handleNomeChange = (event) => {
@@ -108,12 +130,25 @@ const Login = () => {
     setIsPhoneFocused(true);
   };
 
+  const handleCPFFocus = () => {
+    setIsCPFFocused(true);
+  };
+
   const handlePhoneBlur = () => {
     setIsPhoneFocused(false);
     if (telefone.length < 11) {
       setIsPhoneInvalid(true);
     } else {
       setIsPhoneInvalid(false);
+    }
+  };
+
+  const handleCPFBlur = () => {
+    setIsCPFFocused(false);
+    if (telefone.length < 11) {
+      setIsCPFInvalid(true);
+    } else {
+      setIsCPFInvalid(false);
     }
   };
 
@@ -132,6 +167,26 @@ const Login = () => {
     return cleaned;
   };
 
+  const formatCPF = (cpfNumber) => {
+    const cleaned = cpfNumber.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+
+    // Formata o CPF como XXX.XXX.XXX-XX
+    if (cleaned.length === 11) {
+      const match = cleaned.match(/^(\d{3})(\d{3})(\d{3})(\d{2})$/);
+      if (match) {
+        return `${match[1]}.${match[2]}.${match[3]}-${match[4]}`;
+      }
+    }
+
+    // Retorna o CPF sem formatação caso não tenha 11 dígitos
+    return cleaned;
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
     <>
       <FloatingStack>
@@ -139,6 +194,14 @@ const Login = () => {
           <Alert severity="error">
             O número de telefone deve ter pelo menos 11 dígitos.
           </Alert>
+        )}
+
+        {isEmailInvalid && (
+          <Alert severity="error">O email digitado não é válido.</Alert>
+        )}
+
+        {isCPFInvalid && !isCPFFocused && (
+          <Alert severity="error">O CPF digitado não é válido.</Alert>
         )}
       </FloatingStack>
 
@@ -148,7 +211,11 @@ const Login = () => {
             <LoginContainer
               style={isCadastrando ? { height: "650px", marginTop: 50 } : {}}
             >
-              {isCadastrando ? <LoginTitle>Bem vindo!</LoginTitle> : <LoginTitle>Login</LoginTitle>}
+              {isCadastrando ? (
+                <LoginTitle>Bem vindo!</LoginTitle>
+              ) : (
+                <LoginTitle>Login</LoginTitle>
+              )}
 
               <form
                 style={isCadastrando ? { marginTop: 10 } : { marginTop: "25%" }}
@@ -163,7 +230,11 @@ const Login = () => {
                     fullWidth
                     margin="normal"
                     InputLabelProps={{ style: { color: colors.primary } }}
-                    InputProps={{ style: { color: colors.primary } }}
+                    InputProps={{
+                      style: { color: colors.primary },
+                      autoComplete: "new-email",
+                    }}
+                    error={isEmailInvalid}
                   />
                 </>
 
@@ -176,9 +247,9 @@ const Login = () => {
                   fullWidth
                   margin="normal"
                   InputLabelProps={{ style: { color: colors.primary } }}
-                  InputProps={{ style: { color: colors.primary } }}
                   InputProps={{
                     style: { color: colors.primary },
+                    autoComplete: "off",
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
@@ -196,7 +267,6 @@ const Login = () => {
                       </InputAdornment>
                     ),
                   }}
-                  style={{ color: colors.primary }}
                 />
 
                 {isCadastrando && (
@@ -212,6 +282,7 @@ const Login = () => {
                       InputLabelProps={{ style: { color: colors.primary } }}
                       InputProps={{
                         style: { color: colors.primary },
+                        autoComplete: "off",
                         endAdornment: (
                           <InputAdornment position="end">
                             <IconButton
@@ -229,7 +300,6 @@ const Login = () => {
                           </InputAdornment>
                         ),
                       }}
-                      style={{ color: colors.primary }}
                     />
                     <TextField
                       label="Nome"
@@ -239,9 +309,11 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
-                      style={{ color: colors.primary }}
                       InputLabelProps={{ style: { color: colors.primary } }}
-                      InputProps={{ style: { color: colors.primary } }}
+                      InputProps={{
+                        style: { color: colors.primary },
+                        autoComplete: "new-name",
+                      }}
                     />
 
                     <TextField
@@ -249,12 +321,17 @@ const Login = () => {
                       type="text"
                       value={cpf}
                       onChange={handleCPFChange}
+                      onFocus={handleCPFFocus}
+                      onBlur={handleCPFBlur}
                       variant="standard"
+                      error={isCPFInvalid}
                       fullWidth
                       margin="normal"
-                      style={{ color: colors.primary }}
                       InputLabelProps={{ style: { color: colors.primary } }}
-                      InputProps={{ style: { color: colors.primary } }}
+                      InputProps={{
+                        style: { color: colors.primary },
+                        autoComplete: "new-cpf",
+                      }}
                     />
 
                     <TextField
@@ -268,9 +345,11 @@ const Login = () => {
                       variant="standard"
                       fullWidth
                       margin="normal"
-                      style={{ color: colors.primary }}
                       InputLabelProps={{ style: { color: colors.primary } }}
-                      InputProps={{ style: { color: colors.primary } }}
+                      InputProps={{
+                        style: { color: colors.primary },
+                        autoComplete: "new-phone",
+                      }}
                     />
                   </>
                 )}
@@ -286,10 +365,10 @@ const Login = () => {
                     onClick={isCadastrando ? handleFormsignup : handleFormlogin}
                     variant="contained"
                     color="primary"
-                    style={{ color: colors.primary }}
                   >
                     {isCadastrando ? "Cadastrar" : "Entrar"}
                   </Button>
+
                   {!isCadastrando && (
                     <Button
                       onClick={() => setIsCadastrando(true)}

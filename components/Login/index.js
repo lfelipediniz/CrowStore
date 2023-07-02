@@ -45,7 +45,7 @@ const Login = () => {
     const formattedValue = formatCPF(rawValue); // Formata o CPF
 
     // Verifica se o CPF possui 11 dígitos
-    if (formattedValue.length < 11) {
+    if (formattedValue.length < 14) {
       setIsCPFInvalid(true);
     } else {
       setIsCPFInvalid(false);
@@ -58,16 +58,15 @@ const Login = () => {
     const rawValue = event.target.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
     const formattedValue = formatPhoneNumber(rawValue); // Formata o número de telefone
 
-    // Verifica se o número de telefone possui menos de 11 dígitos
-    if (formattedValue.length < 11) {
-      setIsPhoneInvalid(true);
-    } else {
+    // Verifica se o número de telefone possui pelo menos 11 dígitos
+    if (formattedValue.length >= 15) {
       setIsPhoneInvalid(false);
+    } else {
+      setIsPhoneInvalid(true);
     }
 
     setTelefone(formattedValue);
   };
-
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
 
@@ -147,17 +146,16 @@ const Login = () => {
   };
 
   const formatPhoneNumber = (value) => {
-    // Implemente a lógica de formatação do número de telefone aqui, por exemplo:
     const phoneRegex = /^(\d{0,2})(\d{0,5})(\d{0,4})$/;
     const match = value.match(phoneRegex);
 
     if (match) {
       if (match[1] && match[2] && match[3]) {
-        return `+${match[1]} (${match[2]}) ${match[3]}`;
+        return `(${match[1]}) ${match[2]}-${match[3]}`;
       } else if (match[1] && match[2]) {
-        return `+${match[1]} (${match[2]}`;
+        return `(${match[1]}) ${match[2]}`;
       } else if (match[1]) {
-        return `+${match[1]}`;
+        return `(${match[1]}`;
       }
     }
 
@@ -174,7 +172,7 @@ const Login = () => {
 
   const handlePhoneBlur = () => {
     setIsPhoneFocused(false);
-    if (telefone.length < 11) {
+    if (telefone.length <= 11) {
       setIsPhoneInvalid(true);
     } else {
       setIsPhoneInvalid(false);
@@ -185,7 +183,7 @@ const Login = () => {
       <FloatingStack>
         {isPhoneInvalid && isPhoneFocused && (
           <Alert severity="error">
-            O número de telefone deve ter pelo menos 11 dígitos.
+            O telefone celular brasileiro tem 11 digitos!
           </Alert>
         )}
 
@@ -265,6 +263,9 @@ const Login = () => {
                         InputProps={{
                           style: { color: colors.primary },
                           autoComplete: "new-cpf",
+                          inputProps: {
+                            maxLength: 14,
+                          },
                         }}
                       />{" "}
                       <br /> <br />
@@ -283,6 +284,7 @@ const Login = () => {
                         InputProps={{
                           style: { color: colors.primary },
                           autoComplete: "new-phone",
+                          inputProps: { maxLength: 15 }, // Define o máximo de caracteres como 11
                         }}
                       />
                       <br /> <br />
@@ -420,7 +422,10 @@ const Login = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          style={{backgroundColor: colors.ctaBlack, color: "black"}}
+                          style={{
+                            backgroundColor: colors.ctaBlack,
+                            color: "black",
+                          }}
                         >
                           Entrar
                         </Button>
@@ -472,7 +477,10 @@ const Login = () => {
                         onClick={() => setIsCadastrando(true)}
                         variant="outlined"
                         color="primary"
-                        style={{ color: colors.primary, borderColor: colors.ctaBlack }}
+                        style={{
+                          color: colors.primary,
+                          borderColor: colors.ctaBlack,
+                        }}
                       >
                         Cadastre-se
                       </Button>

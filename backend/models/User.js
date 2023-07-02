@@ -23,6 +23,10 @@ const User = mongoose.model(
       type: String,
       required: true
     },
+    cpf: {
+      type: String,
+      required: true
+    }
   }, {timestamps: true})
 );
 

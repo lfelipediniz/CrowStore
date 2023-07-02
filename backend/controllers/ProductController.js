@@ -1,3 +1,4 @@
+const mongoose = require('../db/conn');
 const Product = require('../models/Product')
 
 module.exports = class ProductController {
@@ -35,6 +36,7 @@ module.exports = class ProductController {
 
             // Create a new ClothingType object
             const newType = new Product({
+                _id: new mongoose.Types.ObjectId(),
                 name,
                 tags,
                 gender,
@@ -51,7 +53,6 @@ module.exports = class ProductController {
             // Send an error response
             res.status(422).json({ message: error.message });
         }
-
     }
 
     static async addModel(req, res) {
@@ -130,14 +131,14 @@ module.exports = class ProductController {
 
             if (!product) {
                 // Product with the given ID not found
-                return res.status(404).json({ message: 'Product not found' });
+                return res.status(404).json({ message: `O produto de id ${req.params.id} não foi encontrado.` });
             }
 
             // Return the product object
             return res.status(200).json(product);
         } catch (error) {
             // Error occurred while querying the database
-            return res.status(500).json({ message: 'Error retrieving product', error: error.message });
+            return res.status(500).json({ message: 'Não foi possível recuperar os produtos', error: error.message });
         }
     }
 
@@ -146,16 +147,51 @@ module.exports = class ProductController {
         try {
             const product = await Product.findById(req.params.id);
 
-            if (!product) {
+            if (!(product && product.AvailableModels)) {
                 // Product with the given ID not found
-                return res.status(404).json({ message: 'Product not found' });
+                return res.status(404).json({ message: `Modelos para o produto de id ${req.params.id} não foram encontrados` });
             }
-
             // Return the AvailableModels contents
             return res.status(200).json(product.AvailableModels);
+
         } catch (error) {
             // Error occurred while querying the database
-            return res.status(500).json({ message: 'Error retrieving models', error: error.message });
+            return res.status(500).json({ message: 'Não foi possível recuperar os modelos', error: error.message });
+        }
+    }
+
+    static async getModelByIds(req, res) {
+        try {
+            const product = await Product.findById(req.params.productId);
+
+            if (!product) {
+                // Product with the given ID not found
+                return res.status(404).json({ message: `O produto de id ${req.params.productId} não foi encontrado` });
+            }
+
+            const model = product.AvailableModels.id(req.params.modelId);
+
+            if (!model) {
+                // Model with the given ID not found
+                return res.status(404).json({ message: `O modelo de id ${req.params.modelId} não foi encontrado` });
+            }
+
+            // Return the model object
+            return res.status(200).json(model);
+        } catch (error) {
+            // Error occurred while querying the database
+            return res.status(500).json({ message: 'Não foi possível recuperar o modelo', error: error.message });
+        }
+    }
+
+    static async dropProducts(req, res) {
+        try {
+            // Delete all Product objects
+            await Product.deleteMany();
+
+            res.status(200).json({ message: 'Todos os produtos, se algum, foram apagados com sucesso' });
+        } catch (error) {
+            res.status(500).json({ error: 'Não foi possível apagar os produtos' });
         }
     }
 }

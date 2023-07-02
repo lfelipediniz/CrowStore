@@ -2,11 +2,7 @@ const mongoose = require('../db/conn');
 const { Schema } = mongoose;
 
 const Model = new mongoose.Schema({
-    _id: {
-        type: Schema.Types.ObjectId,
-        auto: true,
-        unique: true
-    },
+    _id: mongoose.Types.ObjectId,
     size: {
         type: String,
         enum: ['PP', 'P', 'M', 'G', 'XG'],
@@ -26,17 +22,13 @@ const Model = new mongoose.Schema({
         },
         required: true
     }
-});
+}, { timestamps: true });
 
 // Define a compound index for size and color
 Model.index({ size: 1, color: 1 }, { unique: true });
 
 const Product = new Schema({
-    _id: {
-        type: Schema.Types.ObjectId,
-        auto: true,
-        unique: true
-    },
+    _id: mongoose.Types.ObjectId,
     name: {
         type: String,
         unique: true,

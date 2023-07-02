@@ -93,6 +93,7 @@ module.exports = class ProductController {
 
             // Create a new Model object
             const newModel = {
+                _id: new mongoose.Types.ObjectId(),
                 size,
                 color,
                 quantity: parsedQuantity
@@ -145,7 +146,7 @@ module.exports = class ProductController {
     static async getModels(req, res) {
 
         try {
-            const product = await Product.findById(req.params.id);
+            const product = await Product.findById(req.params.productId);
 
             if (!(product && product.AvailableModels)) {
                 // Product with the given ID not found
@@ -192,6 +193,162 @@ module.exports = class ProductController {
             res.status(200).json({ message: 'Todos os produtos, se algum, foram apagados com sucesso' });
         } catch (error) {
             res.status(500).json({ error: 'Não foi possível apagar os produtos' });
+        }
+    }
+
+    static async dropModels(req, res) {
+        try {
+            const product = await Product.findById(req.params.productId);
+
+            if (!product) {
+                // Product with the given ID not found
+                return res.status(404).json({ message: `O produto de id ${req.params.modelId} não foi encontrado` });
+            }
+
+            // Set AvailableModels to an empty array
+            product.AvailableModels = [];
+
+            // Save the updated product to the database
+            await product.save();
+
+            // Return a success response
+            return res.status(200).json({ message: `Todos os modelos, se algum, do produto ${req.params.productId} foram apagados` });
+        } catch (error) {
+            // Error occurred while updating the product
+            return res.status(500).json({ message: 'Não foi possível apagar os modelos', error: error.message });
+        }
+    }
+
+    static async removeProduct(req, res) {
+        try {
+            const productId = req.params.productId;
+
+            const product = await Product.findByIdAndDelete(productId);
+
+            if (!product) {
+                // Product with the given ID not found
+                return res.status(404).json({ message: `O produto de id ${req.params.modelId} não foi encontrado` });
+            }
+
+            // Return a success response
+            return res.status(200).json({ message: 'Produto removido com sucesso', product });
+        } catch (error) {
+            // Error occurred while deleting the product
+            return res.status(500).json({ message: 'Não foi possível apagar o produto', error: error.message });
+        }
+    }
+
+
+    static async removeModel(req, res) {
+        try {
+            const productId = req.params.productId;
+            const product = await Product.findById(productId);
+
+            if (!product) {
+                // Product with the given ID not found
+                return res.status(404).json({ message: `O produto de id ${productId} não foi encontrado` });
+            }
+
+            const modelId = req.params.modelId;
+
+            // Find the index of the model to be removed
+            const modelIndex = product.AvailableModels.findIndex(model => model._id.toString() === modelId);
+
+            if (modelIndex === -1) {
+                // Model with the given ID not found
+                return res.status(404).json({ message: `O modelo de id ${modelId} não foi encontrado` });
+            }
+
+            // Remove the model from the AvailableModels array
+            product.AvailableModels.splice(modelIndex, 1);
+
+            // Save the updated product to the database
+            await product.save();
+
+            // Return a success response
+            return res.status(200).json({ message: `O Modelo de id ${modelId} foi removido com sucesso`, product });
+        } catch (error) {
+            // Error occurred while updating the product
+            return res.status(500).json({ message: 'Não foi possível apagar o modelo', error: error.message });
+        }
+    }
+
+
+    static async updateProduct(req, res) {
+        const { productId } = req.params;
+        const updates = req.body;
+
+        try {
+            // Check if the product exists
+            const product = await Product.findById(productId);
+            if (!product) {
+                return res.status(404).json({ message: `O produto de id ${productId} não foi encontrado` });
+            }
+
+            // Check if all keys being changed already exist
+            const existingKeys = Object.keys(product.toObject());
+            const updateKeys = Object.keys(updates);
+            const invalidKeys = updateKeys.filter((key) => !existingKeys.includes(key));
+
+            if (invalidKeys.length > 0) {
+                return res.status(400).json({ message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(', ')}` });
+            }
+
+            // Update the existing keys of the product
+            Object.keys(updates).forEach((key) => {
+                product[key] = updates[key];
+            });
+
+            // Save the updated product
+            await product.save();
+
+            return res.status(200).json({ message: 'Produto atualizado com sucesso', product });
+        } catch (error) {
+            return res.status(500).json({ message: 'Não foi possível atualizar o produto', error: error.message });
+        }
+    }
+
+    static async updateModel(req, res) {
+        try {
+            const productId = req.params.productId;
+            const modelId = req.params.modelId;
+            const updateData = req.body;
+
+            const product = await Product.findById(productId);
+
+            if (!product) {
+                // Product with the given ID not found
+                return res.status(404).json({ message: `O produto de id ${productId} não foi encontrado` });
+            }
+
+            // Find the model to be updated
+            const model = product.AvailableModels.find(model => model._id.toString() === modelId);
+
+            if (!model) {
+                // Model with the given ID not found
+                return res.status(404).json({ message: `O modelo de id ${modelId} não foi encontrado` });
+            }
+
+            // Validate if all keys in updateData exist in the model schema
+            const validKeys = Object.keys(updateData).every(key => model.schema.paths.hasOwnProperty(key));
+            if (!validKeys) {
+                // Invalid keys provided in the update data
+                return res.status(400).json({ message: 'Chaves inválidas foram passadas no pedido de atualização' });
+            }
+
+            // Update the values of matching keys
+            Object.entries(updateData).forEach(([key, value]) => {
+                model[key] = value;
+            });
+
+            // Save the updated product to the database
+            await product.save();
+
+            // Return a success response
+            return res.status(200).json({ message: `Modelo atualizado com sucesso`, model });
+        } catch (error) {
+            // Error occurred while updating the model
+            return res.status(500).json({ message: 'Não foi possível atualizar o modelo', error: error.message });
         }
     }
 }

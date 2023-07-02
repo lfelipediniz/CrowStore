@@ -1,7 +1,12 @@
 const mongoose = require('../db/conn');
 const { Schema } = mongoose;
 
-const ClothingModel = new mongoose.Schema({
+const Model = new mongoose.Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        auto: true,
+        unique: true
+    },
     size: {
         type: String,
         enum: ['PP', 'P', 'M', 'G', 'XG'],
@@ -23,7 +28,15 @@ const ClothingModel = new mongoose.Schema({
     }
 });
 
-const ClothingTypeSchema = new Schema({
+// Define a compound index for size and color
+Model.index({ size: 1, color: 1 }, { unique: true });
+
+const Product = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId,
+        auto: true,
+        unique: true
+    },
     name: {
         type: String,
         unique: true,
@@ -52,9 +65,9 @@ const ClothingTypeSchema = new Schema({
         type: Array,
         required: true
     },
-    AvailableModels: [ClothingModel]
+    AvailableModels: [Model]
 }, { timestamps: true });
 
-const ClothingType = mongoose.model('ClothingType', ClothingTypeSchema);
+const ProductModel = mongoose.model('Product', Product);
 
-module.exports = ClothingType;
+module.exports = ProductModel;

@@ -354,6 +354,9 @@ const Login = () => {
                             backgroundColor: colors.ctaBlack,
                             color: "black",
                           }}
+                          disabled={
+                            isEmailInvalid || isCPFInvalid || isPhoneInvalid 
+                          }
                         >
                           Cadastrar
                         </Button>

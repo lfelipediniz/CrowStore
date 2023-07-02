@@ -350,7 +350,7 @@ const Login = () => {
                           variant="contained"
                           style={{
                             backgroundColor: colors.ctaBlack,
-                            color: colors.secondary,
+                            color: "black",
                           }}
                         >
                           Cadastrar
@@ -420,7 +420,7 @@ const Login = () => {
                         <Button
                           type="submit"
                           variant="contained"
-                          style={{backgroundColor: colors.ctaBlack, color: colors.secondary}}
+                          style={{backgroundColor: colors.ctaBlack, color: "black"}}
                         >
                           Entrar
                         </Button>
@@ -472,7 +472,7 @@ const Login = () => {
                         onClick={() => setIsCadastrando(true)}
                         variant="outlined"
                         color="primary"
-                        style={{ color: colors.primary }}
+                        style={{ color: colors.primary, borderColor: colors.ctaBlack }}
                       >
                         Cadastre-se
                       </Button>

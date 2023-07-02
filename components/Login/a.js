@@ -330,7 +330,7 @@ const Login = () => {
                         InputProps={{
                           endAdornment: (
                             <Button onClick={handleClickShowConfirmPassword}>
-                              {!showConfirmPassword ? (
+                             {!showConfirmPassword ? (
                                 <FaEyeSlash style={{ color: colors.primary }} />
                               ) : (
                                 <FaEye style={{ color: colors.primary }} />
@@ -343,93 +343,60 @@ const Login = () => {
                       />
                       <br />
                       <br />
-                      <br />
-                      <center>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          style={{
-                            backgroundColor: colors.ctaBlack,
-                            color: colors.secondary,
-                          }}
-                        >
-                          Cadastrar
-                        </Button>
-                      </center>
-                      <br />
+                      <Button type="submit" variant="contained" color="primary">
+                        Cadastrar
+                      </Button>
                     </form>
+                    <br />
+                    <Button onClick={() => setIsCadastrando(false)}>
+                      Voltar para Login
+                    </Button>
                   </div>
                 ) : (
                   <div>
                     <form onSubmit={handleFormlogin}>
-                      <br />
-                      <br />
+                      <h2>Login</h2>
                       <TextField
-                        label="Email do usuário"
-                        variant="standard"
-                        fullWidth
+                        label="Nome de usuário"
+                        variant="outlined"
                         required
                         value={userN}
                         onChange={handleUsernameChange}
-                        InputLabelProps={{ style: { color: colors.primary } }}
-                        InputProps={{
-                          style: { color: colors.primary },
-                          autoComplete: "new-phone",
-                        }}
                       />
                       <br />
                       <br />
                       <TextField
                         label="Senha"
-                        variant="standard"
+                        variant="outlined"
                         required
-                        fullWidth
                         type={showPassword ? "text" : "password"}
                         value={senha}
                         onChange={handlePasswordChange}
-                        InputLabelProps={{ style: { color: colors.primary } }}
-                        InputProps={{
-                          style: { color: colors.primary },
-                          autoComplete: "new-phone",
-                        }}
                         InputProps={{
                           endAdornment: (
                             <Button
                               onClick={handleClickShowPassword}
                               onMouseDown={handleMouseDownPassword}
                             >
-                              {showPassword ? (
-                                <FaEyeSlash style={{ color: colors.primary }} />
-                              ) : (
-                                <FaEye style={{ color: colors.primary }} />
-                              )}
+                              {showPassword ? "Esconder" : "Mostrar"}
                             </Button>
                           ),
                         }}
                       />
                       <br />
                       <br />
-                      <br />
-                      <LoginBtnContainer>
-                        <Button
-                          type="submit"
-                          style={{ color: colors.lightGray }}
-                        >
-                          Esqueci a senha
-                        </Button>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          style={{backgroundColor: colors.ctaBlack, color: colors.secondary}}
-                        >
-                          Entrar
-                        </Button>
-                      </LoginBtnContainer>
+                      <Button type="submit" variant="contained" color="primary">
+                        Entrar
+                      </Button>
                     </form>
                     <br />
+                    <Button onClick={() => setIsCadastrando(true)}>
+                      Criar uma nova conta
+                    </Button>
                   </div>
                 )}
               </div>
+
 
               {!isCadastrando ? (
                 <>
@@ -508,15 +475,10 @@ const Login = () => {
                     />
                   </div>
 
-                  <p
-                    style={{
-                      marginTop: 10,
-                      textAlign: "center",
-                      cursor: "pointer",
-                    }}
-                  >
+                  <p style={{ marginTop: 10, textAlign: "center" }}>
                     <a
-                      onClick={() => setIsCadastrando(false)}
+                      href="/"
+                      onClick={handleLoginLinkClick}
                       style={{ color: colors.primary }}
                     >
                       Já tem uma conta? Faça login aqui!

@@ -119,6 +119,7 @@ export const Loginbut1 = styled.button`
 `;
 
 export const LoginBtnContainer = styled.div`
+justify-content: space-between;
   display: flex;
   flex-direction: row;
   margin-top: 20px;

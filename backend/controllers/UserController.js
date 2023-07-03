@@ -141,6 +141,12 @@ class UserController {
         const { id } = req.params;
         const { name, email, phone, cpf } = req.body;
 
+        let image;
+
+        if (req.file) {
+            image = req.file.filename
+        }
+
         try {
             const user = await User.findByIdAndUpdate(
                 id,

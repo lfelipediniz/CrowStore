@@ -6,7 +6,7 @@ const imageStore = multer.diskStorage({
     destination: function(req, file, cb) {
         let folder = req.baseUrl.includes("users") ? "users" : "products";
 
-        cb(null, `public/images/${folder}`)
+        cb(null, `/public/images/${folder}`)
     },
     filename: function(req, file, cb) {
         cb(null, Date.now() + path.extname(file.originalname))

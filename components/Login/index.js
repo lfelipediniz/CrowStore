@@ -351,11 +351,11 @@ const Login = () => {
                           type="submit"
                           variant="contained"
                           style={{
-                            backgroundColor: (isEmailInvalid || isCPFInvalid || isPhoneInvalid ) ? colors.ctaBlack : colors.gray,
+                            backgroundColor:colors.ctaBlack,
                             color: "black",
                           }}
                           disabled={
-                            isEmailInvalid || isCPFInvalid || isPhoneInvalid 
+                            isEmailInvalid || isCPFInvalid || isPhoneInvalid || senha !== confirmSenha
                           }
                         >
                           Cadastrar

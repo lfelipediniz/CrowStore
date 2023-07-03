@@ -19,6 +19,7 @@ import { Context } from "../../context/UserContext";
 
 const Login = () => {
   const [isSingup, setIsSingup] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const [pass, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
@@ -100,7 +101,36 @@ const Login = () => {
   };
 
   const handleFormlogin = (event) => {
-    // Lógica para fazer login
+    event.preventDefault();
+    if (!email) {
+      // Alguma informação está faltando ou inválida, não envie o formulário
+      return;
+    }
+
+    const user = {
+      email,
+      password: pass,
+    };
+
+    fetch("http://localhost:5000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // O cadastro foi realizado com sucesso
+          console.log("Login realizado com sucesso");
+          setIsLogin(true);
+        } else {
+          throw new Error("Erro ao logar");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
   };
 
   const handleFormSignUp = (event) => {
@@ -119,8 +149,6 @@ const Login = () => {
       // Alguma informação está faltando ou inválida, não envie o formulário
       return;
     }
-    event.preventDefault();
-
     event.preventDefault();
 
     const user = {
@@ -224,6 +252,8 @@ const Login = () => {
         )}
 
         {isSingup && <Alert severity="success">Usuário Cadastrado!</Alert>}
+
+        {isLogin && <Alert severity="success">Usuário Logado!</Alert>}
       </FloatingStack>
 
       <LoginWrap>
@@ -234,7 +264,7 @@ const Login = () => {
             >
               <div>
                 {isSinguping ? (
-                  <LoginTitle style={{marginTop: 50}}>Bem vindo!</LoginTitle>
+                  <LoginTitle style={{ marginTop: 50 }}>Bem vindo!</LoginTitle>
                 ) : (
                   <LoginTitle>Login</LoginTitle>
                 )}
@@ -426,13 +456,13 @@ const Login = () => {
                         InputLabelProps={{ style: { color: colors.primary } }}
                         InputProps={{
                           style: { color: colors.primary },
-                          autoComplete: "new-phone",
+                          autoComplete: "new-email",
                         }}
                       />
                       <br />
                       <br />
                       <TextField
-                        label="pass"
+                        label="Senha"
                         variant="standard"
                         required
                         fullWidth
@@ -442,7 +472,7 @@ const Login = () => {
                         InputLabelProps={{ style: { color: colors.primary } }}
                         InputProps={{
                           style: { color: colors.primary },
-                          autoComplete: "new-phone",
+                          autoComplete: "new-pass",
                         }}
                         InputProps={{
                           endAdornment: (
@@ -463,11 +493,8 @@ const Login = () => {
                       <br />
                       <br />
                       <LoginBtnContainer>
-                        <Button
-                          type="submit"
-                          style={{ color: colors.lightGray }}
-                        >
-                          Esqueci a pass
+                        <Button type="" style={{ color: colors.lightGray }}>
+                          Esqueci a senha
                         </Button>
                         <Button
                           type="submit"

@@ -26,7 +26,7 @@ function User() {
           <CommonUser />
         )
       ) : (
-          <Login />
+        <Admin />
 
       )}
       

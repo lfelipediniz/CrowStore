@@ -351,7 +351,7 @@ const Login = () => {
                           type="submit"
                           variant="contained"
                           style={{
-                            backgroundColor: colors.ctaBlack,
+                            backgroundColor: (isEmailInvalid || isCPFInvalid || isPhoneInvalid ) ? colors.ctaBlack : colors.gray,
                             color: "black",
                           }}
                           disabled={

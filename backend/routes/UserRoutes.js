@@ -6,7 +6,6 @@ const User = require('../models/User')
 
 // middleware
 const verifyToken = require('../helpers/verify-token')
-const { imageUpload } = require('../helpers/image-upload.js')
 
 
 router.post('/register', UserController.register)
@@ -16,7 +15,6 @@ router.get('/:id', UserController.getUserById)
 router.patch(
     '/edit/:id',
     verifyToken,
-    imageUpload.single("image"),
     UserController.editUser
 )
 

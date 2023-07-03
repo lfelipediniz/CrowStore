@@ -1,26 +1,29 @@
 const multer = require("multer")
 const path = require("path")
 
-// Destination to store the images
-const imageStore = multer.diskStorage({
+// Configure multer storage for handling file uploads
+const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        let folder = req.baseUrl.includes("users") ? "users" : "products";
-
-        cb(null, `/public/images/${folder}`)
+        cb(null, path.join(__dirname, "../public/images/users"));
     },
     filename: function(req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname))
+        cb(null, Date.now() + "-" + file.originalname);
     },
-})
+});
 
-const imageUpload = multer({
-    storage: imageStore,
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(png|jpg)$/)) {
-            return cb(new Error("Apenas .png ou .jpg são formatos de imagem válidos"))
+const upload = multer({
+    storage,
+    fileFilter: (req, file, cb) => {
+        const filetypes = /jpeg|jpg|png/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+        if (mimetype && extname) {
+            return cb(null, true);
+        } else {
+            cb("Erro: Apenas arquivos .jpeg, .jpg, ou .png são aceitos");
         }
-        cb(undefined, true)
     },
-})
+});
 
-module.exports = { imageUpload }
+module.exports = { upload }

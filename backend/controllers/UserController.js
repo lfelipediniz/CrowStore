@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const createUserToken = require("../helpers/create-user-token");
 const getToken = require("../helpers/get-token");
 const getUserByToken = require("../helpers/get-user-by-token");
+const upload = require('../helpers/image-upload.js')
 
 class UserController {
     static async register(req, res) {
@@ -137,30 +138,49 @@ class UserController {
         }
     }
 
+
+    // Controller method for editing a user
     static async editUser(req, res) {
-        const { id } = req.params;
-        const { name, email, phone, cpf } = req.body;
-
-        let image;
-
-        if (req.file) {
-            image = req.file.filename
-        }
+        const userId = req.params.id;
+        const updatedFields = req.body;
 
         try {
-            const user = await User.findByIdAndUpdate(
-                id,
-                { name, email, phone, cpf },
-                { new: true }
-            );
-
-            if (user) {
-                res.status(200).send(user);
-            } else {
-                res.status(404).json({ message: "Usuário não encontrado" });
+            // Check if the user exists
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({ error: `Não foi encontrado um usuário de id ${userId}` });
             }
+
+            // Update the fields provided in the request body
+            Object.keys(updatedFields).forEach((field) => {
+                if (field !== "image") {
+                    user[field] = updatedFields[field];
+                }
+            });
+
+            // Handle image upload using the 'upload' middleware
+            upload.single("image")(req, res, async (err) => {
+                if (err instanceof multer.MulterError) {
+                    // Multer error handling
+                    return res.status(400).json({ error: err.message });
+                } else if (err) {
+                    // Other errors
+                    return res.status(400).json({ error: "Não foi possível o envio da imagem" });
+                }
+
+                if (req.file) {
+                    const imagePath = path.join("images/users", req.file.filename);
+                    user.image = imagePath; // Store the image path in the user object
+                }
+
+                // Save the updated user object to the database
+                await user.save();
+
+                res.json({ message: "Atualização do usuário concluída com sucesso" });
+            });
         } catch (error) {
-            res.status(500).json({ message: "Erro ao editar usuário" });
+            console.error(error);
+            res.status(500).json({ error: "Falha ao atualizar o usuário" });
         }
     }
 }

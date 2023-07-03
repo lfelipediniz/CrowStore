@@ -235,7 +235,7 @@ const Login = () => {
       <FloatingStack>
         {isPhoneInvalid && isPhoneFocused && (
           <Alert severity="error">
-            O phone celular brasileiro tem 11 digitos!
+            O celular brasileiro tem 11 digitos!
           </Alert>
         )}
 
@@ -272,7 +272,7 @@ const Login = () => {
                   <div>
                     <form onSubmit={handleFormSignUp}>
                       <TextField
-                        label="name"
+                        label="Nome"
                         required
                         fullWidth
                         value={name}
@@ -335,7 +335,7 @@ const Login = () => {
                       />{" "}
                       <br /> <br />
                       <TextField
-                        label="phone"
+                        label="Celular"
                         required
                         error={isPhoneInvalid}
                         value={phone}
@@ -389,7 +389,7 @@ const Login = () => {
                       <br />
                       <br />
                       <TextField
-                        label="Confirmar pass"
+                        label="Confirmar senha"
                         required
                         type={showConfirmPassword ? "text" : "password"}
                         value={confirmpass}

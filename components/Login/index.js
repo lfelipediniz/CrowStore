@@ -18,10 +18,7 @@ import Alert from "@mui/material/Alert";
 import { Context } from "../../context/UserContext";
 
 const Login = () => {
-  const [userSingUP, setUser] = useState({});
-
-  const { register } = useContext(Context)
-
+  const [isSingup, setIsSingup] = useState(false);
 
   const [pass, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
@@ -29,7 +26,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [name, setname] = useState("");
   const [confirmpass, setConfirmpass] = useState("");
-  const [isCadastrando, setIsCadastrando] = useState(false);
+  const [isSinguping, setIsSinguping] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
@@ -122,15 +119,43 @@ const Login = () => {
       // Alguma informação está faltando ou inválida, não envie o formulário
       return;
     }
-    event.preventDefault()
+    event.preventDefault();
 
-    register(userSingUP)
+    event.preventDefault();
 
+    const user = {
+      name,
+      email,
+      cpf,
+      phone,
+      password: pass,
+      confirmpassword: confirmpass,
+    };
+
+    fetch("http://localhost:5000/users/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // O cadastro foi realizado com sucesso
+          console.log("Cadastro realizado com sucesso");
+          setIsSingup(true);
+        } else {
+          throw new Error("Erro ao cadastrar");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
   };
 
   const handleChange = (event) => {
-    setUser({...userSingUP, [event.target.name]: event.target.value})
-  }
+    // setUser({...userSingUP, [event.target.name]: event.target.value})
+  };
 
   const formatCPF = (value) => {
     // Implemente a lógica de formatação do CPF aqui, por exemplo:
@@ -197,21 +222,23 @@ const Login = () => {
         {pass !== confirmpass && isConfirmpassFocused && (
           <Alert severity="error">As passs não são iguais!</Alert>
         )}
+
+        {isSingup && <Alert severity="success">Usuário Cadastrado!</Alert>}
       </FloatingStack>
 
       <LoginWrap>
         <UserContainer>
           <WrapContent>
             <LoginContainer
-              style={isCadastrando ? { height: "650px", marginTop: 50 } : {}}
+              style={isSinguping ? { height: "650px", marginTop: 50 } : {}}
             >
               <div>
-                {isCadastrando ? (
-                  <LoginTitle>Bem vindo!</LoginTitle>
+                {isSinguping ? (
+                  <LoginTitle style={{marginTop: 50}}>Bem vindo!</LoginTitle>
                 ) : (
                   <LoginTitle>Login</LoginTitle>
                 )}
-                {isCadastrando ? (
+                {isSinguping ? (
                   <div>
                     <form onSubmit={handleFormSignUp}>
                       <TextField
@@ -221,7 +248,7 @@ const Login = () => {
                         value={name}
                         onChange={(event) => {
                           handlenameChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         variant="standard"
                         size="small"
@@ -239,7 +266,7 @@ const Login = () => {
                         value={email}
                         onChange={(event) => {
                           handleEmailChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         onFocus={() => setIsEmailFocused(true)}
                         onBlur={() => setIsEmailFocused(false)}
@@ -261,7 +288,7 @@ const Login = () => {
                         fullWidth
                         onChange={(event) => {
                           handleCPFChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         onFocus={() => setIsCPFFocused(true)}
                         onBlur={() => setIsCPFFocused(false)}
@@ -285,7 +312,7 @@ const Login = () => {
                         fullWidth
                         onChange={(event) => {
                           handlephoneChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         onFocus={() => setIsPhoneFocused(true)}
                         onBlur={() => setIsPhoneFocused(false)}
@@ -306,7 +333,7 @@ const Login = () => {
                         value={pass}
                         onChange={(event) => {
                           handlePasswordChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         variant="standard"
                         size="small"
@@ -338,7 +365,7 @@ const Login = () => {
                         value={confirmpass}
                         onChange={(event) => {
                           handleConfirmpassChange(event);
-                          handleChange(event)
+                          handleChange(event);
                         }}
                         onFocus={() => setIsConfirmpassFocused(true)}
                         onBlur={() => setIsConfirmpassFocused(false)}
@@ -459,7 +486,7 @@ const Login = () => {
                 )}
               </div>
 
-              {!isCadastrando ? (
+              {!isSinguping ? (
                 <>
                   <div
                     style={{
@@ -488,7 +515,7 @@ const Login = () => {
                     />
                   </div>
 
-                  {!isCadastrando && (
+                  {!isSinguping && (
                     <div
                       style={{
                         display: "flex",
@@ -497,7 +524,7 @@ const Login = () => {
                       }}
                     >
                       <Button
-                        onClick={() => setIsCadastrando(true)}
+                        onClick={() => setIsSinguping(true)}
                         variant="outlined"
                         color="primary"
                         style={{
@@ -547,7 +574,7 @@ const Login = () => {
                     }}
                   >
                     <a
-                      onClick={() => setIsCadastrando(false)}
+                      onClick={() => setIsSinguping(false)}
                       style={{ color: colors.primary }}
                     >
                       Já tem uma conta? Faça login aqui!

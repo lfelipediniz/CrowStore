@@ -14,13 +14,14 @@ import { colors } from "../../styles/colors";
 import Alert from "@mui/material/Alert";
 
 const Login = () => {
-  const [userN, setUsername] = useState("");
-  const [senha, setPassword] = useState("");
+  const [userSingUP, setUser] = useState({});
+
+  const [pass, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
-  const [telefone, setTelefone] = useState("");
+  const [phone, setphone] = useState("");
   const [email, setEmail] = useState("");
-  const [nome, setNome] = useState("");
-  const [confirmSenha, setConfirmSenha] = useState("");
+  const [name, setname] = useState("");
+  const [confirmpass, setConfirmpass] = useState("");
   const [isCadastrando, setIsCadastrando] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -30,11 +31,7 @@ const Login = () => {
   const [isCPFFocused, setIsCPFFocused] = useState(false);
   const [isCPFInvalid, setIsCPFInvalid] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
-  const [isConfirmSenhaFocused, setIsConfirmSenhaFocused] = useState(false);
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+  const [isConfirmpassFocused, setIsConfirmpassFocused] = useState(false);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -54,18 +51,18 @@ const Login = () => {
     setCpf(formattedValue);
   };
 
-  const handleTelefoneChange = (event) => {
+  const handlephoneChange = (event) => {
     const rawValue = event.target.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
-    const formattedValue = formatPhoneNumber(rawValue); // Formata o número de telefone
+    const formattedValue = formatPhoneNumber(rawValue); // Formata o número de phone
 
-    // Verifica se o número de telefone possui pelo menos 11 dígitos
+    // Verifica se o número de phone possui pelo menos 11 dígitos
     if (formattedValue.length >= 15) {
       setIsPhoneInvalid(false);
     } else {
       setIsPhoneInvalid(true);
     }
 
-    setTelefone(formattedValue);
+    setphone(formattedValue);
   };
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
@@ -78,12 +75,12 @@ const Login = () => {
     setEmail(emailValue);
   };
 
-  const handleNomeChange = (event) => {
-    setNome(event.target.value);
+  const handlenameChange = (event) => {
+    setname(event.target.value);
   };
 
-  const handleConfirmSenhaChange = (event) => {
-    setConfirmSenha(event.target.value);
+  const handleConfirmpassChange = (event) => {
+    setConfirmpass(event.target.value);
   };
 
   const handleClickShowPassword = () => {
@@ -102,36 +99,31 @@ const Login = () => {
     // Lógica para fazer login
   };
 
-  const handleFormsignup = (event) => {
+  const handleFormSignUp = (event) => {
     if (
-      senha !== confirmSenha ||
+      pass !== confirmpass ||
       isCPFInvalid ||
       isEmailInvalid ||
       isPhoneInvalid ||
       !cpf ||
-      !senha ||
-      !confirmSenha ||
+      !pass ||
+      !confirmpass ||
       !email ||
-      !nome ||
-      !telefone
+      !name ||
+      !phone
     ) {
       // Alguma informação está faltando ou inválida, não envie o formulário
       return;
     }
+    event.preventDefault()
 
-    // Resto do código para cadastrar o usuário
+    console.log(userSingUP)
 
-    // Exemplo de alerta
-    alert("Usuário cadastrado com sucesso");
-
-    // Reiniciar o estado do formulário
-    setCpf("");
-    setTelefone("");
-    setEmail("");
-    setNome("");
-    setConfirmSenha("");
-    setIsCadastrando(false);
   };
+
+  const handleChange = (event) => {
+    setUser({...userSingUP, [event.target.name]: event.target.value})
+  }
 
   const formatCPF = (value) => {
     // Implemente a lógica de formatação do CPF aqui, por exemplo:
@@ -172,7 +164,7 @@ const Login = () => {
 
   const handlePhoneBlur = () => {
     setIsPhoneFocused(false);
-    if (telefone.length <= 11) {
+    if (phone.length <= 11) {
       setIsPhoneInvalid(true);
     } else {
       setIsPhoneInvalid(false);
@@ -183,7 +175,7 @@ const Login = () => {
       <FloatingStack>
         {isPhoneInvalid && isPhoneFocused && (
           <Alert severity="error">
-            O telefone celular brasileiro tem 11 digitos!
+            O phone celular brasileiro tem 11 digitos!
           </Alert>
         )}
 
@@ -195,8 +187,8 @@ const Login = () => {
           <Alert severity="error">O CPF digitado não é válido.</Alert>
         )}
 
-        {senha !== confirmSenha && isConfirmSenhaFocused && (
-          <Alert severity="error">As senhas não são iguais!</Alert>
+        {pass !== confirmpass && isConfirmpassFocused && (
+          <Alert severity="error">As passs não são iguais!</Alert>
         )}
       </FloatingStack>
 
@@ -214,13 +206,16 @@ const Login = () => {
                 )}
                 {isCadastrando ? (
                   <div>
-                    <form onSubmit={handleFormsignup}>
+                    <form onSubmit={handleFormSignUp}>
                       <TextField
-                        label="Nome"
+                        label="name"
                         required
                         fullWidth
-                        value={nome}
-                        onChange={handleNomeChange}
+                        value={name}
+                        onChange={(event) => {
+                          handlenameChange(event);
+                          handleChange(event)
+                        }}
                         variant="standard"
                         size="small"
                         InputLabelProps={{ style: { color: colors.primary } }}
@@ -235,7 +230,10 @@ const Login = () => {
                         required
                         error={isEmailInvalid}
                         value={email}
-                        onChange={handleEmailChange}
+                        onChange={(event) => {
+                          handleEmailChange(event);
+                          handleChange(event)
+                        }}
                         onFocus={() => setIsEmailFocused(true)}
                         onBlur={() => setIsEmailFocused(false)}
                         variant="standard"
@@ -254,7 +252,10 @@ const Login = () => {
                         error={isCPFInvalid}
                         value={cpf}
                         fullWidth
-                        onChange={handleCPFChange}
+                        onChange={(event) => {
+                          handleCPFChange(event);
+                          handleChange(event)
+                        }}
                         onFocus={() => setIsCPFFocused(true)}
                         onBlur={() => setIsCPFFocused(false)}
                         variant="standard"
@@ -270,12 +271,15 @@ const Login = () => {
                       />{" "}
                       <br /> <br />
                       <TextField
-                        label="Telefone"
+                        label="phone"
                         required
                         error={isPhoneInvalid}
-                        value={telefone}
+                        value={phone}
                         fullWidth
-                        onChange={handleTelefoneChange}
+                        onChange={(event) => {
+                          handlephoneChange(event);
+                          handleChange(event)
+                        }}
                         onFocus={() => setIsPhoneFocused(true)}
                         onBlur={() => setIsPhoneFocused(false)}
                         variant="standard"
@@ -289,11 +293,14 @@ const Login = () => {
                       />
                       <br /> <br />
                       <TextField
-                        label="Senha"
+                        label="pass"
                         required
                         type={showPassword ? "text" : "password"}
-                        value={senha}
-                        onChange={handlePasswordChange}
+                        value={pass}
+                        onChange={(event) => {
+                          handlePasswordChange(event);
+                          handleChange(event)
+                        }}
                         variant="standard"
                         size="small"
                         fullWidth
@@ -318,13 +325,16 @@ const Login = () => {
                       <br />
                       <br />
                       <TextField
-                        label="Confirmar Senha"
+                        label="Confirmar pass"
                         required
                         type={showConfirmPassword ? "text" : "password"}
-                        value={confirmSenha}
-                        onChange={handleConfirmSenhaChange}
-                        onFocus={() => setIsConfirmSenhaFocused(true)}
-                        onBlur={() => setIsConfirmSenhaFocused(false)}
+                        value={confirmpass}
+                        onChange={(event) => {
+                          handleConfirmpassChange(event);
+                          handleChange(event)
+                        }}
+                        onFocus={() => setIsConfirmpassFocused(true)}
+                        onBlur={() => setIsConfirmpassFocused(false)}
                         variant="standard"
                         size="small"
                         fullWidth
@@ -351,11 +361,14 @@ const Login = () => {
                           type="submit"
                           variant="contained"
                           style={{
-                            backgroundColor:colors.ctaBlack,
+                            backgroundColor: colors.ctaBlack,
                             color: "black",
                           }}
                           disabled={
-                            isEmailInvalid || isCPFInvalid || isPhoneInvalid || senha !== confirmSenha
+                            isEmailInvalid ||
+                            isCPFInvalid ||
+                            isPhoneInvalid ||
+                            pass !== confirmpass
                           }
                         >
                           Cadastrar
@@ -374,8 +387,8 @@ const Login = () => {
                         variant="standard"
                         fullWidth
                         required
-                        value={userN}
-                        onChange={handleUsernameChange}
+                        value={email}
+                        onChange={handleEmailChange}
                         InputLabelProps={{ style: { color: colors.primary } }}
                         InputProps={{
                           style: { color: colors.primary },
@@ -385,12 +398,12 @@ const Login = () => {
                       <br />
                       <br />
                       <TextField
-                        label="Senha"
+                        label="pass"
                         variant="standard"
                         required
                         fullWidth
                         type={showPassword ? "text" : "password"}
-                        value={senha}
+                        value={pass}
                         onChange={handlePasswordChange}
                         InputLabelProps={{ style: { color: colors.primary } }}
                         InputProps={{
@@ -420,7 +433,7 @@ const Login = () => {
                           type="submit"
                           style={{ color: colors.lightGray }}
                         >
-                          Esqueci a senha
+                          Esqueci a pass
                         </Button>
                         <Button
                           type="submit"

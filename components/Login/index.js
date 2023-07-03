@@ -357,7 +357,7 @@ const Login = () => {
                       />
                       <br /> <br />
                       <TextField
-                        label="pass"
+                        label="Senha"
                         required
                         type={showPassword ? "text" : "password"}
                         value={pass}
@@ -461,26 +461,25 @@ const Login = () => {
                       />
                       <br />
                       <br />
+
                       <TextField
                         label="Senha"
                         variant="standard"
-                        required
                         fullWidth
+                        required
                         type={showPassword ? "text" : "password"}
                         value={pass}
                         onChange={handlePasswordChange}
                         InputLabelProps={{ style: { color: colors.primary } }}
                         InputProps={{
                           style: { color: colors.primary },
-                          autoComplete: "new-pass",
-                        }}
-                        InputProps={{
+                          autoComplete: "new-email",
                           endAdornment: (
                             <Button
                               onClick={handleClickShowPassword}
                               onMouseDown={handleMouseDownPassword}
                             >
-                              {showPassword ? (
+                              {!showPassword ? (
                                 <FaEyeSlash style={{ color: colors.primary }} />
                               ) : (
                                 <FaEye style={{ color: colors.primary }} />
@@ -489,6 +488,7 @@ const Login = () => {
                           ),
                         }}
                       />
+
                       <br />
                       <br />
                       <br />

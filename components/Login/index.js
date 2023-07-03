@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { WrapContent } from "../ReusedComponents/WrapContent";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import {
@@ -13,8 +13,15 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { colors } from "../../styles/colors";
 import Alert from "@mui/material/Alert";
 
+// contexts
+
+import { Context } from "../../context/UserContext";
+
 const Login = () => {
   const [userSingUP, setUser] = useState({});
+
+  const { register } = useContext(Context)
+
 
   const [pass, setPassword] = useState("");
   const [cpf, setCpf] = useState("");
@@ -117,7 +124,7 @@ const Login = () => {
     }
     event.preventDefault()
 
-    console.log(userSingUP)
+    register(userSingUP)
 
   };
 

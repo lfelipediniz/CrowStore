@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   AddProductContainer,
   AddProduct,
@@ -166,6 +166,41 @@ const ProductModal = ({
   const [selectedProductColors, setSelectedProductColors] = useState([]);
   const [selectedProductSizes, setSelectedProductSizes] = useState([]);
 
+  const fileInputRef = useRef(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  // Da seleção de multiplas imagens
+  const handleImages = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const allowedTypes = ["image/jpeg", "image/png"];
+    const fileList = Array.from(files)
+      .slice(0, 4) // Limite de 4 imagens
+      .filter((file) => allowedTypes.includes(file.type));
+
+    setSelectedFiles(fileList);
+
+    // Exemplo de como exibir os nomes dos arquivos selecionados
+    for (let i = 0; i < fileList.length; i++) {
+      console.log(fileList[i].name);
+    }
+  };
+
+  const getFormattedFileName = (fileName) => {
+    if (fileName.length > 15) {
+      return `${fileName.slice(0, 15)}-${getFileExtension(fileName)}`;
+    }
+    return fileName;
+  };
+
+  const getFileExtension = (fileName) => {
+    const extension = fileName.split(".").pop();
+    return `.${extension}`;
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -192,15 +227,17 @@ const ProductModal = ({
           </ChangeContainer>
           <AddProduct>
             <>
+              <></>
               <AddButton htmlFor="imageUpload">
                 {selectedImage ? (
                   <ImagePreview src={selectedImage} alt="Selected" />
                 ) : (
                   <>
-                    <FaPhotoVideo /> Adicionar Imagem
+                    <FaPhotoVideo /> Adicionar Imagem Principal
                   </>
                 )}
               </AddButton>
+
               <input
                 id="imageUpload"
                 type="file"
@@ -209,7 +246,6 @@ const ProductModal = ({
                 hidden
               />
             </>
-
             <InputInfoContainer>
               <TitleModal>Informações do Produto</TitleModal>
               <TextField
@@ -232,8 +268,8 @@ const ProductModal = ({
                 fullWidth
                 sx={{ marginBottom: "25px" }}
                 value={selectedDescription} // Vincular o valor da descrição ao estado selecionado
-                onChange={(e) =>
-                  setSelectedDescription(e.target.value) // Atualizar a descrição do produto selecionado
+                onChange={
+                  (e) => setSelectedDescription(e.target.value) // Atualizar a descrição do produto selecionado
                 }
               />
               <TextField
@@ -372,6 +408,41 @@ const ProductModal = ({
               >
                 Tamanhos Disponíveis
               </Button>
+
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ marginBottom: "25px" }}
+                onClick={handleImages}
+              >
+                imagens secundárias
+              </Button>
+              <input
+                id="imageUpload"
+                type="file"
+                accept="image/*"
+                multiple
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+
+              {selectedFiles.length > 0 && (
+                <div>
+                  <center>
+                    <p>Imagens selecionadas</p>
+
+                    <br />
+                    <ul>
+                      {selectedFiles.map((file, index) => (
+                        <>
+                          <p key={index}>{getFormattedFileName(file.name)}</p> 
+                        </>
+                      ))}
+                    </ul>
+                  </center>
+                </div>
+              )}
 
               <Modal
                 open={isSizeModalOpen}

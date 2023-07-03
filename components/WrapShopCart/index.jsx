@@ -72,7 +72,7 @@ const WrapShopCart = () => {
     <ShopcartWrapper>
       <ShopcartContainer>
         <ProductContainer>
-        <Cart onCartUpdate={handleCartUpdate} />
+        <Cart onCartUpdate={handleCartUpdate} isShopCart={true} />
         </ProductContainer>
         <PaymentContainer>
         <PaymentOptions onSubmit={handleSubmission} />

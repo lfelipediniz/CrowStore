@@ -18,7 +18,7 @@ import {
   MobileProductImage,
 } from "./CartElements";
 
-const Cart = ({ onCartUpdate }) => {
+const Cart = ({ onCartUpdate, isShopCart }) => {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState([]);
 
@@ -78,6 +78,7 @@ const Cart = ({ onCartUpdate }) => {
                   name={`quantity${index}`}
                   value={quantities[index]}
                   min="1"
+                  readOnly={!isShopCart}
                   max={product.stock}
                   onChange={(e) => updateQuantity(index, e.target.value)}
                 />
@@ -92,9 +93,11 @@ const Cart = ({ onCartUpdate }) => {
                 </Row>
               </ProductPricing>
             </ProductDescription>
-            <RemoveButton onClick={() => removeProduct(index)}>
-              Remover
-            </RemoveButton>
+            {isShopCart && (
+              <RemoveButton onClick={() => removeProduct(index)}>
+                Remover
+              </RemoveButton>
+            )}
           </MobileProduct>
         ))}
 
@@ -104,9 +107,11 @@ const Cart = ({ onCartUpdate }) => {
             <ProductDescription>
               <ProductId>
                 <H2>{product.productName}</H2>
-                <RemoveButton onClick={() => removeProduct(index)}>
-                  Remover
-                </RemoveButton>
+                {isShopCart && (
+                  <RemoveButton onClick={() => removeProduct(index)}>
+                    Remover
+                  </RemoveButton>
+                )}
               </ProductId>
               <ProductPricing>
                 <Row>
@@ -114,13 +119,14 @@ const Cart = ({ onCartUpdate }) => {
                     Quantidade:
                   </QuantityLabel>
                   <QuantityInput
-                    type="number"
-                    name={`quantity${index}`}
-                    value={quantities[index]}
-                    min="1"
-                    max={product.stock}
-                    onChange={(e) => updateQuantity(index, e.target.value)}
-                  />
+                  type="number"
+                  name={`quantity${index}`}
+                  value={quantities[index]}
+                  min="1"
+                  readOnly={!isShopCart}
+                  max={product.stock}
+                  onChange={(e) => updateQuantity(index, e.target.value)}
+                />
                 </Row>
                 <Row>
                   <H3></H3>
@@ -133,17 +139,14 @@ const Cart = ({ onCartUpdate }) => {
           </ProductContainer>
         ))}
       </StyledCart>
-      <TotalContainer>
-        <Row>
-          <H2>Frete:</H2>
-
-          <H2>{"{Frete}"}</H2>
-        </Row>
-        <Row>
-          <H2>Total:</H2>
-          <H2>{calculateTotalPrice()}</H2>
-        </Row>
-      </TotalContainer>
+      {isShopCart && (
+        <TotalContainer>
+          <Row>
+            <H2>Total:</H2>
+            <H2>{calculateTotalPrice()}</H2>
+          </Row>
+        </TotalContainer>
+      )}
     </>
   );
 };

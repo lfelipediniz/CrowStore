@@ -5,8 +5,6 @@ import Navbar from "../Navbar";
 import User from "../User";
 
 
-
-
 const WrapUser = () => {
 
   const [isOpen, setIsOpen] = useState(false);

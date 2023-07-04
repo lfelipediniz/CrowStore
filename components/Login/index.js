@@ -103,12 +103,12 @@ const Login = () => {
   const handleFormlogin = (event) => {
     event.preventDefault();
     if (!email) return;
-  
+
     const user = {
       email,
       password: pass,
     };
-  
+
     fetch("http://localhost:5000/users/login", {
       method: "POST",
       headers: {
@@ -130,12 +130,12 @@ const Login = () => {
         console.log("Mensagem:", data.message);
         console.log("Token:", data.token);
         console.log("ID do usuário:", data.userId);
-  
+
         // Salvar o token no localStorage
         localStorage.setItem("token", data.token);
-  
+
         setIsLogin(true);
-        
+
         setTimeout(() => {
           window.location.reload(); // Recarrega a página após 2 segundos
         }, 1000);
@@ -193,7 +193,13 @@ const Login = () => {
         console.log("Mensagem:", data.message);
         console.log("Token:", data.token);
         console.log("ID do usuário:", data.userId);
+        // Salvar o token no localStorage
+        localStorage.setItem("token", data.token);
         setIsSingup(true);
+
+        setTimeout(() => {
+          window.location.reload(); // Recarrega a página após 2 segundos
+        }, 1000);
       })
       .catch((error) => {
         console.error("Erro:", error);

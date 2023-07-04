@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const multer = require("multer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -6,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const createUserToken = require("../helpers/create-user-token");
 const getToken = require("../helpers/get-token");
 const getUserByToken = require("../helpers/get-user-by-token");
-const upload = require('../helpers/image-upload.js')
+const { upload } = require('../helpers/image-upload.js')
 
 class UserController {
     static async register(req, res) {
@@ -117,9 +118,11 @@ class UserController {
             const token = getToken(req);
             const decoded = jwt.verify(token, "nossosecret");
 
-            currentUser = await User.findById(decoded.id);
-
-            currentUser.password = undefined;
+            const user = await User.findById(decoded.id);
+            if (user) {
+                currentUser = user;
+                currentUser.password = undefined;
+            }
         } else {
             currentUser = null;
         }
@@ -150,6 +153,8 @@ class UserController {
             if (!user) {
                 return res.status(404).json({ error: `Não foi encontrado um usuário de id ${userId}` });
             }
+
+            console.log(updatedFields);
 
             // Update the fields provided in the request body
             Object.keys(updatedFields).forEach((field) => {

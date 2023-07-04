@@ -147,48 +147,53 @@ class UserController {
     static async editUser(req, res) {
         const userId = req.params.id;
         const updatedFields = req.body;
-
+      
         try {
-            // Check if the user exists
-            const user = await User.findById(userId);
-            if (!user) {
-                return res.status(404).json({ error: `Não foi encontrado um usuário de id ${userId}` });
+          // Check if the user exists
+          const user = await User.findById(userId);
+          if (!user) {
+            return res.status(404).json({ error: `Não foi encontrado um usuário de id ${userId}` });
+          }
+      
+          // Update the fields provided in the request body
+          Object.keys(updatedFields).forEach((field) => {
+            if (field !== "image") {
+              user[field] = updatedFields[field];
             }
-
-            console.log(updatedFields);
-
-            // Update the fields provided in the request body
-            Object.keys(updatedFields).forEach((field) => {
-                if (field !== "image") {
-                    user[field] = updatedFields[field];
-                }
-            });
-
-            // Handle image upload using the 'upload' middleware
-            upload.single("image")(req, res, async (err) => {
-                if (err instanceof multer.MulterError) {
-                    // Multer error handling
-                    return res.status(400).json({ error: err.message });
-                } else if (err) {
-                    // Other errors
-                    return res.status(400).json({ error: "Não foi possível o envio da imagem" });
-                }
-
-                if (req.file) {
-                    const imagePath = path.join("images/users", req.file.filename);
-                    user.image = imagePath; // Store the image path in the user object
-                }
-
-                // Save the updated user object to the database
-                await user.save();
-
-                res.json({ message: "Atualização do usuário concluída com sucesso" });
-            });
+          });
+      
+          // Encrypt the password if provided in the updated fields
+          if (updatedFields.password) {
+            const salt = await bcrypt.genSalt(12);
+            const passwordHash = await bcrypt.hash(updatedFields.password, salt);
+            user.password = passwordHash;
+          }
+      
+          // Handle image upload using the 'upload' middleware
+          upload.single("image")(req, res, async (err) => {
+            if (err instanceof multer.MulterError) {
+              // Multer error handling
+              return res.status(400).json({ error: err.message });
+            } else if (err) {
+              // Other errors
+              return res.status(400).json({ error: "Não foi possível o envio da imagem" });
+            }
+      
+            if (req.file) {
+              const imagePath = path.join("images/users", req.file.filename);
+              user.image = imagePath; // Store the image path in the user object
+            }
+      
+            // Save the updated user object to the database
+            await user.save();
+      
+            res.json({ message: "Atualização do usuário concluída com sucesso" });
+          });
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: "Falha ao atualizar o usuário" });
+          console.error(error);
+          res.status(500).json({ error: "Falha ao atualizar o usuário" });
         }
-    }
+      }
 }
 
 module.exports = UserController;

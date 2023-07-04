@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
@@ -11,6 +11,9 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Image from "next/image";
 import Cart from "../Cart";
 import { MdPerson, MdShoppingCart } from "react-icons/md";
+
+import jwt from "jsonwebtoken";
+import axios from "axios";
 
 function CommonUser() {
   const [name, setName] = useState("");
@@ -37,6 +40,28 @@ function CommonUser() {
   const [isCPFInvalid, setIsCPFInvalid] = useState(false);
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [isConfirmSenhaFocused, setIsConfirmSenhaFocused] = useState(false);
+
+  const [userData, setUserData] = useState(null);
+
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/users/${userId}`);
+      const userData = response.data;
+      setUserData(userData);
+    } catch (error) {
+      console.error("Erro ao buscar informações do usuário:", error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwt.decode(token);
+      if (decodedToken && decodedToken.id) {
+        fetchUserData(decodedToken.id);
+      }
+    }
+  }, []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -289,10 +314,18 @@ function CommonUser() {
                 src="/CrowStore/logos/logo-crow-black-512x512.png"
                 width={100}
                 height={100}
-                alt="Imagem B"
+                alt="Imagem CrowStore"
               />
             </center>
             <br />
+            {userData && (
+              <>
+                <h3>CPF: {userData.cpf}</h3>
+                <br />
+                <h3>Email: {userData.email}</h3>
+                <br />
+                </>
+            )}
             <form>
               <TextField
                 label="Nome"
@@ -375,7 +408,6 @@ function CommonUser() {
                   autoComplete: "new-password",
                 }}
               />
-              <br />
               <br />
               <br />
               <center>

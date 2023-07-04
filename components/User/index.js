@@ -13,10 +13,10 @@ function User() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      // Decida como você armazenou o token e extraia as informações relevantes
-      const user = parseToken(token);
+      // Decodifica a carga útil do token
+      const payload = decodeToken(token);
 
-      if (user && user.admin) {
+      if (payload && payload.admin) {
         setIsAdmin(true);
       }
 
@@ -27,18 +27,18 @@ function User() {
     }
   }, []);
 
-
-  function parseToken(token) {
-    // parse do token e extraia as informações relevantes
-    try {
-      const tokenData = JSON.parse(token);
-      const { admin } = tokenData;
-      return { admin };
-    } catch (error) {
-      // Lida com erros de análise de token
-      console.error("Erro ao analisar o token:", error);
-      return null;
-    }
+  function decodeToken(token) {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
   }
 
   return (

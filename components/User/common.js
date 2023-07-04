@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-import {
-  Container,
-  SideNav,
-  ScrollableContainer,
-  Hi,
-  Form,
-  AvatarContainer,
-  UploadButton,
-} from "./UserElements";
-
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
 import {
-  Box,
-  Divider,
   List,
   ListItem,
   ListItemText,

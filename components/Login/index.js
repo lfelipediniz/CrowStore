@@ -103,12 +103,12 @@ const Login = () => {
   const handleFormlogin = (event) => {
     event.preventDefault();
     if (!email) return;
-
+  
     const user = {
       email,
       password: pass,
     };
-
+  
     fetch("http://localhost:5000/users/login", {
       method: "POST",
       headers: {
@@ -135,6 +135,10 @@ const Login = () => {
         localStorage.setItem("token", data.token);
   
         setIsLogin(true);
+        
+        setTimeout(() => {
+          window.location.reload(); // Recarrega a página após 2 segundos
+        }, 1000);
       })
       .catch((error) => {
         console.error("Erro:", error);

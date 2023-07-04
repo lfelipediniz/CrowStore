@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
 import SearchBar from "../SearchBar";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Button,
-} from "@mui/material";
+import { List, ListItem, ListItemText, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import Modal from "@mui/material/Modal";
@@ -15,7 +10,7 @@ import { colors } from "../../styles/colors";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Image from "next/image";
 import Cart from "../Cart";
-import { MdPerson, MdShoppingCart } from 'react-icons/md';
+import { MdPerson, MdShoppingCart } from "react-icons/md";
 
 function CommonUser() {
   const [name, setName] = useState("");
@@ -89,6 +84,12 @@ function CommonUser() {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleLogout = () => {
+    // Limpar o token do localStorage
+    localStorage.removeItem("token");
+    window.location.reload(); // Recarrega a página
   };
 
   const handleCPFChange = (event) => {
@@ -245,39 +246,41 @@ function CommonUser() {
     });
   };
 
-
-
   return (
     <div style={{ backgroundColor: colors.primary }}>
       <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingTop: "100px",
+          }}
+        >
+          <Button
+            style={{
+              marginRight: "10px",
+              backgroundColor: activeTab === "perfil" ? "#F44336" : "#E0E0E0",
+              color: activeTab === "perfil" ? "#FFFFFF" : "#000000",
+              transition: "background-color 0.3s ease, color 0.3s ease",
+            }}
+            onClick={() => handleTabChange("perfil")}
+            startIcon={<MdPerson />}
+          >
+            Meu Perfil
+          </Button>
 
-      <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '100px' }}>
-      <Button
-        style={{
-          marginRight: '10px',
-          backgroundColor: activeTab === 'perfil' ? '#F44336' : '#E0E0E0',
-          color: activeTab === 'perfil' ? '#FFFFFF' : '#000000',
-          transition: 'background-color 0.3s ease, color 0.3s ease'
-        }}
-        onClick={() => handleTabChange('perfil')}
-        startIcon={<MdPerson />}
-      >
-        Meu Perfil
-      </Button>
-
-      <Button
-        style={{
-          backgroundColor: activeTab === 'pedidos' ? '#F44336' : '#E0E0E0',
-          color: activeTab === 'pedidos' ? '#FFFFFF' : '#000000',
-          transition: 'background-color 0.3s ease, color 0.3s ease'
-        }}
-        onClick={() => handleTabChange('pedidos')}
-        startIcon={<MdShoppingCart />}
-      >
-        Pedidos
-      </Button>
-    </div>
-
+          <Button
+            style={{
+              backgroundColor: activeTab === "pedidos" ? "#F44336" : "#E0E0E0",
+              color: activeTab === "pedidos" ? "#FFFFFF" : "#000000",
+              transition: "background-color 0.3s ease, color 0.3s ease",
+            }}
+            onClick={() => handleTabChange("pedidos")}
+            startIcon={<MdShoppingCart />}
+          >
+            Pedidos
+          </Button>
+        </div>
 
         {activeTab === "perfil" && (
           <div style={{ padding: 100 }}>
@@ -397,7 +400,21 @@ function CommonUser() {
             </form>
 
             <center>
-              <br />
+              <Button
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: colors.textBlack,
+                  color: "white",
+                }}
+                onClick={handleLogout}
+              >
+                Sair
+              </Button>
+            </center>
+
+            <center>
+              <br /> <br />
               <Button
                 type="submit"
                 variant="contained"
@@ -421,7 +438,7 @@ function CommonUser() {
               <Cart onCartUpdate={handleCartUpdate} isShopCart={false} />
             </center>
             <br />
-              <br />
+            <br />
           </div>
         )}
       </div>

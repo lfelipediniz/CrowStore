@@ -18,6 +18,7 @@ import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 import ProductModal from "../ProductModal";
+import { colors } from "../../styles/colors";
 
 const Admin = () => {
   const [editingMode, setEditingMode] = useState(false);
@@ -36,7 +37,9 @@ const Admin = () => {
       if (window.innerWidth < 1115 && editingMode) {
         setEditingMode(false);
         setShowModal(false);
-        alert("Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px");
+        alert(
+          "Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px"
+        );
       }
     };
 
@@ -51,7 +54,9 @@ const Admin = () => {
 
   const toggleEditingMode = () => {
     if (window.innerWidth < 1115) {
-      alert("Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px");
+      alert(
+        "Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px"
+      );
       return;
     }
 
@@ -94,7 +99,8 @@ const Admin = () => {
       : Products.filter(
           (product) =>
             product.category === selectedCategory ||
-            (selectedCategory === "Masculino" && product.gender === "masculino") ||
+            (selectedCategory === "Masculino" &&
+              product.gender === "masculino") ||
             (selectedCategory === "Feminino" && product.gender === "feminino")
         );
 
@@ -134,6 +140,12 @@ const Admin = () => {
   const handleRemoveProduct = (product) => {
     // Implemente a lógica para remover o produto do sistema
     console.log("Remover produto:", product);
+  };
+
+  const handleLogout = () => {
+    // Limpar o token do localStorage
+    localStorage.removeItem("token");
+    window.location.reload(); // Recarrega a página
   };
 
   return (
@@ -181,15 +193,20 @@ const Admin = () => {
                     category !== "Masculino" &&
                     category !== "Feminino" &&
                     editingMode && (
-                      <RemoveButton
-                        onClick={() => handleRemoveCategory(index)}
-                      >
+                      <RemoveButton onClick={() => handleRemoveCategory(index)}>
                         <FaTrashAlt />
                       </RemoveButton>
                     )}
                 </ListItem>
               ))}
             </List>
+            <ListItem
+              button
+              onClick={handleLogout}
+              style={{ backgroundColor: colors.textBlack }}
+            >
+              <ListItemText>Sair</ListItemText>
+            </ListItem>
           </Box>
         </SideNav>
         <SearchBarContainer>

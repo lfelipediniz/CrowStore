@@ -83,17 +83,44 @@ function CommonUser() {
     setCpf(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Dados enviados:", {
-      name,
-      email,
-      avatar,
-      address,
-      phone,
-      cpf,
-    });
+  
+    try {
+      const updatedUser = {
+        name: nome,
+        phone: telefone,
+        password: senha,
+      };
+  
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt.decode(token);
+  
+      if (decodedToken && decodedToken.id) {
+        const userId = decodedToken.id;
+  
+        const response = await axios.patch(
+          `http://localhost:5000/users/edit/${userId}`,
+          updatedUser,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
+        if (response.status === 200) {
+          alert("Usuário atualizado com sucesso");
+          // Atualizar os dados do usuário exibidos no perfil
+          fetchUserData(userId);
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      // Exibir uma mensagem de erro ao usuário, caso necessário
+    }
   };
+  
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -320,15 +347,20 @@ function CommonUser() {
             <br />
             {userData && (
               <>
+                <h2>{userData.name}</h2>
+                <br />
+                <h3>{userData.phone}</h3>
+                <br />
                 <h3>CPF: {userData.cpf}</h3>
                 <br />
                 <h3>Email: {userData.email}</h3>
                 <br />
+                <br />
                 </>
             )}
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
-                label="Nome"
+                label="Novo Nome"
                 required
                 fullWidth
                 value={nome}
@@ -341,7 +373,7 @@ function CommonUser() {
               />{" "}
               <br /> <br />
               <TextField
-                label="Telefone"
+                label="Novo Telefone"
                 required
                 error={isPhoneInvalid}
                 value={telefone}
@@ -358,7 +390,7 @@ function CommonUser() {
               />
               <br /> <br />
               <TextField
-                label="Senha"
+                label="Nova Senha"
                 required
                 type={showPassword ? "text" : "password"}
                 value={senha}
@@ -385,7 +417,7 @@ function CommonUser() {
               <br />
               <br />
               <TextField
-                label="Confirmar Senha"
+                label="Confirmar Nova Senha"
                 required
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmSenha}
@@ -418,12 +450,6 @@ function CommonUser() {
                     backgroundColor: colors.cta,
                     color: "white",
                   }}
-                  disabled={
-                    isEmailInvalid ||
-                    isCPFInvalid ||
-                    isPhoneInvalid ||
-                    senha !== confirmSenha
-                  }
                 >
                   Atualizar Usuário
                 </Button>
@@ -433,7 +459,6 @@ function CommonUser() {
 
             <center>
               <Button
-                type="submit"
                 variant="contained"
                 style={{
                   backgroundColor: colors.textBlack,

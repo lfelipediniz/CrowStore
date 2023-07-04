@@ -39,7 +39,7 @@ export const LoginContainer = styled.div`
   width: 375px;
   height: 500px;
   padding: 30px;
-  background-color: ${colors.secondary};
+  background-color: rgb(38, 38, 38, 0.9);
   border-radius: 5px;
 
   @media (max-width: 1120px) {

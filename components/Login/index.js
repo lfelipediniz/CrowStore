@@ -102,10 +102,7 @@ const Login = () => {
 
   const handleFormlogin = (event) => {
     event.preventDefault();
-    if (!email) {
-      // Alguma informação está faltando ou inválida, não envie o formulário
-      return;
-    }
+    if (!email) return;
 
     const user = {
       email,
@@ -123,10 +120,21 @@ const Login = () => {
         if (response.ok) {
           // O cadastro foi realizado com sucesso
           console.log("Login realizado com sucesso");
-          setIsLogin(true);
+          return response.json(); // Converte a resposta para JSON
         } else {
           throw new Error("Erro ao logar");
         }
+      })
+      .then((data) => {
+        // Exibe as informações retornadas no console
+        console.log("Mensagem:", data.message);
+        console.log("Token:", data.token);
+        console.log("ID do usuário:", data.userId);
+  
+        // Salvar o token no localStorage
+        localStorage.setItem("token", data.token);
+  
+        setIsLogin(true);
       })
       .catch((error) => {
         console.error("Erro:", error);
@@ -171,10 +179,17 @@ const Login = () => {
         if (response.ok) {
           // O cadastro foi realizado com sucesso
           console.log("Cadastro realizado com sucesso");
-          setIsSingup(true);
+          return response.json(); // Converte a resposta para JSON
         } else {
           throw new Error("Erro ao cadastrar");
         }
+      })
+      .then((data) => {
+        // Exibe as informações retornadas no console
+        console.log("Mensagem:", data.message);
+        console.log("Token:", data.token);
+        console.log("ID do usuário:", data.userId);
+        setIsSingup(true);
       })
       .catch((error) => {
         console.error("Erro:", error);
@@ -214,29 +229,11 @@ const Login = () => {
     return value;
   };
 
-  const handleEmailFocus = (value) => {
-    console.log("ai calica");
-  };
-
-  const handlePhoneFocus = () => {
-    setIsPhoneFocused(true);
-  };
-
-  const handlePhoneBlur = () => {
-    setIsPhoneFocused(false);
-    if (phone.length <= 11) {
-      setIsPhoneInvalid(true);
-    } else {
-      setIsPhoneInvalid(false);
-    }
-  };
   return (
     <>
       <FloatingStack>
         {isPhoneInvalid && isPhoneFocused && (
-          <Alert severity="error">
-            O celular brasileiro tem 11 digitos!
-          </Alert>
+          <Alert severity="error">O celular brasileiro tem 11 digitos!</Alert>
         )}
 
         {isEmailInvalid && isEmailFocused && (

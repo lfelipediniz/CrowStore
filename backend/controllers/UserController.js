@@ -64,6 +64,7 @@ class UserController {
             phone,
             password: passwordHash,
             cpf,
+            admin: false
         });
 
         try {

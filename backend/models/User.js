@@ -26,6 +26,10 @@ const User = mongoose.model(
         cpf: {
             type: String,
             required: true
+        },
+        admin: {
+            type: Boolean
+            
         }
     }, { timestamps: true })
 );

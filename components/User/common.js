@@ -85,20 +85,20 @@ function CommonUser() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       const updatedUser = {
         name: nome,
         phone: telefone,
         password: senha,
       };
-  
+
       const token = localStorage.getItem("token");
       const decodedToken = jwt.decode(token);
-  
+
       if (decodedToken && decodedToken.id) {
         const userId = decodedToken.id;
-  
+
         const response = await axios.patch(
           `http://localhost:5000/users/edit/${userId}`,
           updatedUser,
@@ -108,7 +108,7 @@ function CommonUser() {
             },
           }
         );
-  
+
         if (response.status === 200) {
           alert("Usuário atualizado com sucesso");
           // Atualizar os dados do usuário exibidos no perfil
@@ -119,15 +119,6 @@ function CommonUser() {
       console.error("Erro ao atualizar usuário:", error);
       // Exibir uma mensagem de erro ao usuário, caso necessário
     }
-  };
-  
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
   };
 
   const handleTabChange = (tab) => {
@@ -298,207 +289,265 @@ function CommonUser() {
     });
   };
 
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div style={{ backgroundColor: colors.primary }}>
-      <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "100px",
-          }}
-        >
-          <Button
-            style={{
-              marginRight: "10px",
-              backgroundColor: activeTab === "perfil" ? "#F44336" : "#E0E0E0",
-              color: activeTab === "perfil" ? "#FFFFFF" : "#000000",
-              transition: "background-color 0.3s ease, color 0.3s ease",
-            }}
-            onClick={() => handleTabChange("perfil")}
-            startIcon={<MdPerson />}
-          >
-            Meu Perfil
+      <div className="user-info-container">
+        <div className="user-info">
+          <Image
+            src="/CrowStore/logos/logo-crow-black-512x512.png"
+            width={100}
+            height={100}
+            alt="Imagem CrowStore"
+          />
+          <h2>Olá, {userData?.name}</h2>
+          <br />
+          <Button variant="contained" color="primary" onClick={handleModalOpen}>
+            Editar Perfil
           </Button>
+        </div>
+      </div>
 
-          <Button
-            style={{
-              backgroundColor: activeTab === "pedidos" ? "#F44336" : "#E0E0E0",
-              color: activeTab === "pedidos" ? "#FFFFFF" : "#000000",
-              transition: "background-color 0.3s ease, color 0.3s ease",
-            }}
-            onClick={() => handleTabChange("pedidos")}
-            startIcon={<MdShoppingCart />}
+      <div className="profile-container">
+        <div className="profile-tabs">
+          <button
+            className={activeTab === "perfil" ? "active" : ""}
+            onClick={() => setActiveTab("perfil")}
           >
+            <MdPerson />
+            Perfil
+          </button>
+          <button
+            className={activeTab === "pedidos" ? "active" : ""}
+            onClick={() => setActiveTab("pedidos")}
+          >
+            <MdShoppingCart />
             Pedidos
-          </Button>
+          </button>
         </div>
 
         {activeTab === "perfil" && (
-          <div style={{ padding: 100 }}>
-            <center>
-              <Image
-                src="/CrowStore/logos/logo-crow-black-512x512.png"
-                width={100}
-                height={100}
-                alt="Imagem CrowStore"
-              />
-            </center>
-            <br />
-            {userData && (
-              <>
-                <h2>{userData.name}</h2>
-                <br />
-                <h3>{userData.phone}</h3>
-                <br />
-                <h3>CPF: {userData.cpf}</h3>
-                <br />
-                <h3>Email: {userData.email}</h3>
-                <br />
-                <br />
-                </>
-            )}
-            <form onSubmit={handleSubmit}>
-              <TextField
-                label="Novo Nome"
-                required
-                fullWidth
-                value={nome}
-                onChange={handleNomeChange}
-                variant="standard"
-                size="small"
-                InputProps={{
-                  autoComplete: "new-name",
-                }}
-              />{" "}
-              <br /> <br />
-              <TextField
-                label="Novo Telefone"
-                required
-                error={isPhoneInvalid}
-                value={telefone}
-                fullWidth
-                onChange={handleTelefoneChange}
-                onFocus={() => setIsPhoneFocused(true)}
-                onBlur={() => setIsPhoneFocused(false)}
-                variant="standard"
-                size="small"
-                InputProps={{
-                  autoComplete: "new-phone",
-                  inputProps: { maxLength: 15 }, // Define o máximo de caracteres como 11
-                }}
-              />
-              <br /> <br />
-              <TextField
-                label="Nova Senha"
-                required
-                type={showPassword ? "text" : "password"}
-                value={senha}
-                onChange={handlePasswordChange}
-                variant="standard"
-                size="small"
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <Button
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {!showPassword ? (
-                        <FaEyeSlash style={{ color: colors.primary }} />
-                      ) : (
-                        <FaEye style={{ color: colors.primary }} />
-                      )}
-                    </Button>
-                  ),
-                  autoComplete: "new-password",
-                }}
-              />
-              <br />
-              <br />
-              <TextField
-                label="Confirmar Nova Senha"
-                required
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmSenha}
-                onChange={handleConfirmSenhaChange}
-                onFocus={() => setIsConfirmSenhaFocused(true)}
-                onBlur={() => setIsConfirmSenhaFocused(false)}
-                variant="standard"
-                size="small"
-                fullWidth
-                InputProps={{
-                  endAdornment: (
-                    <Button onClick={handleClickShowConfirmPassword}>
-                      {!showConfirmPassword ? (
-                        <FaEyeSlash style={{ color: colors.primary }} />
-                      ) : (
-                        <FaEye style={{ color: colors.primary }} />
-                      )}
-                    </Button>
-                  ),
-                  autoComplete: "new-password",
-                }}
-              />
-              <br />
-              <br />
-              <center>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  style={{
-                    backgroundColor: colors.cta,
-                    color: "white",
-                  }}
-                >
-                  Atualizar Usuário
-                </Button>
-              </center>
-              <br />
-            </form>
-
-            <center>
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: colors.textBlack,
-                  color: "white",
-                }}
-                onClick={handleLogout}
-              >
-                Sair
-              </Button>
-            </center>
-
-            <center>
-              <br /> <br />
-              <Button
-                type="submit"
-                variant="contained"
-                style={{
-                  backgroundColor: colors.gray,
-                  color: "white",
-                }}
-              >
-                Excluir Conta
-              </Button>
-            </center>
+          <div className="profile-content">
+            <h3>Informações Pessoais</h3>
+            <p>Email: {userData?.email}</p>
+            <p>Telefone: {userData?.phone}</p>
+            <p>CPF: {userData?.cpf}</p>
           </div>
         )}
 
         {activeTab === "pedidos" && (
-          <div>
-            <center>
-              {" "}
-              <br />
-              <br />
-              <Cart onCartUpdate={handleCartUpdate} isShopCart={false} />
-            </center>
-            <br />
-            <br />
+          <div className="profile-content">
+            <Cart onCartUpdate={handleCartUpdate} isShopCart={false} />
           </div>
         )}
       </div>
+
+      <Modal open={isModalOpen} onClose={handleModalClose}>
+        <div className="modal-container">
+          <h2>Editar Perfil</h2>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Novo Nome"
+              required
+              fullWidth
+              value={nome}
+              onChange={handleNomeChange}
+              variant="standard"
+              size="small"
+              InputProps={{
+                autoComplete: "new-name",
+              }}
+            />{" "}
+            <br /> <br />
+            <TextField
+              label="Novo Telefone"
+              required
+              error={isPhoneInvalid}
+              value={telefone}
+              fullWidth
+              onChange={handleTelefoneChange}
+              onFocus={() => setIsPhoneFocused(true)}
+              onBlur={() => setIsPhoneFocused(false)}
+              variant="standard"
+              size="small"
+              InputProps={{
+                autoComplete: "new-phone",
+                inputProps: { maxLength: 15 }, // Define o máximo de caracteres como 11
+              }}
+            />
+            <br /> <br />
+            <TextField
+              label="Nova Senha"
+              required
+              type={showPassword ? "text" : "password"}
+              value={senha}
+              onChange={handlePasswordChange}
+              variant="standard"
+              size="small"
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <Button
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {!showPassword ? (
+                      <FaEyeSlash style={{ color: colors.primary }} />
+                    ) : (
+                      <FaEye style={{ color: colors.primary }} />
+                    )}
+                  </Button>
+                ),
+                autoComplete: "new-password",
+              }}
+            />
+            <br />
+            <br />
+            <TextField
+              label="Confirmar Nova Senha"
+              required
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmSenha}
+              onChange={handleConfirmSenhaChange}
+              onFocus={() => setIsConfirmSenhaFocused(true)}
+              onBlur={() => setIsConfirmSenhaFocused(false)}
+              variant="standard"
+              size="small"
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <Button onClick={handleClickShowConfirmPassword}>
+                    {!showConfirmPassword ? (
+                      <FaEyeSlash style={{ color: colors.primary }} />
+                    ) : (
+                      <FaEye style={{ color: colors.primary }} />
+                    )}
+                  </Button>
+                ),
+                autoComplete: "new-password",
+              }}
+            />
+            <br />
+            <br />
+            <center>
+              <Button
+                type="submit"
+                variant="contained"
+                style={{
+                  backgroundColor: colors.cta,
+                  color: "white",
+                }}
+              >
+                Atualizar Usuário
+              </Button>
+            </center>
+            <br />
+          </form>
+        </div>
+      </Modal>
+
+      <style jsx>{`
+        .user-info-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 100px;
+          margin-bottom: 32px;
+        }
+
+        .user-info {
+          text-align: center;
+        }
+
+        .user-info h2 {
+          margin-top: 16px;
+          margin-bottom: 8px;
+        }
+
+        .user-info button {
+          margin-top: 16px;
+        }
+
+        .profile-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .profile-content {
+          margin-top: 16px;
+          text-align: center;
+        }
+
+        .profile-content h3 {
+          margin-bottom: 16px;
+        }
+
+        .profile-content p {
+          margin-bottom: 16px;
+        }
+
+        .profile-tabs {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 16px;
+        }
+
+        .profile-tabs button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 20px;
+          border: none;
+          background-color: ${colors.primary};
+          color: ${colors.gray};
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          border-radius: 30px;
+          box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-tabs button.active {
+          color: ${colors.primary};
+          background-color: ${colors.gray};
+        }
+
+        .profile-tabs button:not(:last-child) {
+          margin-right: 10px;
+        }
+
+        .profile-tabs button svg {
+          margin-right: 8px;
+        }
+
+        .modal-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: ${colors.white};
+          padding: 16px;
+          outline: none;
+        }
+
+        .modal-container h2 {
+          margin-bottom: 16px;
+        }
+
+        .form-container {
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+        }
+      `}</style>
     </div>
   );
 }

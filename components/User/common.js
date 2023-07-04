@@ -63,6 +63,7 @@ function CommonUser() {
     }
   }, []);
 
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -338,7 +339,11 @@ function CommonUser() {
             <p>Email: {userData?.email}</p>
             <p>Telefone: {userData?.phone}</p>
             <p>CPF: {userData?.cpf}</p>
+          <Button onClick={handleLogout}>
+            Sair
+          </Button>
           </div>
+
         )}
 
         {activeTab === "pedidos" && (

@@ -46,7 +46,7 @@ const Caurosel = () => {
         <Slide1>
           <WrapContent>
             <BannerRetangule>
-              <BannerText>Jaqueta Tchans</BannerText>
+              <BannerText>Crow Windbreaker</BannerText>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>

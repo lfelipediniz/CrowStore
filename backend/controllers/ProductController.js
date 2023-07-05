@@ -4,65 +4,93 @@ const { upload } = require('../imguploadconfig/multer.js');
 
 module.exports = class ProductController {
     static async addProduct(req, res) {
-        upload.array('images')(req, res, async function(err) {
-            if (err) {
-                return res.status(500).json({ message: 'Houve um erro ao enviar imagens' });
+        const { name, tags, gender, price, model } = req.body;
+        let newProduct;
+
+        try {
+            if (!name) {
+                throw new Error('O produto necessita ser nomeado');
             }
-            const { name, tags, gender, price } = req.body
-            const images = req.files.map((file) => file.filename);
 
-            console.log(req.body);
-            console.log(req.files);
-
-            try {
-                if (!name) {
-                    throw new Error('O produto necessita ser nomeado');
-                }
-
-                const existingType = await Product.findOne({ name });
-                if (existingType) {
-                    throw new Error('Já existe um produto com o mesmo nome');
-                }
-
-                if (!tags || tags.length === 0) {
-                    throw new Error('O produto necessita estar associado a pelo menos uma categoria');
-                }
-
-                if (!['Masculino', 'Feminino', 'Unissex'].includes(gender)) {
-                    throw new Error('O produto necessita ser classificado em um gênero válido');
-                }
-
-                if (!price || isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
-                    throw new Error('O produto necessita ter um preço qualquer positivo');
-                }
-
-                if (!images || images.length === 0) {
-                    throw new Error('É necessário fornecer pelo menos uma imagem do produto');
-                }
-
-                const newType = new Product({
-                    _id: new mongoose.Types.ObjectId(),
-                    name,
-                    tags,
-                    gender,
-                    price,
-                    images
-                });
-
-                await newType.save();
-
-                res.status(200).json({ message: 'Produto adicionado com sucesso' });
-            } catch (error) {
-                res.status(422).json({ message: error.message });
+            const existingProduct = await Product.findOne({ name });
+            if (existingProduct) {
+                throw new Error('Já existe um produto com o mesmo nome');
             }
-        });
+
+            if (!tags || tags.length === 0) {
+                throw new Error('O produto necessita estar associado a pelo menos uma categoria');
+            }
+
+            if (!['Masculino', 'Feminino', 'Unissex'].includes(gender)) {
+                throw new Error('O produto necessita ser classificado em um gênero válido');
+            }
+
+            if (!price || isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
+                throw new Error('O produto necessita ter um preço qualquer positivo');
+            }
+
+            newProduct = new Product({
+                _id: new mongoose.Types.ObjectId(),
+                name,
+                tags,
+                gender,
+                price,
+            });
+
+            // Save the product first
+            await newProduct.save();
+
+            // Create the model and associate it with the product
+            const { size, color, quantity } = model;
+            const productId = newProduct._id; // Get the newly created product's ID
+
+            await ProductController.addModel({ body: { productId, size, color, quantity } }, res);
+
+            res.status(200).json({ message: 'Produto adicionado com sucesso' });
+        } catch (error) {
+            // If an error occurs during model addition, delete the product from the database
+            if (newProduct) {
+                await Product.findByIdAndDelete(newProduct._id);
+            }
+            res.status(422).json({ message: error.message });
+        }
+    }
+
+    static async setImages(req, res) {
+        const productId = req.params.productId;
+
+        try {
+            const product = await Product.findById(productId);
+
+            if (!product) {
+                return res.status(404).json({ error: `Um produto de id ${productId} não foi encontrado` });
+            }
+
+            upload.array('images')(req, res, async function(err) {
+                if (err instanceof multer.MulterError) {
+                    return res.status(400).json({ error: err.message });
+                } else if (err) {
+                    return res.status(500).json({ error: 'Houve uma falha no envio' });
+                }
+
+                const images = req.files.map(file => file.filename);
+                product.images = images;
+
+                await product.save();
+
+                return res.status(200).json({ message: 'Envio concluído com sucesso' });
+            });
+
+        } catch (error) {
+            return res.status(500).json({ error: 'Internal server error' });
+        }
     }
 
     static async addModel(req, res) {
-        const { id, size, color, quantity } = req.body;
+        const { productId, size, color, quantity } = req.body;
 
         try {
-            const product = await Product.findById(id);
+            const product = await Product.findById(productId);
 
             if (!product) {
                 throw new Error('Produto não encontrado');
@@ -86,7 +114,7 @@ module.exports = class ProductController {
 
             const existingModel = product.AvailableModels.find(model => model.size === size && model.color === color);
             if (existingModel) {
-                throw new Error('Já existe um modelo com o mesmo tamanho e cor');
+                throw new Error('Já existe um modelo de mesmo tamanho e cor para este produto');
             }
 
             const newModel = {

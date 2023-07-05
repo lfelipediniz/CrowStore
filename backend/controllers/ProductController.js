@@ -4,8 +4,7 @@ const { upload } = require('../imguploadconfig/multer.js');
 
 module.exports = class ProductController {
     static async addProduct(req, res) {
-        const { name, tags, gender, price, model } = req.body;
-        let newProduct;
+        const { name, tags, gender, price } = req.body;
 
         try {
             if (!name) {
@@ -29,29 +28,19 @@ module.exports = class ProductController {
                 throw new Error('O produto necessita ter um preço qualquer positivo');
             }
 
-            newProduct = new Product({
+            const product = new Product({
                 _id: new mongoose.Types.ObjectId(),
                 name,
                 tags,
                 gender,
                 price,
+                AvailableModels: []
             });
 
-            // Save the product first
-            await newProduct.save();
-
-            // Create the model and associate it with the product
-            const { size, color, quantity } = model;
-            const productId = newProduct._id; // Get the newly created product's ID
-
-            await ProductController.addModel({ body: { productId, size, color, quantity } }, res);
+            await product.save();
 
             res.status(200).json({ message: 'Produto adicionado com sucesso' });
         } catch (error) {
-            // If an error occurs during model addition, delete the product from the database
-            if (newProduct) {
-                await Product.findByIdAndDelete(newProduct._id);
-            }
             res.status(422).json({ message: error.message });
         }
     }
@@ -107,14 +96,14 @@ module.exports = class ProductController {
                 throw new Error('A cor fornecida é inválida');
             }
 
-            const parsedQuantity = parseInt(quantity);
-            if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
-                throw new Error('Quantidade inválida');
-            }
-
             const existingModel = product.AvailableModels.find(model => model.size === size && model.color === color);
             if (existingModel) {
                 throw new Error('Já existe um modelo de mesmo tamanho e cor para este produto');
+            }
+
+            const parsedQuantity = parseInt(quantity);
+            if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
+                throw new Error('Quantidade inválida');
             }
 
             const newModel = {

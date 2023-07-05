@@ -1,51 +1,61 @@
 const mongoose = require('../db/conn');
 const Product = require('../models/Product')
+const { upload } = require('../imguploadconfig/multer.js');
 
 module.exports = class ProductController {
     static async addProduct(req, res) {
-        const { name, tags, gender, price, images } = req.body
-
-        try {
-            if (!name) {
-                throw new Error('O produto necessita ser nomeado');
+        upload.array('images')(req, res, async function(err) {
+            if (err) {
+                return res.status(500).json({ message: 'Houve um erro ao enviar imagens' });
             }
+            const { name, tags, gender, price } = req.body
+            const images = req.files.map((file) => file.filename);
 
-            const existingType = await Product.findOne({ name });
-            if (existingType) {
-                throw new Error('Já existe um produto com o mesmo nome');
+            console.log(req.body);
+            console.log(req.files);
+
+            try {
+                if (!name) {
+                    throw new Error('O produto necessita ser nomeado');
+                }
+
+                const existingType = await Product.findOne({ name });
+                if (existingType) {
+                    throw new Error('Já existe um produto com o mesmo nome');
+                }
+
+                if (!tags || tags.length === 0) {
+                    throw new Error('O produto necessita estar associado a pelo menos uma categoria');
+                }
+
+                if (!['Masculino', 'Feminino', 'Unissex'].includes(gender)) {
+                    throw new Error('O produto necessita ser classificado em um gênero válido');
+                }
+
+                if (!price || isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
+                    throw new Error('O produto necessita ter um preço qualquer positivo');
+                }
+
+                if (!images || images.length === 0) {
+                    throw new Error('É necessário fornecer pelo menos uma imagem do produto');
+                }
+
+                const newType = new Product({
+                    _id: new mongoose.Types.ObjectId(),
+                    name,
+                    tags,
+                    gender,
+                    price,
+                    images
+                });
+
+                await newType.save();
+
+                res.status(200).json({ message: 'Produto adicionado com sucesso' });
+            } catch (error) {
+                res.status(422).json({ message: error.message });
             }
-
-            if (!tags || tags.length === 0) {
-                throw new Error('O produto necessita estar associado a pelo menos uma categoria');
-            }
-
-            if (!['Masculino', 'Feminino', 'Unissex'].includes(gender)) {
-                throw new Error('O produto necessita ser classificado em um gênero válido');
-            }
-
-            if (!price || isNaN(parseFloat(price)) || parseFloat(price) <= 0) {
-                throw new Error('O produto necessita ter um preço qualquer positivo');
-            }
-
-            if (!images || images.length === 0) {
-                throw new Error('É necessário fornecer pelo menos uma imagem do produto');
-            }
-
-            const newType = new Product({
-                _id: new mongoose.Types.ObjectId(),
-                name,
-                tags,
-                gender,
-                price,
-                images
-            });
-
-            await newType.save();
-
-            res.status(200).json({ message: 'Produto adicionado com sucesso' });
-        } catch (error) {
-            res.status(422).json({ message: error.message });
-        }
+        });
     }
 
     static async addModel(req, res) {

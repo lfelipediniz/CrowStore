@@ -17,5 +17,6 @@ router.patch(
     verifyToken,
     UserController.editUser
 )
+router.post('/editCart', UserController.editCart)
 
 module.exports = router

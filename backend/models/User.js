@@ -13,7 +13,7 @@ const Purchase = new mongoose.Schema({
     required: true,
   },
   product: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Product",
     required: true,
   },
@@ -25,6 +25,10 @@ const Purchase = new mongoose.Schema({
     type: String,
     required: true,
   },
+  img: {
+    type: String,
+    required: true
+  }
 });
 
 const User = mongoose.model(

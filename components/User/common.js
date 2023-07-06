@@ -284,10 +284,7 @@ function CommonUser() {
   const handleCartUpdate = (products, quantities, totalPrice, shopping) => {
     setCartData({
       ...cartData,
-      Products: products,
-      Quantities: quantities,
-      TotalPrice: totalPrice,
-      Shopping: shopping,
+
     });
   };
 
@@ -347,16 +344,7 @@ function CommonUser() {
           <div className="profile-content">
             {cartData.Shopping.length > 0 ? (
               // Exibir os produtos do shopping
-              <div>
-                {cartData.Shopping.map((item) => (
-                  <div key={item.product._id}>
-                    <p>Nome do produto: {item.product.name}</p>
-                    <p>Cor: {item.color}</p>
-                    <p>Tamanho: {item.size}</p>
-                    <p>Quantidade: {item.quantity}</p>
-                  </div>
-                ))}
-              </div>
+              <div></div>
             ) : (
               // Exibir mensagem se não houver produtos no shopping
               <p>Você não efetuou nenhuma compra ainda</p>

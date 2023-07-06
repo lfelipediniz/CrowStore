@@ -12,9 +12,8 @@ const Purchase = new mongoose.Schema({
     },
     required: true,
   },
-  product: {
+  productId: {
     type: String,
-    ref: "Product",
     required: true,
   },
   color: {

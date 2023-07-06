@@ -40,4 +40,4 @@ const Product = mongoose.model(
     }, { timestamps: true })
 );
 
-module.exports = mongoose.model('Product', Product);
+module.exports = Product;

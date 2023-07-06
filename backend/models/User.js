@@ -60,10 +60,15 @@ const User = mongoose.model(
             admin: {
                 type: Boolean,
             },
-            cart: [Purchase],
-            shopping: [],
-        },
-        { timestamps: true }
+            cart: {
+                type: [Purchase],
+                sparse: true
+            },
+            shopping: {
+                type: [Purchase],
+                sparse: true
+            }
+        }, { timestamps: true }
     )
 );
 

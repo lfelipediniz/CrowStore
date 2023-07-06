@@ -27,6 +27,10 @@ const Purchase = new mongoose.Schema({
   img: {
     type: String,
     required: true
+  },
+  qtd: {
+    type: Number,
+    required: true
   }
 });
 

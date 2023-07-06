@@ -147,6 +147,24 @@ module.exports = class ProductController {
         }
     }
 
+    static async getProductByName(req, res) {
+        try {
+            const { name } = req.params;
+
+            // Search the products database for a product with a matching name
+            const product = await Product.findOne({ name });
+
+            if (!product) {
+                return res.status(404).json({ error: 'Produto não encontrado' });
+            }
+
+            return res.json(product);
+        } catch (error) {
+            console.error('Error retrieving product:', error);
+            return res.status(500).json({ error: 'Falha ao recuperar o produto' });
+        }
+    }
+
     static async getModels(req, res) {
 
         try {

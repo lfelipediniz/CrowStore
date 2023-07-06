@@ -63,7 +63,6 @@ function CommonUser() {
     }
   }, []);
 
-
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -279,14 +278,16 @@ function CommonUser() {
     Products: [],
     Quantities: [],
     TotalPrice: 0,
+    Shopping: [], // Adicionado estado para os produtos no shopping
   });
 
-  const handleCartUpdate = (products, quantities, totalPrice) => {
+  const handleCartUpdate = (products, quantities, totalPrice, shopping) => {
     setCartData({
       ...cartData,
       Products: products,
       Quantities: quantities,
       TotalPrice: totalPrice,
+      Shopping: shopping,
     });
   };
 
@@ -297,6 +298,7 @@ function CommonUser() {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
   return (
     <div style={{ backgroundColor: colors.primary }}>
       <div className="user-info-container">
@@ -332,23 +334,33 @@ function CommonUser() {
             Pedidos
           </button>
         </div>
-
         {activeTab === "perfil" && (
           <div className="profile-content">
             <h3>Informações Pessoais</h3>
             <p>Email: {userData?.email}</p>
             <p>Telefone: {userData?.phone}</p>
             <p>CPF: {userData?.cpf}</p>
-          <Button onClick={handleLogout}>
-            Sair
-          </Button>
+            <Button onClick={handleLogout}>Sair</Button>
           </div>
-
         )}
-
         {activeTab === "pedidos" && (
           <div className="profile-content">
-            <Cart onCartUpdate={handleCartUpdate} isShopCart={false} />
+            {cartData.Shopping.length > 0 ? (
+              // Exibir os produtos do shopping
+              <div>
+                {cartData.Shopping.map((item) => (
+                  <div key={item.product._id}>
+                    <p>Nome do produto: {item.product.name}</p>
+                    <p>Cor: {item.color}</p>
+                    <p>Tamanho: {item.size}</p>
+                    <p>Quantidade: {item.quantity}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // Exibir mensagem se não houver produtos no shopping
+              <p>Você não efetuou nenhuma compra ainda</p>
+            )}
           </div>
         )}
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 
 import {
   Content,
@@ -12,11 +12,12 @@ import Image from "next/image";
 const ProductCard = ({ img, productName, price }) => {
   return (
     <ProductCardContainer>
-      <Link href={`/product/${productName}`} legacyBehavior>
+      <Link href={`/product/${encodeURIComponent(productName)}`} legacyBehavior>
         <a>
           <Image src={img} alt={productName} width={230} height={380} />
         </a>
       </Link>
+
       <ProductInfo>
         <Content>{productName}</Content>
         <Content>{price}</Content>

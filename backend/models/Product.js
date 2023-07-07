@@ -4,7 +4,11 @@ const Model = require('./Model');
 const Product = mongoose.model(
     'Product',
     new mongoose.Schema({
-        _id: mongoose.Types.ObjectId,
+        _id: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            unique: true,
+        },
         name: {
             type: String,
             unique: true,
@@ -12,6 +16,10 @@ const Product = mongoose.model(
         },
         tags: {
             type: Array,
+            required: true
+        },
+        popular: {
+            type: Boolean,
             required: true
         },
         gender: {

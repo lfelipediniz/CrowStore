@@ -2,12 +2,8 @@ const mongoose = require("../db/conn");
 const { Schema } = mongoose;
 const Model = require('./Model');
 
-const Purchase = new Schema({
-    _id: {
-        type: mongoose.Types.ObjectId,
-        required: true,
-        unique: true
-    },
+const Item = new Schema({
+    _id: mongoose.Types.ObjectId,
     model: {
         type: Model,
         required: true
@@ -26,6 +22,11 @@ const Purchase = new Schema({
 
 const UserSchema = new Schema(
     {
+        _id: {
+            type: mongoose.Types.ObjectId,
+            required: true,
+            unique: true,
+        },
         name: {
             type: String,
             required: true,
@@ -53,13 +54,9 @@ const UserSchema = new Schema(
             type: Boolean,
         },
         cart: {
-            type: [Purchase],
+            type: [Item],
             sparse: true
         },
-        shopping: {
-            type: [Purchase],
-            sparse: true
-        }
     }, { timestamps: true }
 );
 

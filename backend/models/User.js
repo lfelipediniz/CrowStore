@@ -22,50 +22,47 @@ const Purchase = new Schema({
         },
         required: true
     }
-});
+}, { timestamps: true });
 
-module.exports = Purchase;
-
-const User = mongoose.model(
-    "User",
-    new Schema(
-        {
-            name: {
-                type: String,
-                required: true,
-            },
-            email: {
-                type: String,
-                required: true,
-            },
-            password: {
-                type: String,
-                required: true,
-            },
-            image: {
-                type: String,
-            },
-            phone: {
-                type: String,
-                required: true,
-            },
-            cpf: {
-                type: String,
-                required: true,
-            },
-            admin: {
-                type: Boolean,
-            },
-            cart: {
-                type: [Purchase],
-                sparse: true
-            },
-            shopping: {
-                type: [Purchase],
-                sparse: true
-            }
-        }, { timestamps: true }
-    )
+const UserSchema = new Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        image: {
+            type: String,
+        },
+        phone: {
+            type: String,
+            required: true,
+        },
+        cpf: {
+            type: String,
+            required: true,
+        },
+        admin: {
+            type: Boolean,
+        },
+        cart: {
+            type: [Purchase],
+            sparse: true
+        },
+        shopping: {
+            type: [Purchase],
+            sparse: true
+        }
+    }, { timestamps: true }
 );
+
+const User = mongoose.model("User", UserSchema)
 
 module.exports = User;

@@ -1,0 +1,60 @@
+{
+    "name": "Leandro",
+    "email": "leandro@gmail.com",
+    "password": "$2b$12$7I/.yEPUV77.pFUUt5MU2OIrrxcfJoTmwspOASvaBA.n1Obwn/dwu",
+    "phone": "(11) 94984-8498",
+    "cpf": "544.646.484-84",
+    "admin": false,
+    "shopping": [
+        {}
+    ],
+    "cart": [
+        {
+            "_id": "e4439267203fb5277d347e6c",
+            {
+                "productId": "64a6efa273f740238fde22c0",
+                "size": "M",
+                "color": "HotPink",
+                "quantity": 10
+            },
+            "quantity": 2
+        },
+        {
+            "_id": "7494ab07987ba112bd5c4f98",
+            {
+                "productId": "64a5f1226d96e599c43bbacb",
+                "size": "M",
+                "color": "MintCream",
+                "quantity": 8
+            },
+            "quantity": 1
+        },
+        {
+            "_id": "7494ab07987ba112bd5c4f98",
+            {
+                "productId": "b5e8ba524ab98a57180ee2e0",
+                "size": "P",
+                "color": "Coral",
+                "quantity": 4
+            },
+            "quantity": 1
+        },
+        {
+            "_id": "a8d2fbfa3ebfb655c428ce11",
+            {
+                "productId": "64a5b77075206703e80f6b13",
+                "size": "P",
+                "color": "Rebecca",
+                "quantity": 9
+            },
+            "quantity": 1
+        },
+    ],
+    "createdAt": {
+        "$date": "2023-07-06T17:26:40.503Z"
+    },
+    "updatedAt": {
+        "$date": "2023-07-06T17:26:40.503Z"
+    },
+    "__v": 0
+}

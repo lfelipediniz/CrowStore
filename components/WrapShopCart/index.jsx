@@ -39,7 +39,7 @@ const WrapShopCart = () => {
     };
 
 
-    fetch("http://localhost:5000/users/login", {
+    fetch("http://localhost:5000/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

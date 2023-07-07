@@ -56,6 +56,18 @@ const ProductInfo = ({ product, onAddToCart }) => {
     onAddToCart(cartItem);
   };
 
+  // Set the default selected size and color when the component mounts
+  useEffect(() => {
+    const smallestSize = getSmallestSize(product);
+    setSelectedSize(smallestSize);
+    const colorsForSize = product.AvailableModels
+      .filter(model => model.size === smallestSize)
+      .map(model => model.color);
+    if (colorsForSize.length > 0) {
+      setSelectedColor(colorsForSize[0]);
+    }
+  }, [product]);
+
   // Helper function to get the smallest size available
   const getSmallestSize = (product) => {
     const sizes = product.AvailableModels.map(model => model.size);
@@ -64,20 +76,13 @@ const ProductInfo = ({ product, onAddToCart }) => {
     }, sizes[0]);
   };
 
-  // Set the default selected size when the component mounts
-  useEffect(() => {
-    setSelectedSize(getSmallestSize(product));
-  }, [product]);
-
-  // Set the default selected color when the selected size changes
-  useEffect(() => {
-    const colors = product.AvailableModels
-      .filter(model => model.size === selectedSize)
-      .map(model => model.color);
-    if (colors.length > 0) {
-      setSelectedColor(colors[0]);
+  // Get unique sizes
+  const uniqueSizes = {};
+  product.AvailableModels.forEach(model => {
+    if (!uniqueSizes[model.size]) {
+      uniqueSizes[model.size] = true;
     }
-  }, [selectedSize, product]);
+  });
 
   return (
     <ProductInfoContainer>
@@ -90,33 +95,35 @@ const ProductInfo = ({ product, onAddToCart }) => {
         <Subtitle>Cor</Subtitle>
         <List>
           {product.AvailableModels.map(model => (
-            <ListItem key={model.color}>
-              <ColorSample
-                type="button"
-                className={`sample ${selectedColor === model.color ? "selected" : ""}`}
-                id={`color${model.color}`}
-                value={model.color}
-                color={model.color}
-                selected={selectedColor === model.color}
-                onClick={() => handleColorSelect(model.color)}
-              />
-            </ListItem>
+            model.size === selectedSize && (
+              <ListItem key={model.color}>
+                <ColorSample
+                  type="button"
+                  className={`sample ${selectedColor === model.color ? "selected" : ""}`}
+                  id={`color${model.color}`}
+                  value={model.color}
+                  color={model.color}
+                  selected={selectedColor === model.color}
+                  onClick={() => handleColorSelect(model.color)}
+                />
+              </ListItem>
+            )
           ))}
         </List>
 
         <Subtitle>Tamanho</Subtitle>
         <List>
-          {product.AvailableModels.map(model => (
-            <ListItem key={model.size}>
+          {Object.keys(uniqueSizes).map(size => (
+            <ListItem key={size}>
               <SizeButton
                 type="button"
-                className={`sample ${selectedSize === model.size ? "selected" : ""}`}
-                id={model.size}
-                value={model.size}
-                selected={selectedSize === model.size}
-                onClick={() => handleSizeSelect(model.size)}
+                className={`sample ${selectedSize === size ? "selected" : ""}`}
+                id={size}
+                value={size}
+                selected={selectedSize === size}
+                onClick={() => handleSizeSelect(size)}
               >
-                {model.size}
+                {size}
               </SizeButton>
             </ListItem>
           ))}

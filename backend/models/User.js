@@ -8,10 +8,6 @@ const Purchase = new Schema({
         required: true,
         unique: true
     },
-    productId: {
-        type: mongoose.Types.ObjectId,
-        required: true
-    },
     model: {
         type: Model,
         required: true

@@ -17,6 +17,7 @@ app.use(express.static('public'))
 
 // Routes
 
+app.use("/order", './routes/OrderRoutes')
 app.use('/users', require('./routes/UserRoutes'))
 app.use('/products', require('./routes/ProductRoutes'))
 

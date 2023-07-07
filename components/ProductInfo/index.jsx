@@ -16,17 +16,22 @@ const ProductInfo = ({ product, onAddToCart }) => {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [stock, setStock] = useState(0);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
     const maxQuantity = product.AvailableModels.find(model => model.color === color)?.quantity;
     setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
+    const stock = product.AvailableModels.find(model => model.color === color && model.size === selectedSize)?.quantity;
+    setStock(stock || 0);
   };
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
     const maxQuantity = product.AvailableModels.find(model => model.size === size)?.quantity;
     setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
+    const stock = product.AvailableModels.find(model => model.color === selectedColor && model.size === size)?.quantity;
+    setStock(stock || 0);
 
     // Set the default selected color for the selected size
     const colors = product.AvailableModels
@@ -110,6 +115,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
             )
           ))}
         </List>
+        
 
         <Subtitle>Tamanho</Subtitle>
         <List>
@@ -139,7 +145,12 @@ const ProductInfo = ({ product, onAddToCart }) => {
           max={product.AvailableModels.find(model => model.size === selectedSize && model.color === selectedColor)?.quantity || 1}
           onChange={handleQuantityChange}
         />
-        <br />
+        {selectedColor && selectedSize && (
+          <>
+          <h3>Apenas {stock} no estoque!</h3>
+          </>
+        )}
+
         <SubmitButton type="submit" id="submit">
           <ShoppingCartIcon />
           Adicionar ao carrinho

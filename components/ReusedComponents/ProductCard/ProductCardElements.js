@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const ProductCardContainer = styled.div`
+export const ProductCardContainer = styled.button`
   height: 440px;
+  background:  none;
 
 
 `;

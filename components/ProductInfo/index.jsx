@@ -5,11 +5,11 @@ import {
     Subtitle,
     List,
     ListItem,
+    ColorSample,
     SizeButton,
     QuantityInput,
     SubmitButton,
-    ColorSample,
-    ShoppingCartIcon,
+    ShoppingCartIcon
 } from "./ProductInfoElements";
 
 const ProductInfo = ({ product, onAddToCart }) => {
@@ -18,23 +18,17 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
     const handleColorSelect = (color) => {
         setSelectedColor(color);
-        const maxQuantity = product.AvailableModels.find(
-            (model) => model.color === color
-        )?.quantity;
+        const maxQuantity = product.size[selectedSize]?.colors[color];
         setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
     };
 
     const handleSizeSelect = (sizeKey) => {
         setSelectedSize(sizeKey);
-        const maxQuantity = product.AvailableModels.find(
-            (model) => model.size === sizeKey
-        )?.quantity;
+        const maxQuantity = product.size[sizeKey]?.colors[selectedColor];
         setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
 
         // Set the default selected color for the selected size
-        const colors = product.AvailableModels
-            .filter((model) => model.size === sizeKey)
-            .map((model) => model.color);
+        const colors = Object.keys(product.size[sizeKey]?.colors || {});
         if (colors.length > 0) {
             setSelectedColor(colors[0]);
         } else {
@@ -50,7 +44,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const cartItem = {
-            product: product.name,
+            product: product.productName,
             price: product.price,
             color: selectedColor,
             size: selectedSize,
@@ -59,72 +53,67 @@ const ProductInfo = ({ product, onAddToCart }) => {
         onAddToCart(cartItem);
     };
 
+    // Helper function to get the smallest size available
     const getSmallestSize = (product) => {
-        const sizes = product.AvailableModels.map((model) => model.size);
+        const sizes = Object.keys(product.size);
         return sizes.reduce((smallestSize, currentSize) => {
-            return currentSize < smallestSize ? currentSize : smallestSize;
+            return product.size[currentSize].order < product.size[smallestSize].order
+                ? currentSize
+                : smallestSize;
         }, sizes[0]);
     };
-
     const [selectedSize, setSelectedSize] = useState(getSmallestSize(product));
 
+    // Set the default selected color when the component mounts
     useEffect(() => {
-        const colors = product.AvailableModels
-            .filter((model) => model.size === selectedSize)
-            .map((model) => model.color);
+        const colors = Object.keys(product.size[selectedSize]?.colors || {});
         if (colors.length > 0) {
             setSelectedColor(colors[0]);
         }
-    }, [selectedSize, product.AvailableModels]);
-
-    const stock = product.AvailableModels.reduce((stockMap, model) => {
-        if (!stockMap[model.size]) {
-            stockMap[model.size] = {};
-        }
-        stockMap[model.size][model.color] = model.quantity;
-        return stockMap;
-    }, {});
+    }, [selectedSize, product.size]);
 
     return (
         <ProductInfoContainer>
             <div id="description">
-                <Title>{product.name}</Title>
-                <p>{product.description}</p>
+                <Title>{product.productName}</Title>
+                <p>
+                    Cillum veniam est eiusmod sed culpa Duis. Ipsum aute Duis non
+                    officia. Labore pariatur tempor commodo dolor consectetur nulla
+                    laborum exercitation elit.
+                </p>
             </div>
 
             <form onSubmit={handleSubmit}>
                 <Subtitle>Cor</Subtitle>
                 <List>
-                    {Object.keys(stock[selectedSize] || {}).map((color) => (
-                        stock[selectedSize][color] >= 1 && (
-                            <ListItem key={color}>
-                                <ColorSample
-                                    type="button"
-                                    className={`sample ${selectedColor === color ? "selected" : ""}`}
-                                    id={`color${color}`}
-                                    value={color}
-                                    color={color}
-                                    selected={selectedColor === color}
-                                    onClick={() => handleColorSelect(color)}
-                                />
-                            </ListItem>
-                        )
+                    {Object.keys(product.size[selectedSize]?.colors || {}).map((color) => (
+                        <ListItem key={color}>
+                            <ColorSample
+                                type="button"
+                                className={`sample ${selectedColor === color ? "selected" : ""}`}
+                                id={`color${color}`}
+                                value={color}
+                                color={color}
+                                selected={selectedColor === color}
+                                onClick={() => handleColorSelect(color)}
+                            ></ColorSample>
+                        </ListItem>
                     ))}
                 </List>
 
                 <Subtitle>Tamanho</Subtitle>
                 <List>
-                    {product.AvailableModels.map((model) => (
-                        <ListItem key={model._id}>
+                    {Object.keys(product.size).map((sizeKey) => (
+                        <ListItem key={sizeKey}>
                             <SizeButton
                                 type="button"
-                                className={`sample ${selectedSize === model.size ? "selected" : ""}`}
-                                id={model.size}
-                                value={model.size}
-                                selected={selectedSize === model.size}
-                                onClick={() => handleSizeSelect(model.size)}
+                                className={`sample ${selectedSize === sizeKey ? "selected" : ""}`}
+                                id={sizeKey}
+                                value={sizeKey}
+                                selected={selectedSize === sizeKey}
+                                onClick={() => handleSizeSelect(sizeKey)}
                             >
-                                {model.size}
+                                {sizeKey}
                             </SizeButton>
                         </ListItem>
                     ))}
@@ -137,11 +126,11 @@ const ProductInfo = ({ product, onAddToCart }) => {
                     name="quantity"
                     value={quantity}
                     min={1}
-                    max={stock[selectedSize]?.[selectedColor] || 1}
+                    max={
+                        product.size[selectedSize]?.colors[selectedColor] || 1
+                    }
                     onChange={handleQuantityChange}
                 />
-                <br />
-                <div>Estoque disponível: {stock[selectedSize]?.[selectedColor] || 0}</div>
                 <br />
                 <SubmitButton type="submit" id="submit">
                     <ShoppingCartIcon />

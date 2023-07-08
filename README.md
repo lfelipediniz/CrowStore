@@ -4,9 +4,6 @@
   <img width="200" src="Milestone1/mockup-imgs/crow-store.png">
 </p>
 
-## Enter our [website](https://crowstore.vercel.app/)!
-
-
 ### Authors
 
 | Name                                                       | USP number |

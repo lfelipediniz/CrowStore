@@ -5,11 +5,9 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import { BodyContainer } from "./WrapProductElements.jsx";
 import ProductDescription from "../ProductDescription";
-import {
-  ProductContainer,
-  ScrollableContainer,
-} from "../User/UserElements";
+import { ProductContainer, ScrollableContainer } from "../User/UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
+import { colors } from "../../styles/colors";
 
 const WrapProduct = ({ productName }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,14 +37,14 @@ const WrapProduct = ({ productName }) => {
   }
 
   return (
-    <>
+    <div style={{ backgroundColor: colors.primary }}>
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
       <BodyContainer>
         <ProductDescription product={product} />
       </BodyContainer>
       <Footer />
-    </>
+    </div>
   );
 };
 

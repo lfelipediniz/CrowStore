@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../styles/colors";
 
 export const BodyContainer = styled.div`
     max-width: 1184px;
@@ -6,6 +7,7 @@ export const BodyContainer = styled.div`
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
+    background-color: ${colors.primary};
 
     * {    
         font-family: Inter, sans-serif;

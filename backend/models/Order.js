@@ -1,10 +1,10 @@
 const mongoose = require("../db/conn");
 const { Schema } = mongoose;
-const Product = require('./Product');
+const Item = require('./Item');
 
 const Order = new Schema({
-    Products: {
-        type: [Product.schema],
+    Items: {
+        type: [Item],
         required: true
     },
     Quantities: {
@@ -15,16 +15,16 @@ const Order = new Schema({
         type: Number,
         required: true
     },
-    adress: {
+    address: {
         type: String,
         required: true
     },
     cep: {
-        type: String,
+        type: Number,
         required: true
     },
     cpf: {
-        type: String,
+        type: Number,
         required: true
     },
     clientName: {
@@ -32,7 +32,7 @@ const Order = new Schema({
         required: true
     },
     phone: {
-        type: String,
+        type: Number,
         required: true
     },
 },

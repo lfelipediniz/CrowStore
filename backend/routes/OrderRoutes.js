@@ -1,6 +1,6 @@
-const router = require('express').Router();
+const router = require('express').Router()
 
-const OrController = require('../controllers/OrderController');
-router.post('/registerOrder', OrController.registerOrder);
+const OrderController = require('../controllers/OrderController')
+router.post('/registerOrder', OrderController.registerOrder)
 
-module.exports = router;
+module.exports = router

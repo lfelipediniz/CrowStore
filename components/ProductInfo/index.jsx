@@ -9,7 +9,7 @@ import {
   SizeButton,
   QuantityInput,
   SubmitButton,
-  ShoppingCartIcon
+  ShoppingCartIcon,
 } from "./ProductInfoElements";
 
 const ProductInfo = ({ product, onAddToCart }) => {
@@ -20,23 +20,31 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
-    const maxQuantity = product.AvailableModels.find(model => model.color === color)?.quantity;
+    const maxQuantity = product.AvailableModels.find(
+      (model) => model.color === color
+    )?.quantity;
     setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
-    const stock = product.AvailableModels.find(model => model.color === color && model.size === selectedSize)?.quantity;
+    const stock = product.AvailableModels.find(
+      (model) => model.color === color && model.size === selectedSize
+    )?.quantity;
     setStock(stock || 0);
   };
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
-    const maxQuantity = product.AvailableModels.find(model => model.size === size)?.quantity;
+    const maxQuantity = product.AvailableModels.find(
+      (model) => model.size === size
+    )?.quantity;
     setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
-    const stock = product.AvailableModels.find(model => model.color === selectedColor && model.size === size)?.quantity;
+    const stock = product.AvailableModels.find(
+      (model) => model.color === selectedColor && model.size === size
+    )?.quantity;
     setStock(stock || 0);
 
     // Set the default selected color for the selected size
-    const colors = product.AvailableModels
-      .filter(model => model.size === size)
-      .map(model => model.color);
+    const colors = product.AvailableModels.filter(
+      (model) => model.size === size
+    ).map((model) => model.color);
     if (colors.length > 0) {
       setSelectedColor(colors[0]);
     } else {
@@ -61,29 +69,52 @@ const ProductInfo = ({ product, onAddToCart }) => {
     onAddToCart(cartItem);
   };
 
-  // Set the default selected size and color when the component mounts
   useEffect(() => {
     const smallestSize = getSmallestSize(product);
     setSelectedSize(smallestSize);
-    const colorsForSize = product.AvailableModels
-      .filter(model => model.size === smallestSize)
-      .map(model => model.color);
+    const colorsForSize = product.AvailableModels.filter(
+      (model) => model.size === smallestSize
+    ).map((model) => model.color);
     if (colorsForSize.length > 0) {
       setSelectedColor(colorsForSize[0]);
     }
+
+    // Select the first size and color
+    if (Object.keys(uniqueSizes).length > 0) {
+      const firstSize = Object.keys(uniqueSizes)[0];
+      handleSizeSelect(firstSize);
+    }
+
+    if (product.AvailableModels.length > 0) {
+      const firstColor = product.AvailableModels[0].color;
+      handleColorSelect(firstColor);
+    }
   }, [product]);
 
-  // Helper function to get the smallest size available
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Atualizar o estoque após 1 segundo
+      if (selectedColor && selectedSize) {
+        const stock = product.AvailableModels.find(
+          (model) =>
+            model.size === selectedSize && model.color === selectedColor
+        )?.quantity;
+        setStock(stock || 0);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer); // Limpar o timer quando o componente for desmontado
+  }, [product, selectedColor, selectedSize]);
+
   const getSmallestSize = (product) => {
-    const sizes = product.AvailableModels.map(model => model.size);
+    const sizes = product.AvailableModels.map((model) => model.size);
     return sizes.reduce((smallestSize, currentSize) => {
       return currentSize < smallestSize ? currentSize : smallestSize;
     }, sizes[0]);
   };
 
-  // Get unique sizes
   const uniqueSizes = {};
-  product.AvailableModels.forEach(model => {
+  product.AvailableModels.forEach((model) => {
     if (!uniqueSizes[model.size]) {
       uniqueSizes[model.size] = true;
     }
@@ -97,29 +128,9 @@ const ProductInfo = ({ product, onAddToCart }) => {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <Subtitle>Cor</Subtitle>
-        <List>
-          {product.AvailableModels.map(model => (
-            model.size === selectedSize && (
-              <ListItem key={model.color}>
-                <ColorSample
-                  type="button"
-                  className={`sample ${selectedColor === model.color ? "selected" : ""}`}
-                  id={`color${model.color}`}
-                  value={model.color}
-                  color={model.color}
-                  selected={selectedColor === model.color}
-                  onClick={() => handleColorSelect(model.color)}
-                />
-              </ListItem>
-            )
-          ))}
-        </List>
-        
-
         <Subtitle>Tamanho</Subtitle>
         <List>
-          {Object.keys(uniqueSizes).map(size => (
+          {Object.keys(uniqueSizes).map((size) => (
             <ListItem key={size}>
               <SizeButton
                 type="button"
@@ -135,6 +146,28 @@ const ProductInfo = ({ product, onAddToCart }) => {
           ))}
         </List>
 
+        <Subtitle>Cor</Subtitle>
+        <List>
+          {product.AvailableModels.map(
+            (model) =>
+              model.size === selectedSize && (
+                <ListItem key={model.color}>
+                  <ColorSample
+                    type="button"
+                    className={`sample ${
+                      selectedColor === model.color ? "selected" : ""
+                    }`}
+                    id={`color${model.color}`}
+                    value={model.color}
+                    color={model.color}
+                    selected={selectedColor === model.color}
+                    onClick={() => handleColorSelect(model.color)}
+                  />
+                </ListItem>
+              )
+          )}
+        </List>
+
         <Subtitle>Quantidade</Subtitle>
         <QuantityInput
           type="number"
@@ -142,12 +175,17 @@ const ProductInfo = ({ product, onAddToCart }) => {
           name="quantity"
           value={quantity}
           min={1}
-          max={product.AvailableModels.find(model => model.size === selectedSize && model.color === selectedColor)?.quantity || 1}
+          max={
+            product.AvailableModels.find(
+              (model) =>
+                model.size === selectedSize && model.color === selectedColor
+            )?.quantity || 1
+          }
           onChange={handleQuantityChange}
         />
         {selectedColor && selectedSize && (
           <>
-          <h3>Apenas {stock} no estoque!</h3>
+            <h3>Apenas {stock} no estoque!</h3>
           </>
         )}
 

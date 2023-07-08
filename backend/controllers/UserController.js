@@ -200,6 +200,45 @@ class UserController {
 
   static async editCart(req, res) {}
 
+  static async addProductToCart(req, res) {
+    try {
+      const userId = req.params.id;
+      const { name, price, color, size, quantity } = req.body;
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res
+          .status(404)
+          .json({ error: `Não foi encontrado um usuário de id ${userId}` });
+      }
+
+      const product = {
+        name,
+        price,
+        color,
+        size,
+        quantity,
+      };
+
+      const purchase = {
+        product,
+        quantity,
+      };
+
+      user.cart.push(purchase);
+
+      await user.save();
+
+      res.json({ message: "Produto adicionado ao carrinho com sucesso" });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .json({ error: "Falha ao adicionar o produto ao carrinho" });
+    }
+  }
+
   static async finalizeCart(req, res) {
     try {
       const userId = req.params.id;

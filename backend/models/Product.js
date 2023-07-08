@@ -14,10 +14,6 @@ const Product = mongoose.model(
             type: Array,
             required: true
         },
-        popular: {
-            type: Boolean,
-            required: true
-        },
         gender: {
             type: String,
             enum: ['Masculino', 'Feminino', 'Unissex'],

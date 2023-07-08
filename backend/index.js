@@ -3,7 +3,7 @@ const cors = require('cors')
 
 const app = express()
 
-const Upimgs = require("./routes/Upimgs")
+const Upimgs = require ("./routes/Upimgs")
 
 app.use("/imgs", Upimgs)
 // Config JSON response
@@ -17,7 +17,6 @@ app.use(express.static('public'))
 
 // Routes
 
-app.use("/orders", require('./routes/OrderRoutes'))
 app.use('/users', require('./routes/UserRoutes'))
 app.use('/products', require('./routes/ProductRoutes'))
 

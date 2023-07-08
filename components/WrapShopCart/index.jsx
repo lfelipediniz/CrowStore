@@ -37,23 +37,6 @@ const WrapShopCart = () => {
       ...cartData,
       ...formData,
     };
-
-
-    fetch("http://localhost:5000/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(combinedData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Compra realizada com sucesso");
-          return response.json(); // Converte a resposta para JSON
-        } else {
-          throw new Error("Erro na compra");
-        }
-      })
     // Output to console, as a proof of concept
     console.log(combinedData);
     // Save the combined data to a JSON file (once we implement the server)

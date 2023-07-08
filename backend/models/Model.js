@@ -2,6 +2,10 @@ const mongoose = require('../db/conn');
 
 const Model = mongoose.Schema({
     _id: mongoose.Types.ObjectId,
+    productId: {
+        type: String,
+        required: true
+    },
     size: {
         type: String,
         enum: ['PP', 'P', 'M', 'G', 'XG'],

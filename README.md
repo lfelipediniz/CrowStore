@@ -17,7 +17,7 @@
 
 ### Project Description
 
-The CrowStore is a project for an online store for clothing. It's based off of an initial design proposal by one of its team members. To the interested reader, it is available [here](https://github.com/JV-PC/CrowStore).
+The CrowStore is an online store for selling street fashion clothing. It's based off of an initial design proposal by one of its team members. To the interested reader, it is available [here](https://github.com/JV-PC/CrowStore).
 
 Its structure follows closely its homepage, where all other pages can be directly accessed, such as product listings, searching and administrator's controls.
 
@@ -27,35 +27,36 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 #### Automatically install dependencies
 
-First of all, it's needed to have [Git](https://git-scm.com/downloads), [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) a
-installed on your system.
+First of all, it's needed to have [Git](https://git-scm.com/downloads), and [Node.js](https://nodejs.org/en/download/) installed on your system.
+
+We've used the [yarn](https://yarnpkg.com/) package manager to handle our front-end dependencies and [npm](https://www.npmjs.com/) to handle the back-end dependencies.
 
 To automatically install all dependencies needed on the project just run: 
 
 ```bash
 cd CrowStore
-
-npm i
-# or
 yarn install
+cd backend
+npm i
 ```
 
 #### Getting Started
 
-Run the development server:
+In one terminal, initialize the site's frontend:
 
 ```bash
 cd CrowStore
-
-npm run dev  
-# or
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In another terminal, have initialized the site's backend:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-Or, you can access it to visuaalization through this [link](https://crowstore.vercel.app/) here.
+```bash
+cd CrowStore/backend
+npm run start
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 #### Learn More
 
@@ -66,13 +67,13 @@ To learn more about Next.js, take a look at the following resources:
 
 ## For reviewers
 
-To enter administrator mode just put these data:
+To enter administrator mode use the following account:
 - Login: joaopereiraadm
 - Password: 12345
 
 To enter common user mode just put these data:
-- Login: joaopereira
-- Password: 12345678
+- Login: leandro@gmail.com
+- Password: 123
 
 ## Navigation Diagram
 
@@ -140,12 +141,4 @@ For the second delivery, you already have an application usable when running the
 
 ### Test Results
 
-We follow the philosophy of testing while the application is running. These tests forever served as a greater visualization of the implementation of new features, observing when a new feature was added, so that none of the others were compromised in the process and, if they were, they should be fixed.
-
 ### Problems
-Some problems still need to be documented, like some warnings in the console, and they will be in the future, because some of those problems are due to unfinished project steps.
-
-### Comments
-
-Aditional comments:
-The project is going as expected, and we are on the way to deliver a great website.

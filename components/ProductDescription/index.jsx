@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { ProductContainer, ProductImageContainer } from "./ProductDescriptionElements";
 
 const ProductDescription = ({ product }) => {
-    const [selectedImage, setSelectedImage] = useState(product.images[0]);
+    const [selectedImage, setSelectedImage] = useState(`/CrowStore/imgs/${product.images[0]}`);
 
     const handleImageSelect = (image) => {
         setSelectedImage(image);
@@ -17,7 +17,7 @@ const ProductDescription = ({ product }) => {
             price: product.price,
             color: product.color,
             size: product.size,
-            quantity: 1 // You can adjust the quantity as needed
+            quantity: 1
         };
 
         // Retrieve the token from local storage
@@ -36,24 +36,24 @@ const ProductDescription = ({ product }) => {
             },
             body: JSON.stringify(newItem)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Failed to add the product to the cart.");
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle the response from the server
-            if (data.message) {
-                alert(data.message);
-            } else {
-                alert('Failed to add the product to the cart.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while adding the product to the cart.');
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to add the product to the cart.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response from the server
+                if (data.message) {
+                    alert(data.message);
+                } else {
+                    alert('Failed to add the product to the cart.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding the product to the cart.');
+            });
     };
 
     return (

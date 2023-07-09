@@ -44,17 +44,6 @@ const Purchase = new Schema({
       required: true
     }
   },
-  quantity: {
-    type: Number,
-    validate: {
-      validator: function(value) {
-        return Number.isInteger(value) && value >= 1 && value <= this.product.quantity;
-      },
-      message:
-        'A quantidade deve ser um número inteiro maior ou igual a 1 e menor ou igual à quantidade disponível para esse produto.'
-    },
-    required: true
-  }
 }, { timestamps: true });
 
 const UserSchema = new Schema(

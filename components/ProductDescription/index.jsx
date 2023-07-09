@@ -22,7 +22,7 @@ const ProductDescription = ({ product }) => {
       price: item.price,
       color: item.color,
       size: item.size,
-      quantity: 1,
+      quantity: item.quantity,
     };
 
     // Retrieve the token from local storage

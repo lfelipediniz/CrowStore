@@ -1,39 +1,45 @@
 import React, { useState, useEffect } from "react";
-// We'll add this once we have a server side application.
-// import fs from "fs";
-// import path from "path";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Cart from "../Cart";
 import PaymentOptions from "../PaymentOptions";
-import {
-  BodyContainer,
-  Header,
-  Link,
-  ShopcartContainer,
-  ProductContainer,
-  PaymentContainer,
-  ShopcartWrapper,
-  Container,
-} from "./WrapElements.jsx";
+import { BodyContainer, Header, Link, ShopcartContainer, ProductContainer, PaymentContainer, ShopcartWrapper, Container } from "./WrapElements.jsx";
 import { WrapContent } from "../../components/ReusedComponents/WrapContent";
-
-import jwt from "jsonwebtoken";
-import axios from "axios";
 
 const WrapShopCart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [firstProductName, setFirstProductName] = useState("");
-
   const [userData, setUserData] = useState(null);
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartData, setCartData] = useState({
+    Products: [],
+    Quantities: [],
+  });
 
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(`http://localhost:5000/users/${userId}`);
       const userData = response.data;
       setUserData(userData);
+
+      const cartProducts = userData.cart.map(async (item) => {
+        const productName = item.product.name;
+        const productResponse = await axios.get(`http://localhost:5000/products/getProductByName/${productName}`);
+        const productData = productResponse.data;
+        const productImage = productData.images[0];
+        return {
+          ...item.product,
+          image: `/CrowStore/imgs/${productImage}`,
+        };
+      });
+      const cartProductsData = await Promise.all(cartProducts);
+      const cartQuantities = userData.cart.map((item) => item.quantity);
+
+      setCartData({
+        Products: cartProductsData,
+        Quantities: cartQuantities,
+      });
     } catch (error) {
       console.error("Erro ao buscar informações do usuário:", error);
     }
@@ -47,29 +53,17 @@ const WrapShopCart = () => {
         fetchUserData(decodedToken.id);
       }
     }
-
-    if (userData && userData.cart && userData.cart.length > 0) {
-      const productNames = userData.cart.map((item) => item.product.name);
-      setCartProducts(productNames);
-    }
-  }, [userData]);
+  }, []);
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  const [cartData, setCartData] = useState({
-    Products: [],
-    Quantities: [],
-    TotalPrice: 0,
-  });
-
-  const handleCartUpdate = (products, quantities, totalPrice) => {
+  const handleCartUpdate = (products, quantities) => {
     setCartData({
       ...cartData,
       Products: products,
       Quantities: quantities,
-      TotalPrice: totalPrice,
     });
   };
 
@@ -83,20 +77,7 @@ const WrapShopCart = () => {
     console.log(combinedData);
     // Save the combined data to a JSON file (once we implement the server)
     // saveDataToFile(combinedData);
-  };
 
-  const saveDataToFile = (data) => {
-    const filePath = path.join(
-      __dirname,
-      "../../fakedata/usersDatabase/order.json"
-    );
-    fs.writeFile(filePath, JSON.stringify(data), (err) => {
-      if (err) {
-        console.error("Error saving data to file:", err);
-      } else {
-        console.log("Data saved to file successfully.");
-      }
-    });
   };
 
   return (
@@ -108,15 +89,16 @@ const WrapShopCart = () => {
           <Header>Meu Carrinho</Header>
           <Link href="/">≪ Continuar comprando</Link>
           <p>Email: {userData?.email}</p>
-          <p>Produtos no carrinho:</p>
-          {cartProducts.map((productName) => (
-            <p key={productName}>{productName}</p>
-          ))}
         </WrapContent>
         <ShopcartWrapper>
           <ShopcartContainer>
             <ProductContainer>
-              <Cart onCartUpdate={handleCartUpdate} isShopCart={true} />
+              <Cart
+                products={cartData.Products}
+                quantities={cartData.Quantities}
+                onCartUpdate={handleCartUpdate}
+                isShopCart={true}
+              />
             </ProductContainer>
             <PaymentContainer>
               <PaymentOptions onSubmit={handleSubmission} />

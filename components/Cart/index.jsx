@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import productsData from "../../fakedata/usersDatabase/purchases.json";
+import axios from "axios";
 import {
   StyledCart,
   ProductContainer,
@@ -18,56 +18,62 @@ import {
   MobileProductImage,
 } from "./CartElements";
 
-const Cart = ({ onCartUpdate, isShopCart }) => {
-  const [products, setProducts] = useState([]);
-  const [quantities, setQuantities] = useState([]);
+const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
+  const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(productsData);
-    setQuantities(Array(productsData.length).fill(1));
-  }, []);
+    const fetchProductData = async () => {
+      const productPromises = products.map(async (product) => {
+        const response = await axios.get(`http://localhost:5000/products/getProductByName/${product.name}`);
+        const productData = response.data;
+        const productImage = productData.images[0];
+        return {
+          ...product,
+          image: `/CrowStore/imgs/${productImage}`,
+        };
+      });
+      const productDataArray = await Promise.all(productPromises);
+      setCartProducts(productDataArray);
+    };
+
+    fetchProductData();
+  }, [products]);
 
   const removeProduct = (index) => {
     const updatedProducts = [...products];
     updatedProducts.splice(index, 1);
-    setProducts(updatedProducts);
 
     const updatedQuantities = [...quantities];
     updatedQuantities.splice(index, 1);
-    setQuantities(updatedQuantities);
-    // Invoke the onCartUpdate function with updated values
-    onCartUpdate(updatedProducts, updatedQuantities, calculateTotalPrice());
+
+    onCartUpdate(updatedProducts, updatedQuantities);
   };
 
   const updateQuantity = (index, value) => {
     const updatedQuantities = [...quantities];
-    updatedQuantities[index] = parseInt(value);
-    setQuantities(updatedQuantities);
+    updatedQuantities[index] = parseInt(value, 10);
 
-    // Invoke the onCartUpdate function with updated values
-    onCartUpdate(products, updatedQuantities, calculateTotalPrice());
+    onCartUpdate(products, updatedQuantities);
   };
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
-    for (let i = 0; i < products.length; i++) {
-      const product = products[i];
+    for (let i = 0; i < cartProducts.length; i++) {
+      const product = cartProducts[i];
       const quantity = quantities[i];
-      const price = parseFloat(
-        product.price.replace("R$ ", "").replace(",", ".")
-      );
+      const price = typeof product.price === 'string' ? parseFloat(product.price.replace("R$ ", "").replace(",", ".")) : product.price;
       totalPrice += price * quantity;
     }
     return totalPrice.toFixed(2);
   };
+  
 
   return (
-    // Produtos Mobile
     <>
       <StyledCart>
-        {products.map((product, index) => (
+        {cartProducts.map((product, index) => (
           <MobileProduct key={index}>
-            <ProductImage src={product.image} alt={product.productName} />
+            <MobileProductImage src={product.image} alt={product.name} />
             <ProductDescription>
               <Row>
                 <QuantityLabel htmlFor={`quantity${index}`}>
@@ -84,7 +90,7 @@ const Cart = ({ onCartUpdate, isShopCart }) => {
                 />
               </Row>
               <ProductId>
-                <H3>{product.productName}</H3>
+                <H3>{product.name}</H3>
               </ProductId>
               <ProductPricing>
                 <Row>
@@ -101,12 +107,12 @@ const Cart = ({ onCartUpdate, isShopCart }) => {
           </MobileProduct>
         ))}
 
-        {products.map((product, index) => (
+        {cartProducts.map((product, index) => (
           <ProductContainer key={index}>
-            <ProductImage src={product.image} alt={product.productName} />
+            <ProductImage src={product.image} alt={product.name} />
             <ProductDescription>
               <ProductId>
-                <H2>{product.productName}</H2>
+                <H2>{product.name}</H2>
                 {isShopCart && (
                   <RemoveButton onClick={() => removeProduct(index)}>
                     Remover
@@ -119,14 +125,14 @@ const Cart = ({ onCartUpdate, isShopCart }) => {
                     Quantidade:
                   </QuantityLabel>
                   <QuantityInput
-                  type="number"
-                  name={`quantity${index}`}
-                  value={quantities[index]}
-                  min="1"
-                  readOnly={!isShopCart}
-                  max={product.stock}
-                  onChange={(e) => updateQuantity(index, e.target.value)}
-                />
+                    type="number"
+                    name={`quantity${index}`}
+                    value={quantities[index]}
+                    min="1"
+                    readOnly={!isShopCart}
+                    max={product.stock}
+                    onChange={(e) => updateQuantity(index, e.target.value)}
+                  />
                 </Row>
                 <Row>
                   <H3></H3>

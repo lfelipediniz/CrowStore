@@ -24,7 +24,9 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
   useEffect(() => {
     const fetchProductData = async () => {
       const productPromises = products.map(async (product) => {
-        const response = await axios.get(`http://localhost:5000/products/getProductByName/${product.name}`);
+        const response = await axios.get(
+          `http://localhost:5000/products/getProductByName/${product.name}`
+        );
         const productData = response.data;
         const productImage = productData.images[0];
         return {
@@ -61,12 +63,14 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
     for (let i = 0; i < cartProducts.length; i++) {
       const product = cartProducts[i];
       const quantity = quantities[i];
-      const price = typeof product.price === 'string' ? parseFloat(product.price.replace("R$ ", "").replace(",", ".")) : product.price;
+      const price =
+        typeof product.price === "string"
+          ? parseFloat(product.price.replace("R$ ", "").replace(",", "."))
+          : product.price;
       totalPrice += price * quantity;
     }
     return totalPrice.toFixed(2);
   };
-  
 
   return (
     <>
@@ -79,15 +83,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
                 <QuantityLabel htmlFor={`quantity${index}`}>
                   Quantidade:
                 </QuantityLabel>
-                <QuantityInput
-                  type="number"
-                  name={`quantity${index}`}
-                  value={quantities[index]}
-                  min="1"
-                  readOnly={!isShopCart}
-                  max={product.stock}
-                  onChange={(e) => updateQuantity(index, e.target.value)}
-                />
+                <p>{product.quantity}</p>
               </Row>
               <ProductId>
                 <H3>{product.name}</H3>
@@ -124,20 +120,12 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
                   <QuantityLabel htmlFor={`quantity${index}`}>
                     Quantidade:
                   </QuantityLabel>
-                  <QuantityInput
-                    type="number"
-                    name={`quantity${index}`}
-                    value={quantities[index]}
-                    min="1"
-                    readOnly={!isShopCart}
-                    max={product.stock}
-                    onChange={(e) => updateQuantity(index, e.target.value)}
-                  />
+                  <p>{product.quantity}</p>
                 </Row>
                 <Row>
                   <H3></H3>
                   <p>
-                    <strong>{product.price}</strong>
+                    <strong>R$ {product.price}</strong>
                   </p>
                 </Row>
               </ProductPricing>

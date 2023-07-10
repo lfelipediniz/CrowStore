@@ -66,8 +66,17 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
       const price = parseFloat(product.price);
       totalPrice += price * quantity;
     }
-    return totalPrice.toFixed(2);
+    return totalPrice;
   };
+
+
+  const formatPrice = (price) => {
+    return price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
+
 
   return (
     <>
@@ -88,7 +97,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
               <ProductPricing>
                 <Row>
                   <H3>Preço:</H3>
-                  <H3>{product.price}</H3>
+                  <H3>{formatPrice(product.price)}</H3>
                 </Row>
               </ProductPricing>
             </ProductDescription>
@@ -121,9 +130,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
                 </Row>
                 <Row>
                   <H3></H3>
-                  <p>
-                    <strong>R$ {product.price}</strong>
-                  </p>
+                  <H3>{formatPrice(product.price)}</H3>
                 </Row>
               </ProductPricing>
             </ProductDescription>
@@ -134,7 +141,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
         <TotalContainer>
           <Row>
             <H2>Total:</H2>
-            <H2>{calculateTotalPrice()}</H2>
+            <H2>{formatPrice(calculateTotalPrice())}</H2>
           </Row>
         </TotalContainer>
       )}

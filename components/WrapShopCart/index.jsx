@@ -88,7 +88,6 @@ const WrapShopCart = () => {
         <WrapContent>
           <Header>Meu Carrinho</Header>
           <Link href="/">≪ Continuar comprando</Link>
-          <p>Email: {userData?.email}</p>
         </WrapContent>
         <ShopcartWrapper>
           <ShopcartContainer>
@@ -112,3 +111,4 @@ const WrapShopCart = () => {
 };
 
 export default WrapShopCart;
+ 

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
+import Link from "next/link";
 import {
   Slide1,
   Slide2,
@@ -46,7 +47,14 @@ const Caurosel = () => {
         <Slide1>
           <WrapContent>
             <BannerRetangule>
-              <BannerText>Crow Windbreaker</BannerText>
+              <Link
+                href={`/product/${encodeURIComponent("Crow Windbreaker")}`}
+                legacyBehavior
+              >
+                <a>
+                <BannerText>Crow Windbreaker</BannerText>
+                </a>
+              </Link>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
@@ -56,7 +64,16 @@ const Caurosel = () => {
         <Slide2>
           <WrapContent>
             <BannerRetangule>
-              <BannerText>Camisesta Básica</BannerText>
+              <Link
+                href={`/product/${encodeURIComponent(
+                  "Camiseta Básica"
+                )}`}
+                legacyBehavior
+              >
+                <a>
+                <BannerText>Camisesta Básica</BannerText>
+                </a>
+              </Link>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
@@ -66,7 +83,16 @@ const Caurosel = () => {
         <Slide3>
           <WrapContent>
             <BannerRetangule>
-              <BannerText>Conjunto Outono</BannerText>
+              <Link
+                href={`/product/${encodeURIComponent(
+                  "Jaqueta Acolchoada Crow"
+                )}`}
+                legacyBehavior
+              >
+                <a>
+                <BannerText>Conjunto Outono</BannerText>
+                </a>
+              </Link>
               <BannerArrow onClick={handleNextSlide}>
                 <FaAngleRight />{" "}
               </BannerArrow>
@@ -74,8 +100,7 @@ const Caurosel = () => {
           </WrapContent>
         </Slide3>
       </SwipeableViews>
-      <WrapContent>
-      </WrapContent>
+      <WrapContent></WrapContent>
     </>
   );
 };

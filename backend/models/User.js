@@ -2,26 +2,6 @@ const mongoose = require("../db/conn");
 const { Schema } = mongoose;
 const Model = require('./Model');
 
-const ProductSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    required: true
-  },
-  color: {
-    type: String
-  },
-  size: {
-    type: String
-  },
-  quantity: {
-    type: Number,
-    required: true
-  }
-});
 
 const Purchase = new Schema({
   product: {
@@ -42,6 +22,9 @@ const Purchase = new Schema({
     quantity: {
       type: Number,
       required: true
+    },
+    remove:{
+      type: Boolean
     }
   },
 }, { timestamps: true });

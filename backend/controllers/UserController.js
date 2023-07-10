@@ -129,7 +129,7 @@ class UserController {
     } else {
       currentUser = null;
     }
-
+ 
     res.status(200).send(currentUser);
   }
 
@@ -203,7 +203,7 @@ class UserController {
   static async addProductToCart(req, res) {
     try {
       const userId = req.params.id;
-      const { name, price, color, size, quantity } = req.body;
+      const { name, price, color, size, quantity, remove } = req.body;
 
       const user = await User.findById(userId);
 
@@ -219,11 +219,11 @@ class UserController {
         color,
         size,
         quantity,
+        remove
       };
 
       const purchase = {
         product,
-        quantity,
       };
 
       user.cart.push(purchase);

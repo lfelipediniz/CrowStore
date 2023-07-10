@@ -62,11 +62,8 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
     let totalPrice = 0;
     for (let i = 0; i < cartProducts.length; i++) {
       const product = cartProducts[i];
-      const quantity = quantities[i];
-      const price =
-        typeof product.price === "string"
-          ? parseFloat(product.price.replace("R$ ", "").replace(",", "."))
-          : product.price;
+      const quantity = product.quantity;
+      const price = parseFloat(product.price);
       totalPrice += price * quantity;
     }
     return totalPrice.toFixed(2);

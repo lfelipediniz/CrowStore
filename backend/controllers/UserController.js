@@ -239,7 +239,7 @@ class UserController {
     }
   }
 
-  static async finalizeCart(req, res) {
+  static async finalizeCart(req, res) { 
     try {
       const userId = req.params.id;
       const user = await User.findById(userId);

@@ -1,4 +1,27 @@
 [
+  {
+    "productName": "Touca Crow",
+    "price": "R$ 149.9",
+    "image": "/CrowStore/imgs/TOUCACROW.png",
+    "category": "Touca",
+    "gender": "feminino",
+    "stock": "4",
+    "colors": [
+      "Midnight Blue",
+      "Dark Slate Gray",
+      "Saddle Brown",
+      "Goldenrod",
+      "Light Sky Blue"
+    ],
+    "size": [
+      "PP",
+      "P",
+      "M",
+      "G",
+      "XG"
+    ],
+    "description": "Este moletom CC é perfeito para se manter aquecido e estiloso nos dias mais frios. Com um design moderno e confortável, é uma peça essencial para o seu guarda-roupa de inverno."
+  },
     {
       "productName": "Moletom CC",
       "price": "R$ 129,90",
@@ -23,8 +46,8 @@
       "description": "Este moletom CC é perfeito para se manter aquecido e estiloso nos dias mais frios. Com um design moderno e confortável, é uma peça essencial para o seu guarda-roupa de inverno."
     },
     {
-      "productName": "Moletom Crow feminino",
-      "price": "R$ 159,90",
+      "productName": "Moletom Crow",
+      "price": "R$ 149,90",
       "image": "/CrowStore/imgs/MOLETOMCROW.png",
       "category": "Moletom",
       "gender": "feminino",
@@ -69,7 +92,7 @@
       "description": "Esta calça listrada é perfeita para compor looks descolados e cheios de estilo. Feita com tecido de alta qualidade, oferece conforto e um visual moderno."
     },
     {
-      "productName": "Moletom Crow feminino",
+      "productName": "Sueter Crow",
       "price": "R$ 159,90",
       "image": "/CrowStore/imgs/SUETERCROW.png",
       "category": "Moletom",
@@ -94,7 +117,7 @@
     {
       "productName": "Camisa Kiss",
       "price": "R$ 119,90",
-      "image": "/CrowStore/imgs/C.png",
+      "image": "/CrowStore/imgs/D.png",
       "category": "Camisa",
       "gender": "masculino",
       "stock": "4",
@@ -115,30 +138,7 @@
       "description": "Esta camisa Kiss é perfeita para os fãs da banda de rock. Com um design autêntico e estiloso, é uma peça essencial para expressar o seu estilo musical."
     },
     {
-      "productName": "Touca Crow Feminina",
-      "price": "R$ 49,90",
-      "image": "/CrowStore/imgs/TOUCACROW.png",
-      "category": "Acessório",
-      "gender": "feminino",
-      "stock": "4",
-      "colors": [
-        "Light Coral",
-        "Dark Sea Green",
-        "Fire Brick",
-        "Cornflower Blue",
-        "Dim Gray"
-      ],
-      "size": [
-        "PP",
-        "P",
-        "M",
-        "G",
-        "XG"
-      ],
-      "description": "Esta touca Crow é perfeita para dar um toque de estilo ao seu look. Feita com um tecido macio e quentinho, ela vai manter sua cabeça protegida e estilosa nos dias mais frios."
-    },
-    {
-      "productName": "Jaqueta Inverno Feminina",
+      "productName": "Jaqueta Inverno",
       "price": "R$ 189,90",
       "image": "/CrowStore/imgs/F.png",
       "category": "Jaqueta",

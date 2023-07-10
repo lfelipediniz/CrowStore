@@ -11,6 +11,7 @@ router.post('/login', UserController.login);
 router.get('/checkuser', UserController.checkUser);
 router.get('/:id', UserController.getUserById);
 router.patch('/edit/:id', verifyToken, UserController.editUser);
-router.post('/:id/cart', UserController.addProductToCart); 
+router.post('/:id/cart', UserController.addProductToCart);
+router.patch('/:id/finalizeCart', verifyToken, UserController.finalizeCart);
 
 module.exports = router;

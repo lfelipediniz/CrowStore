@@ -123,6 +123,7 @@ const Admin = () => {
   };
 
   const handleOpenModalCreate = () => {
+    
     setShowModal(true);
   };
 
@@ -132,27 +133,6 @@ const Admin = () => {
   };
 
   const handleSaveProduct = (product) => {
-    /*const produto = {
-      //VER O QUE TA DE ERRADO AQ
-    };
-
-    fetch('/addProduct', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(produto)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Produto adicionado:', data);
-    })
-    .catch(error => {
-      console.error('Ocorreu um erro:', error);
-    });*/
-    
-    
-    
     handleCloseModal();
   };
 

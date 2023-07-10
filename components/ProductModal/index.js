@@ -50,7 +50,9 @@ const ProductModal = ({
   const [selectedColors, setSelectedColors] = useState([]);
   const [isSizeModalOpen, setSizeModalOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
-  const [selectedDescription, setSelectedDescription] = useState(""); // Estado para armazenar a descrição do produto
+  const [selectedDescription, setSelectedDescription] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState(""); // Estado para armazenar a descrição do produto
+  // Estado para armazenar a descrição do produto
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -60,6 +62,7 @@ const ProductModal = ({
   };
 
   const handleSave = () => {
+    
     const updatedProduct = {
       ...product,
       productName: selectedProductData.productName,
@@ -67,6 +70,34 @@ const ProductModal = ({
       selectedSizes: selectedSizes,
       description: selectedDescription, // Incluir a descrição atualizada no objeto do produto
     };
+    const Newproduto = {
+      name:  selectedProductData.productName,
+      tags: selectedDescription,
+      gender: selectedCategory,
+      price: selectedPrice,
+    };
+    fetch("http://localhost:5000/products/addProduct", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(Newproduto),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log("Produto cadastrado com sucesso");
+
+                    return response.json(); 
+                } else {
+                    throw new Error("Erro ao cadastrar produto");
+                }
+            })
+            .then((data) => {
+            })
+            .catch((error) => {
+                console.error("Erro:", error);
+            });
+
     onSave(updatedProduct);
   };
 
@@ -111,6 +142,12 @@ const ProductModal = ({
       setSelectedDescription(product.description); // Atualizar a descrição do produto selecionado
     } else {
       setSelectedDescription("");
+    }
+
+    if (product?.price) {
+      setSelectedPrice(product.price); // Atualizar a descrição do produto selecionado
+    } else {
+      setSelectedPrice("");
     }
   }, [product]);
 
@@ -219,7 +256,7 @@ const ProductModal = ({
                 Remover Produto
               </RemoveButton>
             ) : (
-              <div style={{ height: "40px" }}></div>
+              <div style={{ height: "30px" }}></div>
             )}
             <SaveButton variant="contained" onClick={handleSave}>
               Salvar
@@ -251,7 +288,7 @@ const ProductModal = ({
               <TextField
                 label="Nome do Produto"
                 variant="outlined"
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "15px" }}
                 value={selectedProductData.productName}
                 onChange={(e) =>
                   setSelectedProductData({
@@ -266,16 +303,28 @@ const ProductModal = ({
                 multiline
                 rows={4}
                 fullWidth
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "15px" }}
                 value={selectedDescription} // Vincular o valor da descrição ao estado selecionado
                 onChange={
                   (e) => setSelectedDescription(e.target.value) // Atualizar a descrição do produto selecionado
                 }
               />
               <TextField
+                label="Preço"
+                variant="outlined"
+                multiline
+                rows={1}
+                fullWidth
+                sx={{ marginBottom: "15px" }}
+                value={selectedPrice} // Vincular o valor da descrição ao estado selecionado
+                onChange={
+                  (e) => setSelectedPrice(e.target.value) // Atualizar a descrição do produto selecionado
+                }
+              />
+              <TextField
                 label="Estoque"
                 variant="outlined"
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "15px" }}
                 InputProps={{
                   inputProps: { min: 0 },
                 }}
@@ -292,7 +341,7 @@ const ProductModal = ({
                 select
                 label="Gênero"
                 variant="outlined"
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "15px" }}
               >
                 <MenuItem value="masculino">Masculino</MenuItem>
                 <MenuItem value="feminino">Feminino</MenuItem>
@@ -303,7 +352,7 @@ const ProductModal = ({
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 variant="outlined"
-                sx={{ marginBottom: "25px" }}
+                sx={{ marginBottom: "15px" }}
               >
                 {categories
                   .filter(

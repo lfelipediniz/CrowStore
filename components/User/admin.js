@@ -133,7 +133,7 @@ const Admin = () => {
 
   const handleSaveProduct = (product) => {
     /*const produto = {
-      
+      //VER O QUE TA DE ERRADO AQ
     };
 
     fetch('/addProduct', {

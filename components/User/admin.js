@@ -132,8 +132,27 @@ const Admin = () => {
   };
 
   const handleSaveProduct = (product) => {
-    // Implemente a lógica para salvar ou atualizar o produto no sistema
-    console.log("Salvar produto:", product);
+    /*const produto = {
+      
+    };
+
+    fetch('/addProduct', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(produto)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Produto adicionado:', data);
+    })
+    .catch(error => {
+      console.error('Ocorreu um erro:', error);
+    });*/
+    
+    
+    
     handleCloseModal();
   };
 

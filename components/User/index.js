@@ -5,7 +5,7 @@ import Admin from "./admin";
 import CommonUser from "./common";
 
 function User() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {

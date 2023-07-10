@@ -18,7 +18,7 @@ import {
   MobileProductImage,
 } from "./CartElements";
 
-const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
+const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
@@ -44,12 +44,40 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
   const removeProduct = (index) => {
     const updatedProducts = [...products];
     updatedProducts.splice(index, 1);
-
+  
     const updatedQuantities = [...quantities];
     updatedQuantities.splice(index, 1);
-
+  
     onCartUpdate(updatedProducts, updatedQuantities);
+  
+    // Enviar solicitação para atualizar o usuário com o carrinho atualizado
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const userId = userData._id; // Atualize para obter corretamente o ID do usuário
+    const updatedUserData = {
+      cart: updatedProducts.map((product, index) => ({
+        product: {
+          ...product,
+          remove: index === index ? true : product.remove, // Define 'remove' como true para o produto removido
+        },
+      })),
+    };
+  
+    axios
+      .patch(`http://localhost:5000/users/edit/${userId}`, updatedUserData, config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o usuário:", error);
+      });
   };
+  
+  
 
   const updateQuantity = (index, value) => {
     const updatedQuantities = [...quantities];
@@ -69,7 +97,6 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
     return totalPrice;
   };
 
-
   const formatPrice = (price) => {
     return price.toLocaleString("pt-BR", {
       style: "currency",
@@ -77,6 +104,43 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
     });
   };
 
+  const handleRemove = (index) => {
+    removeProduct(index);
+  };
+
+  const handleCheckout = async () => {
+    const updatedProducts = cartProducts.filter((product) => !product.remove);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.patch(
+        `http://localhost:5000/users/edit/${userId}`,
+        { cart: updatedProducts },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Produtos do carrinho atualizados no banco de dados.");
+
+        const updatedQuantities = quantities.filter((quantity, index) => {
+          return updatedProducts.some(
+            (product) => product._id === products[index]._id
+          );
+        });
+
+        onCartUpdate([], updatedQuantities);
+      }
+    } catch (error) {
+      console.error(
+        "Erro ao atualizar os produtos do carrinho no banco de dados:",
+        error
+      );
+    }
+  };
 
   return (
     <>
@@ -102,7 +166,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
               </ProductPricing>
             </ProductDescription>
             {isShopCart && (
-              <RemoveButton onClick={() => removeProduct(index)}>
+              <RemoveButton onClick={() => handleRemove(index)}>
                 Remover
               </RemoveButton>
             )}
@@ -116,7 +180,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
               <ProductId>
                 <H2>{product.name}</H2>
                 {isShopCart && (
-                  <RemoveButton onClick={() => removeProduct(index)}>
+                  <RemoveButton onClick={() => handleRemove(index)}>
                     Remover
                   </RemoveButton>
                 )}
@@ -143,6 +207,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart }) => {
             <H2>Total:</H2>
             <H2>{formatPrice(calculateTotalPrice())}</H2>
           </Row>
+          <button onClick={handleCheckout}>Finalizar Compra</button>
         </TotalContainer>
       )}
     </>

@@ -47,7 +47,7 @@ const Caurosel = () => {
         <Slide1>
           <WrapContent>
             <BannerRetangule>
-              <Link
+              <Link  
                 href={`/product/${encodeURIComponent("Crow Windbreaker")}`}
                 legacyBehavior
               >

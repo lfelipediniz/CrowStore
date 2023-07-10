@@ -67,17 +67,44 @@ const WrapShopCart = () => {
     });
   };
 
-  const handleSubmission = (formData) => {
-    // Combine cartData and formData
-    const combinedData = {
-      ...cartData,
-      ...formData,
-    };
-    // Output to console, as a proof of concept
-    console.log(combinedData);
-    // Save the combined data to a JSON file (once we implement the server)
-    // saveDataToFile(combinedData);
+  const handleSubmission = async (formData) => {
+    if (!userData) {
+      return;
+    }
 
+    try {
+      const { userId } = userData;
+
+      const updatedUser = {
+        cart: cartData.Products.map((product, index) => ({
+          product,
+          quantity: cartData.Quantities[index],
+          remove: product.remove, // Adicionando a propriedade 'remove'
+        })),
+      };
+
+      const token = localStorage.getItem("token");
+      const response = await axios.patch(
+        `http://localhost:5000/users/edit/${userId}`,
+        updatedUser,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Usuário atualizado com sucesso");
+        // Limpar o carrinho de compras
+        setCartData({
+          Products: [],
+          Quantities: [],
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+    }
   };
 
   return (
@@ -92,12 +119,15 @@ const WrapShopCart = () => {
         <ShopcartWrapper>
           <ShopcartContainer>
             <ProductContainer>
-              <Cart
-                products={cartData.Products}
-                quantities={cartData.Quantities}
-                onCartUpdate={handleCartUpdate}
-                isShopCart={true}
-              />
+              {userData && (
+                <Cart
+                  products={cartData.Products}
+                  quantities={cartData.Quantities}
+                  onCartUpdate={handleCartUpdate}
+                  isShopCart={true}
+                  userData={userData} // Passando o userId como propriedade
+                />
+              )}
             </ProductContainer>
             <PaymentContainer>
               <PaymentOptions onSubmit={handleSubmission} />
@@ -111,4 +141,3 @@ const WrapShopCart = () => {
 };
 
 export default WrapShopCart;
- 

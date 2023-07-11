@@ -5,6 +5,8 @@ import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Cart from "../Cart";
+import CartEmpty from "../../public/CrowStore/animations/CartEmpty";
+
 import PaymentOptions from "../PaymentOptions";
 import {
   BodyContainer,
@@ -101,6 +103,20 @@ const WrapShopCart = () => {
     }
   };
 
+  const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth < 1120);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsScreenSmall(window.innerWidth < 1120);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Container>
@@ -113,7 +129,38 @@ const WrapShopCart = () => {
         <ShopcartWrapper>
           <ShopcartContainer>
             {cartEmpty ? (
-              <h1>Carrinho vazio</h1>
+              <>
+                <ProductContainer>
+                  {!isScreenSmall ? (
+                    <>
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <br />
+                      <h1 style={{ textAlign: "center" }}>
+                        O carrinho está vazio :(
+                      </h1>
+                    </>
+                  ) : (
+                    <>
+                      <br />
+                      <h2 style={{ textAlign: "center" }}>
+                        O carrinho está vazio :(
+                      </h2>
+                    </>
+                  )}
+                </ProductContainer>
+
+                <ProductContainer>
+                  <CartEmpty />
+                </ProductContainer>
+              </>
             ) : (
               <>
                 <ProductContainer>

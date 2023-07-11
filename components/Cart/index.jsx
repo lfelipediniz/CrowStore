@@ -77,14 +77,6 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
       });
   };
   
-  
-
-  const updateQuantity = (index, value) => {
-    const updatedQuantities = [...quantities];
-    updatedQuantities[index] = parseInt(value, 10);
-
-    onCartUpdate(products, updatedQuantities);
-  };
 
   const calculateTotalPrice = () => {
     let totalPrice = 0;
@@ -106,40 +98,6 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
 
   const handleRemove = (index) => {
     removeProduct(index);
-  };
-
-  const handleCheckout = async () => {
-    const updatedProducts = cartProducts.filter((product) => !product.remove);
-
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.patch(
-        `http://localhost:5000/users/edit/${userId}`,
-        { cart: updatedProducts },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        console.log("Produtos do carrinho atualizados no banco de dados.");
-
-        const updatedQuantities = quantities.filter((quantity, index) => {
-          return updatedProducts.some(
-            (product) => product._id === products[index]._id
-          );
-        });
-
-        onCartUpdate([], updatedQuantities);
-      }
-    } catch (error) {
-      console.error(
-        "Erro ao atualizar os produtos do carrinho no banco de dados:",
-        error
-      );
-    }
   };
 
   return (
@@ -207,7 +165,6 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
             <H2>Total:</H2>
             <H2>{formatPrice(calculateTotalPrice())}</H2>
           </Row>
-          <button onClick={handleCheckout}>Finalizar Compra</button>
         </TotalContainer>
       )}
     </>

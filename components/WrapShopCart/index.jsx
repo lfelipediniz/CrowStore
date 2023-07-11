@@ -8,6 +8,7 @@ import Cart from "../Cart";
 import PaymentOptions from "../PaymentOptions";
 import { BodyContainer, Header, Link, ShopcartContainer, ProductContainer, PaymentContainer, ShopcartWrapper, Container } from "./WrapElements.jsx";
 import { WrapContent } from "../../components/ReusedComponents/WrapContent";
+import { Button } from "@mui/material";
 
 const WrapShopCart = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,41 +72,29 @@ const WrapShopCart = () => {
     if (!userData) {
       return;
     }
-
-    try {
-      const { userId } = userData;
-
-      const updatedUser = {
-        cart: cartData.Products.map((product, index) => ({
-          product,
-          quantity: cartData.Quantities[index],
-          remove: product.remove, // Adicionando a propriedade 'remove'
-        })),
-      };
-
-      const token = localStorage.getItem("token");
-      const response = await axios.patch(
-        `http://localhost:5000/users/edit/${userId}`,
-        updatedUser,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        console.log("Usuário atualizado com sucesso");
-        // Limpar o carrinho de compras
-        setCartData({
-          Products: [],
-          Quantities: [],
-        });
-      }
-    } catch (error) {
-      console.error("Erro ao atualizar usuário:", error);
-    }
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const userId = userData._id; // Atualize para obter corretamente o ID do usuário
+  
+    const updatedUserData = {
+      cart: [],
+    };
+  
+    axios
+      .patch(`http://localhost:5000/users/edit/${userId}`, updatedUserData, config)
+      .then((response) => {
+        console.log(response.data);
+        alert("Compra Finalizada"); // Adicione um alerta para indicar que a compra foi finalizada
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar o usuário:", error);
+      });
   };
+  
 
   return (
     <>
@@ -130,7 +119,7 @@ const WrapShopCart = () => {
               )}
             </ProductContainer>
             <PaymentContainer>
-              <PaymentOptions onSubmit={handleSubmission} />
+              <Button onClick={handleSubmission}>Finalizar Compra</Button>
             </PaymentContainer>
           </ShopcartContainer>
         </ShopcartWrapper>

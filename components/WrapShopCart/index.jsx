@@ -26,6 +26,7 @@ const WrapShopCart = () => {
     Products: [],
     Quantities: [],
   });
+  const [cartEmpty, setCartEmpty] = useState(false);
 
   const fetchUserData = async (userId) => {
     try {
@@ -52,6 +53,8 @@ const WrapShopCart = () => {
         Products: cartProductsData,
         Quantities: cartQuantities,
       });
+
+      setCartEmpty(cartProductsData.length === 0);
     } catch (error) {
       console.error("Erro ao buscar informações do usuário:", error);
     }
@@ -77,7 +80,10 @@ const WrapShopCart = () => {
       Products: products,
       Quantities: quantities,
     });
+
+    setCartEmpty(products.length === 0);
   };
+
   const handleSubmission = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -89,7 +95,7 @@ const WrapShopCart = () => {
       // Lógica adicional após finalizar o carrinho
 
       alert("Carrinho finalizado com sucesso!");
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.error("Erro ao finalizar o carrinho:", error);
     }
@@ -106,20 +112,26 @@ const WrapShopCart = () => {
         </WrapContent>
         <ShopcartWrapper>
           <ShopcartContainer>
-            <ProductContainer>
-              {userData && (
-                <Cart
-                  products={cartData.Products}
-                  quantities={cartData.Quantities}
-                  onCartUpdate={handleCartUpdate}
-                  isShopCart={true}
-                  userData={userData} // Passando o userId como propriedade
-                />
-              )}
-            </ProductContainer>
-            <PaymentContainer>
-              <Button onClick={handleSubmission}>Finalizar Compra</Button>
-            </PaymentContainer>
+            {cartEmpty ? (
+              <h1>Carrinho vazio</h1>
+            ) : (
+              <>
+                <ProductContainer>
+                  {userData && (
+                    <Cart
+                      products={cartData.Products}
+                      quantities={cartData.Quantities}
+                      onCartUpdate={handleCartUpdate}
+                      isShopCart={true}
+                      userData={userData} // Passando o userId como propriedade
+                    />
+                  )}
+                </ProductContainer>
+                <PaymentContainer>
+                  <PaymentOptions onSubmit={handleSubmission} />
+                </PaymentContainer>
+              </>
+            )}
           </ShopcartContainer>
         </ShopcartWrapper>
       </Container>

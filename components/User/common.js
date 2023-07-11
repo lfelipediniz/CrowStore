@@ -26,13 +26,9 @@ function CommonUser() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPhoneFocused, setIsPhoneFocused] = useState(false);
-
-  const [userN, setUsername] = useState("");
   const [isCadastrando, setIsCadastrando] = useState(false);
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
-  const [isCPFFocused, setIsCPFFocused] = useState(false);
   const [isCPFInvalid, setIsCPFInvalid] = useState(false);
-  const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [isConfirmSenhaFocused, setIsConfirmSenhaFocused] = useState(false);
 
   const [cartData, setCartData] = useState({

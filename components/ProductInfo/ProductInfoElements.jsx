@@ -45,18 +45,27 @@ export const ListItem = styled.li`
 `;
 
 export const ColorSample = styled.button`
-  border: ${({ selected }) => (selected ? "3px solid" : "1px solid")} ${colors.secondary};
+  border: ${({ selected }) => (selected ? "3px solid" : "1px solid")}
+    ${colors.secondary};
   height: 40px;
   width: 40px;
   background-color: ${({ color }) => color};
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const SizeButton = styled.button`
-  border: ${({ selected }) => (selected ? "3px solid" : "1px solid")} ${colors.secondary};
+  border: ${({ selected }) => (selected ? "3px solid" : "1px solid")}
+    ${colors.secondary};
   height: 40px;
   width: 40px;
   color: ${({ selected }) => (selected ? colors.secondary : colors.textBlack)};
   font-weight: ${({ selected }) => (selected ? "700" : "normal")};
+
+        &:hover {
+    cursor: pointer;
 `;
 
 export const QuantityInput = styled.input`
@@ -70,9 +79,14 @@ export const SubmitButton = styled.button`
   padding-left: 0.5em;
   padding-right: 0.5em;
   margin-top: 2em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #e0e0e0;
+  }
 `;
 
 export const ShoppingCartIcon = styled(FaShoppingCart)`
   margin-right: 16px;
-  color: ${colors.textBlack}
+  color: ${colors.textBlack};
 `;

@@ -9,7 +9,7 @@ import { WrapContent } from "../ReusedComponents/WrapContent";
 const FAQ = () => {
   return (
     <>
-      <FAQContainer isBlack={!true} isPrimary={!true} id="doubts">
+      <FAQContainer  id="doubts">
         <WrapContent>
         <Section1>
           <FAQH1>Dúvidas</FAQH1>

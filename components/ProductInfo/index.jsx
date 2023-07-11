@@ -189,6 +189,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
           </>
         )}
 
+    
         <SubmitButton type="submit" id="submit">
           <ShoppingCartIcon />
           Adicionar ao carrinho

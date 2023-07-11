@@ -6,7 +6,16 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import Cart from "../Cart";
 import PaymentOptions from "../PaymentOptions";
-import { BodyContainer, Header, Link, ShopcartContainer, ProductContainer, PaymentContainer, ShopcartWrapper, Container } from "./WrapElements.jsx";
+import {
+  BodyContainer,
+  Header,
+  Link,
+  ShopcartContainer,
+  ProductContainer,
+  PaymentContainer,
+  ShopcartWrapper,
+  Container,
+} from "./WrapElements.jsx";
 import { WrapContent } from "../../components/ReusedComponents/WrapContent";
 import { Button } from "@mui/material";
 
@@ -26,7 +35,9 @@ const WrapShopCart = () => {
 
       const cartProducts = userData.cart.map(async (item) => {
         const productName = item.product.name;
-        const productResponse = await axios.get(`http://localhost:5000/products/getProductByName/${productName}`);
+        const productResponse = await axios.get(
+          `http://localhost:5000/products/getProductByName/${productName}`
+        );
         const productData = productResponse.data;
         const productImage = productData.images[0];
         return {
@@ -67,34 +78,22 @@ const WrapShopCart = () => {
       Quantities: quantities,
     });
   };
+  const handleSubmission = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt.decode(token);
+      const userId = decodedToken.id;
 
-  const handleSubmission = async (formData) => {
-    if (!userData) {
-      return;
+      await axios.patch(`http://localhost:5000/users/${userId}/cart/finalize`);
+
+      // Lógica adicional após finalizar o carrinho
+
+      alert("Carrinho finalizado com sucesso!");
+      window.location.reload()
+    } catch (error) {
+      console.error("Erro ao finalizar o carrinho:", error);
     }
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const userId = userData._id; // Atualize para obter corretamente o ID do usuário
-  
-    const updatedUserData = {
-      cart: [],
-    };
-  
-    axios
-      .patch(`http://localhost:5000/users/edit/${userId}`, updatedUserData, config)
-      .then((response) => {
-        console.log(response.data);
-        alert("Compra Finalizada"); // Adicione um alerta para indicar que a compra foi finalizada
-      })
-      .catch((error) => {
-        console.error("Erro ao atualizar o usuário:", error);
-      });
   };
-  
 
   return (
     <>

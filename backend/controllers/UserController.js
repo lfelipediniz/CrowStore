@@ -237,9 +237,12 @@ class UserController {
     }
   }
 
-  static async finalizeCart(req, res) { 
+
+  static async addProductToShopping(req, res) {
     try {
       const userId = req.params.id;
+      const { name, price, color, size, quantity, remove } = req.body;
+
       const user = await User.findById(userId);
 
       if (!user) {
@@ -248,16 +251,56 @@ class UserController {
           .json({ error: `Não foi encontrado um usuário de id ${userId}` });
       }
 
-      // Move items from cart to shopping
-      user.shopping.push(...user.cart);
-      user.cart = [];
+      const product = {
+        name,
+        price,
+        color,
+        size,
+        quantity,
+        remove
+      };
+
+      const purchase = {
+        product,
+      };
+
+      user.shopping.push(purchase);
 
       await user.save();
 
-      res.json({ message: "Compra finalizada com sucesso" });
+      res.json({ message: "Produto adicionado ao pedidos com sucesso" });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Falha ao finalizar a compra" });
+      res
+        .status(500)
+        .json({ error: "Falha ao adicionar o produto ao carrinho" });
+    }
+  }
+
+  static async finalizeCart(req, res) {
+    try {
+      const userId = req.params.id;
+  
+      const user = await User.findById(userId);
+  
+      if (!user) {
+        return res
+          .status(404)
+          .json({ error: `Não foi encontrado um usuário de id ${userId}` });
+      }
+  
+      // Transfer all products from cart to shopping list
+      user.shopping.push(...user.cart);
+  
+      // Clear the cart
+      user.cart = [];
+  
+      await user.save();
+  
+      res.json({ message: "Carrinho finalizado com sucesso" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Falha ao finalizar o carrinho" });
     }
   }
 }

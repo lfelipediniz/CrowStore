@@ -12,7 +12,7 @@ router.get('/checkuser', UserController.checkUser);
 router.get('/:id', UserController.getUserById);
 router.patch('/edit/:id', verifyToken, UserController.editUser);
 router.post('/:id/cart', UserController.addProductToCart);
-router.post('/:id/shopping', UserController.addProductToShopping);
-router.patch('/:id/cart/finalize', UserController.finalizeCart); // Nova rota para finalizar o carrinho
+router.patch('/:id/cart/finalize', UserController.finalizeCart);
+router.get('/printShops', UserController.printShops); // Rota para imprimir os produtos das lojas
 
 module.exports = router;

@@ -130,21 +130,40 @@ const WrapShopCart = () => {
       for (let i = 0; i < userData.cart.length; i++) {
         const item = userData.cart[i];
         const modelIndex = item.modelIndex;
-        const newQuantity = item.quantity;
-  
+        const modelIndexx = item.product.modelIndex;
+        const newQuantity = item.product.quantity;
+        
         console.log("Atualizando item:", item); // Verificar o item atual antes da atualização
   
         const productId = await getProductIdByModelIndex(modelIndex); // Obter o ID do produto com base no índice do modelo
+        console.log(modelIndexx)
+        console.log(newQuantity)
         if (productId) {
-          await axios.patch(
-            `http://localhost:5000/products/updateProductModel/${productId}`,
-            {
-              modelIndex,
-              newQuantity,
-            }
-          );
+
+          const Newproduto = {
+            productId:  productId,
+            modelIndex: modelIndexx,
+            newQuantity: newQuantity,
+          };
+          
+          return fetch("http://localhost:5000/products/updateProductModel/", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(Newproduto),
+        })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Erro ao atualizar produto");
         }
-      }
+      });
+  };
+   
+  }
+
   
       await axios.patch(`http://localhost:5000/users/${userId}/cart/finalize`);
   

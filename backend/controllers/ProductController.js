@@ -567,7 +567,8 @@ module.exports = class ProductController {
       }
   
       const model = product.AvailableModels[modelIndex];
-      model.quantity = newQuantity;
+      model.quantity = newQuantity
+      console.log(model);
   
       await product.save();
   
@@ -579,6 +580,7 @@ module.exports = class ProductController {
         .status(500)
         .json({
           message: "Não foi possível atualizar o modelo do produto",
+          
           error: error.message,
         });
     }

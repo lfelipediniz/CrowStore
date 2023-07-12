@@ -15,7 +15,7 @@ router.patch('/setImages/:productId', ProductController.setImages)
 router.patch('/updateProduct/:productId', ProductController.updateProduct)
 router.post('/addModel', ProductController.addModel)
 router.post('/addProduct', ProductController.addProduct)
-router.patch('/updateProductModel/:productId', ProductController.updateProductModel);
+router.patch('/updateProductModel', ProductController.updateProductModel);
 
 
 

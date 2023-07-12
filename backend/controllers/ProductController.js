@@ -4,7 +4,7 @@ const { upload } = require('../imguploadconfig/multer.js');
 
 module.exports = class ProductController {
     static async addProduct(req, res) {
-        const { name, tags, gender, price } = req.body;
+        const { name, tags, gender, price, images } = req.body;
 
     try {
       if (!name) {
@@ -38,6 +38,7 @@ module.exports = class ProductController {
                 tags,
                 gender,
                 price,
+                images,
                 AvailableModels: []
             });
 

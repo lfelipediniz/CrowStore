@@ -567,7 +567,7 @@ module.exports = class ProductController {
       }
   
       const model = product.AvailableModels[modelIndex];
-      model.quantity = newQuantity
+      model.quantity -= newQuantity
       console.log(model);
   
       await product.save();

@@ -23,7 +23,7 @@ const ProductDescription = ({ product }) => {
       color: item.color,
       size: item.size,
       quantity: item.quantity,
-      remove: false
+      modelIndex: item.modelIndex, // Acessa o índice selecionado
     };
 
     // Retrieve the token from local storage

@@ -23,8 +23,8 @@ const Purchase = new Schema({
       type: Number,
       required: true
     },
-    remove:{
-      type: Boolean
+    modelIndex:{
+      type: Number
     }
   },
 }, { timestamps: true });

@@ -12,9 +12,12 @@ router.get('/getProductByName/:name', ProductController.getProductByName)
 router.get('/getProducts', ProductController.getProducts)
 router.patch('/dropModels/:productId', ProductController.dropModels)
 router.patch('/setImages/:productId', ProductController.setImages)
-router.patch('/updateModel/:modelId', ProductController.updateModel)
 router.patch('/updateProduct/:productId', ProductController.updateProduct)
 router.post('/addModel', ProductController.addModel)
 router.post('/addProduct', ProductController.addProduct)
+router.patch('/updateProductModel/:productId', ProductController.updateProductModel);
+
+
+
 
 module.exports = router

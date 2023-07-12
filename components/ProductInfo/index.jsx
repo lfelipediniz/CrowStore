@@ -17,15 +17,15 @@ const ProductInfo = ({ product, onAddToCart }) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0); // Novo estado para armazenar o índice selecionado
 
-  const handleColorSelect = (color) => {
-    setSelectedColor(color);
-    const maxQuantity = product.AvailableModels.find(
-      (model) => model.color === color
-    )?.quantity;
+  const handleColorSelect = (model, index) => { // Recebe o modelo e o índice como argumentos
+    setSelectedColor(model.color);
+    setSelectedIndex(index); // Atualiza o estado com o índice selecionado
+    const maxQuantity = model.quantity;
     setQuantity((prevQuantity) => Math.min(prevQuantity, maxQuantity || 1));
     const stock = product.AvailableModels.find(
-      (model) => model.color === color && model.size === selectedSize
+      (model) => model.color === model.color && model.size === selectedSize
     )?.quantity;
     setStock(stock || 0);
   };
@@ -65,6 +65,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
       color: selectedColor,
       size: selectedSize,
       quantity: parseInt(quantity),
+      modelIndex: selectedIndex, // Adiciona o índice selecionado como um novo atributo
     };
     onAddToCart(cartItem);
   };
@@ -87,7 +88,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
     if (product.AvailableModels.length > 0) {
       const firstColor = product.AvailableModels[0].color;
-      handleColorSelect(firstColor);
+      handleColorSelect(product.AvailableModels[0], 0); // Seleciona o primeiro modelo
     }
   }, [product]);
 
@@ -148,24 +149,23 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
         <Subtitle>Cor</Subtitle>
         <List>
-          {product.AvailableModels.map(
-            (model) =>
-              model.size === selectedSize && (
-                <ListItem key={model.color}>
-                  <ColorSample
-                    type="button"
-                    className={`sample ${
-                      selectedColor === model.color ? "selected" : ""
-                    }`}
-                    id={`color${model.color}`}
-                    value={model.color}
-                    color={model.color}
-                    selected={selectedColor === model.color}
-                    onClick={() => handleColorSelect(model.color)}
-                  />
-                </ListItem>
-              )
-          )}
+          {product.AvailableModels.map((model, index) => (
+            model.size === selectedSize && (
+              <ListItem key={model.color}>
+                <ColorSample
+                  type="button"
+                  className={`sample ${
+                    selectedIndex === index ? "selected" : ""
+                  }`}
+                  id={`color${model.color}`}
+                  value={model.color}
+                  color={model.color}
+                  selected={selectedIndex === index} // Usa selectedIndex para determinar se o botão está selecionado
+                  onClick={() => handleColorSelect(model, index)} // Passa o modelo e o índice como argumentos
+                />
+              </ListItem>
+            )
+          ))}
         </List>
 
         <Subtitle>Quantidade</Subtitle>
@@ -189,7 +189,6 @@ const ProductInfo = ({ product, onAddToCart }) => {
           </>
         )}
 
-    
         <SubmitButton type="submit" id="submit">
           <ShoppingCartIcon />
           Adicionar ao carrinho

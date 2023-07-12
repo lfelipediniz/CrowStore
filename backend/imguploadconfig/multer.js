@@ -3,10 +3,10 @@ const path = require("path")
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, "uploads/")
+        cb(null, "../public/CrowStore/imgs")
     },
     filename: function(req, file, cb){
-        cb(null, Date.now() + path.extname(file.originalname));
+        cb(null, req.body.name + path.extname(file.originalname));
     },
 });
 

@@ -31,8 +31,14 @@ const Admin = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [componentesGerados, setComponentesGerados] = useState(null);
 
   useEffect(() => {
+
+    continuarExecucao().then((componentes) => {
+      setComponentesGerados(componentes);
+    });
+
     const handleResize = () => {
       if (window.innerWidth < 1115 && editingMode) {
         setEditingMode(false);
@@ -141,6 +147,62 @@ const Admin = () => {
     console.log("Remover produto:", product);
   };
 
+
+  const getProducts = (product) => {
+    return fetch("http://localhost:5000/products/getProducts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Erro ao obter produtos");
+        }
+      });
+  };
+  let DadosProdutos;
+  let quantidadeObjetos;
+
+
+  const promise = getProducts();
+  
+
+  promise
+    .then((data) => {
+      DadosProdutos = data;
+      quantidadeObjetos = Array.isArray(data) ? data.length : 0;
+      continuarExecucao();
+      })
+
+
+
+      const continuarExecucao = () => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+    
+            const componentes = [];
+            for (let i = 14; i < quantidadeObjetos; i++) {
+              const produto = DadosProdutos[i];
+              
+              componentes.push(
+                <ProductCard
+                  key={i}
+                  img={`/CrowStore/imgs/${produto.images[0]}`}
+                  productName={produto.name}
+                  price={produto.price}
+                />
+              );
+            }
+    
+            resolve(componentes); 
+          }, 1000); 
+        });
+      };
+      
+
   const handleLogout = () => {
     // Limpar o token do localStorage
     localStorage.removeItem("token");
@@ -213,6 +275,7 @@ const Admin = () => {
         </SearchBarContainer>
         <Content>
           <ProductContainer>
+          {componentesGerados}
             {searchFilteredProducts.map((product, index) => (
               <ProductCardEdit
                 key={index}
@@ -224,6 +287,9 @@ const Admin = () => {
                   productName={product.productName}
                   price={product.price}
                 />
+
+
+                
                 {editingMode && (
                   <div className="edit-icon">
                     <FaEdit />

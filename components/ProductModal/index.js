@@ -16,6 +16,7 @@ import {
   AvailableSizes,
   ChangeContainer,
 } from "./ProductModalElements";
+
 import {
   Modal,
   Box,
@@ -31,7 +32,6 @@ import {
 } from "@mui/material";
 import { FaPhotoVideo, FaTrash } from "react-icons/fa";
 import { WrapContent } from "../ReusedComponents/WrapContent";
-
 import availableColors from "../../fakedata/adminContent/colors.json";
 import availableSizes from "../../fakedata/adminContent/sizes.json";
 
@@ -46,6 +46,8 @@ const ProductModal = ({
   setSelectedCategory,
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageFile, setImageFile] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [isColorModalOpen, setColorModalOpen] = useState(false);
   const [selectedColors, setSelectedColors] = useState([]);
   const [isSizeModalOpen, setSizeModalOpen] = useState(false);
@@ -55,11 +57,15 @@ const ProductModal = ({
   // Estado para armazenar a descrição do produto
 
   const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.includes("image")) {
-      setSelectedImage(URL.createObjectURL(file));
+    const imageFile = event.target.files[0];
+    setImageFile(imageFile)
+
+    if (imageFile && imageFile.type.includes("image")) {
+      const imageUrl = URL.createObjectURL(imageFile);
+      setImageUrl(imageUrl) 
     }
   };
+
 
   const handleSave = () => {
     
@@ -70,13 +76,33 @@ const ProductModal = ({
       selectedSizes: selectedSizes,
       description: selectedDescription, // Incluir a descrição atualizada no objeto do produto
     };
-    const Newproduto = {
-      name:  selectedProductData.productName,
-      tags: selectedDescription,
-      gender: selectedCategory,
-      price: selectedPrice,
-    };
-    fetch("http://localhost:5000/products/addProduct", {
+            var Imgfile = new FormData();
+            console.log(selectedProductData.productName);
+
+            Imgfile.append('name', selectedProductData.productName)
+            Imgfile.append('file', imageFile, `user.png`)
+            
+        
+               fetch("http://localhost:5000/imgs", {
+                mode: 'no-cors',
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: Imgfile,
+              })
+                .then((response) => {
+        });
+
+        const Newproduto = {
+          name:  selectedProductData.productName,
+          tags: selectedDescription,
+          gender: "Masculino",
+          price: selectedPrice,
+          images: `${selectedProductData.productName}.png`
+        };
+
+        fetch("http://localhost:5000/products/addProduct", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -98,7 +124,11 @@ const ProductModal = ({
                 console.error("Erro:", error);
             });
 
+
     onSave(updatedProduct);
+    window.location.reload();
+
+
   };
 
   const handleRemove = () => {

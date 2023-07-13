@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Filter, Title, TagList, Tag, WebButton, MobileFilter, ContainerModal} from "./FilterTagsElements";
-import tagsData from "./tagsData.json";
+import { Filter, Title, TagList, Tag, WebButton, MobileFilter, ContainerModal } from "./FilterTagsElements";
 import { colors } from "../../styles/colors";
-import {
-  Modal,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Checkbox,
-  Button,
-} from "@mui/material";
-
+import { Modal, List, ListItem, ListItemIcon, ListItemText, Checkbox, Button } from "@mui/material";
+import axios from "axios";
 
 function FilterTags(props) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     props.onChange(selectedTags);
   }, [selectedTags]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/categories/ShowCategories");
+        const categoryNames = response.data.map((category) => category.name);
+        setCategories(["Masculino", "Feminino", ...categoryNames]);
+      } catch (error) {
+        console.error("Erro ao obter categorias:", error);
+        setCategories([]);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleTagClick = (value) => {
     if (selectedTags.includes(value)) {
@@ -50,14 +57,14 @@ function FilterTags(props) {
       </MobileFilter>
       <Title>Filtros:</Title>
       <TagList>
-        {tagsData.filters.map((tag, index) => (
+        {categories.map((category, index) => (
           <Tag key={index}>
             <WebButton
               type="WebButton"
-              className={`option ${selectedTags.includes(tag.value) ? "selected" : ""}`}
-              onClick={() => handleTagClick(tag.value)}
+              className={`option ${selectedTags.includes(category) ? "selected" : ""}`}
+              onClick={() => handleTagClick(category)}
             >
-              {tag.label}
+              {category}
             </WebButton>
           </Tag>
         ))}
@@ -74,8 +81,8 @@ function FilterTags(props) {
       >
         <ContainerModal>
           <List>
-            {tagsData.filters.map((tag, index) => (
-              <ListItem key={index} button onClick={() => handleCheckboxChange(tag.value)}>
+            {categories.map((category, index) => (
+              <ListItem key={index} button onClick={() => handleCheckboxChange(category)}>
                 <ListItemIcon
                   sx={{
                     display: "flex",
@@ -84,7 +91,7 @@ function FilterTags(props) {
                 >
                   <Checkbox
                     edge="start"
-                    checked={selectedTags.includes(tag.value)}
+                    checked={selectedTags.includes(category)}
                     tabIndex={-1}
                     disableRipple
                     sx={{
@@ -95,7 +102,7 @@ function FilterTags(props) {
                     }}
                   />
                 </ListItemIcon>
-                <ListItemText primary={tag.label} />
+                <ListItemText primary={category} />
               </ListItem>
             ))}
           </List>

@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 import SearchBar from "../SearchBar";
 import FilterTags from "../FilterTags";
-import {
-  ProductContainer,
-  ScrollableContainer,
-} from "../User/UserElements";
+import { ProductContainer, ScrollableContainer } from "../User/UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import { Subtitle } from "./WrapElements";
+import { colors } from "../../styles/colors";
 
 const WrapSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const scrollableContainerRef = useRef(null);
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -60,18 +59,45 @@ const WrapSearch = () => {
     setFilteredItems(filteredItemsWithFilters);
   }, [filters]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const subtitle = document.getElementById("subtitle");
+
+      if (subtitle) {
+        const scrollY = scrollableContainerRef.current.scrollTop;
+
+        if (scrollY > 0) {
+          subtitle.classList.add("hidden");
+        } else {
+          subtitle.classList.remove("hidden");
+        }
+      }
+    };
+
+    scrollableContainerRef.current.addEventListener("scroll", handleScroll);
+    return () => {
+      scrollableContainerRef.current.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+    };
+  }, []);
+
   return (
-    <>
+    <div style={{ backgroundColor: colors.primary }}>
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
       <SearchBar onChange={modifySearchTerm} />
       <FilterTags onChange={modifyFilters} />
       {searchTerm && (
-        <Subtitle>
+        <Subtitle id="subtitle">
           {filteredItems.length} resultados para "{searchTerm}"
         </Subtitle>
       )}
-      <ScrollableContainer style={{ marginLeft: 0 }}>
+      <ScrollableContainer
+        style={{ marginLeft: 0 }}
+        ref={scrollableContainerRef}
+      >
         <ProductContainer>
           {filteredItems.map((product, index) => (
             <ProductCard
@@ -84,7 +110,7 @@ const WrapSearch = () => {
         </ProductContainer>
       </ScrollableContainer>
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -114,6 +114,7 @@ padding-top: 50px;
   overflow-y: auto;
   max-height: calc(100vh);
   width: 100%;
+  background-color: ${colors.primary};
 
   display: flex;
   justify-content: center; /* Centralizar os produtos */

@@ -36,14 +36,12 @@ class CategoryController {
     try {
       const { categoryName } = req.params;
 
-      // Verificar se a categoria existe
-      const category = await Category.findOne({ name: categoryName });
-      if (!category) {
+      // Excluir a categoria
+      const result = await Category.deleteOne({ name: categoryName });
+
+      if (result.deletedCount === 0) {
         return res.status(404).json({ error: "Categoria não encontrada" });
       }
-
-      // Excluir a categoria
-      await category.remove();
 
       res.json({ message: "Categoria excluída com sucesso" });
     } catch (error) {

@@ -91,7 +91,7 @@ const Admin = () => {
     }
     try {
       await axios.delete(
-        `http://localhost:5000/categories/${encodeURIComponent(
+        `http://localhost:5000/categories/categories/${encodeURIComponent(
           categoryToRemove
         )}`
       );

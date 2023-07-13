@@ -58,7 +58,6 @@ const WrapSearch = () => {
     });
     setFilteredItems(filteredItemsWithFilters);
   }, [filters]);
-
   useEffect(() => {
     const handleScroll = () => {
       const subtitle = document.getElementById("subtitle");
@@ -74,12 +73,15 @@ const WrapSearch = () => {
       }
     };
 
-    scrollableContainerRef.current.addEventListener("scroll", handleScroll);
+    const scrollableContainer = scrollableContainerRef.current;
+    if (scrollableContainer) {
+      scrollableContainer.addEventListener("scroll", handleScroll);
+    }
+
     return () => {
-      scrollableContainerRef.current.removeEventListener(
-        "scroll",
-        handleScroll
-      );
+      if (scrollableContainer) {
+        scrollableContainer.removeEventListener("scroll", handleScroll);
+      }
     };
   }, []);
 

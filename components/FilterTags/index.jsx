@@ -4,10 +4,6 @@ import tagsData from "./tagsData.json";
 import { colors } from "../../styles/colors";
 import {
   Modal,
-  Box,
-  TextField,
-  MenuItem,
-  InputAdornment,
   List,
   ListItem,
   ListItemIcon,

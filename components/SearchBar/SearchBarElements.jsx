@@ -16,6 +16,7 @@ box-sizing: border-box;
 display: flex;
 justify-content: center;
 align-items: center;
+background-color: ${colors.primary};
 
 &:focus {
     border-bottom: 1px solid #E71D36;

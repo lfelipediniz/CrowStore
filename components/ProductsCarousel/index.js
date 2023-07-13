@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   ButtonArrow,
   Container,
@@ -10,6 +10,8 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 function ProductCarousel({ data, name, selectedGender }) {
   const [windowWidth, setWindowWidth] = useState(0);
+  const [currentProduct, setCurrentProduct] = useState(0);
+  const productCarouselRef = useRef();
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,24 +27,32 @@ function ProductCarousel({ data, name, selectedGender }) {
     };
   }, []);
 
+  useEffect(() => {
+    setCurrentProduct(0);
+    productCarouselRef.current?.scrollTo(0, 0);
+  }, [selectedGender]);
+
   const productsPerPage = Math.min(5, Math.floor(windowWidth / 300));
-  const totalProducts = data.length;
+  const filteredData = selectedGender !== "all" ? data.filter(
+    (product) => product.gender.toLowerCase() === selectedGender
+  ) : data;
+  const totalProducts = filteredData.length;
   const totalPages = Math.ceil(totalProducts / productsPerPage);
 
-  const [currentProduct, setCurrentProduct] = React.useState(0);
-
   const handleNextProduct = () => {
-    setCurrentProduct(
-      (prevIndex) => (prevIndex + productsPerPage) % totalProducts
-    );
+    const nextProduct = currentProduct + productsPerPage;
+    if (nextProduct < totalProducts) {
+      setCurrentProduct(nextProduct);
+      productCarouselRef.current?.scrollTo(nextProduct * 300, 0);
+    }
   };
 
   const handlePrevProduct = () => {
-    setCurrentProduct((prevIndex) =>
-      prevIndex === 0
-        ? (totalProducts - productsPerPage) % totalProducts
-        : (prevIndex - productsPerPage + totalProducts) % totalProducts
-    );
+    const prevProduct = currentProduct - productsPerPage;
+    if (prevProduct >= 0) {
+      setCurrentProduct(prevProduct);
+      productCarouselRef.current?.scrollTo(prevProduct * 300, 0);
+    }
   };
 
   return (
@@ -50,13 +60,8 @@ function ProductCarousel({ data, name, selectedGender }) {
       <Container>
         <Subtitle>{name}</Subtitle>
       </Container>
-      <Container>
-        {data
-          .filter(
-            (product) =>
-              product.gender.toLowerCase() === selectedGender ||
-              selectedGender === "all"
-          )
+      <Container ref={productCarouselRef}>
+        {filteredData
           .slice(currentProduct, currentProduct + productsPerPage)
           .map((product, index) => (
             <ProductCard
@@ -68,12 +73,16 @@ function ProductCarousel({ data, name, selectedGender }) {
           ))}
       </Container>
       <ProductArrows>
-        <ButtonArrow onClick={handlePrevProduct}>
-          <FaAngleLeft />
-        </ButtonArrow>
-        <ButtonArrow onClick={handleNextProduct}>
-          <FaAngleRight />
-        </ButtonArrow>
+        {currentProduct > 0 && (
+          <ButtonArrow onClick={handlePrevProduct}>
+            <FaAngleLeft />
+          </ButtonArrow>
+        )}
+        {currentProduct + productsPerPage < totalProducts && (
+          <ButtonArrow onClick={handleNextProduct}>
+            <FaAngleRight />
+          </ButtonArrow>
+        )}
       </ProductArrows>
     </>
   );

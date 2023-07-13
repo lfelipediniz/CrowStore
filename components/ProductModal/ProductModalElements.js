@@ -194,7 +194,7 @@ background-color: ${colors.ctaBlack};
 export const ColorsContainer = styled.div`
 
 background-color: ${colors.secondary};
-height: 565px;
+height: 430px;
 width: 500px;
 border-radius: 10px;
 
@@ -219,9 +219,11 @@ padding: 20px 10px 0px 10px;
 `
 
 export const AvailableColors = styled.div`
-  height: 220px;
   overflow: auto;
   color: ${colors.primary};
+  padding: 20px;
+  margin-top: 20px;
+
 
   & > div {
     margin-bottom: 20px;

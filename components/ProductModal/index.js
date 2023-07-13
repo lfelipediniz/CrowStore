@@ -32,8 +32,7 @@ import {
 } from "@mui/material";
 import { FaPhotoVideo, FaTrash } from "react-icons/fa";
 import { WrapContent } from "../ReusedComponents/WrapContent";
-import availableColors from "../../fakedata/adminContent/colors.json";
-import availableSizes from "../../fakedata/adminContent/sizes.json";
+import { colors } from "../../styles/colors";
 
 const ProductModal = ({
   open,
@@ -264,6 +263,8 @@ const ProductModal = ({
     return `.${extension}`;
   };
 
+  const [selectedColor, setSelectedColor] = useState(""); // Estado para armazenar a cor selecionada
+
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -349,22 +350,6 @@ const ProductModal = ({
                 }
               />
               <TextField
-                label="Estoque"
-                variant="outlined"
-                sx={{ marginBottom: "15px" }}
-                InputProps={{
-                  inputProps: { min: 0 },
-                }}
-                type="number"
-                value={selectedProductData.stock}
-                onChange={(e) =>
-                  setSelectedProductData({
-                    ...selectedProductData,
-                    stock: e.target.value,
-                  })
-                }
-              />
-              <TextField
                 select
                 label="Gênero"
                 variant="outlined"
@@ -402,7 +387,7 @@ const ProductModal = ({
                 onClick={() => setColorModalOpen(true)}
                 sx={{ marginBottom: "25px" }}
               >
-                Cores Disponíveis
+                Available Models
               </Button>
 
               <Modal
@@ -418,72 +403,23 @@ const ProductModal = ({
                   }}
                 >
                   <ColorsContainer>
-                    <ColorsTitle>Cores Disponíveis</ColorsTitle>
-                    <AvailableColors>
-                      <List sx={{ width: "300px" }}>
-                        <ListItem
-                          button
-                          onClick={handleColorSelectAll}
-                          key="all"
-                        >
-                          <ListItemIcon>
-                            <Checkbox
-                              checked={
-                                selectedColors.length === availableColors.length
-                              }
-                              indeterminate={
-                                selectedColors.length > 0 &&
-                                selectedColors.length < availableColors.length
-                              }
-                              disableRipple
-                            />
-                          </ListItemIcon>
-                          <ListItemText primary="Selecionar Todos" />
-                        </ListItem>
-                        {availableColors.map((color) => (
-                          <ListItem
-                            button
-                            onClick={handleColorToggle(color)}
-                            key={color}
-                          >
-                            <ListItemIcon>
-                              <Checkbox
-                                checked={isColorSelected(color)}
-                                disableRipple
-                              />
-                            </ListItemIcon>
-                            <ListItemText primary={color} />
-                          </ListItem>
-                        ))}
-                      </List>
-                    </AvailableColors>
-                    <ColorsTitle>Cores Selecionadas</ColorsTitle>
-                    <AvailableColors>
-                      <WrapContent>
-                        {selectedColors.map((color) => (
-                          <div key={color} style={{ marginTop: "15px" }}>
-                            {color}
-                          </div>
-                        ))}
-                      </WrapContent>
-                    </AvailableColors>
-                    <ColorsButton>
-                      <SaveButton variant="contained" color="primary">
-                        Salvar
-                      </SaveButton>
-                    </ColorsButton>
+                    <ColorsTitle>Seus Modelos</ColorsTitle>
+                    <br />
+                    <center>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => setSizeModalOpen(true)}
+                        sx={{ marginBottom: "25px" }}
+                      >
+                        Adicionar novo Modelo
+                      </Button>
+                    </center>
+
+                    {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos o smodelos existentes */}
                   </ColorsContainer>
                 </Box>
               </Modal>
-
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setSizeModalOpen(true)}
-                sx={{ marginBottom: "25px" }}
-              >
-                Tamanhos Disponíveis
-              </Button>
 
               <Button
                 variant="contained"
@@ -533,60 +469,233 @@ const ProductModal = ({
                   }}
                 >
                   <ColorsContainer>
-                    <ColorsTitle>Tamanhos Disponíveis</ColorsTitle>
+                    <center>
+                      <br />
+                      <ColorsTitle>
+                        Adicionando opção para o cliente
+                      </ColorsTitle>
+                    </center>
                     <AvailableColors>
-                      <List sx={{ width: "300px" }}>
-                        <ListItem
-                          button
-                          onClick={handleSizeSelectAll}
-                          key="all"
+                      <form>
+                        <TextField
+                          select
+                          label={
+                            <p style={{ color: colors.primary }}>Tamanho</p>
+                          }
+                          variant="outlined"
+                          sx={{
+                            color: colors.primary,
+                            width: "100%",
+                            "& .MuiInputBase-root": {
+                              color: "#fff", // Cor do texto
+                            },
+                            "& .MuiSelect-icon": {
+                              color: "#fff", // Cor da seta
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "& fieldset": {
+                                borderColor: "#fff", // Cor do contorno
+                              },
+                              "&:hover fieldset": {
+                                borderColor: "#fff", // Cor do contorno ao passar o mouse
+                              },
+                              "&.Mui-focused fieldset": {
+                                borderColor: "#fff", // Cor do contorno quando o campo está em foco
+                              },
+                            },
+                          }}
                         >
-                          <ListItemIcon>
-                            <Checkbox
-                              checked={
-                                selectedSizes.length === availableSizes.length
-                              }
-                              indeterminate={
-                                selectedSizes.length > 0 &&
-                                selectedSizes.length < availableSizes.length
-                              }
-                              disableRipple
-                            />
-                          </ListItemIcon>
-                          <ListItemText primary="Selecionar Todos" />
-                        </ListItem>
-                        {availableSizes.map((size) => (
-                          <ListItem
-                            button
-                            onClick={handleSizeToggle(size)}
-                            key={size}
-                          >
-                            <ListItemIcon>
-                              <Checkbox
-                                checked={isSizeSelected(size)}
-                                disableRipple
-                              />
-                            </ListItemIcon>
-                            <ListItemText primary={size} />
-                          </ListItem>
-                        ))}
-                      </List>
+                          <MenuItem value="PP">PP</MenuItem>
+                          <MenuItem value="P">P</MenuItem>
+                          <MenuItem value="M">M</MenuItem>
+                          <MenuItem value="G">G</MenuItem>
+                          <MenuItem value="XG">XG</MenuItem>
+                        </TextField>
+                        <br />
+                        <br />
+                        <TextField
+                          select
+                          label={
+                            <p style={{ color: colors.primary }}>
+                              Selecione uma cor
+                            </p>
+                          }
+                          variant="outlined"
+                          sx={{
+                            color: colors.primary,
+                            width: "100%",
+                            "& .MuiInputBase-root": {
+                              color: "#fff", // cor do texto
+                              backgroundColor: selectedColor, // fundo com a cor selecionada
+                            },
+                            "& .MuiSelect-icon": {
+                              color: "#fff", // Cor da seta
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "& fieldset": {
+                                borderColor: "#fff", // cor do contorno
+                              },
+                              "&:hover fieldset": {
+                                borderColor: "#fff", // cor do contorno ao passar o mouse
+                              },
+                              "&.Mui-focused fieldset": {
+                                borderColor: "#fff", // cor do contorno quando o campo está em foco
+                              },
+                            },
+                          }}
+                          value={selectedColor} // Define o valor selecionado no TextField
+                          onChange={(e) => setSelectedColor(e.target.value)} // Atualiza o estado quando o valor muda
+                        >
+                          <MenuItem value="MidnightBlue">
+                            Midnight Blue
+                          </MenuItem>
+                          <MenuItem value="DarkSlateGray">
+                            Dark Slate Gray
+                          </MenuItem>
+                          <MenuItem value="Goldenrod">Goldenrod</MenuItem>
+                          <MenuItem value="Light Sky Blue">
+                            Light Sky Blue
+                          </MenuItem>
+                          <MenuItem value="Light Salmon">Light Salmon</MenuItem>
+                          <MenuItem value="Lavender">Lavender</MenuItem>
+                          <MenuItem value="Dark Olive Green">
+                            Dark Olive Green
+                          </MenuItem>
+                          <MenuItem value="Tomato">Tomato</MenuItem>
+                          <MenuItem value="Steel Blue">Steel Blue</MenuItem>
+                          <MenuItem value="Pale Violet Red">
+                            Pale Violet Red
+                          </MenuItem>
+                          <MenuItem value="Medium Sea Green">
+                            Medium Sea Green
+                          </MenuItem>
+                          <MenuItem value="Chocolate">Chocolate</MenuItem>
+                          <MenuItem value="Medium Purple">
+                            Medium Purple
+                          </MenuItem>
+                          <MenuItem value="Light Slate Gray">
+                            Light Slate Gray
+                          </MenuItem>
+                          <MenuItem value="Light Coral">Light Coral</MenuItem>
+                          <MenuItem value="Dark Sea Green">
+                            Dark Sea Green
+                          </MenuItem>
+                          <MenuItem value="Fire Brick">Fire Brick</MenuItem>
+                          <MenuItem value="Cornflower Blue">
+                            Cornflower Blue
+                          </MenuItem>
+                          <MenuItem value="Dim Gray">Dim Gray</MenuItem>
+                          <MenuItem value="Light Pink">Light Pink</MenuItem>
+                          <MenuItem value="Medium Aquamarine">
+                            Medium Aquamarine
+                          </MenuItem>
+                          <MenuItem value="Sienna">Sienna</MenuItem>
+                          <MenuItem value="Blue Violet">Blue Violet</MenuItem>
+                          <MenuItem value="Gainsboro">Gainsboro</MenuItem>
+                          <MenuItem value="Misty Rose">Misty Rose</MenuItem>
+                          <MenuItem value="Light Green">Light Green</MenuItem>
+                          <MenuItem value="Dark Goldenrod">
+                            Dark Goldenrod
+                          </MenuItem>
+                          <MenuItem value="Medium Orchid">
+                            Medium Orchid
+                          </MenuItem>
+                          <MenuItem value="Silver">Silver</MenuItem>
+                          <MenuItem value="Pale Green">Pale Green</MenuItem>
+                          <MenuItem value="Olive Drab">Olive Drab</MenuItem>
+                          <MenuItem value="Dark Orchid">Dark Orchid</MenuItem>
+                          <MenuItem value="Dark Gray">Dark Gray</MenuItem>
+                          <MenuItem value="Coral">Coral</MenuItem>
+                          <MenuItem value="Aquamarine">Aquamarine</MenuItem>
+                          <MenuItem value="Maroon">Maroon</MenuItem>
+                          <MenuItem value="Purple">Purple</MenuItem>
+                          <MenuItem value="Light Gray">Light Gray</MenuItem>
+                          <MenuItem value="Indian Red">Indian Red</MenuItem>
+                          <MenuItem value="Medium Spring Green">
+                            Medium Spring Green
+                          </MenuItem>
+                          <MenuItem value="Brown">Brown</MenuItem>
+                          <MenuItem value="Medium Slate Blue">
+                            Medium Slate Blue
+                          </MenuItem>
+                          <MenuItem value="Dark Khaki">Dark Khaki</MenuItem>
+                          <MenuItem value="Salmon">Salmon</MenuItem>
+                          <MenuItem value="Pale Turquoise">
+                            Pale Turquoise
+                          </MenuItem>
+                          <MenuItem value="Dark Red">Dark Red</MenuItem>
+                          <MenuItem value="Slate Blue">Slate Blue</MenuItem>
+                          <MenuItem value="Light Slate Grey">
+                            Light Slate Grey
+                          </MenuItem>
+                          <MenuItem value="Light Blue">Light Blue</MenuItem>
+                          <MenuItem value="Medium Turquoise">
+                            Medium Turquoise
+                          </MenuItem>
+                          <MenuItem value="Rosy Brown">Rosy Brown</MenuItem>
+                          <MenuItem value="Medium Violet Red">
+                            Medium Violet Red
+                          </MenuItem>
+                        </TextField>
+                        <br />
+                        <br />
+                        <TextField
+                          label={
+                            <p style={{ color: colors.primary }}>
+                              Quantidade no estoque
+                            </p>
+                          }
+                          variant="outlined"
+                          multiline
+                          rows={1}
+                          fullWidth
+                          onKeyPress={(event) => {
+                            const keyCode = event.keyCode || event.which;
+                            const keyValue = String.fromCharCode(keyCode);
+                            const regex = /[0-9]/;
+                            if (!regex.test(keyValue)) {
+                              event.preventDefault();
+                            }
+                          }}
+                          inputProps={{
+                            pattern: "[0-9]*",
+                            inputMode: "numeric",
+                            step: "1",
+                          }}
+                          sx={{
+                            color: colors.primary,
+                            width: "100%",
+                            "& .MuiInputBase-root": {
+                              color: "#fff", // Cor do texto
+                            },
+                            "& .MuiSelect-icon": {
+                              color: "#fff", // Cor da seta
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "& fieldset": {
+                                borderColor: "#fff", // Cor do contorno
+                              },
+                              "&:hover fieldset": {
+                                borderColor: "#fff", // Cor do contorno ao passar o mouse
+                              },
+                              "&.Mui-focused fieldset": {
+                                borderColor: "#fff", // Cor do contorno quando o campo está em foco
+                              },
+                            },
+                          }}
+                        />
+
+                        <br />
+                        <br />
+                        <br />
+                        <center>
+                          <SaveButton variant="contained" color="primary">
+                            Salvar
+                          </SaveButton>
+                        </center>
+                      </form>
                     </AvailableColors>
-                    <ColorsTitle>Tamanhos Selecionados</ColorsTitle>
-                    <AvailableColors>
-                      <WrapContent>
-                        {selectedSizes.map((size) => (
-                          <div key={size} style={{ marginTop: "15px" }}>
-                            {size}
-                          </div>
-                        ))}
-                      </WrapContent>
-                    </AvailableColors>
-                    <ColorsButton>
-                      <SaveButton variant="contained" color="primary">
-                        Salvar
-                      </SaveButton>
-                    </ColorsButton>
+                    <ColorsButton></ColorsButton>
                   </ColorsContainer>
                 </Box>
               </Modal>

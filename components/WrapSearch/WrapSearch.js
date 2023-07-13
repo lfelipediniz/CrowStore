@@ -49,15 +49,17 @@ const WrapSearch = () => {
   useEffect(() => {
     const filteredItemsWithFilters = filteredItems.filter((item) => {
       const hasAllFilters = filters.every((filter) => {
-        return (
-          item.productName &&
-          item.productName.toLowerCase().includes(filter.toLowerCase())
-        );
+        if (filter === "Masculino" || filter === "Feminino") {
+          return item.gender && item.gender.toLowerCase() === filter.toLowerCase();
+        } else {
+          return item.tags && item.tags.includes(filter);
+        }
       });
       return hasAllFilters;
     });
     setFilteredItems(filteredItemsWithFilters);
   }, [filters]);
+
   useEffect(() => {
     const handleScroll = () => {
       const subtitle = document.getElementById("subtitle");
@@ -90,7 +92,7 @@ const WrapSearch = () => {
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
       <SearchBar onChange={modifySearchTerm} />
-      <FilterTags onChange={modifyFilters} />
+      <FilterTags onChange={modifyFilters} selectedTags={filters} />
       {searchTerm && (
         <Subtitle id="subtitle">
           {filteredItems.length} resultados para "{searchTerm}"

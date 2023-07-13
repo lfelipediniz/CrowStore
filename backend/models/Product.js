@@ -36,6 +36,10 @@ const Product = mongoose.model(
         AvailableModels: {
             type: [Model],
             sparse: true
+        },
+        description: {
+            type: String,
+            required: true
         }
     }, { timestamps: true })
 );

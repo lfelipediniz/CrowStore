@@ -4,7 +4,7 @@ const { upload } = require("../imguploadconfig/multer.js");
 
 module.exports = class ProductController {
   static async addProduct(req, res) {
-    const { name, tags, gender, price, images } = req.body;
+    const { name, tags, gender, price, images, description } = req.body;
 
     try {
       if (!name) {
@@ -32,6 +32,10 @@ module.exports = class ProductController {
         throw new Error("O produto necessita ter um preço qualquer positivo");
       }
 
+      if (!description) {
+        throw new Error("O produto precisa ter uma descrição!");
+      }
+
       const product = new Product({
         _id: new mongoose.Types.ObjectId(),
         name,
@@ -39,6 +43,7 @@ module.exports = class ProductController {
         gender,
         price,
         images,
+        description,
         AvailableModels: [],
       });
 

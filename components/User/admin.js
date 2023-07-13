@@ -324,7 +324,7 @@ const Admin = () => {
                   </ProductCardEdit>
                 ))}
               </ProductContainer>
-            </ScrollableContainer>
+            </ScrollableContainer> 
           </Content>
 
           {/* Modal de adicionar/editar produto */}

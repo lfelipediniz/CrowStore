@@ -6,24 +6,21 @@ import {
   ImagePreview,
   InputInfoContainer,
   TitleModal,
-  Money,
   RemoveButton,
   SaveButton,
   ColorsContainer,
   ColorsTitle,
   AvailableColors,
   ColorsButton,
-  AvailableSizes,
   ChangeContainer,
 } from "./ProductModalElements";
 
 import { styled } from "@mui/material/styles";
-
 import IconButton from "@mui/material/IconButton";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-
-import { FaPen } from "react-icons/fa";
+import { colors } from "../../styles/colors";
+import { FaPhotoVideo, FaTrash, FaPen } from "react-icons/fa";
 
 import {
   Modal,
@@ -31,16 +28,10 @@ import {
   TextField,
   MenuItem,
   Button,
-  InputAdornment,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
-  Checkbox,
 } from "@mui/material";
-import { FaPhotoVideo, FaTrash } from "react-icons/fa";
-import { WrapContent } from "../ReusedComponents/WrapContent";
-import { colors } from "../../styles/colors";
 
 const ProductModal = ({
   open,
@@ -59,15 +50,20 @@ const ProductModal = ({
   const [selectedColors, setSelectedColors] = useState([]);
   const [isSizeModalOpen, setSizeModalOpen] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedDescription, setSelectedDescription] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState(""); // Estado para armazenar a descrição do produto
-  // Estado para armazenar a descrição do produto
+  const [dense, setDense] = React.useState(false);
 
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: colors.textBlack,
     color: colors.primary,
   }));
-  const [dense, setDense] = React.useState(false);
+
+  const [selectedGender, setSelectedGender] = useState("");
+
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -86,7 +82,7 @@ const ProductModal = ({
       productName: selectedProductData.productName,
       selectedColors: selectedColors,
       selectedSizes: selectedSizes,
-      description: selectedDescription, // Incluir a descrição atualizada no objeto do produto
+      description: selectedDescription, // Inclua a descrição atualizada no objeto do produto
     };
     var Imgfile = new FormData();
     console.log(selectedProductData.productName);
@@ -106,9 +102,10 @@ const ProductModal = ({
     const Newproduto = {
       name: selectedProductData.productName,
       tags: selectedDescription,
-      gender: "Masculino",
+      gender: selectedGender,
       price: selectedPrice,
       images: `${selectedProductData.productName}.png`,
+      description: selectedDescription,
     };
 
     fetch("http://localhost:5000/products/addProduct", {
@@ -346,11 +343,10 @@ const ProductModal = ({
                 rows={4}
                 fullWidth
                 sx={{ marginBottom: "15px" }}
-                value={selectedDescription} // Vincular o valor da descrição ao estado selecionado
-                onChange={
-                  (e) => setSelectedDescription(e.target.value) // Atualizar a descrição do produto selecionado
-                }
+                value={selectedDescription}
+                onChange={(e) => setSelectedDescription(e.target.value)}
               />
+
               <TextField
                 label="Preço"
                 variant="outlined"
@@ -368,9 +364,11 @@ const ProductModal = ({
                 label="Gênero"
                 variant="outlined"
                 sx={{ marginBottom: "15px" }}
+                value={selectedGender}
+                onChange={handleGenderChange}
               >
-                <MenuItem value="masculino">Masculino</MenuItem>
-                <MenuItem value="feminino">Feminino</MenuItem>
+                <MenuItem value="Masculino">Masculino</MenuItem>
+                <MenuItem value="Feminino">Feminino</MenuItem>
               </TextField>
               <TextField
                 select
@@ -430,7 +428,7 @@ const ProductModal = ({
                       </Button>
                     </center>
 
-                    {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos o smodelos existentes */}
+                    {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos os modelos existentes */}
                     <Demo>
                       <List dense={dense}>
                         <ListItem

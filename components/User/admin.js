@@ -93,14 +93,19 @@ const Admin = () => {
 
   const handleOpenModal = (e, product) => {
     if (!editingMode) {
-      return; // Se o modo de edição estiver desativado, retorna sem fazer nada
+      return;
     }
     e.preventDefault();
     if (editingMode) {
       setShowModal(true);
-      setSelectedProduct(product);
+      setSelectedProduct({
+        ...product,
+        productName: product.name, // Atualize para selecionar corretamente o nome do produto
+        image: `/CrowStore/imgs/${product.images[0]}`,
+      });
     }
   };
+  
 
   const handleOpenModalCreate = () => {
     setShowModal(true);
@@ -311,7 +316,7 @@ const Admin = () => {
           <ProductModal
             open={showModal}
             onClose={handleCloseModal}
-            product={selectedProduct}
+            product={selectedProduct} // Certifique-se de que a propriedade `product` esteja corretamente passada
             onSave={handleSaveProduct}
             onRemove={handleRemoveProduct}
             categories={categories}

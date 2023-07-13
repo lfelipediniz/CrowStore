@@ -58,17 +58,16 @@ const ProductModal = ({
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
-    setImageFile(imageFile)
+    setImageFile(imageFile);
 
     if (imageFile && imageFile.type.includes("image")) {
       const imageUrl = URL.createObjectURL(imageFile);
-      setImageUrl(imageUrl) 
+      setImageUrl(imageUrl);
+      setSelectedImage(imageUrl); // Atualize para exibir a imagem selecionada no modal
     }
   };
 
-
   const handleSave = () => {
-    
     const updatedProduct = {
       ...product,
       productName: selectedProductData.productName,
@@ -76,59 +75,52 @@ const ProductModal = ({
       selectedSizes: selectedSizes,
       description: selectedDescription, // Incluir a descrição atualizada no objeto do produto
     };
-            var Imgfile = new FormData();
-            console.log(selectedProductData.productName);
+    var Imgfile = new FormData();
+    console.log(selectedProductData.productName);
 
-            Imgfile.append('name', selectedProductData.productName)
-            Imgfile.append('file', imageFile, `user.png`)
-            
-        
-               fetch("http://localhost:5000/imgs", {
-                mode: 'no-cors',
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: Imgfile,
-              })
-                .then((response) => {
-        });
+    Imgfile.append("name", selectedProductData.productName);
+    Imgfile.append("file", imageFile, `user.png`);
 
-        const Newproduto = {
-          name:  selectedProductData.productName,
-          tags: selectedDescription,
-          gender: "Masculino",
-          price: selectedPrice,
-          images: `${selectedProductData.productName}.png`
-        };
+    fetch("http://localhost:5000/imgs", {
+      mode: "no-cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: Imgfile,
+    }).then((response) => {});
 
-        fetch("http://localhost:5000/products/addProduct", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(Newproduto),
-        })
-            .then((response) => {
-                if (response.ok) {
-                    console.log("Produto cadastrado com sucesso");
+    const Newproduto = {
+      name: selectedProductData.productName,
+      tags: selectedDescription,
+      gender: "Masculino",
+      price: selectedPrice,
+      images: `${selectedProductData.productName}.png`,
+    };
 
-                    return response.json(); 
-                } else {
-                    throw new Error("Erro ao cadastrar produto");
-                }
-            })
-            .then((data) => {
-            })
-            .catch((error) => {
-                console.error("Erro:", error);
-            });
+    fetch("http://localhost:5000/products/addProduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Newproduto),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Produto cadastrado com sucesso");
 
+          return response.json();
+        } else {
+          throw new Error("Erro ao cadastrar produto");
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
 
     onSave(updatedProduct);
     window.location.reload();
-
-
   };
 
   const handleRemove = () => {
@@ -144,38 +136,42 @@ const ProductModal = ({
 
   React.useEffect(() => {
     setSelectedProductData({
-      productName: product?.productName || "",
+      productName: product?.productName || "", // Extraindo o nome do produto do objeto `product`
       stock: product?.stock || "",
-      selectedColor: "",
-      selectedSize: "",
+      // Atualize outras propriedades do produto, se necessário
     });
 
+    // Atualize o estado `selectedImage` com a imagem do produto
     if (product?.image) {
       setSelectedImage(product.image);
     } else {
       setSelectedImage(null);
     }
 
+    // Atualize o estado `selectedProductColors` com as cores do produto
     if (product?.colors) {
       setSelectedProductColors(product.colors);
     } else {
       setSelectedProductColors([]);
     }
 
+    // Atualize o estado `selectedProductSizes` com os tamanhos do produto
     if (product?.sizes) {
       setSelectedProductSizes(product.sizes);
     } else {
       setSelectedProductSizes([]);
     }
 
+    // Atualize o estado `selectedDescription` com a descrição do produto
     if (product?.description) {
-      setSelectedDescription(product.description); // Atualizar a descrição do produto selecionado
+      setSelectedDescription(product.description);
     } else {
       setSelectedDescription("");
     }
 
+    // Atualize o estado `selectedPrice` com o preço do produto
     if (product?.price) {
-      setSelectedPrice(product.price); // Atualizar a descrição do produto selecionado
+      setSelectedPrice(product.price);
     } else {
       setSelectedPrice("");
     }
@@ -327,6 +323,7 @@ const ProductModal = ({
                   })
                 }
               />
+
               <TextField
                 label="Descrição"
                 variant="outlined"
@@ -515,7 +512,7 @@ const ProductModal = ({
                     <ul>
                       {selectedFiles.map((file, index) => (
                         <>
-                          <p key={index}>{getFormattedFileName(file.name)}</p> 
+                          <p key={index}>{getFormattedFileName(file.name)}</p>
                         </>
                       ))}
                     </ul>

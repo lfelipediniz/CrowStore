@@ -1,36 +1,49 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import {
-  ButtonArrow,
   Container,
-  ProductArrows,
   ShowcaseGenderBtn,
   IconContainer,
   GenderBtn,
-  Subtitle,
 } from "./ShowCaseSectionElements";
 import ProductCarousel from "../ProductsCarousel";
-import ProductData from "../../fakedata/showcaseContent/products.json";
-import PopularData from "../../fakedata/showcaseContent/popular.json";
-
-import { WrapContent } from "../ReusedComponents/WrapContent";
 import { FaCrow, FaFemale, FaMale } from "react-icons/fa";
 
 function ShowCase() {
   const [selectedGender, setSelectedGender] = useState("all");
   const productCarouselRef = useRef();
+  const [filteredProductData, setFilteredProductData] = useState([]);
+  const [filteredPopularData, setFilteredPopularData] = useState([]);
 
   const handleGenderSelection = (gender) => {
     setSelectedGender(gender);
     productCarouselRef.current?.handleNextProduct();
   };
 
-  const filteredProductData = ProductData.filter(
-    (product) => selectedGender === "all" || product.gender === selectedGender
-  );
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/products/getRecentProducts");
+        setFilteredProductData(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os produtos:", error);
+        setFilteredProductData([]);
+      }
+    };
 
-  const filteredPopularData = PopularData.filter(
-    (product) => selectedGender === "all" || product.gender === selectedGender
-  );
+    const fetchPopularProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/products/getPopularProducts");
+        setFilteredPopularData(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar os produtos populares:", error);
+        setFilteredPopularData([]);
+      }
+    };
+
+    fetchProducts();
+    fetchPopularProducts();
+  }, []);
 
   return (
     <Container id="showcase">

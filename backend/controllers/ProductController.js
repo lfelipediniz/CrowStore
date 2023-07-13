@@ -1,10 +1,10 @@
-const mongoose = require('../db/conn');
-const Product = require('../models/Product')
-const { upload } = require('../imguploadconfig/multer.js');
+const mongoose = require("../db/conn");
+const Product = require("../models/Product");
+const { upload } = require("../imguploadconfig/multer.js");
 
 module.exports = class ProductController {
-    static async addProduct(req, res) {
-        const { name, tags, gender, price, images } = req.body;
+  static async addProduct(req, res) {
+    const { name, tags, gender, price, images } = req.body;
 
     try {
       if (!name) {
@@ -32,17 +32,17 @@ module.exports = class ProductController {
         throw new Error("O produto necessita ter um preço qualquer positivo");
       }
 
-            const product = new Product({
-                _id: new mongoose.Types.ObjectId(),
-                name,
-                tags,
-                gender,
-                price,
-                images,
-                AvailableModels: []
-            });
+      const product = new Product({
+        _id: new mongoose.Types.ObjectId(),
+        name,
+        tags,
+        gender,
+        price,
+        images,
+        AvailableModels: [],
+      });
 
-            await product.save();
+      await product.save();
 
       res.status(200).json({ message: "Produto adicionado com sucesso" });
     } catch (error) {
@@ -297,21 +297,17 @@ module.exports = class ProductController {
       const product = await Product.findById(req.params.id);
 
       if (!product) {
-        return res
-          .status(404)
-          .json({
-            message: `O produto de id ${req.params.id} não foi encontrado.`,
-          });
+        return res.status(404).json({
+          message: `O produto de id ${req.params.id} não foi encontrado.`,
+        });
       }
 
       return res.status(200).json(product);
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível recuperar os produtos",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível recuperar os produtos",
+        error: error.message,
+      });
     }
   }
 
@@ -338,20 +334,16 @@ module.exports = class ProductController {
       const product = await Product.findById(req.params.productId);
 
       if (!(product && product.AvailableModels)) {
-        return res
-          .status(404)
-          .json({
-            message: `Modelos para o produto de id ${req.params.id} não foram encontrados`,
-          });
+        return res.status(404).json({
+          message: `Modelos para o produto de id ${req.params.id} não foram encontrados`,
+        });
       }
       return res.status(200).json(product.AvailableModels);
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível recuperar os modelos",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível recuperar os modelos",
+        error: error.message,
+      });
     }
   }
 
@@ -360,31 +352,25 @@ module.exports = class ProductController {
       const product = await Product.findById(req.params.productId);
 
       if (!product) {
-        return res
-          .status(404)
-          .json({
-            message: `O produto de id ${req.params.productId} não foi encontrado`,
-          });
+        return res.status(404).json({
+          message: `O produto de id ${req.params.productId} não foi encontrado`,
+        });
       }
 
       const model = product.AvailableModels.id(req.params.modelId);
 
       if (!model) {
-        return res
-          .status(404)
-          .json({
-            message: `O modelo de id ${req.params.modelId} não foi encontrado`,
-          });
+        return res.status(404).json({
+          message: `O modelo de id ${req.params.modelId} não foi encontrado`,
+        });
       }
 
       return res.status(200).json(model);
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível recuperar o modelo",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível recuperar o modelo",
+        error: error.message,
+      });
     }
   }
 
@@ -392,11 +378,9 @@ module.exports = class ProductController {
     try {
       await Product.deleteMany();
 
-      res
-        .status(200)
-        .json({
-          message: "Todos os produtos, se algum, foram apagados com sucesso",
-        });
+      res.status(200).json({
+        message: "Todos os produtos, se algum, foram apagados com sucesso",
+      });
     } catch (error) {
       res.status(500).json({ error: "Não foi possível apagar os produtos" });
     }
@@ -407,29 +391,23 @@ module.exports = class ProductController {
       const product = await Product.findById(req.params.productId);
 
       if (!product) {
-        return res
-          .status(404)
-          .json({
-            message: `O produto de id ${req.params.modelId} não foi encontrado`,
-          });
+        return res.status(404).json({
+          message: `O produto de id ${req.params.modelId} não foi encontrado`,
+        });
       }
 
       product.AvailableModels = [];
 
       await product.save();
 
-      return res
-        .status(200)
-        .json({
-          message: `Todos os modelos, se algum, do produto ${req.params.productId} foram apagados`,
-        });
+      return res.status(200).json({
+        message: `Todos os modelos, se algum, do produto ${req.params.productId} foram apagados`,
+      });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível apagar os modelos",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível apagar os modelos",
+        error: error.message,
+      });
     }
   }
 
@@ -440,23 +418,19 @@ module.exports = class ProductController {
       const product = await Product.findByIdAndDelete(productId);
 
       if (!product) {
-        return res
-          .status(404)
-          .json({
-            message: `O produto de id ${req.params.modelId} não foi encontrado`,
-          });
+        return res.status(404).json({
+          message: `O produto de id ${req.params.modelId} não foi encontrado`,
+        });
       }
 
       return res
         .status(200)
         .json({ message: "Produto removido com sucesso", product });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível apagar o produto",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível apagar o produto",
+        error: error.message,
+      });
     }
   }
 
@@ -487,19 +461,15 @@ module.exports = class ProductController {
 
       await product.save();
 
-      return res
-        .status(200)
-        .json({
-          message: `O Modelo de id ${modelId} foi removido com sucesso`,
-          product,
-        });
+      return res.status(200).json({
+        message: `O Modelo de id ${modelId} foi removido com sucesso`,
+        product,
+      });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível apagar o modelo",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível apagar o modelo",
+        error: error.message,
+      });
     }
   }
 
@@ -522,13 +492,11 @@ module.exports = class ProductController {
       );
 
       if (invalidKeys.length > 0) {
-        return res
-          .status(400)
-          .json({
-            message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(
-              ", "
-            )}`,
-          });
+        return res.status(400).json({
+          message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(
+            ", "
+          )}`,
+        });
       }
 
       Object.keys(updates).forEach((key) => {
@@ -541,49 +509,71 @@ module.exports = class ProductController {
         .status(200)
         .json({ message: "Produto atualizado com sucesso", product });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível atualizar o produto",
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível atualizar o produto",
+        error: error.message,
+      });
     }
   }
 
   static async updateProductModel(req, res) {
     const { productId, modelIndex, newQuantity } = req.body;
-  
+
     try {
       const product = await Product.findById(productId);
-  
+
       if (!product) {
         return res
           .status(404)
           .json({ message: `O produto de id ${productId} não foi encontrado` });
       }
-  
+
       if (modelIndex < 0 || modelIndex >= product.AvailableModels.length) {
         return res.status(400).json({ message: "Índice de modelo inválido" });
       }
-  
+
       const model = product.AvailableModels[modelIndex];
-      model.quantity -= newQuantity
+      model.quantity -= newQuantity;
       console.log(model);
-  
+
       await product.save();
-  
+
       return res
         .status(200)
         .json({ message: "Modelo de produto atualizado com sucesso", product });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          message: "Não foi possível atualizar o modelo do produto",
-          
-          error: error.message,
-        });
+      return res.status(500).json({
+        message: "Não foi possível atualizar o modelo do produto",
+
+        error: error.message,
+      });
+    }
+  }
+
+  static async getAllProducts(req, res) {
+    try {
+      const products = await Product.find();
+      res.status(200).json(products);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar os produtos" });
+    }
+  }
+
+  static async getPopularProducts(req, res) {
+    try {
+      const products = await Product.find({ popular: true });
+      res.status(200).json(products);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar os produtos populares" });
     }
   }
   
+  static async getRecentProducts(req, res) {
+    try {
+      const products = await Product.find().sort({ createdAt: -1 }).limit(10);
+      res.status(200).json(products);
+    } catch (error) {
+      res.status(500).json({ message: "Erro ao buscar os produtos recentes" });
+    }
+  }
 };

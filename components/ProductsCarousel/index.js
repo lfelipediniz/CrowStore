@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ButtonArrow, Container, ProductArrows, Subtitle } from "./ProductsCarouselElements";
+import {
+  ButtonArrow,
+  Container,
+  ProductArrows,
+  Subtitle,
+} from "./ProductsCarouselElements";
 import ProductCard from "../ReusedComponents/ProductCard";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
@@ -27,7 +32,9 @@ function ProductCarousel({ data, name }) {
   const [currentProduct, setCurrentProduct] = React.useState(0);
 
   const handleNextProduct = () => {
-    setCurrentProduct((prevIndex) => (prevIndex + productsPerPage) % totalProducts);
+    setCurrentProduct(
+      (prevIndex) => (prevIndex + productsPerPage) % totalProducts
+    );
   };
 
   const handlePrevProduct = () => {
@@ -44,14 +51,16 @@ function ProductCarousel({ data, name }) {
         <Subtitle>{name}</Subtitle>
       </Container>
       <Container>
-        {data.slice(currentProduct, currentProduct + productsPerPage).map((product, index) => (
-          <ProductCard
-            key={`product-${index}`}
-            img={product.image}
-            productName={product.productName}
-            price={product.price}
-          />
-        ))}
+        {data
+          .slice(currentProduct, currentProduct + productsPerPage)
+          .map((product, index) => (
+            <ProductCard
+              key={`product-${index}`}
+              img={`/CrowStore/imgs/${product.images[0]}`}
+              productName={product.name}
+              price={product.price}
+            />
+          ))}
       </Container>
       <ProductArrows>
         <ButtonArrow onClick={handlePrevProduct}>

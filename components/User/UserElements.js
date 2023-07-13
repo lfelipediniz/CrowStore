@@ -102,7 +102,9 @@ export const ProductContainer = styled.div`
   justify-content: center;
   flex-grow: 1;
   gap: 30px;
+  margin-top: 135px; /* Ajuste o valor da margem superior conforme necessário */
 `;
+
 
 export const SearchContainer = styled.div`
   grid-area: search;
@@ -241,4 +243,17 @@ display: grid;
 grid-template-columns: 1fr auto;
 align-items: center;
 gap: 16px;
+`;
+
+export const Subtitle = styled.div`
+  color: ${colors.textBlack};
+  font-size: large;
+  position: absolute;
+  top: 200px;
+  left: 55%;
+  transform: translateX(-50%);
+
+    &.hidden {
+    opacity: 0;
+  }
 `;

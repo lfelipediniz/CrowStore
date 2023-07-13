@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Container,
   SideNav,
@@ -9,16 +9,21 @@ import {
   ProductContainer,
   ProductCardEdit,
   RemoveButton,
+  ScrollableContainer,
+  Subtitle,
 } from "./UserElements";
 
 import ProductCard from "../ReusedComponents/ProductCard";
 import Products from "../../fakedata/adminContent/products.json";
-import SearchBar from "../SearchBar";
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
 import ProductModal from "../ProductModal";
 import { colors } from "../../styles/colors";
+
+// Minhas alterações
+import SearchBar from "../SearchBar";
+import axios from "axios";
 
 const Admin = () => {
   const [editingMode, setEditingMode] = useState(false);
@@ -33,39 +38,27 @@ const Admin = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [componentesGerados, setComponentesGerados] = useState(null);
 
+  // Minhas alterações
+
+  const [filters, setFilters] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const scrollableContainerRef = useRef(null);
+  const [showWidthWarning, setShowWidthWarning] = useState(false); // Novo estado para controlar o aviso de largura mínima
+
   useEffect(() => {
-
-    continuarExecucao().then((componentes) => {
-      setComponentesGerados(componentes);
-    });
-
     const handleResize = () => {
-      if (window.innerWidth < 1115 && editingMode) {
-        setEditingMode(false);
-        setShowModal(false);
-        alert(
-          "Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px"
-        );
-      }
+      setShowWidthWarning(window.innerWidth < 1115);
     };
 
-    handleResize();
-
     window.addEventListener("resize", handleResize);
+    handleResize(); // Verifica a largura da tela ao carregar o componente
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [editingMode]);
+  }, []);
 
   const toggleEditingMode = () => {
-    if (window.innerWidth < 1115) {
-      alert(
-        "Sua tela tem a largura muito pequena para o modo edição. Largura mínima: 1115px"
-      );
-      return;
-    }
-
     setEditingMode(!editingMode);
   };
 
@@ -129,7 +122,6 @@ const Admin = () => {
   };
 
   const handleOpenModalCreate = () => {
-    
     setShowModal(true);
   };
 
@@ -147,61 +139,52 @@ const Admin = () => {
     console.log("Remover produto:", product);
   };
 
-
   const getProducts = (product) => {
     return fetch("http://localhost:5000/products/getProducts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Erro ao obter produtos");
-        }
-      });
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erro ao obter produtos");
+      }
+    });
   };
   let DadosProdutos;
   let quantidadeObjetos;
 
-
   const promise = getProducts();
-  
 
-  promise
-    .then((data) => {
-      DadosProdutos = data;
-      quantidadeObjetos = Array.isArray(data) ? data.length : 0;
-      continuarExecucao();
-      })
+  promise.then((data) => {
+    DadosProdutos = data;
+    quantidadeObjetos = Array.isArray(data) ? data.length : 0;
+    continuarExecucao();
+  });
 
+  const continuarExecucao = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const componentes = [];
+        for (let i = 14; i < quantidadeObjetos; i++) {
+          const produto = DadosProdutos[i];
 
+          componentes.push(
+            <ProductCard
+              key={i}
+              img={`/CrowStore/imgs/${produto.images[0]}`}
+              productName={produto.name}
+              price={produto.price}
+            />
+          );
+        }
 
-      const continuarExecucao = () => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-    
-            const componentes = [];
-            for (let i = 14; i < quantidadeObjetos; i++) {
-              const produto = DadosProdutos[i];
-              
-              componentes.push(
-                <ProductCard
-                  key={i}
-                  img={`/CrowStore/imgs/${produto.images[0]}`}
-                  productName={produto.name}
-                  price={produto.price}
-                />
-              );
-            }
-    
-            resolve(componentes); 
-          }, 1000); 
-        });
-      };
-      
+        resolve(componentes);
+      }, 1000);
+    });
+  };
 
   const handleLogout = () => {
     // Limpar o token do localStorage
@@ -209,109 +192,216 @@ const Admin = () => {
     window.location.reload(); // Recarrega a página
   };
 
+  // Minhas alterações
+
+  const modifyFilters = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  const modifySearchTerm = (newTerm) => {
+    setSearchTerm(newTerm);
+  };
+
+  useEffect(() => {
+    const fetchFilteredItems = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/products/filterProducts",
+          { name: searchTerm }
+        );
+        setFilteredItems(response.data);
+      } catch (error) {
+        console.error("Erro ao filtrar os produtos:", error);
+        setFilteredItems([]);
+      }
+    };
+
+    fetchFilteredItems();
+  }, [searchTerm]);
+
+  useEffect(() => {
+    const filteredItemsWithFilters = filteredItems.filter((item) => {
+      const hasAllFilters = filters.every((filter) => {
+        return (
+          item.productName &&
+          item.productName.toLowerCase().includes(filter.toLowerCase())
+        );
+      });
+      return hasAllFilters;
+    });
+    setFilteredItems(filteredItemsWithFilters);
+  }, [filters]);
+  useEffect(() => {
+    const handleScroll = () => {
+      const subtitle = document.getElementById("subtitle");
+
+      if (subtitle) {
+        const scrollY = scrollableContainerRef.current.scrollTop;
+
+        if (scrollY > 0) {
+          subtitle.classList.add("hidden");
+        } else {
+          subtitle.classList.remove("hidden");
+        }
+      }
+    };
+
+    const scrollableContainer = scrollableContainerRef.current;
+    if (scrollableContainer) {
+      scrollableContainer.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (scrollableContainer) {
+        scrollableContainer.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
   return (
     <>
-      <Container>
-        <SideNav>
-          <Box>
-            <List>
-              {/* Modo de edição */}
-              <EditButtonCotainer>
-                <ListItem button onClick={toggleEditingMode}>
-                  <ListItemText
-                    primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
-                  />
-                </ListItem>
-              </EditButtonCotainer>
-
-              {/* Adicionar Produto */}
-              {editingMode && (
-                <ListItem button onClick={() => handleOpenModalCreate()}>
-                  <ListItemText primary="Adicionar Produto" />
-                </ListItem>
-              )}
-
-              {/* Adicionar Categoria */}
-              {editingMode && (
-                <>
-                  <ListItem button onClick={handleAddCategory}>
-                    <ListItemText primary="Adicionar Categoria" />
-                  </ListItem>
-                  <Divider />
-                </>
-              )}
-
-              {/* Categorias */}
-              {categories.map((category, index) => (
-                <ListItem
-                  key={index}
-                  button
-                  selected={selectedCategory === category}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  <ListItemText primary={category} />
-                  {category !== "Todos" &&
-                    category !== "Masculino" &&
-                    category !== "Feminino" &&
-                    editingMode && (
-                      <RemoveButton onClick={() => handleRemoveCategory(index)}>
-                        <FaTrashAlt />
-                      </RemoveButton>
-                    )}
-                </ListItem>
-              ))}
-            </List>
-            <ListItem
-              button
-              onClick={handleLogout}
-              style={{ backgroundColor: colors.textBlack }}
+      {showWidthWarning ? (
+        <>
+          <div style={{ marginTop: 80 }}>
+            <p
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                padding: "10px",
+                textAlign: "center",
+              }}
             >
-              <ListItemText>Sair</ListItemText>
-            </ListItem>
-          </Box>
-        </SideNav>
-        <SearchBarContainer>
-          <SearchBar onChange={setSearchTerm} />
-        </SearchBarContainer>
-        <Content>
-          <ProductContainer>
-          {componentesGerados}
-            {searchFilteredProducts.map((product, index) => (
-              <ProductCardEdit
-                key={index}
-                onClick={(e) => handleOpenModal(e, product)}
-                editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
-              >
-                <ProductCard
-                  img={product.image}
-                  productName={product.productName}
-                  price={product.price}
-                />
+              Desculpe, você precisa de uma tela com no mínimo 1115px para
+              acessar seus privilégios.
+            </p>
+          </div>
+        </>
+      ) : (
+        <Container>
+          <SideNav>
+            <Box>
+              <List>
+                {/* Modo de edição */}
+                <EditButtonCotainer>
+                  <ListItem button onClick={toggleEditingMode}>
+                    <ListItemText
+                      primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                    />
+                  </ListItem>
+                </EditButtonCotainer>
 
-
-                
+                {/* Adicionar Produto */}
                 {editingMode && (
-                  <div className="edit-icon">
-                    <FaEdit />
-                  </div>
+                  <ListItem button onClick={() => handleOpenModalCreate()}>
+                    <ListItemText primary="Adicionar Produto" />
+                  </ListItem>
                 )}
-              </ProductCardEdit>
-            ))}
-          </ProductContainer>
-        </Content>
 
-        {/* Modal de adicionar/editar produto */}
-        <ProductModal
-          open={showModal}
-          onClose={handleCloseModal}
-          product={selectedProduct}
-          onSave={handleSaveProduct}
-          onRemove={handleRemoveProduct}
-          categories={categories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </Container>
+                {/* Adicionar Categoria */}
+                {editingMode && (
+                  <>
+                    <ListItem button onClick={handleAddCategory}>
+                      <ListItemText primary="Adicionar Categoria" />
+                    </ListItem>
+                    <Divider />
+                  </>
+                )}
+
+                {/* Categorias */}
+                {categories.map((category, index) => (
+                  <ListItem
+                    key={index}
+                    button
+                    selected={selectedCategory === category}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    <ListItemText primary={category} />
+                    {category !== "Todos" &&
+                      category !== "Masculino" &&
+                      category !== "Feminino" &&
+                      editingMode && (
+                        <RemoveButton
+                          onClick={() => handleRemoveCategory(index)}
+                        >
+                          <FaTrashAlt />
+                        </RemoveButton>
+                      )}
+                  </ListItem>
+                ))}
+              </List>
+              <ListItem
+                button
+                onClick={handleLogout}
+                style={{ backgroundColor: colors.textBlack }}
+              >
+                <ListItemText>Sair</ListItemText>
+              </ListItem>
+            </Box>
+          </SideNav>
+          <SearchBarContainer>
+            <SearchBar onChange={modifySearchTerm} />
+
+            <Subtitle id="subtitle">
+              <center>
+                {filteredItems.length} resultados para "{searchTerm}"
+                <br /> <br /> <br /> <br />
+                {editingMode ? (
+                  <p>
+                    Você está no modo edição, basta clicar no{" "}
+                    <strong>Lápis </strong>para editar seu produto
+                  </p>
+                ) : (
+                  <p>
+                    {" "}
+                    Bem-vindo, Administrador! Abaixo, você encontrará a lista
+                    dos produtos armazenados em seu banco de dados.
+                  </p>
+                )}
+              </center>
+            </Subtitle>
+          </SearchBarContainer>
+          <Content>
+            <ScrollableContainer
+              style={{ marginLeft: 0 }}
+              ref={scrollableContainerRef}
+            >
+              <ProductContainer>
+                {filteredItems.map((product, index) => (
+                  <ProductCardEdit
+                    key={`product-${index}`}
+                    onClick={(e) => handleOpenModal(e, product)}
+                    editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
+                  >
+                    <ProductCard
+                      img={`/CrowStore/imgs/${product.images[0]}`}
+                      productName={product.name}
+                      price={product.price}
+                    />
+
+                    {editingMode && (
+                      <div className="edit-icon">
+                        <FaEdit />
+                      </div>
+                    )}
+                  </ProductCardEdit>
+                ))}
+              </ProductContainer>
+            </ScrollableContainer>
+          </Content>
+
+          {/* Modal de adicionar/editar produto */}
+          <ProductModal
+            open={showModal}
+            onClose={handleCloseModal}
+            product={selectedProduct}
+            onSave={handleSaveProduct}
+            onRemove={handleRemoveProduct}
+            categories={categories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
+        </Container>
+      )}
     </>
   );
 };

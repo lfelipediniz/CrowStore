@@ -10,6 +10,12 @@ import {
 import Image from "next/image";
 
 const ProductCard = ({ img, productName, price }) => {
+
+  const formattedPrice = price.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
   return (
     <ProductCardContainer>
       <Link href={`/product/${encodeURIComponent(productName)}`} legacyBehavior>
@@ -20,7 +26,7 @@ const ProductCard = ({ img, productName, price }) => {
 
       <ProductInfo>
         <Content>{productName}</Content>
-        <Content>{price}</Content>
+        <Content>{formattedPrice}</Content>
       </ProductInfo>
     </ProductCardContainer>
   );

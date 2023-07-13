@@ -14,6 +14,7 @@ const WrapSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filters, setFilters] = useState([]);
+  const [originalItems, setOriginalItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const scrollableContainerRef = useRef(null);
 
@@ -30,24 +31,24 @@ const WrapSearch = () => {
   };
 
   useEffect(() => {
-    const fetchFilteredItems = async () => {
+    const fetchItems = async () => {
       try {
         const response = await axios.post(
           "http://localhost:5000/products/filterProducts",
           { name: searchTerm }
         );
-        setFilteredItems(response.data);
+        setOriginalItems(response.data);
       } catch (error) {
         console.error("Erro ao filtrar os produtos:", error);
-        setFilteredItems([]);
+        setOriginalItems([]);
       }
     };
 
-    fetchFilteredItems();
+    fetchItems();
   }, [searchTerm]);
 
   useEffect(() => {
-    const filteredItemsWithFilters = filteredItems.filter((item) => {
+    const filteredItemsWithFilters = originalItems.filter((item) => {
       const hasAllFilters = filters.every((filter) => {
         if (filter === "Masculino" || filter === "Feminino") {
           return item.gender && item.gender.toLowerCase() === filter.toLowerCase();
@@ -58,7 +59,7 @@ const WrapSearch = () => {
       return hasAllFilters;
     });
     setFilteredItems(filteredItemsWithFilters);
-  }, [filters]);
+  }, [filters, originalItems]);
 
   useEffect(() => {
     const handleScroll = () => {

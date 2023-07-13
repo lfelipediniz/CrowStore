@@ -59,6 +59,12 @@ const ProductModal = ({
     color: colors.primary,
   }));
 
+  const [selectedGender, setSelectedGender] = useState("");
+
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
+
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
     setImageFile(imageFile);
@@ -96,10 +102,10 @@ const ProductModal = ({
     const Newproduto = {
       name: selectedProductData.productName,
       tags: selectedDescription,
-      gender: "Masculino",
+      gender: selectedGender,
       price: selectedPrice,
       images: `${selectedProductData.productName}.png`,
-      description:selectedDescription
+      description: selectedDescription,
     };
 
     fetch("http://localhost:5000/products/addProduct", {
@@ -358,9 +364,11 @@ const ProductModal = ({
                 label="Gênero"
                 variant="outlined"
                 sx={{ marginBottom: "15px" }}
+                value={selectedGender}
+                onChange={handleGenderChange}
               >
-                <MenuItem value="masculino">Masculino</MenuItem>
-                <MenuItem value="feminino">Feminino</MenuItem>
+                <MenuItem value="Masculino">Masculino</MenuItem>
+                <MenuItem value="Feminino">Feminino</MenuItem>
               </TextField>
               <TextField
                 select

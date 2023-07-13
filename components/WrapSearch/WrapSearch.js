@@ -1,92 +1,91 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Footer from "../Footer";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
-import ProductData from "../../fakedata/showcaseContent/products.json";
 import SearchBar from "../SearchBar";
 import FilterTags from "../FilterTags";
 import {
-    ProductContainer,
-    ScrollableContainer,
+  ProductContainer,
+  ScrollableContainer,
 } from "../User/UserElements";
 import ProductCard from "../ReusedComponents/ProductCard";
-import { Subtitle } from "./WrapElements.js";
+import { Subtitle } from "./WrapElements";
 
 const WrapSearch = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filters, setFilters] = useState([]);
-    const [filteredItems, setFilteredItems] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filters, setFilters] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-    // Function to filter items based on searchTerm and filters
-    const filterItems = (items, searchTerm, filters) => {
-        const productList = items.map((product) => {
-            const updatedProduct = {
-                productName: product.productName + " " + product.gender,
-                price: product.price,
-                image: product.image,
-            };
-            return updatedProduct;
-        });
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
-        return productList.filter((item) => {
-            const hasSearchTerm =
-                item.productName &&
-                item.productName.toLowerCase().includes(searchTerm.toLowerCase());
+  const modifyFilters = (newFilters) => {
+    setFilters(newFilters);
+  };
 
-            const hasAllFilters = filters.every((filter) => {
-                return (
-                    item.productName &&
-                    item.productName.toLowerCase().includes(filter.toLowerCase())
-                );
-            });
-            return hasSearchTerm && hasAllFilters;
-        });
+  const modifySearchTerm = (newTerm) => {
+    setSearchTerm(newTerm);
+  };
+
+  useEffect(() => {
+    const fetchFilteredItems = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/products/filterProducts",
+          { name: searchTerm }
+        );
+        setFilteredItems(response.data);
+      } catch (error) {
+        console.error("Erro ao filtrar os produtos:", error);
+        setFilteredItems([]);
+      }
     };
 
-    const toggle = () => {
-        setIsOpen(!isOpen);
-    };
+    fetchFilteredItems();
+  }, [searchTerm]);
 
-    const modifyFilters = (newFilters) => {
-        setFilters(newFilters);
-    };
+  useEffect(() => {
+    const filteredItemsWithFilters = filteredItems.filter((item) => {
+      const hasAllFilters = filters.every((filter) => {
+        return (
+          item.productName &&
+          item.productName.toLowerCase().includes(filter.toLowerCase())
+        );
+      });
+      return hasAllFilters;
+    });
+    setFilteredItems(filteredItemsWithFilters);
+  }, [filters]);
 
-    const modifySearchTerm = (newTerm) => {
-        setSearchTerm(newTerm);
-    };
-
-    useEffect(() => {
-        const newFilteredItems = filterItems(ProductData, searchTerm, filters);
-        setFilteredItems(newFilteredItems);
-    }, [searchTerm, filters]);
-
-    return (
-        <>
-            <Sidebar isOpen={isOpen} toggle={toggle} home />
-            <Navbar toggle={toggle} home />
-            <SearchBar onChange={modifySearchTerm} />
-            <FilterTags onChange={modifyFilters} />
-            {searchTerm && (
-                <Subtitle>
-                    {filteredItems.length} resultados para "{searchTerm}"
-                </Subtitle>
-            )}
-            <ScrollableContainer style={{ marginLeft: 0 }}>
-                <ProductContainer>
-                    {filteredItems.map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            img={product.image}
-                            productName={product.productName}
-                            price={product.price}
-                        />
-                    ))}
-                </ProductContainer>
-            </ScrollableContainer >
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Sidebar isOpen={isOpen} toggle={toggle} home />
+      <Navbar toggle={toggle} home />
+      <SearchBar onChange={modifySearchTerm} />
+      <FilterTags onChange={modifyFilters} />
+      {searchTerm && (
+        <Subtitle>
+          {filteredItems.length} resultados para "{searchTerm}"
+        </Subtitle>
+      )}
+      <ScrollableContainer style={{ marginLeft: 0 }}>
+        <ProductContainer>
+          {filteredItems.map((product, index) => (
+            <ProductCard
+              key={`product-${index}`}
+              img={`/CrowStore/imgs/${product.images[0]}`}
+              productName={product.name}
+              price={product.price}
+            />
+          ))}
+        </ProductContainer>
+      </ScrollableContainer>
+      <Footer />
+    </>
+  );
 };
 
 export default WrapSearch;

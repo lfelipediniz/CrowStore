@@ -18,6 +18,7 @@ router.post('/addProduct', ProductController.addProduct)
 router.patch('/updateProductModel', ProductController.updateProductModel);
 router.get('/getPopularProducts', ProductController.getPopularProducts);
 router.get('/getRecentProducts', ProductController.getRecentProducts);
+router.post('/filterProducts', ProductController.filterProducts);
 
 
 

@@ -576,4 +576,23 @@ module.exports = class ProductController {
       res.status(500).json({ message: "Erro ao buscar os produtos recentes" });
     }
   }
+
+
+  static async filterProducts(req, res) {
+    try {
+      const { name } = req.body;
+      let products = [];
+  
+      if (name) {
+        products = await Product.find({ name: { $regex: name, $options: "i" } });
+      } else {
+        products = await Product.find();
+      }
+  
+      res.status(200).json(products);
+    } catch (error) {
+      console.error("Erro ao filtrar os produtos:", error);
+      res.status(500).json({ message: "Erro ao filtrar os produtos" });
+    }
+  }
 };

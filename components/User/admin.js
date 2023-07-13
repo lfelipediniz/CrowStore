@@ -14,7 +14,7 @@ import {
 } from "./UserElements";
 
 import ProductCard from "../ReusedComponents/ProductCard";
-import Products from "../../fakedata/adminContent/products.json";
+
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 
@@ -36,7 +36,6 @@ const Admin = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [componentesGerados, setComponentesGerados] = useState(null);
 
   // Minhas alterações
 
@@ -44,6 +43,7 @@ const Admin = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const scrollableContainerRef = useRef(null);
   const [showWidthWarning, setShowWidthWarning] = useState(false); // Novo estado para controlar o aviso de largura mínima
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,25 +91,6 @@ const Admin = () => {
     setSelectedCategory(category);
   };
 
-  // Filtra os produtos com base na categoria selecionada
-  const filteredProducts =
-    selectedCategory === "Todos"
-      ? Products
-      : Products.filter(
-          (product) =>
-            product.category === selectedCategory ||
-            (selectedCategory === "Masculino" &&
-              product.gender === "masculino") ||
-            (selectedCategory === "Feminino" && product.gender === "feminino")
-        );
-
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Filtra os produtos com base no termo de busca
-  const searchFilteredProducts = filteredProducts.filter((product) =>
-    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const handleOpenModal = (e, product) => {
     if (!editingMode) {
       return; // Se o modo de edição estiver desativado, retorna sem fazer nada
@@ -139,53 +120,6 @@ const Admin = () => {
     console.log("Remover produto:", product);
   };
 
-  const getProducts = (product) => {
-    return fetch("http://localhost:5000/products/getProducts", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("Erro ao obter produtos");
-      }
-    });
-  };
-  let DadosProdutos;
-  let quantidadeObjetos;
-
-  const promise = getProducts();
-
-  promise.then((data) => {
-    DadosProdutos = data;
-    quantidadeObjetos = Array.isArray(data) ? data.length : 0;
-    continuarExecucao();
-  });
-
-  const continuarExecucao = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const componentes = [];
-        for (let i = 14; i < quantidadeObjetos; i++) {
-          const produto = DadosProdutos[i];
-
-          componentes.push(
-            <ProductCard
-              key={i}
-              img={`/CrowStore/imgs/${produto.images[0]}`}
-              productName={produto.name}
-              price={produto.price}
-            />
-          );
-        }
-
-        resolve(componentes);
-      }, 1000);
-    });
-  };
-
   const handleLogout = () => {
     // Limpar o token do localStorage
     localStorage.removeItem("token");
@@ -193,10 +127,6 @@ const Admin = () => {
   };
 
   // Minhas alterações
-
-  const modifyFilters = (newFilters) => {
-    setFilters(newFilters);
-  };
 
   const modifySearchTerm = (newTerm) => {
     setSearchTerm(newTerm);
@@ -219,18 +149,6 @@ const Admin = () => {
     fetchFilteredItems();
   }, [searchTerm]);
 
-  useEffect(() => {
-    const filteredItemsWithFilters = filteredItems.filter((item) => {
-      const hasAllFilters = filters.every((filter) => {
-        return (
-          item.productName &&
-          item.productName.toLowerCase().includes(filter.toLowerCase())
-        );
-      });
-      return hasAllFilters;
-    });
-    setFilteredItems(filteredItemsWithFilters);
-  }, [filters]);
   useEffect(() => {
     const handleScroll = () => {
       const subtitle = document.getElementById("subtitle");

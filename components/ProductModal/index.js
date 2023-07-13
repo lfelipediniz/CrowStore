@@ -17,6 +17,14 @@ import {
   ChangeContainer,
 } from "./ProductModalElements";
 
+import { styled } from "@mui/material/styles";
+
+import IconButton from "@mui/material/IconButton";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+
+import { FaPen } from "react-icons/fa";
+
 import {
   Modal,
   Box,
@@ -54,6 +62,12 @@ const ProductModal = ({
   const [selectedDescription, setSelectedDescription] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(""); // Estado para armazenar a descrição do produto
   // Estado para armazenar a descrição do produto
+
+  const Demo = styled("div")(({ theme }) => ({
+    backgroundColor: colors.textBlack,
+    color: colors.primary,
+  }));
+  const [dense, setDense] = React.useState(false);
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -417,6 +431,31 @@ const ProductModal = ({
                     </center>
 
                     {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos o smodelos existentes */}
+                    <Demo>
+                      <List dense={dense}>
+                        <ListItem
+                          secondaryAction={
+                            <IconButton edge="end" aria-label="delete">
+                              <FaTrash color={colors.primary} />
+                            </IconButton>
+                          }
+                        >
+                          <ListItemAvatar>
+                            <Avatar style={{ colors: colors.secondary }}>
+                              <FaPen color={colors.secondary} />
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary="Tamanho PP, 6 no estoque"
+                            secondary={
+                              <p style={{ color: colors.lightGray }}>
+                                Cor Tomato
+                              </p>
+                            }
+                          />
+                        </ListItem>
+                      </List>
+                    </Demo>
                   </ColorsContainer>
                 </Box>
               </Modal>

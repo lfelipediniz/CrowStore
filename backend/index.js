@@ -19,5 +19,7 @@ app.use(express.static('public'))
 
 app.use('/users', require('./routes/UserRoutes'))
 app.use('/products', require('./routes/ProductRoutes'))
+app.use('/categories', require('./routes/CategoryRoutes'))
+
 
 app.listen(5000)

@@ -61,7 +61,7 @@ const Admin = () => {
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
   };
-
+ 
   const toggleAddCategory = () => {
     setShowAddCategory(!showAddCategory);
   };

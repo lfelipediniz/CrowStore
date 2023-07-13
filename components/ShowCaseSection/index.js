@@ -80,12 +80,14 @@ function ShowCase() {
         ref={productCarouselRef}
         data={filteredProductData}
         name="Lançamentos"
+        selectedGender={selectedGender}
       />
 
       <ProductCarousel
         ref={productCarouselRef}
         data={filteredPopularData}
         name="Populares"
+        selectedGender={selectedGender}
       />
     </Container>
   );

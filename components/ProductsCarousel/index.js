@@ -8,7 +8,7 @@ import {
 import ProductCard from "../ReusedComponents/ProductCard";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-function ProductCarousel({ data, name }) {
+function ProductCarousel({ data, name, selectedGender }) {
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -52,6 +52,11 @@ function ProductCarousel({ data, name }) {
       </Container>
       <Container>
         {data
+          .filter(
+            (product) =>
+              product.gender.toLowerCase() === selectedGender ||
+              selectedGender === "all"
+          )
           .slice(currentProduct, currentProduct + productsPerPage)
           .map((product, index) => (
             <ProductCard

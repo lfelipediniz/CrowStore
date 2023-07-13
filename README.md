@@ -26,7 +26,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First of all, it's needed to have [Git](https://git-scm.com/downloads), and [Node.js](https://nodejs.org/en/download/) installed on your system.
 
-We've used the [yarn](https://yarnpkg.com/) package manager to handle our front-end dependencies and [npm](https://www.npmjs.com/) to handle the back-end dependencies.
+We've used the [yarn](https://yarnpkg.com/) package manager to handle our front-end dependencies and [npm](https://www.npmjs.com/) to handle the back-end dependencies. Using different operational systems has been shown to produce inconsistencies during installation, so prefer to run this project using on of the various Linux based distributions available.
 
 To automatically install all dependencies needed on the project just run: 
 

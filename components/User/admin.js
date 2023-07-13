@@ -61,19 +61,26 @@ const Admin = () => {
   const toggleEditingMode = () => {
     setEditingMode(!editingMode);
   };
- 
+
   const toggleAddCategory = () => {
     setShowAddCategory(!showAddCategory);
   };
 
-  const handleAddCategory = () => {
+  const handleAddCategory = async () => {
     const newCategory = prompt("Digite o nome da nova categoria:");
     if (newCategory) {
-      setCategories([...categories, newCategory]);
+      try {
+        await axios.post("http://localhost:5000/categories/AddCategory", {
+          name: newCategory,
+        });
+        setCategories([...categories, newCategory]);
+      } catch (error) {
+        console.error("Erro ao adicionar categoria:", error);
+      }
     }
   };
 
-  const handleRemoveCategory = (index) => {
+  const handleRemoveCategory = async (index) => {
     const categoryToRemove = categories[index];
     if (
       categoryToRemove === "Todos" ||
@@ -82,9 +89,18 @@ const Admin = () => {
     ) {
       return;
     }
-    const updatedCategories = [...categories];
-    updatedCategories.splice(index, 1);
-    setCategories(updatedCategories);
+    try {
+      await axios.delete(
+        `http://localhost:5000/categories/${encodeURIComponent(
+          categoryToRemove
+        )}`
+      );
+      const updatedCategories = [...categories];
+      updatedCategories.splice(index, 1);
+      setCategories(updatedCategories);
+    } catch (error) {
+      console.error("Erro ao remover categoria:", error);
+    }
   };
 
   const handleCategoryClick = (category) => {
@@ -105,7 +121,6 @@ const Admin = () => {
       });
     }
   };
-  
 
   const handleOpenModalCreate = () => {
     setShowModal(true);

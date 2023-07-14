@@ -7,7 +7,11 @@ export const Subtitle = styled.h3`
   left: 50%;
   transform: translateX(-50%);
 
-    &.hidden {
+  @media (max-width: 580px) {
+    font-size: 15px;
+  }
+
+  &.hidden {
     opacity: 0;
   }
 `;

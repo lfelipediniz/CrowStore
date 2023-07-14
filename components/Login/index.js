@@ -219,7 +219,7 @@ const Login = () => {
             return `${match[1]}.${match[2]}.${match[3]}-${match[4]}`;
         }
 
-        return value;
+        return value; 
     };
 
     const formatPhoneNumber = (value) => {

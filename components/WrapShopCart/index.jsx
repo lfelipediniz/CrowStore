@@ -32,6 +32,12 @@ const WrapShopCart = () => {
   });
   const [cartEmpty, setCartEmpty] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false); // useState para verificar se o usuário é admin
+  const [userExists, setUserExists] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setUserExists(!!token);
+  }, []);
 
   const fetchUserData = async (userId) => {
     try {
@@ -212,51 +218,78 @@ const WrapShopCart = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} home />
       <Navbar toggle={toggle} home />
-      {!isAdmin ? ( // Renderiza o conteúdo apenas se o usuário não for admin
-        <Container>
-          <WrapContent>
-            <Header>Meu Carrinho</Header>
-            <Link href="/">≪ Continuar comprando</Link>
-          </WrapContent>
-          <ShopcartWrapper>
-            <ShopcartContainer>
-              {cartEmpty ? (
-                <>
-                  <ProductContainer>
-                    <>
-                      <br />
-                      <h2 style={{ textAlign: "center" }}>
-                        O carrinho está vazio :(
-                      </h2>
-                    </>
-                  </ProductContainer>
 
-                  <ProductContainer>
-                    <CartEmpty />
-                  </ProductContainer>
-                </>
-              ) : (
-                <>
-                  <ProductContainer>
-                    {userData && (
-                      <Cart
-                        products={cartData.Products}
-                        quantities={cartData.Quantities}
-                        onCartUpdate={handleCartUpdate}
-                        onUpdateCartItem={handleUpdateCartItem}
-                        isShopCart={true}
-                        userData={userData}
-                      />
-                    )}
-                  </ProductContainer>
-                  <PaymentContainer>
-                    <PaymentOptions onSubmit={handleSubmission} />
-                  </PaymentContainer>
-                </>
-              )}
-            </ShopcartContainer>
-          </ShopcartWrapper>
-        </Container>
+      {userExists ? (
+        <>
+          {!isAdmin ? ( // Renderiza o conteúdo apenas se o usuário não for admin
+            <Container>
+              <WrapContent>
+                <Header>Meu Carrinho</Header>
+                <Link href="/">≪ Continuar comprando</Link>
+              </WrapContent>
+              <ShopcartWrapper>
+                <ShopcartContainer>
+                  {cartEmpty ? (
+                    <>
+                      <ProductContainer>
+                        <>
+                          <br />
+                          <h2 style={{ textAlign: "center" }}>
+                            O carrinho está vazio :(
+                          </h2>
+                        </>
+                      </ProductContainer>
+
+                      <ProductContainer>
+                        <CartEmpty />
+                      </ProductContainer>
+                    </>
+                  ) : (
+                    <>
+                      <ProductContainer>
+                        {userData && (
+                          <Cart
+                            products={cartData.Products}
+                            quantities={cartData.Quantities}
+                            onCartUpdate={handleCartUpdate}
+                            onUpdateCartItem={handleUpdateCartItem}
+                            isShopCart={true}
+                            userData={userData}
+                          />
+                        )}
+                      </ProductContainer>
+                      <PaymentContainer>
+                        <PaymentOptions onSubmit={handleSubmission} />
+                      </PaymentContainer>
+                    </>
+                  )}
+                </ShopcartContainer>
+              </ShopcartWrapper>
+            </Container>
+          ) : (
+            <>
+              <div style={{ marginTop: 80, backgroundColor: colors.primary }}>
+                <p
+                  style={{
+                    backgroundColor: "red",
+                    color: "white",
+                    padding: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  A conta de administrador não foi projetada para fins de
+                  compras, portanto, o recurso do carrinho não está disponível.
+                </p>
+                <center>
+                  <br />
+                  <br />
+                  <br />
+                  <AdminCart />
+                </center>
+              </div>
+            </>
+          )}
+        </>
       ) : (
         <>
           <div style={{ marginTop: 80, backgroundColor: colors.primary }}>
@@ -268,15 +301,16 @@ const WrapShopCart = () => {
                 textAlign: "center",
               }}
             >
-              A conta de administrador não foi projetada para fins de compras,
-              portanto, o recurso do carrinho não está disponível.
+              Para ter acesso ao carrinho, é necessário fazer o login. Por
+              favor, faça o login para desfrutar da funcionalidade completa do
+              nosso site.
             </p>
-              <center>
+            <center>
               <br />
               <br />
               <br />
-            <AdminCart />
-              </center>
+              <AdminCart />
+            </center>
           </div>
         </>
       )}

@@ -18,8 +18,17 @@ const ProductInfo = ({ product, onAddToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0); // Novo estado para armazenar o índice selecionado
+  const [isAvailableModelsEmpty, setIsAvailableModelsEmpty] = useState(false);
 
-  const handleColorSelect = (model, index) => { // Recebe o modelo e o índice como argumentos
+  const [userExists, setUserExists] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setUserExists(!!token);
+  }, []);
+
+  const handleColorSelect = (model, index) => {
+    // Recebe o modelo e o índice como argumentos
     setSelectedColor(model.color);
     setSelectedIndex(index); // Atualiza o estado com o índice selecionado
     const maxQuantity = model.quantity;
@@ -59,15 +68,20 @@ const ProductInfo = ({ product, onAddToCart }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const cartItem = {
-      product: product.name,
-      price: product.price,
-      color: selectedColor,
-      size: selectedSize,
-      quantity: parseInt(quantity),
-      modelIndex: selectedIndex, // Adiciona o índice selecionado como um novo atributo
-    };
-    onAddToCart(cartItem);
+
+    if (userExists) {
+      const cartItem = {
+        product: product.name,
+        price: product.price,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: parseInt(quantity),
+        modelIndex: selectedIndex,
+      };
+      onAddToCart(cartItem);
+    } else {
+      window.location.href = "http://localhost:3000/user";
+    }
   };
 
   useEffect(() => {
@@ -85,6 +99,8 @@ const ProductInfo = ({ product, onAddToCart }) => {
       const firstSize = Object.keys(uniqueSizes)[0];
       handleSizeSelect(firstSize);
     }
+
+    setIsAvailableModelsEmpty(product.AvailableModels.length === 0); // Atualiza o estado isAvailableModelsEmpty
 
     if (product.AvailableModels.length > 0) {
       const firstColor = product.AvailableModels[0].color;
@@ -127,73 +143,93 @@ const ProductInfo = ({ product, onAddToCart }) => {
         <Title>{product.name}</Title>
         <p>{product.description}</p>
       </div>
+      {isAvailableModelsEmpty ? (
+        <>
+          <p
+            style={{
+              fontStyle: "italic",
+              textAlign: "center",
+              fontSize: "16px",
+              color: "#333",
+            }}
+          >
+            Em breve, este produto estará disponível para compra. No entanto, o
+            administrador ainda não atualizou o estoque para este item.
+          </p>
+        </>
+      ) : (
+        <>
+          <form onSubmit={handleSubmit}>
+            <Subtitle>Tamanho</Subtitle>
+            <List>
+              {Object.keys(uniqueSizes).map((size) => (
+                <ListItem key={size}>
+                  <SizeButton
+                    type="button"
+                    className={`sample ${
+                      selectedSize === size ? "selected" : ""
+                    }`}
+                    id={size}
+                    value={size}
+                    selected={selectedSize === size}
+                    onClick={() => handleSizeSelect(size)}
+                  >
+                    {size}
+                  </SizeButton>
+                </ListItem>
+              ))}
+            </List>
 
-      <form onSubmit={handleSubmit}>
-        <Subtitle>Tamanho</Subtitle>
-        <List>
-          {Object.keys(uniqueSizes).map((size) => (
-            <ListItem key={size}>
-              <SizeButton
-                type="button"
-                className={`sample ${selectedSize === size ? "selected" : ""}`}
-                id={size}
-                value={size}
-                selected={selectedSize === size}
-                onClick={() => handleSizeSelect(size)}
-              >
-                {size}
-              </SizeButton>
-            </ListItem>
-          ))}
-        </List>
+            <Subtitle>Cor</Subtitle>
+            <List>
+              {product.AvailableModels.map(
+                (model, index) =>
+                  model.size === selectedSize && (
+                    <ListItem key={model.color}>
+                      <ColorSample
+                        type="button"
+                        className={`sample ${
+                          selectedIndex === index ? "selected" : ""
+                        }`}
+                        id={`color${model.color}`}
+                        value={model.color}
+                        color={model.color}
+                        selected={selectedIndex === index} // Usa selectedIndex para determinar se o botão está selecionado
+                        onClick={() => handleColorSelect(model, index)} // Passa o modelo e o índice como argumentos
+                      />
+                    </ListItem>
+                  )
+              )}
+            </List>
 
-        <Subtitle>Cor</Subtitle>
-        <List>
-          {product.AvailableModels.map((model, index) => (
-            model.size === selectedSize && (
-              <ListItem key={model.color}>
-                <ColorSample
-                  type="button"
-                  className={`sample ${
-                    selectedIndex === index ? "selected" : ""
-                  }`}
-                  id={`color${model.color}`}
-                  value={model.color}
-                  color={model.color}
-                  selected={selectedIndex === index} // Usa selectedIndex para determinar se o botão está selecionado
-                  onClick={() => handleColorSelect(model, index)} // Passa o modelo e o índice como argumentos
-                />
-              </ListItem>
-            )
-          ))}
-        </List>
+            <Subtitle>Quantidade</Subtitle>
+            <QuantityInput
+              type="number"
+              id="quantity"
+              name="quantity"
+              value={quantity}
+              min={1}
+              max={
+                product.AvailableModels.find(
+                  (model) =>
+                    model.size === selectedSize && model.color === selectedColor
+                )?.quantity || 1
+              }
+              onChange={handleQuantityChange}
+            />
+            {selectedColor && selectedSize && (
+              <>
+                <h3>Apenas {stock} no estoque!</h3>
+              </>
+            )}
 
-        <Subtitle>Quantidade</Subtitle>
-        <QuantityInput
-          type="number"
-          id="quantity"
-          name="quantity"
-          value={quantity}
-          min={1}
-          max={
-            product.AvailableModels.find(
-              (model) =>
-                model.size === selectedSize && model.color === selectedColor
-            )?.quantity || 1
-          }
-          onChange={handleQuantityChange}
-        />
-        {selectedColor && selectedSize && (
-          <>
-            <h3>Apenas {stock} no estoque!</h3>
-          </>
-        )}
-
-        <SubmitButton type="submit" id="submit">
-          <ShoppingCartIcon />
-          Adicionar ao carrinho
-        </SubmitButton>
-      </form>
+            <SubmitButton type="submit" id="submit">
+              <ShoppingCartIcon />
+              Adicionar ao carrinho
+            </SubmitButton>
+          </form>
+        </>
+      )}
     </ProductInfoContainer>
   );
 };

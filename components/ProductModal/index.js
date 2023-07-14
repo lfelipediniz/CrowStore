@@ -126,59 +126,78 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   };
 
   const handleSave = () => {
-    const updatedProduct = {
-      ...product,
-      productName: selectedProductData.productName,
-      selectedSizes: selectedSizes,
-      description: selectedDescription, // S a descrição atualizada no objeto do produto
-    };
-    var Imgfile = new FormData();
-    console.log(selectedProductData.productName);
+    if (!product) {
+      let Imgfile = new FormData();
+      console.log(selectedProductData.productName);
 
-    Imgfile.append("name", selectedProductData.productName);
-    Imgfile.append("file", imageFile, `user.png`);
+      Imgfile.append("name", selectedProductData.productName);
+      Imgfile.append("file", imageFile, `user.png`);
 
-    fetch("http://localhost:5000/imgs", {
-      mode: "no-cors",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: Imgfile,
-    }).then((response) => {});
+      fetch("http://localhost:5000/imgs", {
+        mode: "no-cors",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: Imgfile,
+      }).then((response) => {});
 
-    const Newproduto = {
-      name: selectedProductData.productName,
-      tags: [selectedCategory],
-      gender: selectedGender,
-      price: selectedPrice,
-      images: `${selectedProductData.productName}.png`,
-      description: selectedDescription,
-    };
+      const Newproduto = {
+        name: selectedProductData.productName,
+        tags: [selectedCategory],
+        gender: selectedGender,
+        price: selectedPrice,
+        images: `${selectedProductData.productName}.png`,
+        description: selectedDescription,
+      };
 
-    fetch("http://localhost:5000/products/addProduct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(Newproduto),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Produto cadastrado com sucesso");
-
-          return response.json();
-        } else {
-          throw new Error("Erro ao cadastrar produto");
-        }
+      fetch("http://localhost:5000/products/addProduct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Newproduto),
       })
-      .then((data) => {})
-      .catch((error) => {
-        console.error("Erro:", error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            console.log("Produto cadastrado com sucesso");
 
-    onSave(updatedProduct);
-    window.location.reload();
+            return response.json();
+          } else {
+            throw new Error("Erro ao cadastrar produto");
+          }
+        })
+        .then((data) => {})
+        .catch((error) => {
+          console.error("Erro:", error);
+        });
+      window.location.reload();
+    } else {
+      // Código para atualizar um produto existente
+
+      // Montar o objeto com as atualizações a serem enviadas para o backend
+      const updates = {
+        name: selectedProductData.productName,
+        description: selectedDescription,
+        price: selectedPrice,
+        gender: selectedGender,
+        tags: [selectedCategory],
+      };
+
+      // Fazer a requisição PATCH para atualizar o produto
+      axios
+        .patch(
+          `http://localhost:5000/products/updateProduct/${product._id}`,
+          updates
+        )
+        .then((response) => {
+          console.log("Produto atualizado com sucesso:", response.data);
+          // Lógica adicional após a atualização do produto, se necessário
+        })
+        .catch((error) => {
+          console.error("Erro ao atualizar o produto:", error);
+        });
+    }
   };
 
   const handleRemove = () => {
@@ -468,17 +487,15 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
               </TextField>
             </InputInfoContainer>
             <InputInfoContainer>
-              { product && (
-              
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => setColorModalOpen(true)}
-                sx={{ marginBottom: "25px" }}
-              >
-                Available Models
-              </Button>
-              
+              {product && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setColorModalOpen(true)}
+                  sx={{ marginBottom: "25px" }}
+                >
+                  Available Models
+                </Button>
               )}
 
               <Modal

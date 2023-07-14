@@ -478,48 +478,48 @@ module.exports = class ProductController {
     }
   }
 
-  static async updateProduct(req, res) {
-    const { productId } = req.params;
-    const updates = req.body;
+  // static async updateProduct(req, res) {
+  //   const { productId } = req.params;
+  //   const updates = req.body;
 
-    try {
-      const product = await Product.findById(productId);
-      if (!product) {
-        return res
-          .status(404)
-          .json({ message: `O produto de id ${productId} não foi encontrado` });
-      }
+  //   try {
+  //     const product = await Product.findById(productId);
+  //     if (!product) {
+  //       return res
+  //         .status(404)
+  //         .json({ message: `O produto de id ${productId} não foi encontrado` });
+  //     }
 
-      const existingKeys = Object.keys(product.toObject());
-      const updateKeys = Object.keys(updates);
-      const invalidKeys = updateKeys.filter(
-        (key) => !existingKeys.includes(key)
-      );
+  //     const existingKeys = Object.keys(product.toObject());
+  //     const updateKeys = Object.keys(updates);
+  //     const invalidKeys = updateKeys.filter(
+  //       (key) => !existingKeys.includes(key)
+  //     );
 
-      if (invalidKeys.length > 0) {
-        return res.status(400).json({
-          message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(
-            ", "
-          )}`,
-        });
-      }
+  //     if (invalidKeys.length > 0) {
+  //       return res.status(400).json({
+  //         message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(
+  //           ", "
+  //         )}`,
+  //       });
+  //     }
 
-      Object.keys(updates).forEach((key) => {
-        product[key] = updates[key];
-      });
+  //     Object.keys(updates).forEach((key) => {
+  //       product[key] = updates[key];
+  //     });
 
-      await product.save();
+  //     await product.save();
 
-      return res
-        .status(200)
-        .json({ message: "Produto atualizado com sucesso", product });
-    } catch (error) {
-      return res.status(500).json({
-        message: "Não foi possível atualizar o produto",
-        error: error.message,
-      });
-    }
-  }
+  //     return res
+  //       .status(200)
+  //       .json({ message: "Produto atualizado com sucesso", product });
+  //   } catch (error) {
+  //     return res.status(500).json({
+  //       message: "Não foi possível atualizar o produto",
+  //       error: error.message,
+  //     });
+  //   }
+  // }
 
   static async updateProductModel(req, res) {
     const { productId, modelIndex, newQuantity } = req.body;
@@ -692,6 +692,49 @@ module.exports = class ProductController {
     } catch (error) {
       res.status(500).json({
         message: "Não foi possível remover o modelo do produto",
+        error: error.message,
+      });
+    }
+  }
+
+  static async updateProduct(req, res) {
+    const { productId } = req.params;
+    const updates = req.body;
+
+    try {
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({
+          message: `O produto de id ${productId} não foi encontrado`,
+        });
+      }
+
+      const existingKeys = Object.keys(product.toObject());
+      const updateKeys = Object.keys(updates);
+      const invalidKeys = updateKeys.filter(
+        (key) => !existingKeys.includes(key)
+      );
+
+      if (invalidKeys.length > 0) {
+        return res.status(400).json({
+          message: `As seguintes chaves são inválidas e serão ignoradas: ${invalidKeys.join(
+            ", "
+          )}`,
+        });
+      }
+
+      Object.keys(updates).forEach((key) => {
+        product[key] = updates[key];
+      });
+
+      await product.save();
+
+      return res
+        .status(200)
+        .json({ message: "Produto atualizado com sucesso", product });
+    } catch (error) {
+      return res.status(500).json({
+        message: "Não foi possível atualizar o produto, verifique se preencheu todo formulário!",
         error: error.message,
       });
     }

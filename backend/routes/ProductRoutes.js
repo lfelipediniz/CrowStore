@@ -24,5 +24,6 @@ router.post('/createProductModel', ProductController.CreateProductModel);
 router.get('/getProductModels/:productId', ProductController.getProductModels);
 router.delete('/deleteProductModel/:productId/:modelIndex', ProductController.deleteProductModel);
 
+router.patch('/updateProduct/:productId', ProductController.updateProduct);
 
 module.exports = router

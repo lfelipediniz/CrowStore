@@ -21,6 +21,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import { colors } from "../../styles/colors";
 import { FaPhotoVideo, FaTrash, FaPen } from "react-icons/fa";
+import axios from "axios";
 
 import {
   Modal,
@@ -45,6 +46,11 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const [selectedDescription, setSelectedDescription] = useState("");
   const [dense, setDense] = useState(false);
   const [categoriesAll, setCategoriesAll] = useState([]);
+
+  const [selectedSize, setSelectedSize] = useState(""); // Estado para armazenar o tamanho selecionado
+  const [selectedColor, setSelectedColor] = useState(""); // Estado para armazenar a cor selecionada
+  const [selectedQuantity, setSelectedQuantity] = useState(""); // Estado para armazenar a quantidade selecionada
+
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: colors.textBlack,
     color: colors.primary,
@@ -84,13 +90,37 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
     }
   };
 
+  const handleSaveModel = () => {
+    // Crie um objeto com os dados a serem enviados
+    const data = {
+      productId: product._id,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: selectedQuantity,
+    };
+
+    console.log(selectedColor)
+
+    // Faça a solicitação POST para a rota /createProductModel
+    axios
+      .post("http://localhost:5000/products/createProductModel", data)
+      .then((response) => {
+        // Manipule a resposta da solicitação
+        console.log("Dados adicionados ao banco de dados:", response.data);
+        // Limpe os campos de texto ou faça outras ações necessárias
+      })
+      .catch((error) => {
+        // Manipule o erro da solicitação
+        console.error("Erro ao adicionar dados ao banco de dados:", error);
+      });
+  };
+
   const handleSave = () => {
     const updatedProduct = {
       ...product,
       productName: selectedProductData.productName,
-      selectedColors: selectedColors,
       selectedSizes: selectedSizes,
-      description: selectedDescription, // Inclua a descrição atualizada no objeto do produto
+      description: selectedDescription, // S a descrição atualizada no objeto do produto
     };
     var Imgfile = new FormData();
     console.log(selectedProductData.productName);
@@ -281,8 +311,6 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
     const extension = fileName.split(".").pop();
     return `.${extension}`;
   };
-
-  const [selectedColor, setSelectedColor] = useState(""); // Estado para armazenar a cor selecionada
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -517,6 +545,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                       <form>
                         <TextField
                           select
+                          value={selectedSize} // Define o valor selecionado no TextField
+                          onChange={(e) => setSelectedSize(e.target.value)} // Atualiza o estado quando o valor muda
                           label={
                             <p style={{ color: colors.primary }}>Tamanho</p>
                           }
@@ -553,6 +583,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                         <br />
                         <TextField
                           select
+                          value={selectedColor} // Define o valor selecionado no TextField
+                          onChange={(e) => setSelectedColor(e.target.value)} // Atualiza o estado quando o valor muda
                           label={
                             <p style={{ color: colors.primary }}>
                               Selecione uma cor
@@ -581,8 +613,6 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                               },
                             },
                           }}
-                          value={selectedColor} // Define o valor selecionado no TextField
-                          onChange={(e) => setSelectedColor(e.target.value)} // Atualiza o estado quando o valor muda
                         >
                           <MenuItem value="MidnightBlue">
                             Midnight Blue
@@ -678,6 +708,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                         <br />
                         <br />
                         <TextField
+                          value={selectedQuantity} // Define o valor selecionado no TextField
+                          onChange={(e) => setSelectedQuantity(e.target.value)} // Atualiza o estado quando o valor muda
                           label={
                             <p style={{ color: colors.primary }}>
                               Quantidade no estoque
@@ -727,7 +759,11 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                         <br />
                         <br />
                         <center>
-                          <SaveButton variant="contained" color="primary">
+                          <SaveButton
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSaveModel}
+                          >
                             Salvar
                           </SaveButton>
                         </center>

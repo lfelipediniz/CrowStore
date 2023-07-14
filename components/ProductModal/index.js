@@ -55,10 +55,10 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: colors.textBlack,
     color: colors.primary,
-    height: 250,
+    height: 280,
     width: "95%",
     overflow: "auto",
-    borderRadius: 15
+    borderRadius: 15,
   }));
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(""); // Estado para armazenar a categoria selecionada
@@ -96,7 +96,6 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   };
 
   const handleSaveModel = () => {
-    // Crie um objeto com os dados a serem enviados
     const data = {
       productId: product._id,
       size: selectedSize,
@@ -104,18 +103,23 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
       quantity: selectedQuantity,
     };
 
-    console.log(selectedColor);
-
-    // Faça a solicitação POST para a rota /createProductModel
     axios
       .post("http://localhost:5000/products/createProductModel", data)
       .then((response) => {
-        // Manipule a resposta da solicitação
         console.log("Dados adicionados ao banco de dados:", response.data);
-        // Limpe os campos de texto ou faça outras ações necessárias
+
+        // Após adicionar o novo modelo com sucesso, obter os modelos atualizados do produto
+        axios
+          .get(`http://localhost:5000/products/getModels/${product._id}`)
+          .then((response) => {
+            // Atualizar o estado com os modelos atualizados
+            setProductModels(response.data);
+          })
+          .catch((error) => {
+            console.error("Erro ao obter modelos do produto:", error);
+          });
       })
       .catch((error) => {
-        // Manipule o erro da solicitação
         console.error("Erro ao adicionar dados ao banco de dados:", error);
       });
   };
@@ -327,6 +331,32 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
     return `.${extension}`;
   };
 
+  const handleRemoveModel = (modelIndex) => {
+    axios
+      .delete(
+        `http://localhost:5000/products/deleteProductModel/${product._id}/${modelIndex}`
+      )
+      .then((response) => {
+        // Manipule a resposta da solicitação
+        console.log("Modelo removido com sucesso:", response.data);
+
+        // Atualize a lista de modelos buscando os modelos atualizados do produto
+        axios
+          .get(`http://localhost:5000/products/getModels/${product._id}`)
+          .then((response) => {
+            // Atualize o estado com os modelos atualizados
+            setProductModels(response.data);
+          })
+          .catch((error) => {
+            console.error("Erro ao obter modelos do produto:", error);
+          });
+      })
+      .catch((error) => {
+        // Manipule o erro da solicitação
+        console.error("Erro ao remover modelo:", error);
+      });
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <Box
@@ -474,38 +504,39 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
 
                     {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos os modelos existentes */}
                     <center>
-                    <Demo>
-                      <List dense={dense}>
-                        {productModels.map((model) => (
-                          <ListItem
-                            key={model._id}
-                            secondaryAction={
-                              <IconButton
-                                edge="end"
-                                aria-label="delete"
-                                onClick={() => handleRemoveModel(model._id)}
-                              >
-                                <FaTrash color={colors.primary} />
-                              </IconButton>
-                            }
-                          >
-                            <ListItemAvatar>
-                              <Avatar style={{ colors: colors.secondary }}>
-                                <FaPen color={colors.secondary} />
-                              </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary={`${model.quantity} unidades no estoque do tamanho ${model.size}`}
-                              secondary={
-                                <p style={{ color: model.color }}>
-                                  {model.color}
-                                </p>
+                      <Demo>
+                        <List dense={dense}>
+                          {productModels.map((model, index) => (
+                            <ListItem
+                              key={model._id}
+                              secondaryAction={
+                                <IconButton
+                                  edge="end"
+                                  aria-label="delete"
+                                  onClick={() => handleRemoveModel(index)}
+                                >
+                                  <FaTrash color={colors.primary} />
+                                </IconButton>
                               }
-                            />
-                          </ListItem>
-                        ))}
-                      </List>
-                    </Demo></center>
+                            >
+                              <ListItemAvatar>
+                                <Avatar style={{ colors: colors.secondary }}>
+                                  <FaPen color={colors.secondary} />
+                                </Avatar>
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={`${model.quantity} unidades no estoque do tamanho ${model.size}`}
+                                secondary={
+                                  <p style={{ color: model.color }}>
+                                    {model.color}
+                                  </p>
+                                }
+                              />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </Demo>
+                    </center>
                   </ColorsContainer>
                 </Box>
               </Modal>

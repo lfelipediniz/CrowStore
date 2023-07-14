@@ -22,9 +22,7 @@ router.post('/filterProducts', ProductController.filterProducts);
 
 router.post('/createProductModel', ProductController.CreateProductModel);
 router.get('/getProductModels/:productId', ProductController.getProductModels);
-router.delete('/deleteProductModel/:productId/:modelId', ProductController.deleteProductModel);
-
-
+router.delete('/deleteProductModel/:productId/:modelIndex', ProductController.deleteProductModel);
 
 
 module.exports = router

@@ -668,7 +668,7 @@ module.exports = class ProductController {
   }
 
   static async deleteProductModel(req, res) {
-    const { productId, modelId } = req.params;
+    const { productId, modelIndex } = req.params;
 
     try {
       const product = await Product.findById(productId);
@@ -679,26 +679,19 @@ module.exports = class ProductController {
         });
       }
 
-      const modelIndex = product.AvailableModels.findIndex(
-        (model) => model._id.toString() === modelId
-      );
-
-      if (modelIndex === -1) {
-        return res.status(404).json({
-          message: `O modelo de id ${modelId} não foi encontrado`,
-        });
+      if (modelIndex < 0 || modelIndex >= product.AvailableModels.length) {
+        return res.status(400).json({ message: "Índice de modelo inválido" });
       }
 
       product.AvailableModels.splice(modelIndex, 1);
-
       await product.save();
 
       res.status(200).json({
-        message: `O modelo de id ${modelId} foi removido com sucesso do produto`,
+        message: `O modelo de índice ${modelIndex} foi removido com sucesso`,
       });
     } catch (error) {
       res.status(500).json({
-        message: "Não foi possível excluir o modelo do produto",
+        message: "Não foi possível remover o modelo do produto",
         error: error.message,
       });
     }

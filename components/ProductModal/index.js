@@ -99,7 +99,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
       quantity: selectedQuantity,
     };
 
-    console.log(selectedColor)
+    console.log(selectedColor);
 
     // Faça a solicitação POST para a rota /createProductModel
     axios
@@ -621,89 +621,15 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                             Dark Slate Gray
                           </MenuItem>
                           <MenuItem value="Goldenrod">Goldenrod</MenuItem>
-                          <MenuItem value="Light Sky Blue">
-                            Light Sky Blue
-                          </MenuItem>
-                          <MenuItem value="Light Salmon">Light Salmon</MenuItem>
                           <MenuItem value="Lavender">Lavender</MenuItem>
-                          <MenuItem value="Dark Olive Green">
-                            Dark Olive Green
-                          </MenuItem>
                           <MenuItem value="Tomato">Tomato</MenuItem>
-                          <MenuItem value="Steel Blue">Steel Blue</MenuItem>
-                          <MenuItem value="Pale Violet Red">
-                            Pale Violet Red
-                          </MenuItem>
-                          <MenuItem value="Medium Sea Green">
-                            Medium Sea Green
-                          </MenuItem>
                           <MenuItem value="Chocolate">Chocolate</MenuItem>
-                          <MenuItem value="Medium Purple">
-                            Medium Purple
-                          </MenuItem>
-                          <MenuItem value="Light Slate Gray">
-                            Light Slate Gray
-                          </MenuItem>
-                          <MenuItem value="Light Coral">Light Coral</MenuItem>
-                          <MenuItem value="Dark Sea Green">
-                            Dark Sea Green
-                          </MenuItem>
-                          <MenuItem value="Fire Brick">Fire Brick</MenuItem>
-                          <MenuItem value="Cornflower Blue">
-                            Cornflower Blue
-                          </MenuItem>
-                          <MenuItem value="Dim Gray">Dim Gray</MenuItem>
-                          <MenuItem value="Light Pink">Light Pink</MenuItem>
-                          <MenuItem value="Medium Aquamarine">
-                            Medium Aquamarine
-                          </MenuItem>
                           <MenuItem value="Sienna">Sienna</MenuItem>
-                          <MenuItem value="Blue Violet">Blue Violet</MenuItem>
                           <MenuItem value="Gainsboro">Gainsboro</MenuItem>
-                          <MenuItem value="Misty Rose">Misty Rose</MenuItem>
-                          <MenuItem value="Light Green">Light Green</MenuItem>
-                          <MenuItem value="Dark Goldenrod">
-                            Dark Goldenrod
-                          </MenuItem>
-                          <MenuItem value="Medium Orchid">
-                            Medium Orchid
-                          </MenuItem>
                           <MenuItem value="Silver">Silver</MenuItem>
-                          <MenuItem value="Pale Green">Pale Green</MenuItem>
-                          <MenuItem value="Olive Drab">Olive Drab</MenuItem>
-                          <MenuItem value="Dark Orchid">Dark Orchid</MenuItem>
-                          <MenuItem value="Dark Gray">Dark Gray</MenuItem>
                           <MenuItem value="Coral">Coral</MenuItem>
-                          <MenuItem value="Aquamarine">Aquamarine</MenuItem>
-                          <MenuItem value="Maroon">Maroon</MenuItem>
                           <MenuItem value="Purple">Purple</MenuItem>
-                          <MenuItem value="Light Gray">Light Gray</MenuItem>
-                          <MenuItem value="Indian Red">Indian Red</MenuItem>
-                          <MenuItem value="Medium Spring Green">
-                            Medium Spring Green
-                          </MenuItem>
-                          <MenuItem value="Brown">Brown</MenuItem>
-                          <MenuItem value="Medium Slate Blue">
-                            Medium Slate Blue
-                          </MenuItem>
-                          <MenuItem value="Dark Khaki">Dark Khaki</MenuItem>
-                          <MenuItem value="Salmon">Salmon</MenuItem>
-                          <MenuItem value="Pale Turquoise">
-                            Pale Turquoise
-                          </MenuItem>
-                          <MenuItem value="Dark Red">Dark Red</MenuItem>
-                          <MenuItem value="Slate Blue">Slate Blue</MenuItem>
-                          <MenuItem value="Light Slate Grey">
-                            Light Slate Grey
-                          </MenuItem>
-                          <MenuItem value="Light Blue">Light Blue</MenuItem>
-                          <MenuItem value="Medium Turquoise">
-                            Medium Turquoise
-                          </MenuItem>
-                          <MenuItem value="Rosy Brown">Rosy Brown</MenuItem>
-                          <MenuItem value="Medium Violet Red">
-                            Medium Violet Red
-                          </MenuItem>
+                          <MenuItem value="Maroon">Maroon</MenuItem>
                         </TextField>
                         <br />
                         <br />

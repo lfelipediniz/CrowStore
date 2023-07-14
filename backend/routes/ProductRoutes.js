@@ -21,6 +21,9 @@ router.get('/getRecentProducts', ProductController.getRecentProducts);
 router.post('/filterProducts', ProductController.filterProducts);
 
 router.post('/createProductModel', ProductController.CreateProductModel);
+router.get('/getProductModels/:productId', ProductController.getProductModels);
+router.delete('/deleteProductModel/:productId/:modelId', ProductController.deleteProductModel);
+
 
 
 

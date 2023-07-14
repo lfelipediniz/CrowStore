@@ -643,4 +643,64 @@ module.exports = class ProductController {
       res.status(422).json({ message: error.message });
     }
   }
+
+  static async getProductModels(req, res) {
+    const { productId } = req.params;
+
+    try {
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        return res.status(404).json({
+          message: `O produto de id ${productId} não foi encontrado`,
+        });
+      }
+
+      const models = product.AvailableModels;
+
+      res.status(200).json(models);
+    } catch (error) {
+      res.status(500).json({
+        message: "Não foi possível recuperar os modelos do produto",
+        error: error.message,
+      });
+    }
+  }
+
+  static async deleteProductModel(req, res) {
+    const { productId, modelId } = req.params;
+
+    try {
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        return res.status(404).json({
+          message: `O produto de id ${productId} não foi encontrado`,
+        });
+      }
+
+      const modelIndex = product.AvailableModels.findIndex(
+        (model) => model._id.toString() === modelId
+      );
+
+      if (modelIndex === -1) {
+        return res.status(404).json({
+          message: `O modelo de id ${modelId} não foi encontrado`,
+        });
+      }
+
+      product.AvailableModels.splice(modelIndex, 1);
+
+      await product.save();
+
+      res.status(200).json({
+        message: `O modelo de id ${modelId} foi removido com sucesso do produto`,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Não foi possível excluir o modelo do produto",
+        error: error.message,
+      });
+    }
+  }
 };

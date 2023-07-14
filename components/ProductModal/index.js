@@ -46,6 +46,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const [selectedDescription, setSelectedDescription] = useState("");
   const [dense, setDense] = useState(false);
   const [categoriesAll, setCategoriesAll] = useState([]);
+  const [productModels, setProductModels] = useState([]); // Estado para armazenar os modelos do produto
 
   const [selectedSize, setSelectedSize] = useState(""); // Estado para armazenar o tamanho selecionado
   const [selectedColor, setSelectedColor] = useState(""); // Estado para armazenar a cor selecionada
@@ -54,6 +55,10 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: colors.textBlack,
     color: colors.primary,
+    height: 250,
+    width: "95%",
+    overflow: "auto",
+    borderRadius: 15
   }));
   const [selectedGender, setSelectedGender] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(""); // Estado para armazenar a categoria selecionada
@@ -223,6 +228,16 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
     } else {
       setSelectedPrice("");
     }
+
+    // Busque os modelos do produto
+    axios
+      .get(`http://localhost:5000/products/getProductModels/${product?._id}`)
+      .then((response) => {
+        setProductModels(response.data);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar modelos do produto:", error);
+      });
   }, [product]);
 
   const handleColorToggle = (color) => () => {
@@ -458,31 +473,39 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                     </center>
 
                     {/* Vou colocar um front de modelo aqui,mas dai vc vai printar com esse front todos os modelos existentes */}
+                    <center>
                     <Demo>
                       <List dense={dense}>
-                        <ListItem
-                          secondaryAction={
-                            <IconButton edge="end" aria-label="delete">
-                              <FaTrash color={colors.primary} />
-                            </IconButton>
-                          }
-                        >
-                          <ListItemAvatar>
-                            <Avatar style={{ colors: colors.secondary }}>
-                              <FaPen color={colors.secondary} />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary="Tamanho PP, 6 no estoque"
-                            secondary={
-                              <p style={{ color: colors.lightGray }}>
-                                Cor Tomato
-                              </p>
+                        {productModels.map((model) => (
+                          <ListItem
+                            key={model._id}
+                            secondaryAction={
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => handleRemoveModel(model._id)}
+                              >
+                                <FaTrash color={colors.primary} />
+                              </IconButton>
                             }
-                          />
-                        </ListItem>
+                          >
+                            <ListItemAvatar>
+                              <Avatar style={{ colors: colors.secondary }}>
+                                <FaPen color={colors.secondary} />
+                              </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={`${model.quantity} unidades no estoque do tamanho ${model.size}`}
+                              secondary={
+                                <p style={{ color: model.color }}>
+                                  {model.color}
+                                </p>
+                              }
+                            />
+                          </ListItem>
+                        ))}
                       </List>
-                    </Demo>
+                    </Demo></center>
                   </ColorsContainer>
                 </Box>
               </Modal>
@@ -646,26 +669,15 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                           rows={1}
                           fullWidth
                           onKeyPress={(event) => {
-                            const keyCode = event.keyCode || event.which;
-                            const keyValue = String.fromCharCode(keyCode);
-                            const regex = /[0-9]/;
-                            if (!regex.test(keyValue)) {
+                            if (!/[0-9]/.test(event.key)) {
                               event.preventDefault();
                             }
-                          }}
-                          inputProps={{
-                            pattern: "[0-9]*",
-                            inputMode: "numeric",
-                            step: "1",
                           }}
                           sx={{
                             color: colors.primary,
                             width: "100%",
                             "& .MuiInputBase-root": {
                               color: "#fff", // Cor do texto
-                            },
-                            "& .MuiSelect-icon": {
-                              color: "#fff", // Cor da seta
                             },
                             "& .MuiOutlinedInput-root": {
                               "& fieldset": {
@@ -680,22 +692,19 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                             },
                           }}
                         />
-
-                        <br />
                         <br />
                         <br />
                         <center>
-                          <SaveButton
+                          <Button
                             variant="contained"
                             color="primary"
                             onClick={handleSaveModel}
                           >
-                            Salvar
-                          </SaveButton>
+                            Adicionar Modelo
+                          </Button>
                         </center>
                       </form>
                     </AvailableColors>
-                    <ColorsButton></ColorsButton>
                   </ColorsContainer>
                 </Box>
               </Modal>

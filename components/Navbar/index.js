@@ -25,7 +25,7 @@ const Navbar = ({ toggle, navbarColor }) => {
   const router = useRouter();
 
   const changeNav = () => {
-    if (window.scrollY >= 60) {
+    if (window.scrollY >= 80) {
       setScrollNav(true);
     } else {
       setScrollNav(false);

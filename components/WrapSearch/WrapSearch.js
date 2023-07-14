@@ -51,7 +51,9 @@ const WrapSearch = () => {
     const filteredItemsWithFilters = originalItems.filter((item) => {
       const hasAllFilters = filters.every((filter) => {
         if (filter === "Masculino" || filter === "Feminino") {
-          return item.gender && item.gender.toLowerCase() === filter.toLowerCase();
+          return (
+            item.gender && item.gender.toLowerCase() === filter.toLowerCase()
+          );
         } else {
           return item.tags && item.tags.includes(filter);
         }
@@ -94,11 +96,22 @@ const WrapSearch = () => {
       <Navbar toggle={toggle} home />
       <SearchBar onChange={modifySearchTerm} />
       <FilterTags onChange={modifyFilters} selectedTags={filters} />
-      {searchTerm && (
-        <Subtitle id="subtitle">
-          {filteredItems.length} resultados para "{searchTerm}"
-        </Subtitle>
-      )}
+      <Subtitle id="subtitle">
+        <center>
+          <br />
+          <br />
+          Desbrave o universo de possibilidades na Crow Store!
+          <br /> <br />
+          {searchTerm ? (
+            <>
+              {filteredItems.length} resultados para "{searchTerm}"
+            </>
+          ) : (
+            <>Faça sua pesquisa e desvende tesouros ocultos</>
+          )}
+        </center>
+      </Subtitle>
+
       <ScrollableContainer
         style={{ marginLeft: 0 }}
         ref={scrollableContainerRef}

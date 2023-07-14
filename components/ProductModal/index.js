@@ -162,6 +162,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
           if (response.ok) {
             console.log("Produto cadastrado com sucesso");
 
+            window.location.reload(); 
+
             return response.json();
           } else {
             throw new Error("Erro ao cadastrar produto");
@@ -192,7 +194,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
         )
         .then((response) => {
           console.log("Produto atualizado com sucesso:", response.data);
-          // Lógica adicional após a atualização do produto, se necessário
+          window.location.reload(); 
+
         })
         .catch((error) => {
           console.error("Erro ao atualizar o produto:", error);

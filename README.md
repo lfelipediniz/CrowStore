@@ -99,28 +99,9 @@ To enter common user mode just put these data:
 
 Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/Milestone1/mockup-imgs)
 
-### Requirements
+### The requirements met by the project
 
-- The system must have 2 types of users: Clients and Administrators
-
-  - Administrators are responsible for registering/managing administrators, customers, and products/services provided. The application already comes with an account admin with password admin.
-
-  - Customers are users who access the system to buy products/services.
-
-- The admin record includes, at least: name, id, phone, email.
-
-- Each customer's record includes, at least: name, id, address, phone, email
-  Product/services records include, at least: name, id, photo, description, price, quantity (in stock), quantity sold.
-
-- Your store may sell products, services or both (you decide)
-
-- Selling Products (or services): Products are selected, their quantity chosen, and are included in a cart. Products are purchased using a credit card number (any number is accepted by the system). The quantity of product sold is subtracted from the quantity in stock and added to the quantity sold. Carts are emptied only on payment or by customers.
-
-- Product/Service Management: Administrators can create/update/read/delete (crud) new products and services. For example, they can change the stock quantity.
-
-- Your functionality: Create a functionality that is specific to your application. It does not have to be something complicated. For instance, if you are selling cars, you may allow users to use an accelerator to hear how each car engine roars up and down.
-
-- The system must provide accessibility requirements and provide good usability. The system must be responsive.
+Our website includes interfaces for both customers and administrators, and capabilities for registering users and products. We've added as an specific functionality to it a dynamic search with a tag-based filtering system. Products are chosen by their type, specific model (such as color and size) and quantity to be added to a cart, where they can be purchased using PIX or a credit card. All pages in the website are fully responsive.
 
 ### Comments About the Code
 

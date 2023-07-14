@@ -21,7 +21,6 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import ProductModal from "../ProductModal";
 import { colors } from "../../styles/colors";
 
-// Minhas alterações
 import SearchBar from "../SearchBar";
 import axios from "axios";
 
@@ -33,12 +32,11 @@ const Admin = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Minhas alterações
-
   const [filters, setFilters] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const scrollableContainerRef = useRef(null);
-  const [showWidthWarning, setShowWidthWarning] = useState(false); // Novo estado para controlar o aviso de largura mínima
+  const [showWidthWarning, setShowWidthWarning] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -62,7 +60,7 @@ const Admin = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Verifica a largura da tela ao carregar o componente
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -128,7 +126,7 @@ const Admin = () => {
       setShowModal(true);
       setSelectedProduct({
         ...product,
-        productName: product.name, // Atualize para selecionar corretamente o nome do produto
+        productName: product.name,
         image: `/CrowStore/imgs/${product.images[0]}`,
       });
     }
@@ -148,17 +146,13 @@ const Admin = () => {
   };
 
   const handleRemoveProduct = (product) => {
-    // Implemente a lógica para remover o produto do sistema
     console.log("Remover produto:", product);
   };
 
   const handleLogout = () => {
-    // Limpar o token do localStorage
     localStorage.removeItem("token");
-    window.location.reload(); // Recarrega a página
+    window.location.reload();
   };
-
-  // Minhas alterações
 
   const modifySearchTerm = (newTerm) => {
     setSearchTerm(newTerm);
@@ -208,6 +202,26 @@ const Admin = () => {
     };
   }, []);
 
+  const filterProducts = () => {
+    if (selectedCategory === "Todos") {
+      setFilteredProducts(filteredItems);
+    } else if (selectedCategory === "Masculino") {
+      const filtered = filteredItems.filter(
+        (product) => product.gender === "Masculino"
+      );
+      setFilteredProducts(filtered);
+    } else if (selectedCategory === "Feminino") {
+      const filtered = filteredItems.filter(
+        (product) => product.gender === "Feminino"
+      );
+      setFilteredProducts(filtered);
+    }
+  };
+
+  useEffect(() => {
+    filterProducts();
+  }, [selectedCategory, filteredItems]);
+
   return (
     <>
       {showWidthWarning ? (
@@ -231,7 +245,6 @@ const Admin = () => {
           <SideNav>
             <Box>
               <List>
-                {/* Modo de edição */}
                 <EditButtonCotainer>
                   <ListItem button onClick={toggleEditingMode}>
                     <ListItemText
@@ -246,7 +259,6 @@ const Admin = () => {
                   </ListItem>
                 </EditButtonCotainer>
 
-                {/* Adicionar Produto */}
                 {editingMode && (
                   <ListItem button onClick={() => handleOpenModalCreate()}>
                     <ListItemText
@@ -255,7 +267,6 @@ const Admin = () => {
                   </ListItem>
                 )}
 
-                {/* Adicionar Categoria */}
                 {editingMode && (
                   <>
                     <ListItem button onClick={handleAddCategory}>
@@ -267,13 +278,27 @@ const Admin = () => {
                   </>
                 )}
 
-                <ListItem button onClick={handleAddCategory}>
+                <ListItem
+                  button
+                  onClick={() => handleCategoryClick("Todos")}
+                  selected={selectedCategory === "Todos"}
+                >
                   <ListItemText primary="Todos" />
                 </ListItem>
-                <ListItem button onClick={handleAddCategory}>
+
+                <ListItem
+                  button
+                  onClick={() => handleCategoryClick("Masculino")}
+                  selected={selectedCategory === "Masculino"}
+                >
                   <ListItemText primary="Masculino" />
                 </ListItem>
-                <ListItem button onClick={handleAddCategory}>
+
+                <ListItem
+                  button
+                  onClick={() => handleCategoryClick("Feminino")}
+                  selected={selectedCategory === "Feminino"}
+                >
                   <ListItemText primary="Feminino" />
                 </ListItem>
 
@@ -295,7 +320,6 @@ const Admin = () => {
                 </center>
                 <Divider />
 
-                {/* Categorias */}
                 {categories.map((category, index) => (
                   <ListItem
                     key={category._id}
@@ -324,7 +348,7 @@ const Admin = () => {
 
             <Subtitle id="subtitle">
               <center>
-                {filteredItems.length} resultados para "{searchTerm}"
+                {filteredProducts.length} resultados para "{searchTerm}"
                 <br /> <br /> <br /> <br />
                 {editingMode ? (
                   <p>
@@ -333,7 +357,6 @@ const Admin = () => {
                   </p>
                 ) : (
                   <p>
-                    {" "}
                     Bem-vindo, Administrador! Abaixo, você encontrará a lista
                     dos produtos armazenados em seu banco de dados.
                   </p>
@@ -347,11 +370,11 @@ const Admin = () => {
               ref={scrollableContainerRef}
             >
               <ProductContainer>
-                {filteredItems.map((product, index) => (
+                {filteredProducts.map((product, index) => (
                   <ProductCardEdit
                     key={`product-${index}`}
                     onClick={(e) => handleOpenModal(e, product)}
-                    editingMode={editingMode} // Passa a propriedade editingMode para o ProductCardEdit
+                    editingMode={editingMode}
                   >
                     <ProductCard
                       img={`/CrowStore/imgs/${product.images[0]}`}
@@ -370,11 +393,10 @@ const Admin = () => {
             </ScrollableContainer>
           </Content>
 
-          {/* Modal de adicionar/editar produto */}
           <ProductModal
             open={showModal}
             onClose={handleCloseModal}
-            product={selectedProduct} // Certifique-se de que a propriedade `product` esteja corretamente passada
+            product={selectedProduct}
             onSave={handleSaveProduct}
             onRemove={handleRemoveProduct}
           />

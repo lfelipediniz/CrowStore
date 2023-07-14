@@ -109,7 +109,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
 
     const Newproduto = {
       name: selectedProductData.productName,
-      tags: selectedDescription,
+      tags: [selectedCategory],
       gender: selectedGender,
       price: selectedPrice,
       images: `${selectedProductData.productName}.png`,

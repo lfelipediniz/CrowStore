@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   AddProductContainer,
   AddProduct,
@@ -33,16 +33,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-const ProductModal = ({
-  open,
-  onClose,
-  product,
-  onSave,
-  onRemove,
-  categories,
-  selectedCategory,
-  setSelectedCategory,
-}) => {
+const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageFile, setImageFile] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -52,18 +43,35 @@ const ProductModal = ({
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedDescription, setSelectedDescription] = useState("");
-  const [dense, setDense] = React.useState(false);
-
+  const [dense, setDense] = useState(false);
+  const [categoriesAll, setCategoriesAll] = useState([]);
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: colors.textBlack,
     color: colors.primary,
   }));
-
   const [selectedGender, setSelectedGender] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(""); // Estado para armazenar a categoria selecionada
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
   };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/categories/ShowCategories")
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Erro ao buscar categorias");
+        }
+      })
+      .then((data) => {
+        setCategoriesAll(data);
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
+  }, []);
 
   const handleImageChange = (event) => {
     const imageFile = event.target.files[0];
@@ -72,7 +80,7 @@ const ProductModal = ({
     if (imageFile && imageFile.type.includes("image")) {
       const imageUrl = URL.createObjectURL(imageFile);
       setImageUrl(imageUrl);
-      setSelectedImage(imageUrl); // Atualize para exibir a imagem selecionada no modal
+      setSelectedImage(imageUrl);
     }
   };
 
@@ -378,18 +386,11 @@ const ProductModal = ({
                 variant="outlined"
                 sx={{ marginBottom: "15px" }}
               >
-                {categories
-                  .filter(
-                    (category) =>
-                      category !== "Todos" &&
-                      category !== "Masculino" &&
-                      category !== "Feminino"
-                  )
-                  .map((category, index) => (
-                    <MenuItem key={index} value={category}>
-                      {category}
-                    </MenuItem>
-                  ))}
+                {categoriesAll.map((category) => (
+                  <MenuItem key={category._id} value={category.name}>
+                    {category.name}
+                  </MenuItem>
+                ))}
               </TextField>
             </InputInfoContainer>
             <InputInfoContainer>

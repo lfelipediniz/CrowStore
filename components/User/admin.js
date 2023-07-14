@@ -334,9 +334,6 @@ const Admin = () => {
             product={selectedProduct} // Certifique-se de que a propriedade `product` esteja corretamente passada
             onSave={handleSaveProduct}
             onRemove={handleRemoveProduct}
-            categories={categories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
           />
         </Container>
       )}

@@ -228,42 +228,53 @@ const WrapShopCart = () => {
                 <Link href="/">≪ Continuar comprando</Link>
               </WrapContent>
               <ShopcartWrapper>
-                <ShopcartContainer>
-                  {cartEmpty ? (
-                    <>
-                      <ProductContainer>
-                        <>
+                {cartEmpty ? (
+                  <>
+                    <ProductContainer>
+                      <center>
+                        <h2
+                          style={{
+                            textAlign: "center",
+                            color: "#f74646",
+                            fontSize: "24px",
+                          }}
+                        >
+                          Seu carrinho está vazio no momento
                           <br />
-                          <h2 style={{ textAlign: "center" }}>
-                            O carrinho está vazio :(
-                          </h2>
-                        </>
-                      </ProductContainer>
+                          <br />
+                        </h2>
+                        <p>
+                          Adicione produtos incríveis para tornar sua
+                          experiência de compra ainda mais especial!
+                        </p>
+                      </center>
+                    </ProductContainer>
 
-                      <ProductContainer>
-                        <CartEmpty />
-                      </ProductContainer>
-                    </>
-                  ) : (
-                    <>
-                      <ProductContainer>
-                        {userData && (
-                          <Cart
-                            products={cartData.Products}
-                            quantities={cartData.Quantities}
-                            onCartUpdate={handleCartUpdate}
-                            onUpdateCartItem={handleUpdateCartItem}
-                            isShopCart={true}
-                            userData={userData}
-                          />
-                        )}
-                      </ProductContainer>
-                      <PaymentContainer>
-                        <PaymentOptions onSubmit={handleSubmission} />
-                      </PaymentContainer>
-                    </>
-                  )}
-                </ShopcartContainer>
+                    <ProductContainer
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <CartEmpty />
+                    </ProductContainer>
+                  </>
+                ) : (
+                  <ShopcartContainer>
+                    <ProductContainer>
+                      {userData && (
+                        <Cart
+                          products={cartData.Products}
+                          quantities={cartData.Quantities}
+                          onCartUpdate={handleCartUpdate}
+                          onUpdateCartItem={handleUpdateCartItem}
+                          isShopCart={true}
+                          userData={userData}
+                        />
+                      )}
+                    </ProductContainer>
+                    <PaymentContainer>
+                      <PaymentOptions onSubmit={handleSubmission} />
+                    </PaymentContainer>
+                  </ShopcartContainer>
+                )}
               </ShopcartWrapper>
             </Container>
           ) : (

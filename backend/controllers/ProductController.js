@@ -572,7 +572,7 @@ module.exports = class ProductController {
       res.status(500).json({ message: "Erro ao buscar os produtos populares" });
     }
   }
-  
+
   static async getRecentProducts(req, res) {
     try {
       const products = await Product.find().sort({ createdAt: -1 }).limit(10);
@@ -582,22 +582,65 @@ module.exports = class ProductController {
     }
   }
 
-
   static async filterProducts(req, res) {
     try {
       const { name } = req.body;
       let products = [];
-  
+
       if (name) {
-        products = await Product.find({ name: { $regex: name, $options: "i" } });
+        products = await Product.find({
+          name: { $regex: name, $options: "i" },
+        });
       } else {
         products = await Product.find();
       }
-  
+
       res.status(200).json(products);
     } catch (error) {
       console.error("Erro ao filtrar os produtos:", error);
       res.status(500).json({ message: "Erro ao filtrar os produtos" });
+    }
+  }
+
+  static async CreateProductModel(req, res) {
+    const { productId, size, color, quantity } = req.body;
+
+    try {
+      const product = await Product.findById(productId);
+
+      if (!product) {
+        throw new Error("Produto não encontrado");
+      }
+
+      const existingModel = product.AvailableModels.find(
+        (model) => model.size === size && model.color === color
+      );
+
+      if (existingModel) {
+        throw new Error(
+          "Já existe um modelo com o mesmo tamanho e cor para este produto"
+        );
+      }
+
+      const parsedQuantity = parseInt(quantity);
+
+      if (!Number.isInteger(parsedQuantity) || parsedQuantity <= 0) {
+        throw new Error("Quantidade inválida");
+      }
+
+      const newModel = {
+        size,
+        color,
+        quantity: parsedQuantity,
+      };
+
+      product.AvailableModels.push(newModel);
+
+      await product.save();
+
+      res.status(200).json({ message: "Modelo adicionado com sucesso" });
+    } catch (error) {
+      res.status(422).json({ message: error.message });
     }
   }
 };

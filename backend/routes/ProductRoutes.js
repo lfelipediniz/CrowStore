@@ -20,6 +20,8 @@ router.get('/getPopularProducts', ProductController.getPopularProducts);
 router.get('/getRecentProducts', ProductController.getRecentProducts);
 router.post('/filterProducts', ProductController.filterProducts);
 
+router.post('/createProductModel', ProductController.CreateProductModel);
+
 
 
 module.exports = router

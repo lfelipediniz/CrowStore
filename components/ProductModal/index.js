@@ -463,10 +463,15 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                 rows={1}
                 fullWidth
                 sx={{ marginBottom: "15px" }}
-                value={selectedPrice} // Vincular o valor da descrição ao estado selecionado
-                onChange={
-                  (e) => setSelectedPrice(e.target.value) // Atualizar a descrição do produto selecionado
-                }
+                value={selectedPrice}
+                onChange={(e) => {
+                  const input = e.target.value;
+                  const regex = /^\d*$/; // Expressão regular para validar apenas números
+
+                  if (regex.test(input)) {
+                    setSelectedPrice(input);
+                  }
+                }}
               />
               <TextField
                 select

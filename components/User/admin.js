@@ -28,11 +28,7 @@ import axios from "axios";
 const Admin = () => {
   const [editingMode, setEditingMode] = useState(false);
   const [showAddCategory, setShowAddCategory] = useState(false);
-  const [categories, setCategories] = useState([
-    "Todos",
-    "Masculino",
-    "Feminino",
-  ]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -44,6 +40,21 @@ const Admin = () => {
   const scrollableContainerRef = useRef(null);
   const [showWidthWarning, setShowWidthWarning] = useState(false); // Novo estado para controlar o aviso de largura mínima
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/categories/ShowCategories"
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar as categorias:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -80,23 +91,24 @@ const Admin = () => {
     }
   };
 
-  const handleRemoveCategory = async (index) => {
-    const categoryToRemove = categories[index];
+  const handleRemoveCategory = async (categoryName) => {
     if (
-      categoryToRemove === "Todos" ||
-      categoryToRemove === "Masculino" ||
-      categoryToRemove === "Feminino"
+      categoryName === "Todos" ||
+      categoryName === "Masculino" ||
+      categoryName === "Feminino"
     ) {
       return;
     }
+
     try {
       await axios.delete(
         `http://localhost:5000/categories/categories/${encodeURIComponent(
-          categoryToRemove
+          categoryName
         )}`
       );
-      const updatedCategories = [...categories];
-      updatedCategories.splice(index, 1);
+      const updatedCategories = categories.filter(
+        (category) => category.name !== categoryName
+      );
       setCategories(updatedCategories);
     } catch (error) {
       console.error("Erro ao remover categoria:", error);
@@ -223,7 +235,13 @@ const Admin = () => {
                 <EditButtonCotainer>
                   <ListItem button onClick={toggleEditingMode}>
                     <ListItemText
-                      primary={editingMode ? "Finalizar Edição" : "Modo Edição"}
+                      primary={
+                        editingMode ? (
+                          <center>Finalizar Edição</center>
+                        ) : (
+                          <center>Modo Edição</center>
+                        )
+                      }
                     />
                   </ListItem>
                 </EditButtonCotainer>
@@ -231,7 +249,9 @@ const Admin = () => {
                 {/* Adicionar Produto */}
                 {editingMode && (
                   <ListItem button onClick={() => handleOpenModalCreate()}>
-                    <ListItemText primary="Adicionar Produto" />
+                    <ListItemText
+                      primary={<center>Adicionar Produto</center>}
+                    />
                   </ListItem>
                 )}
 
@@ -239,27 +259,57 @@ const Admin = () => {
                 {editingMode && (
                   <>
                     <ListItem button onClick={handleAddCategory}>
-                      <ListItemText primary="Adicionar Categoria" />
+                      <ListItemText
+                        primary={<center>Adicionar Categoria</center>}
+                      />
                     </ListItem>
                     <Divider />
                   </>
                 )}
 
+                <ListItem button onClick={handleAddCategory}>
+                  <ListItemText primary="Todos" />
+                </ListItem>
+                <ListItem button onClick={handleAddCategory}>
+                  <ListItemText primary="Masculino" />
+                </ListItem>
+                <ListItem button onClick={handleAddCategory}>
+                  <ListItemText primary="Feminino" />
+                </ListItem>
+
+                <ListItem
+                  button
+                  onClick={handleLogout}
+                  style={{ backgroundColor: colors.textBlack }}
+                >
+                  <ListItemText>
+                    <center>Sair</center>
+                  </ListItemText>
+                </ListItem>
+
+                <Divider />
+                <center>
+                  <br />
+                  <p>Suas Categorias</p>
+                  <br />
+                </center>
+                <Divider />
+
                 {/* Categorias */}
                 {categories.map((category, index) => (
                   <ListItem
-                    key={index}
+                    key={category._id}
                     button
-                    selected={selectedCategory === category}
-                    onClick={() => handleCategoryClick(category)}
+                    selected={selectedCategory === category.name}
+                    onClick={() => handleCategoryClick(category.name)}
                   >
-                    <ListItemText primary={category} />
+                    <ListItemText primary={category.name} />
                     {category !== "Todos" &&
                       category !== "Masculino" &&
                       category !== "Feminino" &&
                       editingMode && (
                         <RemoveButton
-                          onClick={() => handleRemoveCategory(index)}
+                          onClick={() => handleRemoveCategory(category.name)}
                         >
                           <FaTrashAlt />
                         </RemoveButton>
@@ -267,13 +317,6 @@ const Admin = () => {
                   </ListItem>
                 ))}
               </List>
-              <ListItem
-                button
-                onClick={handleLogout}
-                style={{ backgroundColor: colors.textBlack }}
-              >
-                <ListItemText>Sair</ListItemText>
-              </ListItem>
             </Box>
           </SideNav>
           <SearchBarContainer>
@@ -324,7 +367,7 @@ const Admin = () => {
                   </ProductCardEdit>
                 ))}
               </ProductContainer>
-            </ScrollableContainer> 
+            </ScrollableContainer>
           </Content>
 
           {/* Modal de adicionar/editar produto */}

@@ -201,9 +201,17 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   };
 
   const handleRemove = () => {
-    onRemove(product);
+    axios
+      .delete(`http://localhost:5000/products/removeProduct/${product._id}`)
+      .then(() => {
+        // Produto removido com sucesso, recarregue a página
+        window.location.reload();
+      })
+      .catch((error) => {
+        // Trate o erro, se necessário
+        console.error("Erro ao remover o produto:", error);
+      });
   };
-
   const [selectedProductData, setSelectedProductData] = useState({
     productName: product?.productName || "",
     stock: product?.stock || "",

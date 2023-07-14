@@ -13,7 +13,7 @@ export default function AdminCart() {
   };
 
   return (
-    <div style={{ width: '500px' }}>
+    <div style={{ width: '350px' }}>
       <Lottie 
         options={defaultOptions}
       />

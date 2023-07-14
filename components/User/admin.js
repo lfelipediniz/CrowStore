@@ -23,6 +23,7 @@ import { colors } from "../../styles/colors";
 
 import SearchBar from "../SearchBar";
 import axios from "axios";
+import AdminCart from "../../public/CrowStore/animations/AdminCart";
 
 const Admin = () => {
   const [editingMode, setEditingMode] = useState(false);
@@ -225,7 +226,7 @@ const Admin = () => {
   return (
     <>
       {showWidthWarning ? (
-        <>
+        <div style={{backgroundColor: colors.primary}}>
           <div style={{ marginTop: 80 }}>
             <p
               style={{
@@ -238,8 +239,15 @@ const Admin = () => {
               Desculpe, você precisa de uma tela com no mínimo 1115px para
               acessar seus privilégios.
             </p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <center>
+              <AdminCart />
+            </center>
           </div>
-        </>
+        </div>
       ) : (
         <Container>
           <SideNav>

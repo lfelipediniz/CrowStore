@@ -20,6 +20,8 @@ import {
 } from "./WrapElements.jsx";
 import { WrapContent } from "../../components/ReusedComponents/WrapContent";
 import { Button } from "@mui/material";
+import AdminCart from "../../public/CrowStore/animations/AdminCart";
+import { colors } from "../../styles/colors";
 
 const WrapShopCart = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,12 +31,14 @@ const WrapShopCart = () => {
     Quantities: [],
   });
   const [cartEmpty, setCartEmpty] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // useState para verificar se o usuário é admin
 
   const fetchUserData = async (userId) => {
     try {
       const response = await axios.get(`http://localhost:5000/users/${userId}`);
       const userData = response.data;
       setUserData(userData);
+      setIsAdmin(userData.admin); // Atualiza o estado de isAdmin com base no valor de admin do usuário
 
       const cartProducts = userData.cart.map(async (item) => {
         const productName = item.product.name;
@@ -206,52 +210,77 @@ const WrapShopCart = () => {
 
   return (
     <>
-      <Container>
-        <Sidebar isOpen={isOpen} toggle={toggle} home />
-        <Navbar toggle={toggle} home />
-        <WrapContent>
-          <Header>Meu Carrinho</Header>
-          <Link href="/">≪ Continuar comprando</Link>
-        </WrapContent>
-        <ShopcartWrapper>
-          <ShopcartContainer>
-            {cartEmpty ? (
-              <>
-                <ProductContainer>
-                  <>
-                    <br />
-                    <h2 style={{ textAlign: "center" }}>
-                      O carrinho está vazio :(
-                    </h2>
-                  </>
-                </ProductContainer>
+      <Sidebar isOpen={isOpen} toggle={toggle} home />
+      <Navbar toggle={toggle} home />
+      {!isAdmin ? ( // Renderiza o conteúdo apenas se o usuário não for admin
+        <Container>
+          <WrapContent>
+            <Header>Meu Carrinho</Header>
+            <Link href="/">≪ Continuar comprando</Link>
+          </WrapContent>
+          <ShopcartWrapper>
+            <ShopcartContainer>
+              {cartEmpty ? (
+                <>
+                  <ProductContainer>
+                    <>
+                      <br />
+                      <h2 style={{ textAlign: "center" }}>
+                        O carrinho está vazio :(
+                      </h2>
+                    </>
+                  </ProductContainer>
 
-                <ProductContainer>
-                  <CartEmpty />
-                </ProductContainer>
-              </>
-            ) : (
-              <>
-                <ProductContainer>
-                  {userData && (
-                    <Cart
-                      products={cartData.Products}
-                      quantities={cartData.Quantities}
-                      onCartUpdate={handleCartUpdate}
-                      onUpdateCartItem={handleUpdateCartItem}
-                      isShopCart={true}
-                      userData={userData}
-                    />
-                  )}
-                </ProductContainer>
-                <PaymentContainer>
-                  <PaymentOptions onSubmit={handleSubmission} />
-                </PaymentContainer>
-              </>
-            )}
-          </ShopcartContainer>
-        </ShopcartWrapper>
-      </Container>
+                  <ProductContainer>
+                    <CartEmpty />
+                  </ProductContainer>
+                </>
+              ) : (
+                <>
+                  <ProductContainer>
+                    {userData && (
+                      <Cart
+                        products={cartData.Products}
+                        quantities={cartData.Quantities}
+                        onCartUpdate={handleCartUpdate}
+                        onUpdateCartItem={handleUpdateCartItem}
+                        isShopCart={true}
+                        userData={userData}
+                      />
+                    )}
+                  </ProductContainer>
+                  <PaymentContainer>
+                    <PaymentOptions onSubmit={handleSubmission} />
+                  </PaymentContainer>
+                </>
+              )}
+            </ShopcartContainer>
+          </ShopcartWrapper>
+        </Container>
+      ) : (
+        <>
+          <div style={{ marginTop: 80, backgroundColor: colors.primary }}>
+            <p
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                padding: "10px",
+                textAlign: "center",
+              }}
+            >
+              A conta de administrador não foi projetada para fins de compras,
+              portanto, o recurso do carrinho não está disponível.
+            </p>
+              <center>
+              <br />
+              <br />
+              <br />
+            <AdminCart />
+              </center>
+          </div>
+        </>
+      )}
+
       <Footer />
     </>
   );

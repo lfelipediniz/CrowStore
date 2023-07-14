@@ -20,7 +20,8 @@ import IconButton from "@mui/material/IconButton";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import { colors } from "../../styles/colors";
-import { FaPhotoVideo, FaTrash, FaPen } from "react-icons/fa";
+import { FaPhotoVideo, FaTrash, FaCrow } from "react-icons/fa";
+
 import axios from "axios";
 
 import {
@@ -467,6 +468,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
               </TextField>
             </InputInfoContainer>
             <InputInfoContainer>
+              { product && (
+              
               <Button
                 variant="contained"
                 color="primary"
@@ -475,6 +478,8 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
               >
                 Available Models
               </Button>
+              
+              )}
 
               <Modal
                 open={isColorModalOpen}
@@ -521,7 +526,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
                             >
                               <ListItemAvatar>
                                 <Avatar style={{ colors: colors.secondary }}>
-                                  <FaPen color={colors.secondary} />
+                                  <FaCrow color={colors.secondary} />
                                 </Avatar>
                               </ListItemAvatar>
                               <ListItemText

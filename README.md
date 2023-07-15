@@ -117,12 +117,23 @@ For the first delivery, the mockup was used and now the react backend, with elem
 
 For the second delivery, polishing and a large part of the backend of the project were done, aiming at a quality delivery. In addition, the visualization of the same in different screen resolutions was also thought.
 
-### Test Plan
+### Test plan and its results
 
-The initial plan is to use the navigation diagram to test the full functionality of the site.
+#### User (Client) login and registration
 
-For the second delivery, you already have an application usable when running the application (frontend and backend together), facilitating the testing of its functionalities.
+As with all other models, CRUD operations where first tested by performing requests to the server directly, using Postman. Upon verifying that those were functional, we've proceeded to implement the server calls at the corresponding React components. Our tests concluded that user registration works as expected: users are prompted to provide all the necessary identification in order to access their own shopping cart and make purchases. The registration process presents poignant warnings and tips to guide them though it. By using tokens stored as cookies, the logged in state persists as navigation takes place. Notwithstanding, the state of the cart persists even after logging out and back in.
 
-### Test Results
+#### Administrator account
 
-### Problems
+Our administrator account was implemented as a variation in type of the user model. The administrator account is able to access the administrator page, where calls for the server can be made to alter the descriptions of products, add or new ones. The same can be said about product categories, that feed into our system of dynamic search with tag-based filters. Due to time constraints, we were not able to implement controls that allow an administrator to add or remove users at will, or change their status from a regular user to administrator and vice-versa. By logging in as a regular user and an administrator interchangeably, we were able to test the impacts of the users actions upon the administrator (such as updating its purchases list) and of the administrator upon the user (by modifying the products, models or categories of products available).
+
+#### Product Sale
+
+Products were modeled as a composition of models: the product and the "model" models. As clothing, though having shared characteristics such as branding and type, can differ in their model by its size and coloring. Such information gets carried over correctly through the administrator screen to the product page and the cart. Due to time constraints, we were not able to implement model specifications to the cart, which is shown to provide confusion when the same user does a variety of purchases of the same type of clothing but on different models.
+
+#### The group's functionality
+
+We've implemented a dynamic search with a tag-based filtering system, present both in the search screen as in the administrator's screen. By adding and removing products or altering existing ones, we were able to confirm its functionality maintains consistency upon various updates to the database.
+
+
+

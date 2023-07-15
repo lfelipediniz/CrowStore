@@ -84,6 +84,8 @@ const Admin = () => {
           name: newCategory,
         });
         setCategories([...categories, newCategory]);
+
+        window.location.reload();
       } catch (error) {
         console.error("Erro ao adicionar categoria:", error);
       }
@@ -226,7 +228,7 @@ const Admin = () => {
   return (
     <>
       {showWidthWarning ? (
-        <div style={{backgroundColor: colors.primary}}>
+        <div style={{ backgroundColor: colors.primary }}>
           <div style={{ marginTop: 80 }}>
             <p
               style={{

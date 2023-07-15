@@ -91,13 +91,19 @@ To enter common user mode just put these data:
       LogIn---Carrinho
 ```
 
-### Mockup images
+### Mockup images (Milestone 1)
 
 <div style="align: center;">
   <img src="Milestone1/mockup-imgs/mockhome.gif" alt="Home mockup">
 </div>
 
+
+
 Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/Milestone1/mockup-imgs)
+
+## Website frontend only (Milestone 2)
+
+https://crowstore.vercel.app/
 
 ### The requirements met by the project
 

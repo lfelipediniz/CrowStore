@@ -65,11 +65,7 @@ To learn more about Next.js, take a look at the following resources:
 ## For reviewers
 
 To enter administrator mode use the following account:
-- Login: joaopereiraadm
-- Password: 12345
-
-To enter common user mode just put these data:
-- Login: leandro@gmail.com
+- Login: felipefe@gmail.com
 - Password: 123
 
 ## Navigation Diagram

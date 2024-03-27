@@ -10,7 +10,8 @@ app.use("/imgs", Upimgs)
 app.use(express.json())
 
 //Solve CORS
-app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
+app.use(cors({ credentials: true, origin: 'https://crowstore.vercel.app' }));
+
 
 // Public folder for images
 app.use(express.static('public'))

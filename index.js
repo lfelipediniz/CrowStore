@@ -9,6 +9,9 @@ app.use("/imgs", Upimgs)
 // Config JSON response
 app.use(express.json())
 
+//Solve CORS
+app.use(cors({ credentials: true, origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
+
 
 // Public folder for images
 app.use(express.static('public'))
@@ -20,4 +23,5 @@ app.use('/products', require('./routes/ProductRoutes'))
 app.use('/categories', require('./routes/CategoryRoutes'))
 
 
-app.listen(5001)
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

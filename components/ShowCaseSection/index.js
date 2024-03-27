@@ -23,7 +23,7 @@ function ShowCase() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/products/getRecentProducts");
+        const response = await axios.get("http://localhost:5001/products/getRecentProducts");
         setFilteredProductData(response.data);
       } catch (error) {
         console.error("Erro ao buscar os produtos:", error);
@@ -33,7 +33,7 @@ function ShowCase() {
 
     const fetchPopularProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/products/getPopularProducts");
+        const response = await axios.get("http://localhost:5001/products/getPopularProducts");
         setFilteredPopularData(response.data);
       } catch (error) {
         console.error("Erro ao buscar os produtos populares:", error);

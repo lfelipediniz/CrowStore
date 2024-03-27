@@ -109,7 +109,7 @@ const Login = () => {
             password: pass,
         };
 
-        fetch("http://localhost:5000/users/login", {
+        fetch("http://localhost:5001/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -172,7 +172,7 @@ const Login = () => {
             confirmpassword: confirmpass,
         };
 
-        fetch("http://localhost:5000/users/register", {
+        fetch("http://localhost:5001/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

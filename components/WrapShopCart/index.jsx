@@ -41,7 +41,7 @@ const WrapShopCart = () => {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5000/users/${userId}`);
+      const response = await axios.get(`http://localhost:5001/users/${userId}`);
       const userData = response.data;
       setUserData(userData);
       setIsAdmin(userData.admin); // Atualiza o estado de isAdmin com base no valor de admin do usuário
@@ -49,7 +49,7 @@ const WrapShopCart = () => {
       const cartProducts = userData.cart.map(async (item) => {
         const productName = item.product.name;
         const productResponse = await axios.get(
-          `http://localhost:5000/products/getProductByName/${productName}`
+          `http://localhost:5001/products/getProductByName/${productName}`
         );
         const productData = productResponse.data;
         const productImage = productData.images[0];
@@ -104,7 +104,7 @@ const WrapShopCart = () => {
 
     if (productId) {
       await axios.patch(
-        `http://localhost:5000/products/updateProductModel/${productId}`,
+        `http://localhost:5001/products/updateProductModel/${productId}`,
         {
           modelIndex,
           newQuantity,
@@ -124,7 +124,7 @@ const WrapShopCart = () => {
   const getProductIdByName = async (productName) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/products/getProductByName/${productName}`
+        `http://localhost:5001/products/getProductByName/${productName}`
       );
       const productData = response.data;
       return productData._id;
@@ -160,7 +160,7 @@ const WrapShopCart = () => {
             newQuantity: newQuantity,
           };
 
-          await fetch("http://localhost:5000/products/updateProductModel/", {
+          await fetch("http://localhost:5001/products/updateProductModel/", {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -174,7 +174,7 @@ const WrapShopCart = () => {
         }
       }
 
-      await axios.patch(`http://localhost:5000/users/${userId}/cart/finalize`);
+      await axios.patch(`http://localhost:5001/users/${userId}/cart/finalize`);
 
       alert("Carrinho finalizado com sucesso!");
       window.location.reload();
@@ -193,7 +193,7 @@ const WrapShopCart = () => {
       const userId = decodedToken.id;
 
       const userResponse = await axios.get(
-        `http://localhost:5000/users/${userId}`
+        `http://localhost:5001/users/${userId}`
       );
       const userCart = userResponse.data.cart;
 
@@ -201,7 +201,7 @@ const WrapShopCart = () => {
       if (item) {
         const productName = item.product.name;
         const productResponse = await axios.get(
-          `http://localhost:5000/products/getProductByName/${productName}`
+          `http://localhost:5001/products/getProductByName/${productName}`
         );
         const productData = productResponse.data;
         return productData._id;

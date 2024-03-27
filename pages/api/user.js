@@ -1,4 +1,4 @@
-import UserController from "../../database/controllers/UserController"
+import UserController from "../../controllers/UserController"
 export default async function handler(req, res){
     const response = await UserController.saveUser(req.body)
     .then((data)=>{

@@ -69,7 +69,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/categories/ShowCategories")
+    fetch("http://localhost:5001/categories/ShowCategories")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -105,13 +105,13 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
     };
 
     axios
-      .post("http://localhost:5000/products/createProductModel", data)
+      .post("http://localhost:5001/products/createProductModel", data)
       .then((response) => {
         console.log("Dados adicionados ao banco de dados:", response.data);
 
         // Após adicionar o novo modelo com sucesso, obter os modelos atualizados do produto
         axios
-          .get(`http://localhost:5000/products/getModels/${product._id}`)
+          .get(`http://localhost:5001/products/getModels/${product._id}`)
           .then((response) => {
             // Atualizar o estado com os modelos atualizados
             setProductModels(response.data);
@@ -133,7 +133,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
       Imgfile.append("name", selectedProductData.productName);
       Imgfile.append("file", imageFile, `user.png`);
 
-      fetch("http://localhost:5000/imgs", {
+      fetch("http://localhost:5001/imgs", {
         mode: "no-cors",
         method: "POST",
         headers: {
@@ -151,7 +151,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
         description: selectedDescription,
       };
 
-      fetch("http://localhost:5000/products/addProduct", {
+      fetch("http://localhost:5001/products/addProduct", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -189,7 +189,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
       // Fazer a requisição PATCH para atualizar o produto
       axios
         .patch(
-          `http://localhost:5000/products/updateProduct/${product._id}`,
+          `http://localhost:5001/products/updateProduct/${product._id}`,
           updates
         )
         .then((response) => {
@@ -205,7 +205,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
 
   const handleRemove = () => {
     axios
-      .delete(`http://localhost:5000/products/removeProduct/${product._id}`)
+      .delete(`http://localhost:5001/products/removeProduct/${product._id}`)
       .then(() => {
         // Produto removido com sucesso, recarregue a página
         window.location.reload();
@@ -266,7 +266,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
 
     // Busque os modelos do produto
     axios
-      .get(`http://localhost:5000/products/getProductModels/${product?._id}`)
+      .get(`http://localhost:5001/products/getProductModels/${product?._id}`)
       .then((response) => {
         setProductModels(response.data);
       })
@@ -365,7 +365,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
   const handleRemoveModel = (modelIndex) => {
     axios
       .delete(
-        `http://localhost:5000/products/deleteProductModel/${product._id}/${modelIndex}`
+        `http://localhost:5001/products/deleteProductModel/${product._id}/${modelIndex}`
       )
       .then((response) => {
         // Manipule a resposta da solicitação
@@ -373,7 +373,7 @@ const ProductModal = ({ open, onClose, product, onSave, onRemove }) => {
 
         // Atualize a lista de modelos buscando os modelos atualizados do produto
         axios
-          .get(`http://localhost:5000/products/getModels/${product._id}`)
+          .get(`http://localhost:5001/products/getModels/${product._id}`)
           .then((response) => {
             // Atualize o estado com os modelos atualizados
             setProductModels(response.data);

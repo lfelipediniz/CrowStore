@@ -45,7 +45,7 @@ bannerArrowRight.addEventListener("click", handleArrowClick);
 updateBanner();
 
 // Define um intervalo de 5 segundos para chamar a função handleArrowClick
-setInterval(handleArrowClick, 5000);
+setInterval(handleArrowClick, 5001);
 
 // Adiciona um event listener transitionend para remover a classe .banner-image da imagem atual
 bannerSection.addEventListener("transitionend", () => {

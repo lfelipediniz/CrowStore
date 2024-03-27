@@ -30,7 +30,7 @@ const Caurosel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNextSlide();
-    }, 5000);
+    }, 5001);
 
     return () => {
       clearInterval(interval);

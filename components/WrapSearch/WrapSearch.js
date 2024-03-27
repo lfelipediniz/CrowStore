@@ -34,7 +34,7 @@ const WrapSearch = () => {
     const fetchItems = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/products/filterProducts",
+          "http://localhost:5001/products/filterProducts",
           { name: searchTerm }
         );
         setOriginalItems(response.data);

@@ -44,7 +44,7 @@ const Admin = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/categories/ShowCategories"
+          "http://localhost:5001/categories/ShowCategories"
         );
         setCategories(response.data);
       } catch (error) {
@@ -80,7 +80,7 @@ const Admin = () => {
     const newCategory = prompt("Digite o nome da nova categoria:");
     if (newCategory) {
       try {
-        await axios.post("http://localhost:5000/categories/AddCategory", {
+        await axios.post("http://localhost:5001/categories/AddCategory", {
           name: newCategory,
         });
         setCategories([...categories, newCategory]);
@@ -103,7 +103,7 @@ const Admin = () => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/categories/categories/${encodeURIComponent(
+        `http://localhost:5001/categories/categories/${encodeURIComponent(
           categoryName
         )}`
       );
@@ -165,7 +165,7 @@ const Admin = () => {
     const fetchFilteredItems = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/products/filterProducts",
+          "http://localhost:5001/products/filterProducts",
           { name: searchTerm }
         );
         setFilteredItems(response.data);

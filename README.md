@@ -1,16 +1,13 @@
 # Crow Store
 
 <p align="center">
-  <img width="200" src="Milestone1/mockup-imgs/crow-store.png">
+  <img width="200" src="PILOTMilestone/mockup-imgs/crow-store.png">
 </p>
 
-### Authors
+### Website
 
-| Name                                                       | USP number |
-| :--------------------------------------------------------- | :--------- |
-| [João Vitor Pereira Candido](https://github.com/JV-PC)     | 13751131   |
-| [Luiz Felipe Diniz Costa](https://github.com/lfelipediniz) | 13782032   |
-| [Guilherme de Abreu Barreto](https://github.com/de-abreu)  | 12543033   |
+https://crowstore.vercel.app/
+
 
 ### Project Description
 
@@ -28,29 +25,24 @@ First of all, it's needed to have [Git](https://git-scm.com/downloads), and [Nod
 
 We've used the [yarn](https://yarnpkg.com/) package manager to handle our front-end dependencies and [npm](https://www.npmjs.com/) to handle the back-end dependencies. Using different operational systems has been shown to produce inconsistencies during installation, so prefer to run this project using on of the various Linux based distributions available.
 
-To automatically install all dependencies needed on the project just run: 
-
-```bash
-cd CrowStore
-yarn install
-cd backend
-npm i
-```
 
 #### Getting Started
 
-In one terminal, initialize the site's frontend:
+In one terminal, initialize:
 
 ```bash
 cd CrowStore
-yarn dev
 ```
-
-In another terminal, have initialized the site's backend:
+To automatically install all dependencies needed on the project just type: 
 
 ```bash
-cd CrowStore/backend
-npm run start
+yarn add --dev concurrently
+```
+
+To run the project:
+
+```bash
+yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -97,9 +89,6 @@ To enter administrator mode use the following account:
 
 Samples of this site's pages appearance can be found in this [**folder**](https://github.com/lfelipediniz/CrowStore/tree/main/Milestone1/mockup-imgs)
 
-## Website frontend only (Milestone 2)
-
-https://crowstore.vercel.app/
 
 ### The requirements met by the project
 
@@ -130,6 +119,14 @@ Products were modeled as a composition of models: the product and the "model" mo
 #### The group's functionality
 
 We've implemented a dynamic search with a tag-based filtering system, present both in the search screen as in the administrator's screen. By adding and removing products or altering existing ones, we were able to confirm its functionality maintains consistency upon various updates to the database.
+
+### Authors
+
+| Name                                                       | USP number |
+| :--------------------------------------------------------- | :--------- |
+| [João Vitor Pereira Candido](https://github.com/JV-PC)     | 13751131   |
+| [Luiz Felipe Diniz Costa](https://github.com/lfelipediniz) | 13782032   |
+| [Guilherme de Abreu Barreto](https://github.com/de-abreu)  | 12543033   |
 
 
 

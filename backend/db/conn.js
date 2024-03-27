@@ -1,11 +1,13 @@
-const mongoose = require('mongoose')
+require('dotenv').config(); // load .env variables
 
-mongoose.set("strictQuery", true)
+const mongoose = require('mongoose');
+
+mongoose.set("strictQuery", true);
 async function main() {
-  await mongoose.connect('mongodb+srv://crowstore:P8NcKDXy@crowbd.wdtfqcd.mongodb.net/')
-  console.log("Conectou ao Mongoose")
+  await mongoose.connect(process.env.MONGODB_URI);
+  console.log("Conectou ao Mongoose");
 }
 
-main().catch((err) => console.log(err))
+main().catch((err) => console.log(err));
 
-module.exports = mongoose
+module.exports = mongoose;

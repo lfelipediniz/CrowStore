@@ -34,7 +34,7 @@ const ProductDescription = ({ product }) => {
     const userId = decodedToken.id;
 
     // Send the newItem to the user's cart
-    fetch(`http://localhost:5001/users/${userId}/cart`, {
+    fetch(`/users/${userId}/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -16,7 +16,7 @@ function FilterTags(props) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/categories/ShowCategories");
+        const response = await axios.get("/categories/ShowCategories");
         const categoryNames = response.data.map((category) => category.name);
         setCategories(["Masculino", "Feminino", ...categoryNames]);
       } catch (error) {

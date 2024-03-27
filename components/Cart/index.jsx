@@ -25,7 +25,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
     const fetchProductData = async () => {
       const productPromises = products.map(async (product) => {
         const response = await axios.get(
-          `http://localhost:5001/products/getProductByName/${product.name}`
+          `/products/getProductByName/${product.name}`
         );
         const productData = response.data;
         const productImage = productData.images[0];
@@ -68,7 +68,7 @@ const Cart = ({ products, quantities, onCartUpdate, isShopCart, userData }) => {
     };
   
     axios
-      .patch(`http://localhost:5001/users/edit/${userId}`, updatedUserData, config)
+      .patch(`/users/edit/${userId}`, updatedUserData, config)
       .then((response) => {
         console.log(response.data);
       })

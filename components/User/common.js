@@ -54,7 +54,7 @@ function CommonUser() {
         const userId = decodedToken.id;
 
         const response = await axios.patch(
-          `http://localhost:5001/users/edit/${userId}`,
+          `/users/edit/${userId}`,
           updatedUser,
           {
             headers: {
@@ -77,14 +77,14 @@ function CommonUser() {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:5001/users/${userId}`);
+      const response = await axios.get(`/users/${userId}`);
       const userData = response.data;
       setUserData(userData);
 
       const cartProducts = userData.shopping.map(async (item) => {
         const productName = item.product.name;
         const productResponse = await axios.get(
-          `http://localhost:5001/products/getProductByName/${productName}`
+          `/products/getProductByName/${productName}`
         );
         const productData = productResponse.data;
         const productImage = productData.images[0];

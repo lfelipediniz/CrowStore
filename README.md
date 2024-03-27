@@ -26,7 +26,7 @@ First of all, it's needed to have [Git](https://git-scm.com/downloads), and [Nod
 We've used the [yarn](https://yarnpkg.com/) package manager to handle our front-end dependencies and [npm](https://www.npmjs.com/) to handle the back-end dependencies. Using different operational systems has been shown to produce inconsistencies during installation, so prefer to run this project using on of the various Linux based distributions available.
 
 
-#### Getting Started
+### Getting Started
 
 In one terminal, initialize:
 

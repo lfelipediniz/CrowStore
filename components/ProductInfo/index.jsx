@@ -80,7 +80,7 @@ const ProductInfo = ({ product, onAddToCart }) => {
       };
       onAddToCart(cartItem);
     } else {
-      window.location.href = "http://localhost:3000/user";
+      window.location.href = "/user";
     }
   };
 

@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "concurrently \"next start\" \"nodemon ./backend/src/index.js --watch backend\"",
+    "start": "concurrently \"next start\" \"nodemon ./index.js --watch backend\"",
     "lint": "next lint",
-    "backend": "nodemon ./backend/src/index.js"
+    "backend": "nodemon ./index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
